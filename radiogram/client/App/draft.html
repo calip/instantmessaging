@@ -36,18 +36,20 @@
                           <div class="col-md-12">
 
                               <div class="table-responsive">
-                                   <table class="table table-bordered">
+                                  <table class="table table-bordered">
                                       <thead>
                                       <tr>
-                                          <td colspan="2" class="text-center text-bold bg-light-grey">Panggilan</td>
+                                          <td class="" style="border-bottom: none; width:1%"></td>
+                                          <td colspan="2" class="text-center text-bold bg-light-grey" style="width:10%">Panggilan</td>
                                           <td class="text-center text-bold bg-light-grey">Jenis</td>
                                           <td class="text-center text-bold bg-light-grey">nomor</td>
                                           <td class="text-center text-bold bg-light-grey" colspan="2">Derajat</td>
-                                          <td class="text-center text-bold bg-light-grey" colspan="2">Instruksi Pengiriman</td>
+                                          <td class="text-center text-bold bg-light-grey" colspan="2" style="width:15%">Instruksi Pengiriman</td>
                                       </tr>
                                       </thead>
                                       <tbody>
                                       <tr>
+                                          <td class="text-center rotate" rowspan="12"><div><span><b>Ruang di luar garis hanya untuk petugas KOMLEK</b><span></div></td>
                                           <td class="text-center" colspan="2">
                                               <input type="text" placeholder="Panggilan" name="panggilan" class="form-control panggilan" id="panggilan" value="">
                                           </td>
@@ -55,7 +57,7 @@
                                               <input type="text" placeholder="Jenis" name="jenis" class="form-control jenis" id="jenis" value="">
                                           </td>
                                           <td class="text-center">
-                                              <input type="text" placeholder="Nomor" name="nomor" class="form-control nomor" id="nomor" value="">
+                                              <input type="text" placeholder="Nomor" class="form-control nomor" id="nomor" value="">
                                           </td>
                                           <td class="text-center" colspan="2">
                                               <select name="derajat" class="form-control derajat" id="derajat" style="display:none">
@@ -78,7 +80,7 @@
                                           <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none">Kepada</td>
                                           <td colspan="4" class="parent-receivers" style="border-right:2px solid #000000; border-bottom: none;" id="list-receiver"></td>
                                           <td class="text-center" style="border-bottom: none;"><input type="text" placeholder="Tanda Dinas" class="form-control" value="" id="tandadinas"></td>
-                                          <td class="text-center" style="border-bottom: none;"><input type="text" placeholder="group" class="form-control" value="0" name="group" id="group"></td>
+                                          <td class="text-center" style="border-bottom: none;"><input type="text" placeholder="group" class="form-control" value="0" name="group" id="group" readonly></td>
                                       </tr>
                                       <tr>
                                           <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom:2px solid #000000; border-right: none;">Tembusan</td>
@@ -90,20 +92,11 @@
                                           <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right:none;">Klasifikasi</td>
                                           <td colspan="4" class="parent-klasifikasi" style="border-bottom: none; border-right: none;">
                                               <select name="klasifikasi" class="form-control klasifikasi" id="klasifikasi">
-                                                  <option value="Biasa" selected>Biasa</option>
-                                                  <option value="Rahasia">Rahasia</option>
-                                                  <option value="Sangat Rahasia">Sangat Rahasia</option>
+                                                  <option value="Biasa" selected>BIASA</option>
+                                                  <option value="Rahasia">RAHASIA</option>
+                                                  <option value="Sangat Rahasia">SANGAT RAHASIA</option>
                                               </select>
                                               <span class="klasifikasi-error help-block valid"></span>
-                                          </td>
-                                          <td style="border-bottom: none; border-right: none;"></td>
-                                          <td style="border-bottom: none;"></td>
-                                      </tr>
-                                      <tr>
-                                          <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Judul</td>
-                                          <td colspan="4" class="parent-title" style="border-bottom: none; border-right: none;">
-                                              <input type="text" placeholder="Judul" name="title" class="form-control title" id="title">
-                                              <span class="title-error help-block valid"></span>
                                           </td>
                                           <td style="border-bottom: none; border-right: none;"></td>
                                           <td style="border-bottom: none;"></td>

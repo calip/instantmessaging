@@ -171,44 +171,218 @@ soyut.radiogramdraft.renderContent = function () {
         }
         else {
             var listRcp = [];
-            if(roleName.isWASDAL){
-                listRcp = receiverRole;
-            }
-            else{
-                listRcp.push(receiverRole);
-            }
-            soyut.radiogramdraft.Radiogram_Draft({
-                panggilan: panggilan,
-                jenis: jenis,
-                nomor: nomor,
-                derajat: derajat,
-                instruksi: instruksi,
-                tandadinas: tandadinas,
-                group: group,
-                classification: klasifikasi,
-                title: title,
-                Number: no,
-                cara: cara,
-                paraf: paraf,
-                alamataksi: alamataksi,
-                alamattembusan: alamattembusan,
-                content: message,
-                readStatus: 'unread',
-                owner: senderRole,
-                sender: senderRole,
-                senderWasdal: roleName.isWASDAL,
-                receivers: listRcp,
-                cc: tembusan,
-                session: soyutSession.id,
-                senderName: senderName,
-                senderRank: senderRank,
-                senderSignature: senderSignature
-            }, function (err, result) {
-                if (!err) {
-                    //console.log(result)
-                    soyut.radiogramdraft.clearInput();
-                    soyut.radiogramdraft.renderDraft();
-                }
+            listRcp = receiverRole;
+            var listTembusan = [];
+            listTembusan = tembusan;
+            
+            var listReceiver = [];
+            var listCC = [];
+            sessionService.Session_getScenario({id: soyutSession.id}, function(err, scenario){
+                soyut.radiogram.getListPangkogas(scenario, function (err, listKogas) {
+                    receiverRole.forEach(function(i){
+                        if(i == "0"){
+                            listKogas.forEach(function(m){
+                                listReceiver.push(m.id);
+                            });
+                        }
+                    });
+                    listReceiver.forEach(function(rcv){
+                        //send receievr
+                        soyut.radiogram.Radiogram_SendReceiverWasdal({
+                            panggilan: panggilan,
+                            jenis: jenis,
+                            nomor: nomor,
+                            derajat: derajat,
+                            instruksi: instruksi,
+                            tandadinas: tandadinas,
+                            group: group,
+                            classification: klasifikasi,
+                            Number: no,
+                            cara: cara,
+                            paraf: paraf,
+                            alamataksi: alamataksi,
+                            alamattembusan: alamattembusan,
+                            content: message,
+                            readStatus: 'unread',
+                            owner: rcv,
+                            sender: senderRole,
+                            receivers: listRcp,
+                            senderWasdal: roleName.isWASDAL,
+                            cc: tembusan,
+                            session: soyutSession.id,
+                            senderName: senderName,
+                            senderRank: senderRank,
+                            senderSignature: senderSignature,
+                            SendTime: new Date(),
+                            simtime: new Date(soyut.clock.getCurrentSimTime().simTime),
+                            createTime: new Date()
+                        }, function (err, result) {
+                            if (!err) {
+                            }
+                        });
+                    });
+                    listRcp.forEach(function(rcp){
+                        if(rcp != '0'){
+                            //send receievr
+                            soyut.radiogram.Radiogram_SendReceiverWasdal({
+                                panggilan: panggilan,
+                                jenis: jenis,
+                                nomor: nomor,
+                                derajat: derajat,
+                                instruksi: instruksi,
+                                tandadinas: tandadinas,
+                                group: group,
+                                classification: klasifikasi,
+                                Number: no,
+                                cara: cara,
+                                paraf: paraf,
+                                alamataksi: alamataksi,
+                                alamattembusan: alamattembusan,
+                                content: message,
+                                readStatus: 'unread',
+                                owner: rcp,
+                                sender: senderRole,
+                                receivers: listRcp,
+                                senderWasdal: roleName.isWASDAL,
+                                cc: tembusan,
+                                session: soyutSession.id,
+                                senderName: senderName,
+                                senderRank: senderRank,
+                                senderSignature: senderSignature,
+                                SendTime: new Date(),
+                                simtime: new Date(soyut.clock.getCurrentSimTime().simTime),
+                                createTime: new Date()
+                            }, function (err, result) {
+                                if (!err) {
+                                }
+                            });
+                        }
+                    });
+                    if(tembusan != undefined || tembusan != null){
+                        tembusan.forEach(function(cc){
+                            if(cc == "0"){
+                                listKogas.forEach(function(n){
+                                    listCC.push(n.id);
+                                });
+                            }
+                        });
+                        listCC.forEach(function(lrcv){
+                            //send receievr
+                            soyut.radiogram.Radiogram_SendReceiverWasdal({
+                                panggilan: panggilan,
+                                jenis: jenis,
+                                nomor: nomor,
+                                derajat: derajat,
+                                instruksi: instruksi,
+                                tandadinas: tandadinas,
+                                group: group,
+                                classification: klasifikasi,
+                                Number: no,
+                                cara: cara,
+                                paraf: paraf,
+                                alamataksi: alamataksi,
+                                alamattembusan: alamattembusan,
+                                content: message,
+                                readStatus: 'unread',
+                                owner: lrcv,
+                                sender: senderRole,
+                                receivers: listRcp,
+                                senderWasdal: roleName.isWASDAL,
+                                cc: tembusan,
+                                session: soyutSession.id,
+                                senderName: senderName,
+                                senderRank: senderRank,
+                                senderSignature: senderSignature,
+                                SendTime: new Date(),
+                                simtime: new Date(soyut.clock.getCurrentSimTime().simTime),
+                                createTime: new Date()
+                            }, function (err, result) {
+                                if (!err) {
+                                }
+                            });
+                        });
+                        listTembusan.forEach(function(lrcp){
+                            if(lrcp != "0"){
+                                //send receievr
+                                soyut.radiogram.Radiogram_SendReceiverWasdal({
+                                    panggilan: panggilan,
+                                    jenis: jenis,
+                                    nomor: nomor,
+                                    derajat: derajat,
+                                    instruksi: instruksi,
+                                    tandadinas: tandadinas,
+                                    group: group,
+                                    classification: klasifikasi,
+                                    Number: no,
+                                    cara: cara,
+                                    paraf: paraf,
+                                    alamataksi: alamataksi,
+                                    alamattembusan: alamattembusan,
+                                    content: message,
+                                    readStatus: 'unread',
+                                    owner: lrcp,
+                                    sender: senderRole,
+                                    receivers: listRcp,
+                                    senderWasdal: roleName.isWASDAL,
+                                    cc: tembusan,
+                                    session: soyutSession.id,
+                                    senderName: senderName,
+                                    senderRank: senderRank,
+                                    senderSignature: senderSignature,
+                                    SendTime: new Date(),
+                                    simtime: new Date(soyut.clock.getCurrentSimTime().simTime),
+                                    createTime: new Date()
+                                }, function (err, result) {
+                                    if (!err) {
+                                    }
+                                });
+                            }
+                        });
+                    }
+                    
+                    //send
+                    soyut.radiogram.Radiogram_SendWasdal({
+                        panggilan: panggilan,
+                        jenis: jenis,
+                        nomor: nomor,
+                        derajat: derajat,
+                        instruksi: instruksi,
+                        tandadinas: tandadinas,
+                        group: group,
+                        classification: klasifikasi,
+                        Number: no,
+                        cara: cara,
+                        paraf: paraf,
+                        alamataksi: alamataksi,
+                        alamattembusan: alamattembusan,
+                        content: message,
+                        readStatus: 'unread',
+                        owner: senderRole,
+                        sender: senderRole,
+                        receivers: listRcp,
+                        senderWasdal: roleName.isWASDAL,
+                        cc: tembusan,
+                        session: soyutSession.id,
+                        senderName: senderName,
+                        senderRank: senderRank,
+                        senderSignature: senderSignature,
+                        SendTime: new Date(),
+                        simtime: new Date(soyut.clock.getCurrentSimTime().simTime),
+                        createTime: new Date()
+                    }, function (err, result) {
+                        if (!err) {
+                            soyut.radiogram.clearInput();
+                            var resId = result.data.generated_keys[0];
+
+                            $(getInstanceID("wdl-email-content")).addClass('disable');
+                            $(getInstanceID("wdl-email-form")).addClass('disable');
+                            $(getInstanceID("wdl-email-view")).addClass('disable');
+                            $(getInstanceID("wdl-email-send")).removeClass('disable');
+                            soyut.radiogram.renderSendingResult('.email-result', resId);
+                        }
+                    });
+                    
+                });
             });
         }
     });
@@ -282,7 +456,7 @@ soyut.radiogramdraft.renderListMessage = function (elSelector, elChildren, messa
                 var _this = this;
 
                 var getRadiogram = function (role, callback) {
-                    soyut.radiogramdraft.Radiogram_GetInboxByRole({id: role, state: message}, function (err, data) {
+                    soyut.radiogram.Radiogram_GetInboxByRole({id: role, state: message, field:'SendTime', sort:'desc'}, function (err, data) {
                         if (!err) {
                             if (data.length > 0) {
                                 if (data != null) {
@@ -295,20 +469,36 @@ soyut.radiogramdraft.renderListMessage = function (elSelector, elChildren, messa
 
                 var arrData =[];
                 scenarioService.VRole_list({scenario: roleName.scenario}, function (err, vrole) {
-                    vrole.forEach(function (v) {
-                        getRadiogram(v.id, function (err, vres) {
-                            vres.forEach(function (vi) {
-                                if(message == "inbox") {
-                                    if(vi.senderWasdal){
+                        vrole.forEach(function (v) {
+                            getRadiogram(v.id, function (err, vres) {
+                                vres.forEach(function (vi) {
+                                    if(message == "inbox") {
+                                        var stringTime = '<span class="text">waktu Sebenarnya '+ moment(vi.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
+                                                         '<span class="text">waktu Asumsi '+ moment(vi.simtime).format("DD-MM-YYYY h:mm") +'</span>';
+                                    
+                                        var senderRole = "";
                                         scenarioService.VRole_get({id:vi.sender}, function (err, vsender) {
+                                            if(vsender.data == undefined){
+                                                if(!vi.senderWasdal){
+                                                    senderRole = "PANGKOGAS";
+                                                }
+                                            }
+                                            else{
+                                                senderRole = vsender.data.position;
+                                            }
+                                            
                                             arrData.push({
                                                 id: vi.id,
                                                 title: vi.title,
                                                 content: vi.content,
                                                 SendTime: vi.SendTime,
                                                 simtime: vi.simtime,
+                                                createTime: vi.createTime,
+                                                stringTime: stringTime,
                                                 Number: vi.Number,
-                                                receiverCallsign: vsender.data.callsign,
+                                                readStatus: vi.readStatus,
+                                                composeStatus: vi.composeStatus,
+                                                receiverCallsign: senderRole,
                                                 receiverRank: "",
                                                 receiverName: "",
                                                 receiverPhoto: ""
@@ -317,64 +507,61 @@ soyut.radiogramdraft.renderListMessage = function (elSelector, elChildren, messa
                                         });
                                     }
                                     else{
-                                        scenarioService.Role_find({query: {id: vi.sender}}, function (err, vsender) {
-                                             arrData.push({
-                                                id: vi.id,
-                                                title: vi.title,
-                                                content: vi.content,
-                                                SendTime: vi.SendTime,
-                                                simtime: vi.simtime,
-                                                Number: vi.Number,
-                                                receiverCallsign: vsender.data[0].callsign,
-                                                receiverRank: "",
-                                                receiverName: "",
-                                                receiverPhoto: ""
-                                            });
-                                            _this.$set(_this, 'messages', arrData);
-                                        })
-                                    }
-                                }
-                                else{
-                                    if(vi.senderWasdal){
-                                        scenarioService.Role_find({query: {id: vi.receivers}}, function (err, vrec) {
-                                             arrData.push({
-                                                id: vi.id,
-                                                title: vi.title,
-                                                content: vi.content,
-                                                SendTime: vi.SendTime,
-                                                simtime: vi.simtime,
-                                                Number: vi.Number,
-                                                receiverCallsign: vrec.data[0].callsign,
-                                                receiverRank: "",
-                                                receiverName: "",
-                                                receiverPhoto: ""
-                                            });
-                                            _this.$set(_this, 'messages', arrData);
-                                        })
+                                        var stringTime = '';
+                                        if(message == 'draft'){
+                                            stringTime = '<span class="text">dibuat '+moment(vi.createTime).format("DD-MM-YYYY h:mm")+'</span>';
+                                        }
+                                        else{
+                                            stringTime = '<span class="text">waktu Sebenarnya '+ moment(vi.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
+                                                                '<span class="text">waktu Asumsi '+ moment(vi.simtime).format("DD-MM-YYYY h:mm") +'</span>';
+                                        }
                                         
-                                    }
-                                    else{
-                                        scenarioService.VRole_get({id:vi.receivers}, function (err, vrec) {
+                                        var senderCallsign = '';
+                                        if(vi.receivers[0] == "0"){
                                             arrData.push({
                                                 id: vi.id,
                                                 title: vi.title,
                                                 content: vi.content,
                                                 SendTime: vi.SendTime,
                                                 simtime: vi.simtime,
+                                                createTime: vi.createTime,
+                                                stringTime: stringTime,
                                                 Number: vi.Number,
-                                                receiverCallsign: vrec.data.callsign,
+                                                readStatus: vi.readStatus,
+                                                composeStatus: vi.composeStatus,
+                                                receiverCallsign: "PANGKOGAS",
                                                 receiverRank: "",
                                                 receiverName: "",
                                                 receiverPhoto: ""
                                             });
                                             _this.$set(_this, 'messages', arrData);
-                                        });
-                                    }
-                                }
+                                        }
+                                        else{
+                                            scenarioService.VRole_get({id:vi.receivers[0]}, function (err, vrec) {
+                                                arrData.push({
+                                                    id: vi.id,
+                                                    title: vi.title,
+                                                    content: vi.content,
+                                                    SendTime: vi.SendTime,
+                                                    simtime: vi.simtime,
+                                                    createTime: vi.createTime,
+                                                    stringTime: stringTime,
+                                                    Number: vi.Number,
+                                                    readStatus: vi.readStatus,
+                                                    composeStatus: vi.composeStatus,
+                                                    receiverCallsign: vrec.data.position,
+                                                    receiverRank: "",
+                                                    receiverName: "",
+                                                    receiverPhoto: ""
+                                                });
+                                                _this.$set(_this, 'messages', arrData);
+                                            })
+                                        }
+                                    }             
+                                });
                             });
-                        })
-                    })
-                });
+                        });
+                    });
             },
             viewMessageDetail: function (val) {
                 soyut.radiogramdraft.renderMessageDetail('.email-reader', val, message);
@@ -461,7 +648,14 @@ soyut.radiogramdraft.renderMessageDetail = function (elSelector, message, state)
                                     data.cc.forEach(function (m) {
                                         if (m != "") {
                                             scenarioService.VRole_get({id: m}, function (err, rcc) {
-                                                roleCc = roleCc + rcc.data.callsign + ", ";
+                                                if(rcc.data == undefined){
+                                                    if(m == '0'){
+                                                        roleCc = roleCc + "PANGKOGAS, ";
+                                                    }
+                                                }
+                                                else{
+                                                    roleCc = roleCc + rcc.data.position + ", ";
+                                                }
                                                 _this.$set(_this, 'rolecc', roleCc);
                                             });
                                         }
@@ -471,32 +665,36 @@ soyut.radiogramdraft.renderMessageDetail = function (elSelector, message, state)
                                 if(data.receivers != null || data.receivers != undefined){
                                     data.receivers.forEach(function (n) {
                                         if (n != "") {
-                                            scenarioService.Role_find({query: {id: n}}, function (err, rpt) {
-                                                roleReceiver = roleReceiver + rpt.data[0].callsign + ", ";
+                                            scenarioService.VRole_get({id: n}, function (err, rpt) {
+                                                if(rpt.data == undefined){
+                                                    if(n == '0'){
+                                                        roleReceiver = roleReceiver + "PANGKOGAS, ";
+                                                    }
+                                                }
+                                                else{
+                                                    roleReceiver = roleReceiver + rpt.data.position + ", ";
+                                                }
                                                 _this.$set(_this, 'rolereceiver', roleReceiver);
                                             });
                                         }
                                     });
                                 }
-
                                 var contents = {
                                     id: data.id,
-                                    title: data.title,
                                     content: data.content,
-                                    session: data.session,
                                     tembusan: data.cc,
                                     renderMessages: renderMessage,
                                     SendTime: data.SendTime,
                                     simtime: data.simtime,
                                     senderRole: data.sender,
-                                    senderCallsign: sender.data.callsign,
+                                    senderCallsign: sender.data.position,
                                     senderRank: data.senderName,
                                     senderName: data.senderRank,
                                     senderPhoto: "",
                                     senderSignature: data.senderSignature,
                                     panggilan: data.panggilan,
                                     jenis: data.jenis,
-                                    no: data.nomor,
+                                    nomor: data.nomor,
                                     derajat: data.derajat,
                                     instruksi: data.instruksi,
                                     klasifikasi: data.classification,
@@ -527,8 +725,14 @@ soyut.radiogramdraft.renderMessageDetail = function (elSelector, message, state)
                                     data.cc.forEach(function (m) {
                                         if (m != "") {
                                             scenarioService.VRole_get({id: m}, function (err, rcc) {
-                                                console.log(rcc)
-                                                roleCc = roleCc + rcc.data.callsign + ", ";
+                                                if(rcc.data == undefined){
+                                                    if(m == '0'){
+                                                        roleCc = roleCc + "PANGKOGAS, ";
+                                                    }
+                                                }
+                                                else{
+                                                    roleCc = roleCc + rcc.data.position + ", ";
+                                                }
                                                 _this.$set(_this, 'rolecc', roleCc);
                                             });
                                         }
@@ -539,7 +743,14 @@ soyut.radiogramdraft.renderMessageDetail = function (elSelector, message, state)
                                     data.receivers.forEach(function (n) {
                                         if (n != "") {
                                             scenarioService.VRole_get({id: n}, function (err, rpt) {
-                                                roleReceiver = roleReceiver + rpt.data.callsign + ", ";
+                                                if(rpt.data == undefined){
+                                                    if(n == '0'){
+                                                        roleReceiver = roleReceiver + "PANGKOGAS, ";
+                                                    }
+                                                }
+                                                else{
+                                                    roleReceiver = roleReceiver + rpt.data.position + ", ";
+                                                }
                                                 _this.$set(_this, 'rolereceiver', roleReceiver);
                                             });
                                         }
@@ -548,22 +759,20 @@ soyut.radiogramdraft.renderMessageDetail = function (elSelector, message, state)
 
                                 var contents = {
                                     id: data.id,
-                                    title: data.title,
-                                    session: data.session,
                                     content: data.content,
                                     tembusan: data.cc,
                                     renderMessages: renderMessage,
                                     SendTime: data.SendTime,
                                     simtime: data.simtime,
                                     senderRole: data.sender,
-                                    senderCallsign: sender.data[0].callsign,
+                                    senderCallsign: sender.data[0].position,
                                     senderRank: data.senderName,
                                     senderName: data.senderRank,
                                     senderPhoto: "",
                                     senderSignature: data.senderSignature,
                                     panggilan: data.panggilan,
                                     jenis: data.jenis,
-                                    no: data.nomor,
+                                    nomor: data.nomor,
                                     derajat: data.derajat,
                                     instruksi: data.instruksi,
                                     klasifikasi: data.classification,
@@ -806,14 +1015,11 @@ soyut.radiogramdraft.getListReceiverWasdal = function (scenario, callback) {
 soyut.radiogramdraft.renderReceiverWasdal = function () {
     soyut.radiogramdraft.listReceivers = [];
     sessionService.Session_getScenario({id: soyutSession.id}, function(err, scenario){
-        soyut.radiogramdraft.getListReceiverWasdal(scenario, function (err, listGroup) {
+        soyut.radiogramdraft.getListVRole(scenario, function (err, listRole) {
             var html = '<select name="optReceiver[]" multiple id="optReceiver" class="form-control optReceiver">';
-            soyut.radiogramdraft.listReceivers.forEach(function (i) {
-                html += '<optgroup label="'+i.name+'">';
-                i.role.forEach(function(m){
-                    html += '<option value="'+m.id+'">'+m.callsign+'</option>'; 
-                });
-                html += '</optgroup>';
+            html += '<option value="0">PANGKOGAS</option>'; 
+            listRole.forEach(function(m){
+                html += '<option value="'+m.id+'">'+m.callsign+'</option>';
             });
             html +='</select>';
             html +='<span class="receivers-error help-block valid"></span>';
@@ -835,7 +1041,7 @@ soyut.radiogramdraft.renderSenderWasdal = function () {
             var html = '<select name="optSender" id="optSender" class="form-control optSender" style="display:none">';
             html += '<option value="">Cari..</option>';
             listRole.forEach(function (i) {
-                html += '<option value="'+ i.id +'">'+ i.callsign +'</option>';
+                html += '<option value="'+ i.id +'">'+ i.position +'</option>';
             });
             html +='</select>';
             html +='<span class="sender-error help-block valid"></span>';
@@ -850,8 +1056,9 @@ soyut.radiogramdraft.renderCCWasdal = function () {
     sessionService.Session_getScenario({id: soyutSession.id}, function(err, scenario){
         soyut.radiogramdraft.getListVRole(scenario, function (err, listRole) {
             var html = '<select name="optCC[]" multiple id="optCC" class="optCC">';
+            html += '<option value="0">PANGKOGAS</option>'; 
             listRole.forEach(function (i) {
-                html += '<option value="'+ i.id +'">'+ i.callsign +'</option>';
+                html += '<option value="'+ i.id +'">'+ i.position +'</option>';
             });
             html +='</select>';
             $(getInstanceID("list-tembusan")).append(html);
