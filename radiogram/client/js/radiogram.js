@@ -1152,27 +1152,36 @@ soyut.radiogram.renderListMessage = function (elSelector, elChildren, message) {
                                         }
                                         
                                         var senderCallsign = '';
-                                        if(vi.receivers[0] == "0"){
-                                            arrData.push({
-                                                id: vi.id,
-                                                title: vi.title,
-                                                content: vi.content,
-                                                SendTime: vi.SendTime,
-                                                simtime: vi.simtime,
-                                                createTime: vi.createTime,
-                                                stringTime: stringTime,
-                                                Number: vi.Number,
-                                                readStatus: vi.readStatus,
-                                                composeStatus: vi.composeStatus,
-                                                receiverCallsign: "PANGKOGAS",
-                                                receiverRank: "",
-                                                receiverName: "",
-                                                receiverPhoto: ""
-                                            });
-                                            _this.$set(_this, 'messages', arrData);
-                                        }
-                                        else{
+                                        // console.log(vi.receivers[0]+" lll")
+                                        // if(vi.receivers[0] == "0"){
+                                        //     arrData.push({
+                                        //         id: vi.id,
+                                        //         title: vi.title,
+                                        //         content: vi.content,
+                                        //         SendTime: vi.SendTime,
+                                        //         simtime: vi.simtime,
+                                        //         createTime: vi.createTime,
+                                        //         stringTime: stringTime,
+                                        //         Number: vi.Number,
+                                        //         readStatus: vi.readStatus,
+                                        //         composeStatus: vi.composeStatus,
+                                        //         receiverCallsign: "PANGKOGAS",
+                                        //         receiverRank: "",
+                                        //         receiverName: "",
+                                        //         receiverPhoto: ""
+                                        //     });
+                                        //     _this.$set(_this, 'messages', arrData);
+                                        // }
+                                        //else{
                                             scenarioService.VRole_get({id:vi.receivers[0]}, function (err, vrec) {
+                                                if(vrec.data == undefined){
+                                                    if(vi.receivers[0]){
+                                                        senderCallsign = "PANGKOGAS";
+                                                    }
+                                                }
+                                                else{
+                                                    senderCallsign = vrec.data.position;
+                                                }
                                                 arrData.push({
                                                     id: vi.id,
                                                     title: vi.title,
@@ -1184,14 +1193,14 @@ soyut.radiogram.renderListMessage = function (elSelector, elChildren, message) {
                                                     Number: vi.Number,
                                                     readStatus: vi.readStatus,
                                                     composeStatus: vi.composeStatus,
-                                                    receiverCallsign: vrec.data.position,
+                                                    receiverCallsign: senderCallsign,
                                                     receiverRank: "",
                                                     receiverName: "",
                                                     receiverPhoto: ""
                                                 });
                                                 _this.$set(_this, 'messages', arrData);
                                             })
-                                        }
+                                        //}
                                     }             
                                 });
                             });
@@ -1455,8 +1464,8 @@ soyut.radiogram.renderMessageDetail = function (elSelector, message, state) {
                                     simtime: data.simtime,
                                     senderRole: data.sender,
                                     senderCallsign: sender.data.position,
-                                    senderRank: data.senderName,
-                                    senderName: data.senderRank,
+                                    senderRank: data.senderRank,
+                                    senderName: data.senderName,
                                     senderPhoto: "",
                                     senderSignature: data.senderSignature,
                                     panggilan: data.panggilan,
@@ -1533,8 +1542,8 @@ soyut.radiogram.renderMessageDetail = function (elSelector, message, state) {
                                     simtime: data.simtime,
                                     senderRole: data.sender,
                                     senderCallsign: sender.data[0].position,
-                                    senderRank: data.senderName,
-                                    senderName: data.senderRank,
+                                    senderRank: data.senderRank,
+                                    senderName: data.senderName,
                                     senderPhoto: "",
                                     senderSignature: data.senderSignature,
                                     panggilan: data.panggilan,
