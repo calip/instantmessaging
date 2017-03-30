@@ -1152,36 +1152,28 @@ soyut.radiogram.renderListMessage = function (elSelector, elChildren, message) {
                                         }
                                         
                                         var senderCallsign = '';
-                                        // console.log(vi.receivers[0]+" lll")
-                                        // if(vi.receivers[0] == "0"){
-                                        //     arrData.push({
-                                        //         id: vi.id,
-                                        //         title: vi.title,
-                                        //         content: vi.content,
-                                        //         SendTime: vi.SendTime,
-                                        //         simtime: vi.simtime,
-                                        //         createTime: vi.createTime,
-                                        //         stringTime: stringTime,
-                                        //         Number: vi.Number,
-                                        //         readStatus: vi.readStatus,
-                                        //         composeStatus: vi.composeStatus,
-                                        //         receiverCallsign: "PANGKOGAS",
-                                        //         receiverRank: "",
-                                        //         receiverName: "",
-                                        //         receiverPhoto: ""
-                                        //     });
-                                        //     _this.$set(_this, 'messages', arrData);
-                                        // }
-                                        //else{
+                                        if(vi.receivers[0] == "0"){
+                                            arrData.push({
+                                                id: vi.id,
+                                                title: vi.title,
+                                                content: vi.content,
+                                                SendTime: vi.SendTime,
+                                                simtime: vi.simtime,
+                                                createTime: vi.createTime,
+                                                stringTime: stringTime,
+                                                Number: vi.Number,
+                                                readStatus: vi.readStatus,
+                                                composeStatus: vi.composeStatus,
+                                                receiverCallsign: "PANGKOGAS",
+                                                receiverRank: "",
+                                                receiverName: "",
+                                                receiverPhoto: ""
+                                            });
+                                            _this.$set(_this, 'messages', arrData);
+                                        }
+                                        else{
                                             scenarioService.VRole_get({id:vi.receivers[0]}, function (err, vrec) {
-                                                if(vrec.data == undefined){
-                                                    if(vi.receivers[0]){
-                                                        senderCallsign = "PANGKOGAS";
-                                                    }
-                                                }
-                                                else{
-                                                    senderCallsign = vrec.data.position;
-                                                }
+                                                
                                                 arrData.push({
                                                     id: vi.id,
                                                     title: vi.title,
@@ -1193,14 +1185,14 @@ soyut.radiogram.renderListMessage = function (elSelector, elChildren, message) {
                                                     Number: vi.Number,
                                                     readStatus: vi.readStatus,
                                                     composeStatus: vi.composeStatus,
-                                                    receiverCallsign: senderCallsign,
+                                                    receiverCallsign: vrec.data.position,
                                                     receiverRank: "",
                                                     receiverName: "",
                                                     receiverPhoto: ""
                                                 });
                                                 _this.$set(_this, 'messages', arrData);
                                             })
-                                        //}
+                                        }
                                     }             
                                 });
                             });
@@ -2370,7 +2362,7 @@ soyut.radiogram.renderCurrentWasdal = function () {
 soyut.radiogram.init = function () {
     soyut.radiogram.perfectScrollbarHandler();
     soyut.radiogram.messageHeightHandler();
-    soyut.radiogram.resizeHandler();
+    // soyut.radiogram.resizeHandler();
     soyut.radiogram.sidebarHandler();
     soyut.radiogram.renderInbox();
     soyut.radiogram.renderContent();

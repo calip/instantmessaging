@@ -1093,7 +1093,7 @@ soyut.radiogramdraft.renderCCWasdal = function () {
 soyut.radiogramdraft.init = function () {
     soyut.radiogramdraft.perfectScrollbarHandler();
     soyut.radiogramdraft.messageHeightHandler();
-    soyut.radiogramdraft.resizeHandler();
+    //soyut.radiogramdraft.resizeHandler();
     soyut.radiogramdraft.renderDraft();
     soyut.radiogramdraft.renderContent();
 
