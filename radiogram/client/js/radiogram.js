@@ -1,6 +1,3 @@
-var soyutSession = soyut.Session;
-var roleName = soyut.Session.role;
-
 soyut.radiogram.sidebarHandler = function() {
     var $html = $('html'), $win = $(window), wrap = $('.app-aside'), MEDIAQUERY = {}, app = $('.wdl-app');
 		var eventObject = isTouch() ? 'click' : 'mouseenter', elem = $('.sidebar'), ul = "", menuTitle, _this, sidebarMobileToggler = $('.sidebar-mobile-toggler'), $winOffsetTop = 0, $winScrollTop = 0, $appWidth;

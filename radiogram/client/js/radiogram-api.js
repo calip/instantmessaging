@@ -6,6 +6,8 @@ var sessionService = soyut.Services.getInstance().getService("sessionServer");
 if (Promise.promisifyAll) {
     Promise.promisifyAll(soyut.radiogram);
 }
+var soyutSession = soyut.Session;
+var roleName = soyut.Session.role;
 
 socket.on('new_radiogram', function (data) {
     data.new_val.receivers.forEach(function(i){
