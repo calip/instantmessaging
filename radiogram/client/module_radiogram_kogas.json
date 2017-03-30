@@ -1,0 +1,33 @@
+{
+  "appId":"soyut.module.app.radiogram.kogas",
+  "appName":"Radiogram Monitor",
+  "version":"1.0.0",
+  "isMultiInstance":true,
+  "icon":"icon.png",
+  "startup" : false,
+  "isWidget" : false,
+  "requiredPolicies":["radiogram-user"],
+  "debug" : true,
+  "activities":[
+    {
+      "class":"soyut.module.app.radiogram.kogas.main",
+      "title":"Radiogram Monitor",
+      "launcher" : true,
+      "libraryScript":[
+        {"name":"fxtblapp","url":"/libs/datatables/fxdatatables.js"},
+        {"name":"sctblapp","url":"/libs/datatables/dtscroller.js"}
+      ],
+      "instanceScript":[
+        {"name":"kogasapp","url":"/js/kogas.js"}
+      ],
+      "styles":[
+        {"name":"kogascss","url":"/css/kogas.css"},
+        {"name":"fxtblcss","url":"/libs/datatables/fxdatatables.css"},
+        {"name":"sctblcss","url":"/libs/datatables/dtscroller.css"}
+      ],
+      "contents":[
+        {"name":"kogas","url":"/kogas.html"}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "appId":"soyut.module.app.radiogram",
+  "appName":"Radiogram",
+  "version":"1.0.0",
+  "isMultiInstance":true,
+  "icon":"icon.png",
+  "startup" : false,
+  "isWidget" : false,
+  "requiredPolicies":["radiogram-user"],
+  "debug" : true,
+  "activities":[
+    {
+      "class":"soyut.module.app.radiogram.main",
+      "title":"Radiogram",
+      "launcher" : true,
+      "libraryScript":[
+        {"name":"rdg_token","url":"/libs/multiselect/multiselect.js"},
+        {"name":"rdg_scrollbar","url":"/libs/pscrollbar/pscrollbar.min.js"},
+        {"name":"rdg_formatter","url":"/js/InputFormatter.js"}
+      ],
+      "instanceScript":[
+        {"name":"rdg_main","url":"/js/radiogram.js"},
+        {"name":"rdg_texteditor","url":"/js/texteditor.js"}
+      ],
+      "styles":[
+        {"name":"rdg_style","url":"/css/styles.css"},
+        {"name":"rdg_scrollbarcss","url":"/libs/pscrollbar/pscrollbar.min.css"},
+        {"name":"rdg_tokencss","url":"/libs/multiselect/multiselect.css"},
+        {"name":"rdg_plugins","url":"/css/plugins.css"}
+      ],
+      "contents":[
+        {"name":"rdg_index","url":"/index.html"}
+      ]
+    },
+    {
+      "class":"soyut.module.app.radiogram.draft",
+      "title":"Radiogram",
+      "launcher" : false,
+      "externalUse": true,
+      "libraryScript":[
+        {"name":"rdgd_token","url":"/libs/token/tokeninput.js"},
+        {"name":"rdgd_scrollbar","url":"/libs/pscrollbar/pscrollbar.min.js"},
+        {"name":"rdgd_formatter","url":"/js/InputFormatter.js"}
+      ],
+      "instanceScript":[
+        {"name":"rdgd_main","url":"/App/draft.js"},
+        {"name":"rdgd_texteditor","url":"/js/texteditor.js"}
+      ],
+      "styles":[
+        {"name":"rdgd_style","url":"/css/draft.css"},
+        {"name":"rdgd_scrollbarcss","url":"/libs/pscrollbar/pscrollbar.min.css"},
+        {"name":"rdgd_tokencss","url":"/libs/token/token-input-facebook.css"},
+        {"name":"rdgd_plugins","url":"/css/plugins.css"}
+      ],
+      "contents":[
+        {"name":"rdgd_index","url":"/App/draft.html"}
+      ]
+    },
+    {
+      "class":"soyut.module.app.radiogram.pdfviewer",
+      "title":"PDF Viewer",
+      "launcher" : false,
+      "libraryScript":[
+
+      ],
+      "instanceScript":[
+        {"name":"pdfviewer","url":"/App/pdfviewer.js"}
+      ],
+      "styles":[
+
+      ],
+      "contents":[
+        {"name":"pdfviewer","url":"/App/pdfviewer.html"}
+      ]
+    }
+  ]
+}

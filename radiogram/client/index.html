@@ -1,0 +1,769 @@
+<div class="wdl-main">
+
+  <div class="wdl-app">
+      <!-- sidebar -->
+      <div class="sidebar app-aside wdl-sidebar">
+        <div class="sidebar-container perfect-scrollbar">
+          <nav>
+
+            <!-- start: DOCUMENTATION BUTTON -->
+            <div class="wrapper">
+              <a href="#" id="wdl-nav-compose" class="button-o">
+                <i class="fa icon-new-message"></i>
+                <span>Buat Radiogram</span>
+              </a>
+            </div>
+            <!-- end: DOCUMENTATION BUTTON -->
+
+            <!-- start: MAIN NAVIGATION MENU -->
+            <div class="navbar-title">
+              <span>Menu Utama</span>
+            </div>
+            <ul class="main-navigation-menu" id="wdl-navigation-menu">
+              <li>
+                <a href="#" id="wdl-nav-inbox">
+                  <div class="item-content">
+                    <div class="item-media">
+                      <i class="fa icon-email26"></i>
+                    </div>
+                    <div class="item-inner">
+                      <span class="title"> Kotak Masuk </span>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#" id="wdl-nav-sent">
+                  <div class="item-content">
+                    <div class="item-media">
+                      <i class="fa icon-email147"></i>
+                    </div>
+                    <div class="item-inner">
+                      <span class="title"> Kotak Keluar </span>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#" id="wdl-nav-draft">
+                  <div class="item-content">
+                    <div class="item-media">
+                      <i class="fa icon-draft"></i>
+                    </div>
+                    <div class="item-inner">
+                      <span class="title"> Naskah </span>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#" id="wdl-nav-trash">
+                    <div class="item-content">
+                        <div class="item-media">
+                            <i class="fa icon-trash"></i>
+                        </div>
+                        <div class="item-inner">
+                            <span class="title"> Kotak Sampah </span>
+                        </div>
+                    </div>
+                </a>
+              </li>
+            </ul>
+            <!-- group -->
+            <div class="navbar-title">
+                <span id="role-group-name">KOGAS </span>
+            </div>
+            <div class="role-group-list"></div>
+            <!-- end group -->
+          </nav>
+        </div>
+      </div>
+      <!-- sidebar -->
+      <div class="app-content">
+          <!-- start: TOP NAVBAR -->
+          <header class="navbar navbar-default navbar-static-top">
+              <!-- start: NAVBAR HEADER -->
+              <div class="navbar-header">
+                  <a href="#" class="sidebar-mobile-toggler pull-left hidden-md hidden-lg" class="btn btn-navbar sidebar-toggle" data-toggle-class="app-slide-off" data-toggle-target="#app" data-toggle-click-outside="#sidebar">
+                      <i class="ti-align-justify"></i>
+                  </a>
+                  <a class="navbar-brand" href="#" id="detail-user"></a>
+                  <a href="#" class="sidebar-toggler pull-right visible-md visible-lg" data-toggle-class="app-sidebar-closed" data-toggle-target="#app">
+                      <i class="ti-align-justify"></i>
+                  </a>
+                  <a class="pull-right menu-toggler visible-xs-block" id="menu-toggler" data-toggle="collapse" href=".navbar-collapse">
+                      <span class="sr-only">Toggle navigation</span>
+                      <i class="ti-view-grid"></i>
+                  </a>
+              </div>
+
+              <!-- start: NAVBAR COLLAPSE -->
+              <div class="navbar-collapse collapse"></div>
+          </header>
+
+          <!-- main content -->
+          <div class="main-content">
+              
+              <div class="wrap-content container email-compose disable" id="wdl-email-form">
+
+                  <div class="container-fluid container-fullw">
+                      <div class="row">
+                          <div class="col-md-12">
+
+                              <div class="table-responsive">
+                                  <table class="table table-bordered">
+                                      <thead>
+                                      <tr>
+                                          <td class="" style="border-bottom: none; width:1%"></td>
+                                          <td colspan="2" class="text-center text-bold bg-light-grey" style="width:10%">Panggilan</td>
+                                          <td class="text-center text-bold bg-light-grey">Jenis</td>
+                                          <td class="text-center text-bold bg-light-grey">nomor</td>
+                                          <td class="text-center text-bold bg-light-grey" colspan="2">Derajat</td>
+                                          <td class="text-center text-bold bg-light-grey" colspan="2" style="width:15%">Instruksi Pengiriman</td>
+                                      </tr>
+                                      </thead>
+                                      <tbody>
+                                      <tr>
+                                          <td class="text-center rotate" rowspan="12"><div><span><b>Ruang di luar garis hanya untuk petugas KOMLEK</b><span></div></td>
+                                          <td class="text-center" colspan="2">
+                                              <input type="text" placeholder="Panggilan" name="panggilan" class="form-control panggilan" id="panggilan" value="">
+                                          </td>
+                                          <td class="text-center">
+                                              <input type="text" placeholder="Jenis" name="jenis" class="form-control jenis" id="jenis" value="">
+                                          </td>
+                                          <td class="text-center">
+                                              <input type="text" placeholder="Nomor" class="form-control nomor" id="nomor" value="">
+                                          </td>
+                                          <td class="text-center" colspan="2">
+                                              <select name="derajat" class="form-control derajat" id="derajat" style="display:none">
+                                                  <option value="P" selected>P</option>
+                                                  <option value="OP">OP</option>
+                                                  <option value="O">O</option>
+                                              </select>
+                                          </td>
+                                          <td class="text-center" colspan="2">
+                                              <input type="text" placeholder="Instruksi Pengiriman" name="instruksi" id="instruksi" class="form-control instruksi" value="">
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                          <td colspan="2" class="text-bold" style="border-top:2px solid #000000; border-left:2px solid #000000; border-bottom: none; border-right: none">Dari</td>
+                                          <td colspan="4" class="parent-sender" style="border-top:2px solid #000000; border-right:2px solid #000000; border-bottom: none;" id="list-sender"></td>
+                                          <td class="text-center text-bold bg-light-grey">Tanda Dinas</td>
+                                          <td class="text-center text-bold bg-light-grey">Group</td>
+                                      </tr>
+                                      <tr>
+                                          <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none">Kepada</td>
+                                          <td colspan="4" class="parent-receivers" style="border-right:2px solid #000000; border-bottom: none;" id="list-receiver"></td>
+                                          <td class="text-center" style="border-bottom: none;"><input type="text" placeholder="Tanda Dinas" class="form-control" value="" id="tandadinas"></td>
+                                          <td class="text-center" style="border-bottom: none;"><input type="text" placeholder="group" class="form-control" value="0" name="group" id="group" readonly></td>
+                                      </tr>
+                                      <tr>
+                                          <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom:2px solid #000000; border-right: none;">Tembusan</td>
+                                          <td colspan="4" style="border-right:2px solid #000000; border-bottom:2px solid #000000;" id="list-tembusan"></td>
+                                          <td style="border-bottom:2px solid #000000"></td>
+                                          <td style="border-bottom:2px solid #000000"></td>
+                                      </tr>
+                                      <tr>
+                                          <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right:none;">Klasifikasi</td>
+                                          <td colspan="4" class="parent-klasifikasi" style="border-bottom: none; border-right: none;">
+                                              <select name="klasifikasi" class="form-control klasifikasi" id="klasifikasi">
+                                                  <option value="Biasa" selected>BIASA</option>
+                                                  <option value="Rahasia">RAHASIA</option>
+                                                  <option value="Sangat Rahasia">SANGAT RAHASIA</option>
+                                              </select>
+                                              <span class="klasifikasi-error help-block valid"></span>
+                                          </td>
+                                          <td style="border-bottom: none; border-right: none;"></td>
+                                          <td style="border-bottom: none;"></td>
+                                      </tr>
+                                      <tr>
+                                          <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Nomor</td>
+                                          <td colspan="4" class="parent-no" style="border-bottom: none; border-right: none;">
+                                              <input type="text" placeholder="Nomor" name="Number" class="form-control Number" id="Number">
+                                              <span class="no-error help-block valid"></span>
+                                          </td>
+                                          <td style="border-bottom: none; border-right: none;"></td>
+                                          <td style="border-bottom: none;"></td>
+                                      </tr>
+                                      <tr>
+                                          <td colspan="8" style="border-left:2px solid #000000;">
+                                              <input type="hidden" name="cur_pos" id="cur_pos" value="0">
+                                              <input type="hidden" name="cur_word" id="cur_word" value="0">
+                                              <input type="hidden" name="cur_sent" id="cur_sent" value="0">
+                                              <input type="hidden" name="cur_line" id="cur_line" value="0">
+                                              <input type="hidden" name="colm_count" id="colm_count" value="0">
+                                              <input type="hidden" id="char_count" name="char_count" value="0">
+                                              <input type="hidden" id="word_count" name="word_count" value="0">
+                                              <input type="hidden" id="sent_count" name="sent_count" value="0">
+                                              <input type="hidden" id="line_count" name="line_count" value="0">
+                                              <input type="hidden" id="sel_char_count" name="sel_char_count" value="0">
+                                              <input type="hidden" id="sel_word_count" name="sel_word_count" value="0">
+                                              <input type="hidden" id="sel_sent_count" name="sel_sent_count" value="0">
+                                              <input type="hidden" id="sel_line_count" name="sel_line_count" value="0">
+
+                                              <input type="hidden" id="status" name="status" value="0">
+                                              <textarea name="message-input" class="message-input form-control" id="message-input" wrap="off" rows="10" onclick="cpcount('');" onkeyup="cpcount(''); totalcount();" style="min-height: 200px;"></textarea>
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                          <td class="text-center text-bold bg-light-grey" colspan="2" style="border-left:2px solid #000000;">Pengirim</td>
+                                          <td class="text-center text-bold bg-light-grey" colspan="2" style="border-right:2px solid #000000;">Derajat</td>
+                                          <td class="text-center text-bold bg-light-grey" colspan="2" style="border-top:2px solid #000000;">Dikirim/Diterima</td>
+                                          <td class="text-center text-bold bg-light-grey" style="border-top:2px solid #000000;">Cara</td>
+                                          <td class="text-center text-bold bg-light-grey" style="border-top:2px solid #000000;">Paraf</td>
+                                      </tr>
+                                      <tr>
+                                          <td class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Nama</td>
+                                          <td style="border-bottom: none;"><input type="text" placeholder="" readonly class="form-control sender-name" name="sender-name" id="sender-name" value=""></td>
+                                          <td class="text-center text-bold">Aksi</td>
+                                          <td class="text-center text-bold" style="border-right:2px solid #000000;">Tembusan</td>
+                                          <td class="text-center text-bold">Jam</td>
+                                          <td class="text-center text-bold">Tanggal</td>
+                                          <td class="text-center vertical-align-top" rowspan="3"><input type="text" placeholder="" name="cara" class="form-control cara" value="" id="cara"></td>
+                                          <td class="text-center vertical-align-top" rowspan="3"><input type="text" placeholder="" name="paraf" class="form-control paraf" value="" id="paraf"></td>
+                                      </tr>
+                                      <tr>
+                                          <td class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Pangkat</td>
+                                          <td style="border-bottom: none;"><input type="text" placeholder="" readonly class="form-control sender-pangkat" name="sender-pangkat" id="sender-pangkat" value=""></td>
+                                          <td class="text-center vertical-align-top" rowspan="2"><input type="text" placeholder="" name="alamataksi" class="form-control alamataksi" value="" id="alamataksi"></td>
+                                          <td class="text-center vertical-align-top" rowspan="2" style="border-right:2px solid #000000;"><input type="text" placeholder="" name="alamattembusan" class="form-control alamattembusan" id="alamattembusan" value=""></td>
+                                          <td class="text-center vertical-align-top" rowspan="2"><input type="text" placeholder="" name="jam" class="form-control jam" value="" id="jam"></td>
+                                          <td class="text-center vertical-align-top" rowspan="2"><input type="text" placeholder="" name="tanggal" class="form-control tanggal" value="" id="tanggal"></td>
+                                      </tr>
+                                      <tr>
+                                          <td class="text-bold" style="border-left:2px solid #000000; border-right: none;">TTD</td>
+                                          <td><input type="hidden" name="signature" id="signature" class="signature"><img width="100" class="sender-signature" id="sender-signature" name="sender-signature"></td>
+                                      </tr>
+                                      </tbody>
+                                  </table>
+                              </div>
+
+                              <div class="row">
+                                  <div class="col-md-12">
+                                      <button class="btn btn-primary btn-o btn-wide" type="button" id="btnSaveMessage">
+                                          <i class="fa icon-draft"></i> Naskah
+                                      </button>
+                                      <!--<button class="btn btn-info btn-wide" type="button" id="btnPreviewMessage">
+                                          Pratinjau <i class="fa icon-arrow-right"></i>
+                                      </button>
+                                      -->
+                                      <button class="btn btn-primary btn-wide" type="button" id="btnSubmitMessage">
+                                          Kirim <i class="fa icon-arrow-right"></i>
+                                      </button>
+                                  </div>
+                              </div>
+
+                          </div>
+                      </div>
+                  </div>
+
+              </div>
+
+              <div class="wrap-content container email-result disable" id="wdl-email-send">
+
+              </div>
+
+              <div class="wrap-content container email-preview disable" id="wdl-email-view">
+
+              </div>
+
+              <div class="wrap-content container" id="wdl-email-content">
+                  <div class="wrap-messages">
+                      <div id="inbox" class="inbox">
+                          <!-- start: EMAIL LIST -->
+                          <div class="col email-list"></div>
+                          <!-- end: EMAIL LIST -->
+
+                          <!-- start: EMAIL READER -->
+                          <div class="email-reader perfect-scrollbar"></div>
+                          <!-- end: EMAIL READER -->
+                      </div>
+                  </div>
+              </div>
+
+          </div>
+          <!-- main content -->
+
+      </div>
+  </div>
+
+</div>
+
+<template id="role-group-list">
+    <ul class="folders wdl-folders">
+        <li v-for="group in groups">
+            <a href="#" v-bind="loadAttribute(group.id)">
+                <div class="item-content">
+                    <div class="item-media">
+                        <i class="fa icon-email26"></i>
+                    </div>
+                    <div class="item-inner">
+                        <span class="title"> {{group.name}} </span>
+                    </div>
+                </div>
+            </a>
+            <ul class="sub-menu">
+                <li>
+                    <a href="#" @click="ViewInboxGroup(group.id)">
+                        <span class="Kotak Masuk"> Kotak Masuk </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" @click="ViewSentGroup(group.id)">
+                        <span class="Kotak Keluar"> Kotak Keluar </span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</template>
+
+<template id="email-list">
+  <div class="wrap-list">
+    <div class="wrap-options">
+      <div class="messages-search">
+        <form>
+          <input type="text" placeholder="Cari radiogram..." class="form-control underline">
+        </form>
+      </div>
+    </div>
+    <ul class="messages-list perfect-scrollbar">
+      <li v-for="message in messages" :class="LoadStatusMessage(message.id, message.readStatus, message.composeStatus)">
+        <a href="#" @click="viewMessageDetail(message.id)">
+          <span class="messages-item-from">{{message.receiverCallsign}}</span>
+          <div class="messages-item-time" v-html="message.stringTime"></div>
+          <span class="messages-item-subject"> {{message.Number}}</span>
+          <span class="messages-item-content">{{ message.content | truncate}}.....</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</template>
+
+<template id="wasdal-list">
+  <div class="wrap-list">
+    <div class="wrap-options">
+      <div class="messages-search">
+        <form>
+          <input type="text" placeholder="Search messages..." class="form-control underline">
+        </form>
+      </div>
+    </div>
+    <ul class="messages-list perfect-scrollbar">
+      <li v-for="message in messages" :class="LoadStatusMessage(message.id, message.readStatus, message.composeStatus)">
+        <a href="#" @click="viewMessageDetail(message.id)">
+          <span class="messages-item-from">{{message.receiverCallsign}}</span>
+          <div class="messages-item-time">
+            <span class="text">waktu Sebenarnya {{ moment(message.SendTime).format('DD-MM-YYYY h:mm') }}</span>
+            <span class="text">waktu Asumsi {{ moment(message.simtime).format('DD-MM-YYYY h:mm') }}</span>
+          </div>
+          <span class="messages-item-subject"> {{message.Number}}</span>
+          <span class="messages-item-content">{{ message.content | truncate}}.....</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</template>
+
+<template id="email-reader">
+    <div class="container-fluid container-fullw">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <td class="" style="border-bottom: none;"></td>
+                            <td colspan="2" class="text-center text-bold bg-light-grey" style="width: 10%;">Panggilan</td>
+                            <td class="text-center text-bold bg-light-grey" style="width: 30%;">Jenis</td>
+                            <td class="text-center text-bold bg-light-grey" style="width: 20%;">nomor</td>
+                            <td class="text-center text-bold bg-light-grey" colspan="2" style="width: 20%;">Derajat</td>
+                            <td class="text-center text-bold bg-light-grey" colspan="2" style="width: 20%;">Instruksi Pengiriman</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="text-center rotate" rowspan="12"><div><span><b>Ruang di luar garis hanya untuk petugas KOMLEK</b><span></div></td>
+                            <td class="text-center" colspan="2" style="height: 30px;">
+                                <input type="hidden" name="selected-message" class="selected-message" id="selected-message" v-model="contents.id">
+                                <input type="hidden" placeholder="Panggilan" name="panggilan" class="form-control panggilan" v-model="contents.panggilan">
+                                {{contents.panggilan}}
+                            </td>
+                            <td class="text-center">
+                                <input type="hidden" placeholder="Jenis" name="jenis" class="form-control jenis" v-model="contents.jenis">
+                                {{contents.jenis}}
+                            </td>
+                            <td class="text-center">
+                                <input type="hidden" placeholder="Nomor" name="nomor" class="form-control nomor" v-model="contents.nomor">
+                                {{contents.nomor}}
+                            </td>
+                            <td class="text-center" colspan="2">
+                                <input type="hidden" placeholder="Derajat" name="derajat" class="form-control derajat" v-model="contents.derajat">
+                                {{contents.derajat}}
+                            </td>
+                            <td class="text-center" colspan="2">
+                                <input type="hidden" placeholder="Instruksi Pengiriman" name="instruksi" class="form-control instruksi" v-model="contents.instruksi">
+                                {{contents.instruksi}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="text-bold" style="border-top:2px solid #000000; border-left:2px solid #000000; border-bottom: none; border-right: none">Dari</td>
+                            <td colspan="4" style="border-top:2px solid #000000; border-right:2px solid #000000; border-bottom: none;">
+                                <input type="hidden" class="senderRole" name="senderRole" v-model="contents.senderRole">
+                                <input type="hidden" class="senderUser" name="senderUser" v-model="contents.senderUser">
+                                {{contents.senderCallsign}}
+                            </td>
+                            <td class="text-center text-bold bg-light-grey" colspan="2">Tanggal/Waktu Pengajuan</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none">Kepada</td>
+                            <td colspan="4" style="border-right:2px solid #000000; border-bottom: none;">
+                                <input type="hidden" class="rolereceiver" name="rolereceiver" v-model="rolereceiver">
+                                {{rolereceiver}}
+                            </td>
+                            <td class="text-center" colspan="2"><input type="hidden" placeholder="Tanda Dinas" class="form-control" v-model="contents.simtime"><label>{{contents.simtime}}</label></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" rowspan="2" class="text-bold" style="border-left:2px solid #000000; border-right: none; border-bottom:2px solid #000000;">Tembusan</td>
+                            <td colspan="4" rowspan="2" style="border-right:2px solid #000000; border-bottom:2px solid #000000;">
+                                <input type="hidden" class="tembusan" name="tembusan" v-model="contents.tembusan"/>
+                                <input type="hidden" class="rolecc" name="rolecc" v-model="rolecc"/>
+                                {{rolecc}}
+                            </td>
+                            <td class="text-center text-bold bg-light-grey">Tanda Dinas</td>
+                            <td class="text-center text-bold bg-light-grey">Group</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" style="border-bottom: none">
+                                <input type="hidden" placeholder="Tanda Dinas" class="form-control" v-model="contents.tandadinas">
+                                {{contents.tandadinas}}
+                            </td>
+                            <td class="text-center" style="border-bottom: none">
+                                <input type="hidden" placeholder="group" class="form-control" v-model="contents.group">
+                                {{contents.group}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right:none;">Klasifikasi</td>
+                            <td colspan="4" style="border-bottom: none; border-right: none; border-right: solid 2px #000000; ">
+                                <input type="hidden" class="klasifikasi" name="klasifikasi" v-model="contents.klasifikasi"/>
+                                {{contents.klasifikasi}}
+                            </td>
+                            <td class="text-center" style="border-bottom:2px solid #000000"></td>
+                            <td class="text-center" style="border-bottom:2px solid #000000"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Nomor</td>
+                            <td colspan="4" class="parent-no" style="border-bottom: none; border-right: none;">
+                                <input type="hidden" placeholder="Nomor" name="Number" class="form-control Number" v-model="contents.no">
+                                {{contents.no}}
+                            </td>
+                            <td style="border-bottom: none; border-right: none;"></td>
+                            <td style="border-bottom: none;"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="8" style="height:250px; vertical-align: top; border-left:2px solid #000000;">
+                                <input type="hidden" class="context" name="context" v-model="contents.content"/>
+                                <label v-html="contents.renderMessages"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center text-bold bg-light-grey" colspan="2" style="border-left:2px solid #000000;">Pengirim</td>
+                            <td class="text-center text-bold bg-light-grey" colspan="2" style="border-right:2px solid #000000;">Derajat</td>
+                            <td class="text-center text-bold bg-light-grey" colspan="2" style="border-top:2px solid #000000;">Dikirim/Diterima</td>
+                            <td class="text-center text-bold bg-light-grey" style="border-top:2px solid #000000;">Cara</td>
+                            <td class="text-center text-bold bg-light-grey" style="border-top:2px solid #000000;">Paraf</td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Nama</td>
+                            <td style="border-bottom: none;">
+                                <input type="hidden" placeholder="" class="form-control sender-name" name="sender-name" v-model="contents.senderName">
+                                {{contents.senderName}}
+                            </td>
+                            <td class="text-center text-bold">Aksi</td>
+                            <td class="text-center text-bold" style="border-right:2px solid #000000;">Tembusan</td>
+                            <td class="text-center text-bold">Jam</td>
+                            <td class="text-center text-bold">Tanggal</td>
+                            <td class="text-center vertical-align-top" rowspan="3">
+                                <input type="hidden" placeholder="" name="cara" class="form-control cara" v-model="contents.cara">
+                                {{contents.cara}}
+                            </td>
+                            <td class="text-center vertical-align-top" rowspan="3">
+                                <input type="hidden" placeholder="" name="paraf" class="form-control paraf" v-model="contents.paraf">
+                                {{contents.paraf}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Pangkat</td>
+                            <td style="border-bottom: none;">
+                                <input type="hidden" placeholder="" class="form-control sender-pangkat" name="sender-pangkat" v-model="contents.senderRank">
+                                {{contents.senderRank}}
+                            </td>
+                            <td class="text-center vertical-align-top" rowspan="2">
+                                <input type="hidden" placeholder="" name="alamataksi" class="form-control alamataksi" v-model="contents.alamataksi">
+                                {{contents.alamataksi}}
+                            </td>
+                            <td class="text-center vertical-align-top" rowspan="2" style="border-right:2px solid #000000;">
+                                <input type="hidden" placeholder="" name="alamattembusan" class="form-control alamattembusan" v-model="contents.alamattembusan">
+                                {{contents.alamattembusan}}
+                            </td>
+                            <td class="text-center vertical-align-top" rowspan="2">
+                                <input type="hidden" placeholder="" name="jam" class="form-control jam" v-model="contents.jam">
+                                {{contents.jam}}
+                            </td>
+                            <td class="text-center vertical-align-top" rowspan="2">
+                                <input type="hidden" placeholder="" name="tanggal" class="form-control tanggal" v-model="contents.tanggal">
+                                {{contents.tanggal}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold" style="border-left:2px solid #000000; border-right: none;">TTD</td>
+                            <td><input type="hidden" name="signature" class="signature" v-model="contents.senderSignature"><img :src="contents.senderSignature" width="100" class="sender-signature" name="sender-signature"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="btn btn-danger btn-wide" v-bind="loadMoveButton(contents.composeStatus)" type="button" @click="MoveMessage">
+                            Hapus <i class="fa icon-delete121"></i>
+                        </button>
+                        <button class="btn btn-danger btn-wide" v-bind="loadDeleteButton(contents.composeStatus)" type="button" @click="DeleteMessage">
+                            Hapus <i class="fa icon-delete121"></i>
+                        </button>
+                        <button class="btn btn-warning btn-wide" v-bind="loadPrintButton(contents.composeStatus)" type="button" @click="PrintPaper">
+                            Print <i class="fa icon-printer"></i>
+                        </button>
+                        <button class="btn btn-warning btn-wide" v-bind="loadPDFButton(contents.composeStatus)" type="button" @click="PrintPdf">
+                            Simpan ke PDF <i class="fa icon-file-pdf"></i>
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-primary btn-wide pull-right btn-replyMessage" v-bind="loadReplyButton(contents.composeStatus)" type="button" @click="ReplyMessage">
+                            Balas <i class="fa icon-arrow-right"></i>
+                        </button>
+                        <button class="btn btn-primary btn-wide pull-right" type="button" v-bind="loadSentButton(contents.composeStatus)" @click="SubmitMessage()">
+                            Kirim <i class="fa icon-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="send-result">
+    <div class="container-fluid container-fullw">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="padding-30">
+                    <p class="text-center big-icon text-primary">
+                        <i class="fa icon-smile"></i>
+                    </p>
+                    <div class="form-group has-success text-large text-center">
+                        <span class="symbol ok" aria-required="true"></span> Radiogram Telah Terkirim
+                    </div>
+                    <div class="btn-group btn-group-justified margin-bottom-30">
+                        <input type="hidden" name="radiogramId" v-model="contents">
+                        <input type="hidden" name="rolecc" v-model="rolecc">
+                        <a href="#" @click="BackToInbox()" class="btn btn-o btn-primary">
+                            Tutup
+                        </a>
+                        <a href="#" @click="PrintPaper()" class="btn btn-o btn-warning">
+                            Print
+                        </a>
+                        <a href="#" @click="PrintPDF()" class="btn btn-o btn-danger">
+                            Simpan Ke PDF
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="email-preview">
+    <div class="container-fluid container-fullw">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <td colspan="2" class="text-center text-bold bg-light-grey" style="width: 10%;">Panggilan</td>
+                            <td class="text-center text-bold bg-light-grey" style="width: 30%;">Jenis</td>
+                            <td class="text-center text-bold bg-light-grey" style="width: 20%;">nomor</td>
+                            <td class="text-center text-bold bg-light-grey" colspan="2" style="width: 20%;">Derajat</td>
+                            <td class="text-center text-bold bg-light-grey" colspan="2" style="width: 20%;">Instruksi Pengiriman</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="text-center" colspan="2" style="height: 30px;">
+                                <input type="hidden" placeholder="Panggilan" name="panggilan" class="form-control panggilan" v-model="contents.panggilan">
+                                {{contents.panggilan}}
+                            </td>
+                            <td class="text-center">
+                                <input type="hidden" placeholder="Jenis" name="jenis" class="form-control jenis" v-model="contents.jenis">
+                                {{contents.jenis}}
+                            </td>
+                            <td class="text-center">
+                                <input type="hidden" placeholder="Nomor" name="nomor" class="form-control nomor" v-model="contents.nomor">
+                                {{contents.nomor}}
+                            </td>
+                            <td class="text-center" colspan="2">
+                                <input type="hidden" placeholder="Derajat" name="derajat" class="form-control derajat" v-model="contents.derajat">
+                                {{contents.derajat}}
+                            </td>
+                            <td class="text-center" colspan="2">
+                                <input type="hidden" placeholder="Instruksi Pengiriman" name="instruksi" class="form-control instruksi" v-model="contents.instruksi">
+                                {{contents.instruksi}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="text-bold" style="border-top:2px solid #000000; border-left:2px solid #000000; border-bottom: none; border-right: none">Dari</td>
+                            <td colspan="4" style="border-top:2px solid #000000; border-right:2px solid #000000; border-bottom: none;">
+                                <input type="hidden" class="sender" name="sender" v-model="contents.sender">
+                                <input type="hidden" class="senderid" name="senderid" v-model="contents.senderid">
+                                {{contents.senderCallsign}}
+                            </td>
+                            <td class="text-center text-bold bg-light-grey">Tanda Dinas</td>
+                            <td class="text-center text-bold bg-light-grey">Group</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none">Kepada</td>
+                            <td colspan="4" class="parent-receivers" style="border-right:2px solid #000000; border-bottom: none;">
+                                <input type="hidden" class="receivers" name="receivers" v-model="contents.receivers">
+                                <input type="hidden" class="receiversid" name="receiversid" v-model="contents.receiversid">
+                                {{contents.receiverCallsign}}
+                            </td>
+                            <td class="text-center" style="border-bottom: none;">
+                                <input type="hidden" placeholder="Tanda Dinas" class="form-control" v-model="contents.tandadinas">
+                                {{contents.tandadinas}}
+                            </td>
+                            <td class="text-center" style="border-bottom: none;">
+                                <input type="hidden" placeholder="group" class="form-control" v-model="contents.group">
+                                {{contents.group}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom:2px solid #000000; border-right: none;">Tembusan</td>
+                            <td colspan="4" style="border-right:2px solid #000000; border-bottom:2px solid #000000;">
+                                <input type="hidden" class="tembusan" name="tembusan" v-model="contents.tembusan">
+                                {{rolecc}}
+                            </td>
+                            <td style="border-bottom:2px solid #000000"></td>
+                            <td style="border-bottom:2px solid #000000"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right:none;">Klasifikasi</td>
+                            <td colspan="4" style="border-bottom: none; border-right: none;">
+                                <input type="hidden" class="klasifikasi" name="klasifikasi" v-model="contents.klasifikasi"/>
+                                {{contents.klasifikasi}}
+                            </td>
+                            <td style="border-bottom: none; border-right: none;"></td>
+                            <td style="border-bottom: none;"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Judul</td>
+                            <td colspan="4" class="parent-title" style="border-bottom: none; border-right: none;">
+                                <input type="hidden" placeholder="Judul" name="title" class="form-control title" v-model="contents.title">
+                                {{contents.title}}
+                            </td>
+                            <td style="border-bottom: none; border-right: none;"></td>
+                            <td style="border-bottom: none;"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Nomor</td>
+                            <td colspan="4" class="parent-no" style="border-bottom: none; border-right: none;">
+                                <input type="hidden" placeholder="Nomor" name="Number" class="form-control Number" v-model="contents.Number">
+                                {{contents.Number}}
+                            </td>
+                            <td style="border-bottom: none; border-right: none;"></td>
+                            <td style="border-bottom: none;"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="8" style="height:250px; vertical-align: top; border-left:2px solid #000000;">
+                                <input type="hidden" class="context" name="context" v-model="contents.content"/>
+                                <label v-html="contents.renderMessages"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center text-bold bg-light-grey" colspan="2" style="border-left:2px solid #000000;">Pengirim</td>
+                            <td class="text-center text-bold bg-light-grey" colspan="2" style="border-right:2px solid #000000;">Derajat</td>
+                            <td class="text-center text-bold bg-light-grey" colspan="2" style="border-top:2px solid #000000;">Dikirim/Diterima</td>
+                            <td class="text-center text-bold bg-light-grey" style="border-top:2px solid #000000;">Cara</td>
+                            <td class="text-center text-bold bg-light-grey" style="border-top:2px solid #000000;">Paraf</td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Nama</td>
+                            <td style="border-bottom: none;">
+                                <input type="hidden" placeholder="" class="form-control sender-name" name="sender-name" v-model="contents.senderName">
+                                {{contents.senderName}}
+                            </td>
+                            <td class="text-center text-bold">Aksi</td>
+                            <td class="text-center text-bold" style="border-right:2px solid #000000;">Tembusan</td>
+                            <td class="text-center text-bold">Jam</td>
+                            <td class="text-center text-bold">Tanggal</td>
+                            <td class="text-center vertical-align-top" rowspan="3">
+                                <input type="hidden" placeholder="" name="cara" class="form-control cara" v-model="contents.cara">
+                                {{contents.cara}}
+                            </td>
+                            <td class="text-center vertical-align-top" rowspan="3">
+                                <input type="hidden" placeholder="" name="paraf" class="form-control paraf" v-model="contents.paraf">
+                                {{contents.paraf}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Pangkat</td>
+                            <td style="border-bottom: none;">
+                                <input type="hidden" placeholder="" class="form-control sender-pangkat" name="sender-pangkat" v-model="contents.senderRank">
+                                {{contents.senderRank}}
+                            </td>
+                            <td class="text-center vertical-align-top" rowspan="2">
+                                <input type="hidden" placeholder="" name="alamataksi" class="form-control alamataksi" v-model="contents.alamataksi">
+                                {{contents.alamataksi}}
+                            </td>
+                            <td class="text-center vertical-align-top" rowspan="2" style="border-right:2px solid #000000;">
+                                <input type="hidden" placeholder="" name="alamattembusan" class="form-control alamattembusan" v-model="contents.alamattembusan">
+                                {{contents.alamattembusan}}
+                            </td>
+                            <td class="text-center vertical-align-top" rowspan="2">
+                                <input type="hidden" placeholder="" name="jam" class="form-control jam" v-model="contents.jam">
+                                {{contents.jam}}
+                            </td>
+                            <td class="text-center vertical-align-top" rowspan="2">
+                                <input type="hidden" placeholder="" name="tanggal" class="form-control tanggal" v-model="contents.tanggal">
+                                {{contents.tanggal}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold" style="border-left:2px solid #000000; border-right: none;">TTD</td>
+                            <td><input type="hidden" name="signature" class="signature" v-model="contents.senderSignature"><img :src="contents.senderSignature" width="100" class="sender-signature" name="sender-signature"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary btn-o btn-wide" type="button" @click="BackToMessage()">
+                            Kembali <i class="fa icon-arrow-right"></i>
+                        </button>
+                        <button class="btn btn-info btn-wide" type="button" @click="SaveMessage()">
+                            Naskah <i class="fa icon-arrow-right"></i>
+                        </button>
+                        <button class="btn btn-primary btn-wide" type="button" @click="SubmitMessage()">
+                            Kirim <i class="fa icon-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</template>

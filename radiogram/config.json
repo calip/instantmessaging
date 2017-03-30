@@ -1,0 +1,16 @@
+{
+    "hostname": "localhost",
+    "port" : 50120,
+    "terminalCheckInterval" : 10,
+    "authServerUrl" : "https://localhost:3000",
+    "ssl" : {
+        "key"  : "./keys/private-localhost.key",
+        "cert" : "./keys/cert-localhost.crt",
+        "ca"   : "./keys/tesynergy-root-ca.crt"
+    },
+    "rethink":{
+        "host":"radiogram.db.soyut",
+        "port":28015,
+        "database":"soyut_radiogram"
+    }
+}

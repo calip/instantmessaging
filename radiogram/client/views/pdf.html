@@ -1,0 +1,208 @@
+<html>
+<head>
+  <meta charset="utf8">
+  <title>Radiogram</title>
+  <style>
+    body {
+      font: 12px Helvetica, Sans-Serif;
+    }
+    #page-wrap {
+      margin: 20px 5px;
+    }
+
+    #header {
+      height: 15px;
+      width: 100%;
+      margin: 0;
+      text-align: center;
+      color: #000000;
+      border:solid 1px #000000;
+      border-bottom: none;
+      font: bold 12px Helvetica, Sans-Serif;
+      text-decoration: uppercase;
+      letter-spacing: 20px; padding: 8px 0px;
+    }
+
+    textarea {
+      border: 0;
+      font: 12px Helvetica, Sans-Serif;
+      overflow: hidden;
+      resize: none;
+    }
+    table { border-collapse: collapse; }
+    table td, table th { border: 1px solid black;}
+
+    table td.rotate {
+        /* Something you can count on */
+        height: 140px;
+        white-space: nowrap;
+    }
+
+    table td.rotate > div {
+        transform:
+                /* Magic Numbers */
+                translate(0px, 50px)
+                    /* 45 is really 360 - 45 */
+                rotate(-90deg);
+        width: 30px;
+    }
+    table td.rotate > div > span {
+        padding: 5px;
+    }
+
+    #address { width: 250px; height: 150px; float: left; }
+    #customer { overflow: hidden; }
+
+    #logo { text-align: right; float: right; position: relative; margin-top: 25px; border: 1px solid #fff; max-width: 540px; max-height: 100px; overflow: hidden; }
+    #logo:hover, #logo.edit { border: 1px solid #000; margin-top: 0px; max-height: 125px; }
+    #logoctr { display: none; }
+    #logo:hover #logoctr, #logo.edit #logoctr { display: block; text-align: right; line-height: 25px; background: #eee; padding: 0 5px; }
+    #logohelp { text-align: left; display: none; font-style: italic; padding: 10px 5px;}
+    #logohelp input { margin-bottom: 5px; }
+    .edit #logohelp { display: block; }
+    .edit #save-logo, .edit #cancel-logo { display: inline; }
+    .edit #image, #save-logo, #cancel-logo, .edit #change-logo, .edit #delete-logo { display: none; }
+    #customer-title { font-size: 20px; font-weight: bold; float: left; }
+
+    #meta { margin-top: 1px; width: 300px; float: right; }
+    #meta td { text-align: right;  }
+    #meta td.meta-head { text-align: left; background: #eee; }
+    #meta td textarea { width: 100%; height: 20px; text-align: right; }
+
+    #items {
+      width: 100%;
+      margin: 0 auto;
+      border: 1px solid black; }
+    #items th {
+      background: #eee;
+      font: bold 10px Helvetica, Sans-Serif;
+    }
+    #items th label{
+      padding: 5px;
+    }
+    #items textarea { width: 80px; height: 50px; }
+    #items tr.item-row {
+      border: 1px solid black;
+      font: 10px Helvetica, Sans-Serif;
+      vertical-align: top;
+    }
+    #items tr.item-row td label{
+      padding: 5px;
+    }
+    #coba{
+      height: 100%;
+      width: 100%;
+      background: #00a8c6;
+    }
+    .text-center{
+      text-align: center;
+    }
+
+    #items td.description textarea, #items td.item-name textarea { width: 100%; }
+    #items td.total-line { border-right: 0; text-align: right; }
+    #items td.total-value { border-left: 0; padding: 10px; }
+    #items td.total-value textarea { height: 20px; background: none; }
+    #items td.balance { background: #eee; }
+    #items td.blank { border: 0; }
+
+    #terms { text-align: center; margin: 20px 0 0 0; }
+    #terms h5 { text-transform: uppercase; font: 13px Helvetica, Sans-Serif; letter-spacing: 10px; padding: 0 0 8px 0; margin: 0 0 8px 0; }
+    #terms textarea { width: 100%; text-align: center;}
+
+    textarea:hover, textarea:focus, #items td.total-value textarea:hover, #items td.total-value textarea:focus, .delete:hover { background-color:#EEFF88; }
+
+    .delete-wpr { position: relative; }
+    .delete { display: block; color: #000; text-decoration: none; position: absolute; background: #EEEEEE; font-weight: bold; padding: 0px 3px; border: 1px solid; top: -6px; left: -22px; font-family: Verdana; font-size: 12px; }
+    .text-center { text-align: center}
+
+
+  </style>
+</head>
+<body>
+
+<div id="page-wrap">
+
+  <div id="header">FORMULIR BERITA</div>
+
+  <table id="items">
+
+    <tr>
+      <th colspan="2">Panggilan</th>
+      <th>Jenis</th>
+      <th>nomor</th>
+      <th colspan="2">Derajat</th>
+      <th colspan="2">Instruksi Pengiriman</th>
+    </tr>
+    <tr class="item-row">
+      <td colspan="2"><label>{{panggilan}}</label></td>
+      <td><label>{{jenis}}</label></td>
+      <td><label>{{nomor}}</label></td>
+      <td colspan="2"><label>{{derajat}}</label></td>
+      <td colspan="2"><label>{{instruksi}}</label></td>
+    </tr>
+    <tr class="item-row">
+      <td colspan="6" style="border-top:2px solid #000000; border-left:2px solid #000000; border-bottom: 1px solid #ffffff; border-right: 2px solid #000000;"><div style="width:100px; float: left">Dari</div> : <label>{{sender_Name}}</label></td>
+      <th colspan="2">Tanggal/Waktu Pengajuan</th>
+    </tr>
+    <tr class="item-row">
+      <td colspan="6" style="border-left:2px solid #000000; border-bottom: 1px solid #ffffff; border-right: 2px solid #000000"><div style="width:100px; float: left">Kepada</div> : <label>{{receiver_Name}}</label></td>
+      <td colspan="2" class="text-center"><label>{{datetime}}</label></td>
+    </tr>
+    <tr class="item-row">
+      <td colspan="6" style="border-left:2px solid #000000; border-bottom: 1px solid #ffffff; border-right: 2px solid #000000"><div style="width:100px; float: left">Tembusan</div> : <label>{{tembusan_Name}}</label></td>
+      <th>Tanda Dinas</th>
+      <th>Group</th>
+    </tr>
+    <tr class="item-row">
+      <td colspan="6" style="border-left:2px solid #000000; border-bottom: 1px solid #ffffff;  border-top: 2px solid #000000; border-right: 2px solid #000000"><div style="width:100px; float: left">Klasifikasi</div> : <label>{{klasifikasi}}</label></td>
+      <td><label>{{tanda_dinas}}</label></td>
+      <td><label>{{group}}</label></td>
+    </tr>
+    <tr class="item-row">
+      <td colspan="6" style="border-left:2px solid #000000; border-bottom: 1px solid #ffffff;  border-right: 2px solid #000000"><div style="width:100px; float: left">Title</div> : <label>{{title}}</label></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr class="item-row">
+      <td colspan="6" style="border-left:2px solid #000000; border-right: 2px solid #000000; border-bottom: 1px solid #ffffff; "><div style="width:100px; float: left">Nomor</div> : <label>{{number}}</label></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr class="item-row" style="border-left:2px solid #000000; border-right: 2px solid #000000;">
+      <td colspan="8" style="height:250px; vertical-align: top;">
+        {{renderMessage}}
+      </td>
+    </tr>
+    <tr class="item-row">
+      <th colspan="2" style="border-left:2px solid #000000;">Pengirim</th>
+      <th colspan="2">Derajat</th>
+      <th colspan="2" style="border-top:2px solid #000000; border-left:2px solid #000000;">Dikirim/Diterima</th>
+      <th style="border-top:2px solid #000000;">Cara</th>
+      <th style="border-top:2px solid #000000;">Paraf</th>
+    </tr>
+    <tr class="item-row">
+      <td colspan="2" style="border-left:2px solid #000000;">Nama : <label>{{sendername}}</label></td>
+      <td class="text-center"><label>Aksi</label></td>
+      <td class="text-center">Tembusan</td>
+      <td class="text-center" style="border-left:2px solid #000000;">Jam</td>
+      <td class="text-center">Tanggal</td>
+      <td rowspan="3"><label>{{cara}}</label></td>
+      <td rowspan="3"><label>{{paraf}}</label></td>
+    </tr>
+    <tr class="item-row">
+      <td colspan="2" style="border-left:2px solid #000000;">Pangkat : <label>{{senderpangkat}}</label></td>
+      <td rowspan="2"><label>{{alamataksi}}</label></td>
+      <td rowspan="2"><label>{{alamattembusan}}</label></td>
+      <td rowspan="2" style="border-left:2px solid #000000;"><label>{{jam}}</label></td>
+      <td rowspan="2"><label>{{tanggal}}</label></td>
+    </tr>
+    <tr class="item-row">
+      <td colspan="2" style="border-left:2px solid #000000;">Tanda Tangan : <img src="{{tanda_tangan}}" width="100"></td>
+    </tr>
+
+  </table>
+
+</div>
+
+</body>
+</html>
