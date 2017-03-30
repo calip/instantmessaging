@@ -10,6 +10,21 @@
   "debug" : true,
   "activities":[
     {
+      "class":"soyut.module.app.radiogram.api",
+      "title":"Radiogram API",
+      "requiredPolicies":[],
+      "launcher" : false,
+      "libraryScript":[
+        {"name": "radiogram-api", "url":"/js/radiogram-api.js"}
+      ],
+      "instanceScript":[
+      ],
+      "styles":[
+      ],
+      "contents":[
+      ]
+    },
+    {
       "class":"soyut.module.app.radiogram.main",
       "title":"Radiogram",
       "launcher" : true,
