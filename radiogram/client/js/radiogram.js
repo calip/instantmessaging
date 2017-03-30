@@ -1,3 +1,6 @@
+var soyutSession = soyut.Session;
+var roleName = soyut.Session.role;
+
 soyut.radiogram.sidebarHandler = function() {
     var $html = $('html'), $win = $(window), wrap = $('.app-aside'), MEDIAQUERY = {}, app = $('.wdl-app');
 		var eventObject = isTouch() ? 'click' : 'mouseenter', elem = $('.sidebar'), ul = "", menuTitle, _this, sidebarMobileToggler = $('.sidebar-mobile-toggler'), $winOffsetTop = 0, $winScrollTop = 0, $appWidth;
@@ -300,7 +303,7 @@ soyut.radiogram.renderCompose = function () {
         $(getInstanceID("btnSubmitMessage")).css({display:'none'});
     }
 
-    $(getInstanceID('sender-name')).val(soyut.Session.user.name);
+    $(getInstanceID('sender-name')).val(soyut.Session.role.callsign);
     $(getInstanceID('sender-pangkat')).val(soyut.Session.user.rank);
     $(getInstanceID('signature')).val(soyut.Session.user.signature);
     $(getInstanceID('sender-signature')).attr('src', soyut.Session.user.signature);
