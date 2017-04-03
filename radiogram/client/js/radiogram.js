@@ -830,19 +830,19 @@ soyut.radiogram.renderListGroupMessage = function (elSelector, elChildren, messa
                     scenarioService.Role_getRoleByGroup({roleGroup: group}, function (err, rolegroup) {
                         rolegroup.forEach(function (rg) {
                             getOutboxRadiogram(rg.id, function (err, res) {
-                                res.forEach(function (i) {
+                                //res.forEach(function (i) {
                                     arrData.push({
-                                        id: i.id,
-                                        content: i.content,
-                                        SendTime: i.SendTime,
-                                        simtime: i.simtime,
-                                        Number: i.Number,
-                                        readStatus: i.readStatus,
+                                        id: res[0].id,
+                                        content: res[0].content,
+                                        SendTime: res[0].SendTime,
+                                        simtime: res[0].simtime,
+                                        Number: res[0].Number,
+                                        readStatus: res[0].readStatus,
                                         composeStatus: 'sent',
                                         receiverCallsign: "PANGKOGAS"
                                     });
                                     _this.$set(_this, 'messages', arrData);
-                                });
+                                //});
                             });
                         });
                     });
@@ -920,61 +920,62 @@ soyut.radiogram.renderListMessage = function (elSelector, elChildren, message) {
                 if(roleName.isWASDAL){
                     var arrData =[];
                     soyut.radiogram.renderListWasdalMessages(message,function(res){
-                        res.forEach(function (vi) {
-                            if(message == "inbox") {
-                                var stringTime = '<span class="text">waktu Sebenarnya '+ moment(vi.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
-                                                    '<span class="text">waktu Asumsi '+ moment(vi.simtime).format("DD-MM-YYYY h:mm") +'</span>';    
-                                soyut.radiogram.renderSenderObjWasdal(vi.sender, vi.senderWasdal, function (sender) {
-                                    arrData.push({
-                                        id: vi.id,
-                                        title: vi.title,
-                                        content: vi.content,
-                                        SendTime: vi.SendTime,
-                                        simtime: vi.simtime,
-                                        createTime: vi.createTime,
-                                        stringTime: stringTime,
-                                        Number: vi.Number,
-                                        readStatus: vi.readStatus,
-                                        composeStatus: vi.composeStatus,
-                                        receiverCallsign: sender.position,
-                                        receiverRank: "",
-                                        receiverName: "",
-                                        receiverPhoto: ""
-                                    });
-                                    _this.$set(_this, 'messages', arrData);                               
-                                })
+                        //console.log(res[0].Number)
+                        //res.forEach(function (vi) {
+                        if(message == "inbox") {
+                            var stringTime = '<span class="text">waktu Sebenarnya '+ moment(res[0].SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
+                                                '<span class="text">waktu Asumsi '+ moment(res[0].simtime).format("DD-MM-YYYY h:mm") +'</span>';    
+                            soyut.radiogram.renderSenderObjWasdal(res[0].sender, res[0].senderWasdal, function (sender) {
+                                arrData.push({
+                                    id: res[0].id,
+                                    title: res[0].title,
+                                    content: res[0].content,
+                                    SendTime: res[0].SendTime,
+                                    simtime: res[0].simtime,
+                                    createTime: res[0].createTime,
+                                    stringTime: stringTime,
+                                    Number: res[0].Number,
+                                    readStatus: res[0].readStatus,
+                                    composeStatus: res[0].composeStatus,
+                                    receiverCallsign: sender.position,
+                                    receiverRank: "",
+                                    receiverName: "",
+                                    receiverPhoto: ""
+                                });
+                                _this.$set(_this, 'messages', arrData);                               
+                            })
+                        }
+                        else{
+                            var stringTime = '';
+                            if(message == 'draft'){
+                                stringTime = '<span class="text">dibuat '+moment(res[0].createTime).format("DD-MM-YYYY h:mm")+'</span>';
                             }
                             else{
-                                var stringTime = '';
-                                if(message == 'draft'){
-                                    stringTime = '<span class="text">dibuat '+moment(vi.createTime).format("DD-MM-YYYY h:mm")+'</span>';
-                                }
-                                else{
-                                    stringTime = '<span class="text">waktu Sebenarnya '+ moment(vi.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
-                                                        '<span class="text">waktu Asumsi '+ moment(vi.simtime).format("DD-MM-YYYY h:mm") +'</span>';
-                                }
-                                
-                                soyut.radiogram.renderListReceiversDetail(vi.receivers, function (receivers) {
-                                    arrData.push({
-                                        id: vi.id,
-                                        title: vi.title,
-                                        content: vi.content,
-                                        SendTime: vi.SendTime,
-                                        simtime: vi.simtime,
-                                        createTime: vi.createTime,
-                                        stringTime: stringTime,
-                                        Number: vi.Number,
-                                        readStatus: vi.readStatus,
-                                        composeStatus: vi.composeStatus,
-                                        receiverCallsign: receivers,
-                                        receiverRank: "",
-                                        receiverName: "",
-                                        receiverPhoto: ""
-                                    });
-                                    _this.$set(_this, 'messages', arrData);    
-                                });
+                                stringTime = '<span class="text">waktu Sebenarnya '+ moment(res[0].SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
+                                                    '<span class="text">waktu Asumsi '+ moment(res[0].simtime).format("DD-MM-YYYY h:mm") +'</span>';
                             }
-                        });
+                            
+                            soyut.radiogram.renderListReceiversDetail(res[0].receivers, function (receivers) {
+                                arrData.push({
+                                    id: res[0].id,
+                                    title: res[0].title,
+                                    content: res[0].content,
+                                    SendTime: res[0].SendTime,
+                                    simtime: res[0].simtime,
+                                    createTime: res[0].createTime,
+                                    stringTime: stringTime,
+                                    Number: res[0].Number,
+                                    readStatus: res[0].readStatus,
+                                    composeStatus: res[0].composeStatus,
+                                    receiverCallsign: receivers,
+                                    receiverRank: "",
+                                    receiverName: "",
+                                    receiverPhoto: ""
+                                });
+                                _this.$set(_this, 'messages', arrData);    
+                            });
+                        }
+                        //});
                     });
                 }
                 else{
