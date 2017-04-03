@@ -330,7 +330,7 @@
     <ul class="messages-list perfect-scrollbar">
       <li v-for="message in messages" :class="LoadStatusMessage(message.id, message.readStatus, message.composeStatus)">
         <a href="#" @click="viewMessageDetail(message.id)">
-          <span class="messages-item-from">{{message.receiverCallsign}}</span>
+          <span class="messages-item-from">{{ message.receiverCallsign | truncsender}}</span>
           <div class="messages-item-time" v-html="message.stringTime"></div>
           <span class="messages-item-subject"> {{message.Number}}</span>
           <span class="messages-item-content">{{ message.content | truncate}}.....</span>
@@ -419,8 +419,8 @@
                         <tr>
                             <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none">Kepada</td>
                             <td colspan="4" style="border-right:2px solid #000000; border-bottom: none;">
-                                <input type="hidden" class="rolereceiver" name="rolereceiver" v-model="rolereceiver">
-                                {{rolereceiver}}
+                                <input type="hidden" class="rolereceiver" name="rolereceiver" v-model="contents.receiverDetail">
+                                {{contents.receiverDetail}}
                             </td>
                             <td class="text-center" colspan="2"><input type="hidden" placeholder="Tanda Dinas" class="form-control" v-model="contents.simtime"><label>{{contents.simtime}}</label></td>
                         </tr>
@@ -428,8 +428,8 @@
                             <td colspan="2" rowspan="2" class="text-bold" style="border-left:2px solid #000000; border-right: none; border-bottom:2px solid #000000;">Tembusan</td>
                             <td colspan="4" rowspan="2" style="border-right:2px solid #000000; border-bottom:2px solid #000000;">
                                 <input type="hidden" class="tembusan" name="tembusan" v-model="contents.tembusan"/>
-                                <input type="hidden" class="rolecc" name="rolecc" v-model="rolecc"/>
-                                {{rolecc}}
+                                <input type="hidden" class="rolecc" name="rolecc" v-model="contents.ccDetail"/>
+                                {{contents.ccDetail}}
                             </td>
                             <td class="text-center text-bold bg-light-grey">Tanda Dinas</td>
                             <td class="text-center text-bold bg-light-grey">Group</td>

@@ -13,9 +13,6 @@ module.exports = {
     sender:{
       model:'role'
     },
-    sender:{
-      model:'role'
-    },
     senderWasdal :{
       type: 'boolean',
       defaultsTo:false,
@@ -54,7 +51,7 @@ module.exports = {
       model:'rolegroup'
     },
     composeStatus:{
-      enum:['inbox','sent','draft','trash'],
+      enum:['inbox','sent','draft','trash','pending'],
       defaultsTo:'draft'
     },
     readStatus:{
@@ -109,11 +106,8 @@ module.exports = {
     senderName:{
       type:'string'
     },
-    senderRank:{
-      type:'string'
-    },
-    senderSignature:{
-      type:'string'
+    parentId:{
+      model:'Radiogram'
     }
   },
   getById : function(id, cb)
