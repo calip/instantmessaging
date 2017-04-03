@@ -806,19 +806,19 @@ soyut.radiogram.renderListGroupMessage = function (elSelector, elChildren, messa
                             scenarioService.Role_getRoleByGroup({roleGroup: group}, function (err, rolegroup) {
                                 rolegroup.forEach(function (rg) {
                                     getInboxRadiogram(m.id, rg.id, function (err, res) {
-                                        res.forEach(function (i) {
+                                        //res.forEach(function (i) {
                                             arrData.push({
-                                                id: i.id,
-                                                content: i.content,
-                                                SendTime: i.SendTime,
-                                                simtime: i.simtime,
-                                                Number: i.Number,
-                                                readStatus: i.readStatus,
-                                                composeStatus: i.composeStatus,
+                                                id: res[0].id,
+                                                content: res[0].content,
+                                                SendTime: res[0].SendTime,
+                                                simtime: res[0].simtime,
+                                                Number: res[0].Number,
+                                                readStatus: res[0].readStatus,
+                                                composeStatus: res[0].composeStatus,
                                                 receiverCallsign: "PANGKOGAS"
                                             });
                                             _this.$set(_this, 'messages', arrData);
-                                        });
+                                        //});
                                     });
                                 });
                             });
@@ -830,7 +830,7 @@ soyut.radiogram.renderListGroupMessage = function (elSelector, elChildren, messa
                     scenarioService.Role_getRoleByGroup({roleGroup: group}, function (err, rolegroup) {
                         rolegroup.forEach(function (rg) {
                             getOutboxRadiogram(rg.id, function (err, res) {
-                                //res.forEach(function (i) {
+                                res.forEach(function (i) {
                                     arrData.push({
                                         id: res[0].id,
                                         content: res[0].content,
@@ -842,7 +842,7 @@ soyut.radiogram.renderListGroupMessage = function (elSelector, elChildren, messa
                                         receiverCallsign: "PANGKOGAS"
                                     });
                                     _this.$set(_this, 'messages', arrData);
-                                //});
+                                });
                             });
                         });
                     });
