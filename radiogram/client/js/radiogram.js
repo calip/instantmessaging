@@ -480,10 +480,7 @@ soyut.radiogram.renderContent = function () {
                     sender: senderRole,
                     receivers: receiverRole,
                     cc: tembusan,
-                    senderName: senderName,
-                    SendTime: new Date(),
-                    simtime: null,
-                    createTime: new Date()
+                    senderName: senderName
                 }, function (res) {
                     soyut.radiogram.clearInput();
 
@@ -926,6 +923,8 @@ soyut.radiogram.renderListMessage = function (elSelector, elChildren, message) {
                             if(message == "inbox") {
                                 var stringTime = '<span class="text">waktu Sebenarnya '+ moment(vi.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
                                                     '<span class="text">waktu Asumsi '+ moment(vi.simtime).format("DD-MM-YYYY h:mm") +'</span>';    
+
+                                
                                 soyut.radiogram.renderSenderObjWasdal(vi.sender, vi.senderWasdal, function (sender) {
                                     arrData.push({
                                         id: vi.id,
@@ -1739,3 +1738,4 @@ soyut.radiogram.init = function () {
 };
 
 soyut.radiogram.init();
+

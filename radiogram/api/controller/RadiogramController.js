@@ -137,7 +137,7 @@ module.exports = {
             },
             accessToken: [RADIOGRAM_USER_TOKEN, RADIOGRAM_MANAGER_TOKEN]
         },
-        Send:{
+        SendReceiver:{
             method: function (authServerUrl, remoteSocket, reqMsg, resCallback) {
                 var panggilan = reqMsg.data.params.panggilan;
                 var jenis = reqMsg.data.params.jenis;
@@ -154,7 +154,75 @@ module.exports = {
                 var alamattembusan = reqMsg.data.params.alamattembusan;
                 var content = reqMsg.data.params.content;
                 var readStatus = reqMsg.data.params.readStatus;
-                var owner = reqMsg.data.params.sender;
+                var owner = reqMsg.data.params.owner;
+                var sender = reqMsg.data.params.sender;
+                var senderWasdal = reqMsg.data.params.senderWasdal;
+                var receivers = reqMsg.data.params.receivers;
+                var cc = reqMsg.data.params.cc;
+                var session = reqMsg.data.params.session;
+                var SendTime = reqMsg.data.params.SendTime;
+                var simtime = reqMsg.data.params.simtime;
+                var createTime = reqMsg.data.params.createTime;
+                var senderName = reqMsg.data.params.senderName;
+                var parentId = reqMsg.data.params.parentId;
+                var composeStatus = reqMsg.data.params.composeStatus;
+
+                r.table('Radiogram').insert({
+                        panggilan: panggilan,
+                        jenis: jenis,
+                        nomor: nomor,
+                        derajat: derajat,
+                        instruksi: instruksi,
+                        tandadinas: tandadinas,
+                        group: groups,
+                        cara: cara,
+                        paraf: paraf,
+                        alamataksi: alamataksi,
+                        alamattembusan: alamattembusan,
+                        classification: classification,
+                        Number:Number,
+                        content: content,
+                        readStatus: readStatus,
+                        owner: owner,
+                        sender: sender,
+                        senderName: senderName,
+                        senderWasdal: senderWasdal,
+                        receivers: receivers,
+                        cc: cc,
+                        composeStatus: composeStatus,
+                        session: session,
+                        SendTime: SendTime,
+                        simtime: simtime,
+                        createTime: createTime,
+                        parentId: parentId
+                    },
+                    function (err, result) {
+                        if (err) throw err;
+                        else {
+                            resCallback(false, {success: true, data: result})
+                        }
+                    });
+            },
+            accessToken: [RADIOGRAM_USER_TOKEN, RADIOGRAM_MANAGER_TOKEN]
+        },
+        Sending:{
+            method: function (authServerUrl, remoteSocket, reqMsg, resCallback) {
+                var panggilan = reqMsg.data.params.panggilan;
+                var jenis = reqMsg.data.params.jenis;
+                var nomor = reqMsg.data.params.nomor;
+                var derajat = reqMsg.data.params.derajat;
+                var instruksi = reqMsg.data.params.instruksi;
+                var tandadinas = reqMsg.data.params.tandadinas;
+                var groups = reqMsg.data.params.group;
+                var classification = reqMsg.data.params.classification;
+                var Number = reqMsg.data.params.Number;
+                var cara = reqMsg.data.params.cara;
+                var paraf = reqMsg.data.params.paraf;
+                var alamataksi = reqMsg.data.params.alamataksi;
+                var alamattembusan = reqMsg.data.params.alamattembusan;
+                var content = reqMsg.data.params.content;
+                var readStatus = reqMsg.data.params.readStatus;
+                var owner = reqMsg.data.params.owner;
                 var sender = reqMsg.data.params.sender;
                 var senderWasdal = reqMsg.data.params.senderWasdal;
                 var receivers = reqMsg.data.params.receivers;
@@ -196,95 +264,11 @@ module.exports = {
                     function (err, result) {
                         if (err) throw err;
                         else {
-                            //create copy
-                            if(receivers != null || receivers != undefined) {
-                                receivers.forEach(function (listRcv) {
-                                    if (listRcv != "") {
-                                        r.table('Radiogram').insert({
-                                            panggilan: panggilan,
-                                            jenis: jenis,
-                                            nomor: nomor,
-                                            derajat: derajat,
-                                            instruksi: instruksi,
-                                            tandadinas: tandadinas,
-                                            group: groups,
-                                            cara: cara,
-                                            paraf: paraf,
-                                            alamataksi: alamataksi,
-                                            alamattembusan: alamattembusan,
-                                            classification: classification,
-                                            Number:Number,
-                                            content: content,
-                                            readStatus: 'unread',
-                                            owner: listRcv,
-                                            sender: sender,
-                                            senderName: senderName,
-                                            senderWasdal: senderWasdal,
-                                            receivers: receivers,
-                                            cc: cc,
-                                            composeStatus: 'inbox',
-                                            session: session,
-                                            SendTime: SendTime,
-                                            simtime: simtime,
-                                            createTime: createTime
-                                        },
-                                        function (err, resender) {
-                                            if (err) throw err;
-                                            else {
-                                                //create copy
-                                            }
-                                        });
-                                    }
-                                })
-                            }
-                            // insert cc
-                            if(cc != null || cc != undefined) {
-                                cc.forEach(function (listCc) {
-                                    if (listCc != "") {
-                                        r.table('Radiogram').insert({
-                                                panggilan: panggilan,
-                                                jenis: jenis,
-                                                nomor: nomor,
-                                                derajat: derajat,
-                                                instruksi: instruksi,
-                                                tandadinas: tandadinas,
-                                                group: groups,
-                                                cara: cara,
-                                                paraf: paraf,
-                                                alamataksi: alamataksi,
-                                                alamattembusan: alamattembusan,
-                                                session: session,
-                                                owner: listCc,
-                                                sender: sender,
-                                                senderName: senderName,
-                                                senderWasdal: senderWasdal,
-                                                receivers: receivers,
-                                                cc: cc,
-                                                Number: Number,
-                                                classification: classification,
-                                                composeStatus: 'inbox',
-                                                content: content,
-                                                readStatus: 'unread',
-                                                SendTime: SendTime,
-                                                simtime: simtime,
-                                                createTime: createTime
-                                            },
-                                            function (err, reReceiver) {
-                                                if (err) throw err;
-                                                else {
-                                                    //create copy
-                                                }
-                                            });
-                                    }
-                                });
-                            }
-
                             resCallback(false, {success: true, data: result})
                         }
                     });
             },
             accessToken: [RADIOGRAM_USER_TOKEN, RADIOGRAM_MANAGER_TOKEN]
-
         },
         SendWasdal:{
             method: function (authServerUrl, remoteSocket, reqMsg, resCallback) {

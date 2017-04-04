@@ -8,16 +8,48 @@ if (Promise.promisifyAll) {
 }
 
 socket.on('new_radiogram', function (data) {
-    data.new_val.receivers.forEach(function(i){
-        if(soyut.Session.role.id == i){
-            if(data.new_val.composeStatus == 'inbox'){
-                SendNotification(data.new_val.title, data.new_val.content, data.new_val.id);
-    
-                soyut.radiogram.renderListMessage('.email-list', '.email-reader', data.new_val.composeStatus);
-            }
-        }  
-    });
+    if(soyut.Session.role.isWASDAL){
+        getListVRole(soyut.Session.role.scenario).then(function(result) {
+            result.forEach(function(i){
+                if(data.new_val.owner == i.id){
+                    console.log(i.position+" notification "+i.id)
+                    if(data.new_val.composeStatus == 'inbox'){
+                        SendNotification(data.new_val.title, data.new_val.content, data.new_val.id);
+            
+                        soyut.radiogram.renderListMessage('.email-list', '.email-reader', data.new_val.composeStatus);
+                    }
+                }
+            });
+        });
+    }
+    else{
+        scenarioService.Role_getRoleByGroup({roleGroup: soyut.Session.role.roleGroup}, function(err,res) {
+            res.forEach(function(i){
+                if(i.isAddress){
+                    if(data.new_val.owner == i.id){
+                        console.log(i.position+" notification "+i.id)
 
+                        if(data.new_val.composeStatus == 'inbox'){
+                            SendNotification(data.new_val.title, data.new_val.content, data.new_val.id);
+                
+                            soyut.radiogram.renderListMessage('.email-list', '.email-reader', data.new_val.composeStatus);
+                        }
+                    }
+                }
+            });
+        });
+
+        // data.new_val.receivers.forEach(function(i){
+        //     console.log(i)
+        //     if(soyut.Session.role.id == i){
+        //         if(data.new_val.composeStatus == 'inbox'){
+        //             SendNotification(data.new_val.title, data.new_val.content, data.new_val.id);
+        
+        //             soyut.radiogram.renderListMessage('.email-list', '.email-reader', data.new_val.composeStatus);
+        //         }
+        //     }  
+        // });
+    }
 });
 
 soyut.radiogram.renderListSender = function (callback) {
@@ -204,6 +236,20 @@ function getVRole(role) {
     });
 };
 
+function getListVRole(scenario) {
+    return new Promise (function(resolve,reject){
+        scenarioService.VRole_list({scenario: scenario}, function (e, data) {
+            if(e){
+                reject(e);
+            }else{
+                var dataObj = {};
+                dataObj = data;
+                resolve(dataObj);
+            }
+        });  
+    });
+};
+
 soyut.radiogram.renderSenderObj = function (role, wasdal, callback) {
     if(wasdal){
         getVRole(role).then(function(result) {
@@ -349,6 +395,7 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
         
         var listReceiver = [];
         var listCC = [];
+        //var reclock = '2017-04-02T17:39:30.804Z';
         soyut.clock.getCurrentActualTime({}, function(err, reclock){
             params.receivers.forEach(function(i){
                 if(i == "0"){
@@ -357,6 +404,7 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
                     });
                 }
             });
+            //console.log(listRcp[1])
             listReceiver.forEach(function(rcv){
                 //send receievr
                 soyut.radiogram.Radiogram_SendReceiverWasdal({
@@ -392,8 +440,8 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
                     }
                 });
             });
-            listRcp.forEach(function(rcp){
-                if(rcp != '0'){
+            // listRcp.forEach(function(rcp){
+                if(listRcp[1] != undefined){
                     //send receievr
                     soyut.radiogram.Radiogram_SendReceiverWasdal({
                         panggilan: params.panggilan,
@@ -411,7 +459,7 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
                         alamattembusan: params.alamattembusan,
                         content: params.content,
                         readStatus: 'unread',
-                        owner: rcp,
+                        owner: listRcp[1],
                         sender: params.sender,
                         receivers: params.receivers,
                         senderWasdal: soyut.Session.role.isWASDAL,
@@ -428,7 +476,7 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
                         }
                     });
                 }
-            });
+            // });
             if(params.cc != undefined || params.cc != null){
                 params.cc.forEach(function(cc){
                     if(cc == "0"){
@@ -472,8 +520,8 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
                         }
                     });
                 });
-                listTembusan.forEach(function(lrcp){
-                    if(lrcp != "0"){
+            //     listTembusan.forEach(function(lrcp){
+                    if(listTembusan[1] != undefined){
                         //send receievr
                         soyut.radiogram.Radiogram_SendReceiverWasdal({
                             panggilan: params.panggilan,
@@ -491,7 +539,7 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
                             alamattembusan: params.alamattembusan,
                             content: params.content,
                             readStatus: 'unread',
-                            owner: lrcp,
+                            owner: listTembusan[1],
                             sender: params.sender,
                             receivers: params.receivers,
                             senderWasdal: soyut.Session.role.isWASDAL,
@@ -508,7 +556,7 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
                             }
                         });
                     }
-                });
+            //     });
             }
             
             //send
@@ -564,8 +612,53 @@ function getListPangkogas() {
 }
 
 soyut.radiogram.SendRadiogram = function (params, callback) {
+    var listRcp = [];
+    listRcp = params.receivers;
+    var listTembusan = [];
+    listTembusan = params.cc;
+    
+    var listReceiver = [];
+    var listCC = [];
+    //var reclock = '2017-04-02T17:39:30.804Z';
     soyut.clock.getCurrentActualTime({}, function(err, reclock){
-        soyut.radiogram.Radiogram_Send({
+        if(listRcp[0] != undefined){
+            soyut.radiogram.Radiogram_SendReceiver({
+                panggilan: params.panggilan,
+                jenis: params.jenis,
+                nomor: params.nomor,
+                derajat: params.derajat,
+                instruksi: params.instruksi,
+                tandadinas: params.tandadinas,
+                group: params.group,
+                classification: params.classification,
+                Number: params.Number,
+                cara: params.cara,
+                paraf: params.paraf,
+                alamataksi: params.alamataksi,
+                alamattembusan: params.alamattembusan,
+                content: params.content,
+                readStatus: 'unread',
+                owner: listRcp[0],
+                sender: params.sender,
+                receivers: params.receivers,
+                senderWasdal: soyut.Session.role.isWASDAL,
+                cc: params.cc,
+                session: soyut.Session.id,
+                senderName: params.senderName,
+                composeStatus: 'inbox',
+                SendTime: reclock,
+                simtime: null,
+                createTime: reclock,
+                parentId: null
+                }, function (err, res) {
+                if (!err) {
+                    //callback(result.data.generated_keys[0])
+                }
+            });
+        }
+
+        //send
+        soyut.radiogram.Radiogram_Sending({
             panggilan: params.panggilan,
             jenis: params.jenis,
             nomor: params.nomor,
@@ -581,7 +674,7 @@ soyut.radiogram.SendRadiogram = function (params, callback) {
             alamattembusan: params.alamattembusan,
             content: params.content,
             readStatus: 'unread',
-            owner: params.owner,
+            owner: params.sender,
             sender: params.sender,
             receivers: params.receivers,
             senderWasdal: soyut.Session.role.isWASDAL,
@@ -590,10 +683,10 @@ soyut.radiogram.SendRadiogram = function (params, callback) {
             senderName: params.senderName,
             SendTime: reclock,
             simtime: null,
-            createTime: reclock,
-            }, function (err, result) {
+            createTime: reclock
+        }, function (err, results) {
             if (!err) {
-                callback(result.data.generated_keys[0])
+                callback(results.data.generated_keys[0]);
             }
         });
     });
@@ -856,3 +949,4 @@ soyut.radiogram.SendDraftWasdalRadiogram = function (params, callback) {
         });
     });
 }
+
