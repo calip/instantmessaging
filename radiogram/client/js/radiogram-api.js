@@ -16,7 +16,7 @@ socket.on('new_radiogram', function (data) {
                     if(data.new_val.composeStatus == 'inbox'){
                         SendNotification(data.new_val.title, data.new_val.content, data.new_val.id);
             
-                        soyut.radiogram.renderListMessage('.email-list', '.email-reader', data.new_val.composeStatus);
+                        //soyut.radiogram.renderListMessage('.email-list', '.email-reader', data.new_val.composeStatus);
                     }
                 }
             });
@@ -32,7 +32,7 @@ socket.on('new_radiogram', function (data) {
                         if(data.new_val.composeStatus == 'inbox'){
                             SendNotification(data.new_val.title, data.new_val.content, data.new_val.id);
                 
-                            soyut.radiogram.renderListMessage('.email-list', '.email-reader', data.new_val.composeStatus);
+                            //soyut.radiogram.renderListMessage('.email-list', '.email-reader', data.new_val.composeStatus);
                         }
                     }
                 }
@@ -51,6 +51,18 @@ socket.on('new_radiogram', function (data) {
         // });
     }
 });
+
+function SendNotification(title, content, id) {
+    var app = getAppInstance();
+
+    soyut.Event.getInstance().invokeSystemEvent('notification', {
+        title: title, content: content, handler: function (d) {
+            console.log(id);
+            app.launchActivity("soyut.module.app.radiogram.wasdal.main", {radiogramId: id});
+        }
+    });
+}
+
 
 soyut.radiogram.renderListSender = function (callback) {
     getListSender().then(function(result) {
