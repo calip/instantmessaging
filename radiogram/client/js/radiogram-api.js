@@ -53,12 +53,12 @@ socket.on('new_radiogram', function (data) {
 });
 
 function SendNotification(title, content, id) {
-    var app = getAppInstance();
+    //var app = getAppInstance();
 
     soyut.Event.getInstance().invokeSystemEvent('notification', {
         title: title, content: content, handler: function (d) {
             console.log(id);
-            app.launchActivity("soyut.module.app.radiogram.wasdal.main", {radiogramId: id});
+            //app.launchActivity("soyut.module.app.radiogram.wasdal.main", {radiogramId: id});
         }
     });
 }
