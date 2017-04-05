@@ -38,17 +38,6 @@ socket.on('new_radiogram', function (data) {
                 }
             });
         });
-
-        // data.new_val.receivers.forEach(function(i){
-        //     console.log(i)
-        //     if(soyut.Session.role.id == i){
-        //         if(data.new_val.composeStatus == 'inbox'){
-        //             SendNotification(data.new_val.title, data.new_val.content, data.new_val.id);
-        
-        //             soyut.radiogram.renderListMessage('.email-list', '.email-reader', data.new_val.composeStatus);
-        //         }
-        //     }  
-        // });
     }
 });
 
@@ -234,6 +223,18 @@ soyut.radiogram.renderSenderObjWasdal = function (role, wasdal, callback) {
     });
 };
 
+soyut.radiogram.renderSenderWasdalDetail = function (role, callback) {
+    getVRole(role).then(function(result) {
+        callback(result);
+    });
+};
+
+soyut.radiogram.renderSenderDetail = function (role, callback) {
+    getRole(role).then(function(result) {
+        callback(result);
+    });
+};
+
 function getVRole(role) {
     return new Promise (function(resolve,reject){
         scenarioService.VRole_get({id: role}, function (e, data) {
@@ -325,6 +326,20 @@ function getRoleGroup() {
     });
 }
 
+function getRadiogramParent(id) {
+    return new Promise (function(resolve,reject){
+        soyut.radiogram.Radiogram_GetByParentId({id: id}, function (e, data) {
+            if(e){
+                reject(e);
+            }else{
+                var dataObj = {};
+                dataObj = data;
+                resolve(dataObj);
+            }
+        });
+    });
+}
+
 soyut.radiogram.renderListRoleGroup = function (callback) {
     getListRoleGroup().then(function(result) {
         callback(result)
@@ -364,6 +379,12 @@ function getContentRadiogram(id) {
                 resolve(dataObj);
             }
         });  
+    });
+};
+
+soyut.radiogram.renderRadiogramDetail = function (id, callback) {
+    getContentRadiogram(id).then(function(result) {
+        callback(result)
     });
 };
 
@@ -407,7 +428,7 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
         
         var listReceiver = [];
         var listCC = [];
-        //var reclock = '2017-04-02T17:39:30.804Z';
+        
         soyut.clock.getCurrentActualTime({}, function(err, reclock){
             params.receivers.forEach(function(i){
                 if(i == "0"){
@@ -416,7 +437,7 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
                     });
                 }
             });
-            //console.log(listRcp[1])
+            
             listReceiver.forEach(function(rcv){
                 //send receievr
                 soyut.radiogram.Radiogram_SendReceiverWasdal({
@@ -442,6 +463,7 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
                     cc: params.cc,
                     session: soyut.Session.id,
                     senderName: params.senderName,
+                    senderRank: params.senderRank,
                     SendTime: reclock,
                     simtime: null,
                     createTime: reclock,
@@ -452,43 +474,44 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
                     }
                 });
             });
-            // listRcp.forEach(function(rcp){
-                if(listRcp[1] != undefined){
-                    //send receievr
-                    soyut.radiogram.Radiogram_SendReceiverWasdal({
-                        panggilan: params.panggilan,
-                        jenis: params.jenis,
-                        nomor: params.nomor,
-                        derajat: params.derajat,
-                        instruksi: params.instruksi,
-                        tandadinas: params.tandadinas,
-                        group: params.group,
-                        classification: params.classification,
-                        Number: params.Number,
-                        cara: params.cara,
-                        paraf: params.paraf,
-                        alamataksi: params.alamataksi,
-                        alamattembusan: params.alamattembusan,
-                        content: params.content,
-                        readStatus: 'unread',
-                        owner: listRcp[1],
-                        sender: params.sender,
-                        receivers: params.receivers,
-                        senderWasdal: soyut.Session.role.isWASDAL,
-                        cc: params.cc,
-                        session: soyut.Session.id,
-                        senderName: params.senderName,
-                        SendTime: reclock,
-                        simtime: null,
-                        createTime: reclock,
-                        parentId: null,
-                        composeStatus: 'inbox'
-                    }, function (err, res) {
-                        if (!err) {
-                        }
-                    });
-                }
-            // });
+            
+            if(listRcp[1] != undefined){
+                //send receievr
+                soyut.radiogram.Radiogram_SendReceiverWasdal({
+                    panggilan: params.panggilan,
+                    jenis: params.jenis,
+                    nomor: params.nomor,
+                    derajat: params.derajat,
+                    instruksi: params.instruksi,
+                    tandadinas: params.tandadinas,
+                    group: params.group,
+                    classification: params.classification,
+                    Number: params.Number,
+                    cara: params.cara,
+                    paraf: params.paraf,
+                    alamataksi: params.alamataksi,
+                    alamattembusan: params.alamattembusan,
+                    content: params.content,
+                    readStatus: 'unread',
+                    owner: listRcp[1],
+                    sender: params.sender,
+                    receivers: params.receivers,
+                    senderWasdal: soyut.Session.role.isWASDAL,
+                    cc: params.cc,
+                    session: soyut.Session.id,
+                    senderName: params.senderName,
+                    senderRank: params.senderRank,
+                    SendTime: reclock,
+                    simtime: null,
+                    createTime: reclock,
+                    parentId: null,
+                    composeStatus: 'inbox'
+                }, function (err, res) {
+                    if (!err) {
+                    }
+                });
+            }
+
             if(params.cc != undefined || params.cc != null){
                 params.cc.forEach(function(cc){
                     if(cc == "0"){
@@ -522,6 +545,7 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
                         cc: params.cc,
                         session: soyut.Session.id,
                         senderName: params.senderName,
+                        senderRank: params.senderRank,
                         SendTime: reclock,
                         simtime: null,
                         createTime: reclock,
@@ -532,43 +556,43 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
                         }
                     });
                 });
-            //     listTembusan.forEach(function(lrcp){
-                    if(listTembusan[1] != undefined){
-                        //send receievr
-                        soyut.radiogram.Radiogram_SendReceiverWasdal({
-                            panggilan: params.panggilan,
-                            jenis: params.jenis,
-                            nomor: params.nomor,
-                            derajat: params.derajat,
-                            instruksi: params.instruksi,
-                            tandadinas: params.tandadinas,
-                            group: params.group,
-                            classification: params.classification,
-                            Number: params.Number,
-                            cara: params.cara,
-                            paraf: params.paraf,
-                            alamataksi: params.alamataksi,
-                            alamattembusan: params.alamattembusan,
-                            content: params.content,
-                            readStatus: 'unread',
-                            owner: listTembusan[1],
-                            sender: params.sender,
-                            receivers: params.receivers,
-                            senderWasdal: soyut.Session.role.isWASDAL,
-                            cc: params.cc,
-                            session: soyut.Session.id,
-                            senderName: params.senderName,
-                            SendTime: reclock,
-                            simtime: null,
-                            createTime: reclock,
-                            parentId: null,
-                            composeStatus: 'inbox'
-                        }, function (err, res) {
-                            if (!err) {
-                            }
-                        });
-                    }
-            //     });
+                
+                if(listTembusan[1] != undefined){
+                    //send receievr
+                    soyut.radiogram.Radiogram_SendReceiverWasdal({
+                        panggilan: params.panggilan,
+                        jenis: params.jenis,
+                        nomor: params.nomor,
+                        derajat: params.derajat,
+                        instruksi: params.instruksi,
+                        tandadinas: params.tandadinas,
+                        group: params.group,
+                        classification: params.classification,
+                        Number: params.Number,
+                        cara: params.cara,
+                        paraf: params.paraf,
+                        alamataksi: params.alamataksi,
+                        alamattembusan: params.alamattembusan,
+                        content: params.content,
+                        readStatus: 'unread',
+                        owner: listTembusan[1],
+                        sender: params.sender,
+                        receivers: params.receivers,
+                        senderWasdal: soyut.Session.role.isWASDAL,
+                        cc: params.cc,
+                        session: soyut.Session.id,
+                        senderName: params.senderName,
+                        senderRank: params.senderRank,
+                        SendTime: reclock,
+                        simtime: null,
+                        createTime: reclock,
+                        parentId: null,
+                        composeStatus: 'inbox'
+                    }, function (err, res) {
+                        if (!err) {
+                        }
+                    });
+                }
             }
             
             //send
@@ -595,6 +619,7 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
                 cc: params.cc,
                 session: soyut.Session.id,
                 senderName: params.senderName,
+                senderRank: params.senderRank,
                 SendTime: reclock,
                 simtime: null,
                 createTime: reclock
@@ -623,6 +648,12 @@ function getListPangkogas() {
     });
 }
 
+soyut.radiogram.yearNumToSimStr = function(yearNum) {
+    var lastNum = yearNum % 10;
+    var lastChr = String.fromCharCode(65 + lastNum);
+    return yearNum.toString().substring(0,3) + lastChr;
+}
+
 soyut.radiogram.SendRadiogram = function (params, callback) {
     var listRcp = [];
     listRcp = params.receivers;
@@ -631,7 +662,7 @@ soyut.radiogram.SendRadiogram = function (params, callback) {
     
     var listReceiver = [];
     var listCC = [];
-    //var reclock = '2017-04-02T17:39:30.804Z';
+    
     soyut.clock.getCurrentActualTime({}, function(err, reclock){
         if(listRcp[0] != undefined){
             soyut.radiogram.Radiogram_SendReceiver({
@@ -657,6 +688,7 @@ soyut.radiogram.SendRadiogram = function (params, callback) {
                 cc: params.cc,
                 session: soyut.Session.id,
                 senderName: params.senderName,
+                senderRank: params.senderRank,
                 composeStatus: 'inbox',
                 SendTime: reclock,
                 simtime: null,
@@ -693,6 +725,7 @@ soyut.radiogram.SendRadiogram = function (params, callback) {
             cc: params.cc,
             session: soyut.Session.id,
             senderName: params.senderName,
+            senderRank: params.senderRank,
             SendTime: reclock,
             simtime: null,
             createTime: reclock
@@ -730,6 +763,7 @@ soyut.radiogram.DraftWasdalRadiogram = function (params, callback) {
                 cc: params.cc,
                 session: soyut.Session.id,
                 senderName: params.senderName,
+                senderRank: params.senderRank,
                 SendTime: reclock,
                 simtime: null,
                 createTime: reclock
@@ -775,6 +809,7 @@ soyut.radiogram.DraftWasdalRadiogram = function (params, callback) {
                             cc: params.cc,
                             session: soyut.Session.id,
                             senderName: params.senderName,
+                            senderRank: params.senderRank,
                             SendTime: reclock,
                             simtime: null,
                             createTime: reclock,
@@ -785,8 +820,9 @@ soyut.radiogram.DraftWasdalRadiogram = function (params, callback) {
                             }
                         });
                     });
-                    listRcp.forEach(function(rcp){
-                        if(rcp != '0'){
+                    if(listRcp[1] != undefined){
+                    //listRcp.forEach(function(rcp){
+                        //if(rcp != '0'){
                             //send receievr
                             soyut.radiogram.Radiogram_SendReceiverWasdal({
                                 panggilan: params.panggilan,
@@ -804,13 +840,14 @@ soyut.radiogram.DraftWasdalRadiogram = function (params, callback) {
                                 alamattembusan: params.alamattembusan,
                                 content: params.content,
                                 readStatus: 'unread',
-                                owner: rcp,
+                                owner: listRcp[1],
                                 sender: params.sender,
                                 receivers: params.receivers,
                                 senderWasdal: soyut.Session.role.isWASDAL,
                                 cc: params.cc,
                                 session: soyut.Session.id,
                                 senderName: params.senderName,
+                                senderRank: params.senderRank,
                                 SendTime: reclock,
                                 simtime: null,
                                 createTime: reclock,
@@ -820,8 +857,8 @@ soyut.radiogram.DraftWasdalRadiogram = function (params, callback) {
                                 if (!err) {
                                 }
                             });
-                        }
-                    });
+                        //}
+                    }
                     if(params.cc != undefined || params.cc != null){
                         params.cc.forEach(function(cc){
                             if(cc == "0"){
@@ -855,6 +892,7 @@ soyut.radiogram.DraftWasdalRadiogram = function (params, callback) {
                                 cc: params.cc,
                                 session: soyut.Session.id,
                                 senderName: params.senderName,
+                                senderRank: params.senderRank,
                                 SendTime: reclock,
                                 simtime: null,
                                 createTime: reclock,
@@ -865,8 +903,9 @@ soyut.radiogram.DraftWasdalRadiogram = function (params, callback) {
                                 }
                             });
                         });
-                        listTembusan.forEach(function(lrcp){
-                            if(lrcp != "0"){
+                        //listTembusan.forEach(function(lrcp){
+                            if(listTembusan[1] != undefined){
+                            //if(lrcp != "0"){
                                 //send receievr
                                 soyut.radiogram.Radiogram_SendReceiverWasdal({
                                     panggilan: params.panggilan,
@@ -884,13 +923,14 @@ soyut.radiogram.DraftWasdalRadiogram = function (params, callback) {
                                     alamattembusan: params.alamattembusan,
                                     content: params.content,
                                     readStatus: 'unread',
-                                    owner: lrcp,
+                                    owner: listTembusan[0],
                                     sender: params.sender,
                                     receivers: params.receivers,
                                     senderWasdal: soyut.Session.role.isWASDAL,
                                     cc: params.cc,
                                     session: soyut.Session.id,
                                     senderName: params.senderName,
+                                    senderRank: params.senderRank,
                                     SendTime: reclock,
                                     simtime: null,
                                     createTime: reclock,
@@ -901,7 +941,7 @@ soyut.radiogram.DraftWasdalRadiogram = function (params, callback) {
                                     }
                                 });
                             }
-                        });
+                        //});
                     }
                     callback("success");
                 }
@@ -909,6 +949,89 @@ soyut.radiogram.DraftWasdalRadiogram = function (params, callback) {
         });
     });
 }
+
+soyut.radiogram.UpdateDraftWasdalRadiogram = function(params, callback){
+    soyut.radiogram.Radiogram_UpdateDraft({
+        id: params.id,
+        panggilan: params.panggilan,
+        jenis: params.jenis,
+        nomor: params.nomor,
+        derajat: params.derajat,
+        instruksi: params.instruksi,
+        tandadinas: params.tandadinas,
+        group: params.group,
+        classification: params.classification,
+        Number: params.Number,
+        cara: params.cara,
+        paraf: params.paraf,
+        alamataksi: params.alamataksi,
+        alamattembusan: params.alamattembusan,
+        content: params.content,
+        sender: params.sender,
+        receivers: params.receivers,
+        cc: params.cc,
+        senderName: params.senderName,
+        senderRank: params.senderRank,
+    }, function (err, res) {
+        getRadiogramParent(params.id).then(function(result) {
+            result.forEach(function(i){
+                soyut.radiogram.Radiogram_UpdateDraft({
+                    id: i.id,
+                    panggilan: params.panggilan,
+                    jenis: params.jenis,
+                    nomor: params.nomor,
+                    derajat: params.derajat,
+                    instruksi: params.instruksi,
+                    tandadinas: params.tandadinas,
+                    group: params.group,
+                    classification: params.classification,
+                    Number: params.Number,
+                    cara: params.cara,
+                    paraf: params.paraf,
+                    alamataksi: params.alamataksi,
+                    alamattembusan: params.alamattembusan,
+                    content: params.content,
+                    sender: params.sender,
+                    receivers: params.receivers,
+                    cc: params.cc,
+                    senderName: params.senderName,
+                    senderRank: params.senderRank,
+                }, function (err, result) {
+
+                });
+            });
+
+            callback("success");
+        });
+    });
+}
+
+soyut.radiogram.UpdateDraftRadiogram = function(params, callback){
+    soyut.radiogram.Radiogram_UpdateDraft({
+        id: params.id,
+        panggilan: params.panggilan,
+        jenis: params.jenis,
+        nomor: params.nomor,
+        derajat: params.derajat,
+        instruksi: params.instruksi,
+        tandadinas: params.tandadinas,
+        group: params.group,
+        classification: params.classification,
+        Number: params.Number,
+        cara: params.cara,
+        paraf: params.paraf,
+        alamataksi: params.alamataksi,
+        alamattembusan: params.alamattembusan,
+        content: params.content,
+        sender: params.sender,
+        receivers: params.receivers,
+        cc: params.cc,
+        senderName: params.senderName,
+        senderRank: params.senderRank,
+    }, function (err, res) {
+        callback("success");
+    });
+};
 
 soyut.radiogram.DraftRadiogram = function (params, callback) {
     soyut.clock.getCurrentActualTime({}, function(err, reclock){
@@ -935,6 +1058,7 @@ soyut.radiogram.DraftRadiogram = function (params, callback) {
             cc: params.cc,
             session: soyut.Session.id,
             senderName: params.senderName,
+            senderRank: params.senderRank,
             SendTime: reclock,
             simtime: null,
             createTime: reclock
@@ -962,3 +1086,116 @@ soyut.radiogram.SendDraftWasdalRadiogram = function (params, callback) {
     });
 }
 
+soyut.radiogram.RenderPrinterPDF = function(id, callback){
+    soyut.radiogram.renderRadiogramDetail(id, function(data){
+
+        if (soyut.Session.role.isWASDAL) {
+            soyut.radiogram.renderSenderObjWasdal(data.sender, data.senderWasdal, function (sender) {
+                soyut.radiogram.renderListReceiversDetail(data.receivers, function (receivers) {
+                    soyut.radiogram.renderListReceiversDetail(data.cc, function (cc) {
+                        soyut.radiogram.renderUserDetail(data.sender, function (user) {
+
+                            var textArray = data.content.split('\n');
+                            var renderMessage = "";
+                            for (var i = 0; i < textArray.length; i++) {
+                                renderMessage += textArray[i] + "<br />";
+                            }
+
+                            var cSendDate = moment(data.SendTime).format('DD-MM-YYYY h:mm');
+                            var cHour = moment(data.SendTime).format('h');
+                            var cMinute = moment(data.SendTime).format('mm');
+                            var tSimDate = moment(data.SendTime).format("DD")+""+moment(data.SendTime).format("MM")+" "+moment(data.SendTime).format("h")+"."+moment(data.SendTime).format("mm")+" WA";
+                            soyut.radiogram.Printer_PrintToPDF({
+                                panggilan: data.panggilan,
+                                jenis: data.jenis,
+                                nomor: data.nomor,
+                                derajat: data.derajat,
+                                instruksi: data.instruksi,
+                                datetime: cSendDate,
+                                sender_Name: sender.position,
+                                receiver_Name: receivers,
+                                tembusan_Name: cc,
+                                klasifikasi: data.classification,
+                                number: data.Number,
+                                tanda_dinas: data.tandadinas,
+                                group: data.group,
+                                sendername: data.senderName,
+                                senderpangkat: data.senderRank,
+                                tanda_tangan: "",
+                                alamataksi: data.alamataksi,
+                                alamattembusan: data.alamattembusan,
+                                jam: cHour,
+                                tanggal: cMinute,
+                                cara: data.cara,
+                                paraf: data.paraf,
+                                message: data.content,
+                                simtime: tSimDate
+                            }, function (err, res) {
+                                callback(res);
+                            });
+                        });
+                    });
+                });
+            });
+        }
+        else{
+            soyut.radiogram.renderSenderObj(data.sender, data.senderWasdal, function (sender) {
+                soyut.radiogram.renderListReceiversDetail(data.receivers, function (receivers) {
+                    soyut.radiogram.renderListReceiversDetail(data.cc, function (cc) {
+                        soyut.radiogram.renderUserDetail(data.sender, function (user) {
+                            
+                            var textArray = data.content.split('\n');
+                            var renderMessage = "";
+                            for (var i = 0; i < textArray.length; i++) {
+                                renderMessage += textArray[i] + "<br />";
+                            }
+
+                            var cSendDate = moment(data.SendTime).format('DD-MM-YYYY h:mm');
+                            var cHour = moment(data.SendTime).format('h');
+                            var cMinute = moment(data.SendTime).format('mm');
+                            var tSimDate = moment(data.SendTime).format("DD")+""+moment(data.SendTime).format("MM")+" "+moment(data.SendTime).format("h")+"."+moment(data.SendTime).format("mm")+" WA";
+                            soyut.radiogram.Printer_PrintToPDF({
+                                panggilan: data.panggilan,
+                                jenis: data.jenis,
+                                nomor: data.nomor,
+                                derajat: data.derajat,
+                                instruksi: data.instruksi,
+                                datetime: cSendDate,
+                                sender_Name: sender.position,
+                                receiver_Name: receivers,
+                                tembusan_Name: cc,
+                                klasifikasi: data.classification,
+                                number: data.Number,
+                                tanda_dinas: data.tandadinas,
+                                group: data.group,
+                                sendername: data.senderName,
+                                senderpangkat: data.senderRank,
+                                tanda_tangan: "",
+                                alamataksi: data.alamataksi,
+                                alamattembusan: data.alamattembusan,
+                                jam: cHour,
+                                tanggal: cMinute,
+                                cara: data.cara,
+                                paraf: data.paraf,
+                                message: data.content,
+                                simtime: tSimDate
+                            }, function (err, res) {
+                                callback(res);
+                            });
+
+                        });
+                    });
+                });
+            });
+        }
+        
+    });
+}
+
+soyut.radiogram.checkReceivers = function(selected, value, callback){
+    selected.forEach(function(m){
+        if(value == m){
+            callback(true);
+        }
+    });
+}

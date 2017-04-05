@@ -93,10 +93,14 @@ soyut.radiogramdraft.renderCompose = function () {
         $(getInstanceID("btnSubmitMessage")).css({display:'none'});
     }
 
-    $(getInstanceID('sender-name')).val(soyut.Session.role.callsign);
-    $(getInstanceID('sender-pangkat')).val(soyut.Session.user.rank);
-    $(getInstanceID('signature')).val(soyut.Session.user.signature);
-    $(getInstanceID('sender-signature')).attr('src', soyut.Session.user.signature);
+    soyut.radiogramdraft.renderSenderWasdal('new', null);
+    soyut.radiogramdraft.renderReceiverWasdal('new', null);
+    soyut.radiogramdraft.renderCCWasdal('new', null);
+
+    // $(getInstanceID('sender-name')).val(soyut.Session.role.callsign);
+    // $(getInstanceID('sender-pangkat')).val(soyut.Session.user.rank);
+    // $(getInstanceID('signature')).val(soyut.Session.user.signature);
+    // $(getInstanceID('sender-signature')).attr('src', soyut.Session.user.signature);
 };
 
 soyut.radiogramdraft.renderContent = function () {
@@ -120,6 +124,7 @@ soyut.radiogramdraft.renderContent = function () {
         var no = $(getInstanceID("Number")).val();
         var message = $(getInstanceID("message-input")).val();
         var senderName = $(getInstanceID("sender-name")).val();
+        var senderRank = $(getInstanceID("sender-pangkat")).val();
         var alamataksi = $(getInstanceID("alamataksi")).val();
         var alamattembusan = $(getInstanceID("alamattembusan")).val();
         var cara = $(getInstanceID("cara")).val();
@@ -156,20 +161,6 @@ soyut.radiogramdraft.renderContent = function () {
             error = "";
         }
 
-        if (no == "" || no == null) {
-            $('.parent-no').addClass('has-error');
-            $('.no-error').removeClass('valid');
-            $('.no-error').html('Harus diisi!');
-            error = "no Error";
-        }
-        else {
-            $('.parent-no').removeClass('has-error');
-            $('.parent-no').addClass('has-success');
-            $('.no-error').addClass('valid');
-            $('.no-error').html('');
-            error = "";
-        }
-
         if(error != ""){
             return false;
         }
@@ -194,6 +185,7 @@ soyut.radiogramdraft.renderContent = function () {
                 receivers: receiverRole,
                 cc: tembusan,
                 senderName: senderName,
+                senderRank: senderRank
             },function(res){
                 soyut.radiogram.clearInput();
                 $(getInstanceID("wdl-email-content")).addClass('disable');
@@ -376,7 +368,7 @@ soyut.radiogramdraft.renderMessageDetail = function (elSelector, message, state)
                     soyut.radiogram.renderSenderObjWasdal(data.sender, data.senderWasdal, function (sender) {
                         soyut.radiogram.renderListReceiversDetail(data.receivers, function (receivers) {
                             soyut.radiogram.renderListReceiversDetail(data.cc, function (cc) {
-                                soyut.radiogram.renderUserDetail(data.sender, function (user) {
+                                //soyut.radiogram.renderUserDetail(data.sender, function (user) {
                                     var textArray = data.content.split('\n');
                                     var renderMessage = "";
                                     for (var i = 0; i < textArray.length; i++) {
@@ -391,10 +383,10 @@ soyut.radiogramdraft.renderMessageDetail = function (elSelector, message, state)
                                         simtime: data.simtime,
                                         senderRole: data.sender,
                                         senderCallsign: sender.position,
-                                        senderRank: user.rank,
+                                        senderRank: data.senderRank,
                                         senderName: data.senderName,
                                         senderPhoto: "",
-                                        senderSignature: user.signature,
+                                        senderSignature: "",
                                         panggilan: data.panggilan,
                                         jenis: data.jenis,
                                         nomor: data.nomor,
@@ -414,7 +406,7 @@ soyut.radiogramdraft.renderMessageDetail = function (elSelector, message, state)
                                     };
 
                                     _this.$set(_this, 'contents', contents);
-                                });
+                                //});
                             });
                         });
                     });
@@ -456,60 +448,159 @@ soyut.radiogramdraft.renderMessageDetail = function (elSelector, message, state)
     });
 };
 
-soyut.radiogramdraft.renderReceiverWasdal = function () {
-    soyut.radiogram.renderListReceivers(function(res){
-        var html = '<select name="optReceiver[]" multiple id="optReceiver" class="form-control optReceiver">';
-        html += '<option value="0">PANGKOGAS</option>'; 
-        res.forEach(function(i){
-            html += '<option value="'+i.id+'">'+i.position+'</option>'; 
-        });
-        html +='</select>';
-        html +='<span class="receivers-error help-block valid"></span>';
-        $(getInstanceID("list-receiver")).append(html);
+soyut.radiogramdraft.renderReceiverWasdal = function (state, value) {
+    $(getInstanceID("list-receiver")).html('');
+    if(state == 'new'){
+        soyut.radiogram.renderListReceivers(function(res){
+            var html = '<select name="optReceiver[]" multiple id="optReceiver" class="form-control optReceiver">';
+            html += '<option value="0">PANGKOGAS</option>'; 
+            res.forEach(function(i){
+                html += '<option value="'+i.id+'">'+i.position+'</option>'; 
+            });
+            html +='</select>';
+            html +='<span class="receivers-error help-block valid"></span>';
+            $(getInstanceID("list-receiver")).append(html);
 
-        $('.optReceiver').multiselect({
-            columns: 1,
-            placeholder: 'Cari...',
-            search: true,
-            selectAll: true
+            $('.optReceiver').multiselect({
+                columns: 1,
+                placeholder: 'Cari...',
+                search: true,
+                selectAll: true
+            });
         });
-    });
+    }
+    else{
+        if(value != null){
+            soyut.radiogram.renderListReceivers(function(res){
+                var html = '<select name="optReceiver[]" multiple id="optReceiver" class="form-control optReceiver">';
+                var mSelected = "";
+                if(value[0] == '0'){
+                    mSelected = "selected";
+                }
+                html += '<option value="0" '+mSelected+'>PANGKOGAS</option>'; 
+                res.forEach(function(i){
+                    var selected = "";
+                    if(value != null){
+                        soyut.radiogram.checkReceivers(value, i.id, function(sel){
+                            if(sel){
+                                selected += "selected";
+                            }
+                        });
+                    }
+                    html += '<option value="'+i.id+'" '+selected+'>'+i.position+'</option>'; 
+                });
+                html +='</select>';
+                html +='<span class="receivers-error help-block valid"></span>';
+                $(getInstanceID("list-receiver")).append(html);
+
+                $('.optReceiver').multiselect({
+                    columns: 1,
+                    placeholder: 'Cari...',
+                    search: true,
+                    selectAll: true
+                });
+            });
+        }
+    }
 };
 
-soyut.radiogramdraft.renderSenderWasdal = function () {
-    soyut.radiogram.renderListReceivers(function(res){
-        var html = '<select name="optSender" id="optSender" class="form-control optSender" style="display:none">';
-        html += '<option value="">Cari..</option>';
-        res.forEach(function (i) {
-            html += '<option value="'+ i.id +'">'+ i.position +'</option>';
-        });
-        html +='</select>';
-        html +='<span class="sender-error help-block valid"></span>';
-        $(getInstanceID("list-sender")).append(html);
+soyut.radiogramdraft.renderSenderWasdal = function (state, value) {
+    $(getInstanceID("list-sender")).html('');
+    if(state == 'new'){
+        soyut.radiogram.renderListReceivers(function(res){
+            var html = '<select name="optSender" id="optSender" class="form-control optSender" style="display:none" onchange="soyut.radiogramdraft.SetSenderDetail(this.value)">';
+            html += '<option value="">Cari..</option>';
+            res.forEach(function (i) {
+                html += '<option value="'+ i.id +'">'+ i.position +'</option>';
+            });
+            html +='</select>';
+            html +='<span class="sender-error help-block valid"></span>';
+            $(getInstanceID("list-sender")).append(html);
 
-        $(".optSender").select2({ width: '100%' });
-    });
+            $(".optSender").select2({ width: '100%' });
+        });
+    }
+    else{
+        if(value != null){
+            soyut.radiogram.renderListReceivers(function(res){
+                var html = '<select name="optSender" id="optSender" class="form-control optSender" style="display:none" onchange="soyut.radiogramdraft.SetSenderDetail(this.value)">';
+                html += '<option value="">Cari..</option>';
+                res.forEach(function (i) {
+                    var selected = "";
+                    if(value != null){
+                        if(value == i.id){
+                            selected = "selected";
+                        }
+                    }
+                    html += '<option value="'+ i.id +'" '+selected+'>'+ i.position +'</option>';
+                });
+                html +='</select>';
+                html +='<span class="sender-error help-block valid"></span>';
+                $(getInstanceID("list-sender")).append(html);
+
+                $(".optSender").select2({ width: '100%' });
+            });
+        }
+    }
 };
 
-soyut.radiogramdraft.renderCCWasdal = function () {
-    soyut.radiogram.renderListReceivers(function(res){
-        var html = '<select name="optCC[]" multiple id="optCC" class="optCC">';
-        html += '<option value="0">PANGKOGAS</option>'; 
-        res.forEach(function (i) {
-            html += '<option value="'+ i.id +'">'+ i.position +'</option>';
-        });
-        html +='</select>';
-        $(getInstanceID("list-tembusan")).append(html);
 
-        $('.optCC').multiselect({
-            columns: 1,
-            placeholder: 'Cari...',
-            search: true,
-            selectAll: true
+soyut.radiogramdraft.renderCCWasdal = function (state, value) {
+    $(getInstanceID("list-tembusan")).html('');
+    if(state == 'new'){
+        soyut.radiogram.renderListReceivers(function(res){
+            var html = '<select name="optCC[]" multiple id="optCC" class="optCC">';
+            html += '<option value="0">PANGKOGAS</option>'; 
+            res.forEach(function (i) {
+                html += '<option value="'+ i.id +'">'+ i.position +'</option>';
+            });
+            html +='</select>';
+            $(getInstanceID("list-tembusan")).append(html);
+
+            $('.optCC').multiselect({
+                columns: 1,
+                placeholder: 'Cari...',
+                search: true,
+                selectAll: true
+            });
         });
-    });
+    }
+    else{
+        soyut.radiogram.renderListReceivers(function(res){
+            var html = '<select name="optCC[]" multiple id="optCC" class="optCC">';
+            html += '<option value="0">PANGKOGAS</option>'; 
+            res.forEach(function (i) {
+                var selected = "";
+                if(value != null){
+                    soyut.radiogram.checkReceivers(value, i.id, function(sel){
+                        if(sel){
+                            selected += "selected";
+                        }
+                    });
+                }
+                html += '<option value="'+ i.id +'" '+selected+'>'+ i.position +'</option>';
+            });
+            html +='</select>';
+            $(getInstanceID("list-tembusan")).append(html);
+
+            $('.optCC').multiselect({
+                columns: 1,
+                placeholder: 'Cari...',
+                search: true,
+                selectAll: true
+            });
+        });
+    }
 };
 
+soyut.radiogramdraft.SetSenderDetail = function(val){
+    if(val != ""){
+        soyut.radiogram.renderSenderWasdalDetail(val, function(res){
+            $(getInstanceID('sender-name')).val(res.data.callsign);
+            $(getInstanceID('sender-pangkat')).val(res.data.rank);
+        });
+    }
+}
 
 soyut.radiogramdraft.init = function () {
     soyut.radiogramdraft.perfectScrollbarHandler();
@@ -519,9 +610,6 @@ soyut.radiogramdraft.init = function () {
     soyut.radiogramdraft.renderContent();
 
     $(".derajat").select2({ width: '100%' });
-    soyut.radiogramdraft.renderSenderWasdal();
-    soyut.radiogramdraft.renderReceiverWasdal();
-    soyut.radiogramdraft.renderCCWasdal();
 
 };
 

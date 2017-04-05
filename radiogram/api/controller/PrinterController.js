@@ -36,6 +36,7 @@ module.exports = {
       var cara = reqMsg.data.params.cara;
       var paraf = reqMsg.data.params.paraf;
       var message = reqMsg.data.params.message;
+      var simtime = reqMsg.data.params.simtime;
       var renderMessage = message.replace(/(?:\r\n|\r|\n)/g, '<br />');
 
       var context = "./client/views/pdf.html";
@@ -67,7 +68,7 @@ module.exports = {
       html = html.replace('{{cara}}', cara);
       html = html.replace('{{paraf}}', paraf);
       html = html.replace('{{renderMessage}}', renderMessage);
-
+      html = html.replace('{{simtime}}', simtime);
 
       var options = {format: 'Letter'};
 

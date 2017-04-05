@@ -106,6 +106,9 @@ module.exports = {
     senderName:{
       type:'string'
     },
+    senderRank:{
+      type:'string'
+    },
     parentId:{
       model:'Radiogram'
     }

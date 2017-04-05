@@ -57,6 +57,7 @@ module.exports = {
                 var session = reqMsg.data.params.session;
                 var createTime = reqMsg.data.params.createTime;
                 var senderName = reqMsg.data.params.senderName;
+                var senderRank = reqMsg.data.params.senderRank;
 
                 r.table('Radiogram').insert({
                         panggilan: panggilan,
@@ -77,6 +78,7 @@ module.exports = {
                         owner: owner,
                         sender: sender,
                         senderName: senderName,
+                        senderRank: senderRank,
                         senderWasdal: senderWasdal,
                         receivers: receivers,
                         cc: cc,
@@ -164,6 +166,7 @@ module.exports = {
                 var simtime = reqMsg.data.params.simtime;
                 var createTime = reqMsg.data.params.createTime;
                 var senderName = reqMsg.data.params.senderName;
+                var senderRank = reqMsg.data.params.senderRank;
                 var parentId = reqMsg.data.params.parentId;
                 var composeStatus = reqMsg.data.params.composeStatus;
 
@@ -186,6 +189,7 @@ module.exports = {
                         owner: owner,
                         sender: sender,
                         senderName: senderName,
+                        senderRank: senderRank,
                         senderWasdal: senderWasdal,
                         receivers: receivers,
                         cc: cc,
@@ -232,6 +236,7 @@ module.exports = {
                 var simtime = reqMsg.data.params.simtime;
                 var createTime = reqMsg.data.params.createTime;
                 var senderName = reqMsg.data.params.senderName;
+                var senderRank = reqMsg.data.params.senderRank;
 
                 r.table('Radiogram').insert({
                         panggilan: panggilan,
@@ -252,6 +257,7 @@ module.exports = {
                         owner: owner,
                         sender: sender,
                         senderName: senderName,
+                        senderRank: senderRank,
                         senderWasdal: senderWasdal,
                         receivers: receivers,
                         cc: cc,
@@ -297,6 +303,7 @@ module.exports = {
                 var simtime = reqMsg.data.params.simtime;
                 var createTime = reqMsg.data.params.createTime;
                 var senderName = reqMsg.data.params.senderName;
+                var senderRank = reqMsg.data.params.senderRank;
 
                 r.table('Radiogram').insert({
                         panggilan: panggilan,
@@ -317,6 +324,7 @@ module.exports = {
                         owner: owner,
                         sender: sender,
                         senderName: senderName,
+                        senderRank: senderRank,
                         senderWasdal: senderWasdal,
                         receivers: receivers,
                         cc: cc,
@@ -363,6 +371,7 @@ module.exports = {
                 var simtime = reqMsg.data.params.simtime;
                 var createTime = reqMsg.data.params.createTime;
                 var senderName = reqMsg.data.params.senderName;
+                var senderRank = reqMsg.data.params.senderRank;
                 var parentId = reqMsg.data.params.parentId;
                 var composeStatus = reqMsg.data.params.composeStatus;
 
@@ -385,6 +394,7 @@ module.exports = {
                         owner: owner,
                         sender: sender,
                         senderName: senderName,
+                        senderRank: senderRank,
                         senderWasdal: senderWasdal,
                         receivers: receivers,
                         cc: cc,
@@ -405,6 +415,56 @@ module.exports = {
             accessToken: [RADIOGRAM_USER_TOKEN, RADIOGRAM_MANAGER_TOKEN]
 
         },
+        UpdateDraft:{
+            method: function (authServerUrl, remoteSocket, reqMsg, resCallback) {
+                var id = reqMsg.data.params.id;
+                var panggilan = reqMsg.data.params.panggilan;
+                var jenis = reqMsg.data.params.jenis;
+                var nomor = reqMsg.data.params.nomor;
+                var derajat = reqMsg.data.params.derajat;
+                var instruksi = reqMsg.data.params.instruksi;
+                var tandadinas = reqMsg.data.params.tandadinas;
+                var groups = reqMsg.data.params.group;
+                var classification = reqMsg.data.params.classification;
+                var Number = reqMsg.data.params.Number;
+                var cara = reqMsg.data.params.cara;
+                var paraf = reqMsg.data.params.paraf;
+                var alamataksi = reqMsg.data.params.alamataksi;
+                var alamattembusan = reqMsg.data.params.alamattembusan;
+                var content = reqMsg.data.params.content;
+                var sender = reqMsg.data.params.sender;
+                var receivers = reqMsg.data.params.receivers;
+                var cc = reqMsg.data.params.cc;
+                var senderName = reqMsg.data.params.senderName;
+                var senderRank = reqMsg.data.params.senderRank;
+
+                r.table('Radiogram').update({id: id}, {
+                    panggilan: panggilan,
+                    jenis: jenis,
+                    nomor: nomor,
+                    derajat: derajat,
+                    instruksi: instruksi,
+                    tandadinas: tandadinas,
+                    group: groups,
+                    classification: classification,
+                    Number: Number,
+                    cara: cara,
+                    paraf: paraf,
+                    alamataksi: alamataksi,
+                    alamattembusan: alamattembusan,
+                    content: content,
+                    sender: sender,
+                    receivers: receivers,
+                    cc: cc,
+                    senderName: senderName,
+                    senderRank: senderRank
+                }, function (err, result) {
+                    if (err) resCallback(true, err)
+                    else resCallback(false, result)
+                });
+            },
+            accessToken: [RADIOGRAM_USER_TOKEN, RADIOGRAM_MANAGER_TOKEN]
+        },
         setSendTime:{
             method: function (authServerUrl, remoteSocket, reqMsg, resCallback) {
                 var id = reqMsg.data.params.id;
@@ -413,6 +473,29 @@ module.exports = {
                 r.table('Radiogram').update({id: id}, {SendTime: SendTime}, function (err, result) {
                     if (err) resCallback(true, err)
                     else resCallback(false, result)
+                });
+            },
+            accessToken: [RADIOGRAM_USER_TOKEN, RADIOGRAM_MANAGER_TOKEN]
+        },
+        GetByParentId:{
+            method: function (authServerUrl, remoteSocket, reqMsg, resCallback) {
+                var id = reqMsg.data.params.id;
+                r.table('Radiogram').find({parentId: id}).exec(function (err, result) {
+                    if (err) {
+                        return res.json({success: false, error: "record not found"});
+                        throw err;
+                    }
+                    else {
+                        result.toArray(function (err, radiogram) {
+                            if (err) {
+                                return res.json({success: false, error: "record not found"});
+                                throw err;
+                            }
+                            else {
+                                resCallback(false, radiogram);
+                            }
+                        });
+                    }
                 });
             },
             accessToken: [RADIOGRAM_USER_TOKEN, RADIOGRAM_MANAGER_TOKEN]

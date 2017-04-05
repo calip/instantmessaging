@@ -126,6 +126,7 @@
                                       <tr>
                                           <td class="text-center rotate" rowspan="12"><div><span><b>Ruang di luar garis hanya untuk petugas KOMLEK</b><span></div></td>
                                           <td class="text-center" colspan="2">
+                                              <input type="hidden" name="editId" id="editId" value="">
                                               <input type="text" placeholder="Panggilan" name="panggilan" class="form-control panggilan" id="panggilan" value="">
                                           </td>
                                           <td class="text-center">
@@ -533,9 +534,14 @@
                         <button class="btn btn-danger btn-wide" v-bind="loadDeleteButton(contents.composeStatus)" type="button" @click="DeleteMessage">
                             Hapus <i class="fa icon-delete121"></i>
                         </button>
+                        <button class="btn btn-info btn-wide btn-changeMessage" type="button" @click="EditMessage" v-bind="loadChangeButton(contents.composeStatus)">
+                            Ubah <i class="fa icon-pencil"></i>
+                        </button>
+                        <!--
                         <button class="btn btn-warning btn-wide" v-bind="loadPrintButton(contents.composeStatus)" type="button" @click="PrintPaper">
                             Print <i class="fa icon-printer"></i>
                         </button>
+                        -->
                         <button class="btn btn-warning btn-wide" v-bind="loadPDFButton(contents.composeStatus)" type="button" @click="PrintPdf">
                             Simpan ke PDF <i class="fa icon-file-pdf"></i>
                         </button>
@@ -567,14 +573,14 @@
                         <span class="symbol ok" aria-required="true"></span> Radiogram Telah Terkirim
                     </div>
                     <div class="btn-group btn-group-justified margin-bottom-30">
-                        <input type="hidden" name="radiogramId" v-model="contents">
-                        <input type="hidden" name="rolecc" v-model="rolecc">
                         <a href="#" @click="BackToInbox()" class="btn btn-o btn-primary">
                             Tutup
                         </a>
+                        <!--
                         <a href="#" @click="PrintPaper()" class="btn btn-o btn-warning">
                             Print
                         </a>
+                        -->
                         <a href="#" @click="PrintPDF()" class="btn btn-o btn-danger">
                             Simpan Ke PDF
                         </a>
