@@ -249,6 +249,7 @@ soyut.radiogram.renderInbox = function () {
     $(getInstanceID("wdl-email-form")).addClass('disable');
     $(getInstanceID("wdl-email-send")).addClass('disable');
     $(getInstanceID("wdl-email-view")).addClass('disable');
+    $(getInstanceID("wdl-kop-form")).addClass('disable');
 
     soyut.radiogram.renderListMessage('.email-list', '.email-reader', 'inbox');
 };
@@ -262,6 +263,7 @@ soyut.radiogram.renderSent = function () {
     $(getInstanceID("wdl-email-form")).addClass('disable');
     $(getInstanceID("wdl-email-send")).addClass('disable');
     $(getInstanceID("wdl-email-view")).addClass('disable');
+    $(getInstanceID("wdl-kop-form")).addClass('disable');
 
     soyut.radiogram.renderListMessage('.email-list', '.email-reader', 'sent');
 };
@@ -275,10 +277,12 @@ soyut.radiogram.renderDraft = function () {
     $(getInstanceID("wdl-email-form")).addClass('disable');
     $(getInstanceID("wdl-email-send")).addClass('disable');
     $(getInstanceID("wdl-email-view")).addClass('disable');
+    $(getInstanceID("wdl-kop-form")).addClass('disable');
 
     soyut.radiogram.renderListMessage('.email-list', '.email-reader', 'draft');
 };
 soyut.radiogram.renderTrash = function () {
+    soyut.radiogram.clearInput();
     $(getInstanceID("wdl-nav-trash")).parent().addClass("active");
     $(getInstanceID("wdl-nav-trash")).parent().addClass("open");
 
@@ -286,6 +290,7 @@ soyut.radiogram.renderTrash = function () {
     $(getInstanceID("wdl-email-form")).addClass('disable');
     $(getInstanceID("wdl-email-send")).addClass('disable');
     $(getInstanceID("wdl-email-view")).addClass('disable');
+    $(getInstanceID("wdl-kop-form")).addClass('disable');
 
     soyut.radiogram.renderListMessage('.email-list', '.email-reader', 'trash');
 };
@@ -296,6 +301,7 @@ soyut.radiogram.renderCompose = function () {
     $(getInstanceID("wdl-email-content")).addClass('disable');
     $(getInstanceID("wdl-email-send")).addClass('disable');
     $(getInstanceID("wdl-email-view")).addClass('disable');
+    $(getInstanceID("wdl-kop-form")).addClass('disable');
     
     $(getInstanceID('nomor')).keypress(function(key) {
         if(key.charCode < 48 || key.charCode > 57) return false;
@@ -322,6 +328,16 @@ soyut.radiogram.renderCompose = function () {
         soyut.radiogram.renderComposeReceivers('new', null);
         soyut.radiogram.renderComposeCC('new', null);
     }
+};
+
+soyut.radiogram.renderKop = function () {
+    soyut.radiogram.clearInput();
+    $(getInstanceID("wdl-email-form")).addClass('disable');
+    $(getInstanceID("wdl-email-content")).addClass('disable');
+    $(getInstanceID("wdl-email-send")).addClass('disable');
+    $(getInstanceID("wdl-email-view")).addClass('disable');
+    $(getInstanceID("wdl-kop-form")).removeClass('disable');
+
 };
 
 soyut.radiogram.renderContent = function () {
@@ -359,6 +375,17 @@ soyut.radiogram.renderContent = function () {
         $(getInstanceID("wdl-navigation-menu")).children().removeClass("open");
 
         soyut.radiogram.renderCompose();
+    });
+
+    $(getInstanceID("wdl-nav-kop")).click(function (event) {
+        $(getInstanceID("wdl-navigation-menu")).children().removeClass("active");
+        $(getInstanceID("wdl-navigation-menu")).children().removeClass("open");
+
+        soyut.radiogram.renderKop();
+    });
+
+    $(getInstanceID("btnSaveKop")).click(function(event){
+        console.log("save kop surat")
     });
 
     $(getInstanceID("btnSubmitMessage")).click(function (event) {
@@ -446,6 +473,7 @@ soyut.radiogram.renderContent = function () {
                     $(getInstanceID("wdl-email-content")).addClass('disable');
                     $(getInstanceID("wdl-email-form")).addClass('disable');
                     $(getInstanceID("wdl-email-view")).addClass('disable');
+                    $(getInstanceID("wdl-kop-form")).addClass('disable');
                     $(getInstanceID("wdl-email-send")).removeClass('disable');
                     soyut.radiogram.renderSendingResult('.email-result', res);
                 });
@@ -481,6 +509,7 @@ soyut.radiogram.renderContent = function () {
                     $(getInstanceID("wdl-email-content")).addClass('disable');
                     $(getInstanceID("wdl-email-form")).addClass('disable');
                     $(getInstanceID("wdl-email-view")).addClass('disable');
+                    $(getInstanceID("wdl-kop-form")).addClass('disable');
                     $(getInstanceID("wdl-email-send")).removeClass('disable');
                     soyut.radiogram.renderSendingResult('.email-result', res);
                 });
@@ -1447,6 +1476,7 @@ soyut.radiogram.EditMessage = function(val){
     $(getInstanceID("wdl-email-content")).addClass('disable');
     $(getInstanceID("wdl-email-send")).addClass('disable');
     $(getInstanceID("wdl-email-view")).addClass('disable');
+    $(getInstanceID("wdl-kop-form")).addClass('disable');
     
     $(getInstanceID('nomor')).keypress(function(key) {
         if(key.charCode < 48 || key.charCode > 57) return false;
@@ -1599,10 +1629,10 @@ soyut.radiogram.SetSenderDetail = function(val){
         }
         else{
             soyut.radiogram.renderSenderDetail(val, function(res){
-                soyut.radiogram.renderUserDetail(val, function (user) {
+                //soyut.radiogram.renderUserDetail(val, function (user) {
                     $(getInstanceID('sender-name')).val(res.data[0].callsign);
-                    $(getInstanceID('sender-pangkat')).val(user.rank);
-                });
+                    $(getInstanceID('sender-pangkat')).val(res.data[0].rank);
+                //});
             });
         }
     }
@@ -1944,7 +1974,7 @@ soyut.radiogram.init = function () {
         // soyut.radiogram.renderComposeSender();
         // soyut.radiogram.renderComposeReceivers();
         // soyut.radiogram.renderComposeCC();
-
+        $(getInstanceID('kop-menu')).css('display','none');
         $(getInstanceID('role-group-name')).css('display','none');
     }
 };

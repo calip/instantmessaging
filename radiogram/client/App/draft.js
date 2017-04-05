@@ -437,6 +437,7 @@ soyut.radiogramdraft.renderMessageDetail = function (elSelector, message, state)
                     id: getId,
                     radiogram: content.id,
                     radiogramno: content.no,
+                    radiogramcontent: content.content,
                     session: content.session
                 };
 

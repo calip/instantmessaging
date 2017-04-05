@@ -77,6 +77,7 @@
       "class":"soyut.module.app.radiogram.pdfviewer",
       "title":"PDF Viewer",
       "launcher" : false,
+      "externalUse": true,
       "libraryScript":[
 
       ],

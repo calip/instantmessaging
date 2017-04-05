@@ -7,32 +7,12 @@
 
 module.exports = {
   attributes: {
-    sentRadiogram:{
-      model:'Radiogram'
+    title:{
+      type:'string'
     },
-    accRadiogram:{
-      model:'Radiogram'
-    },
-    sendStatus:{
-      type: 'boolean',
-      defaultsTo:false,
-    },
-    sendTime:{
-      type:'datetime'
-    },
-    readStatus:{
-      type: 'boolean',
-      defaultsTo:false,
-    },
-    readTime:{
-      type:'datetime'
-    },
-    replyStatus:{
-      type: 'boolean',
-      defaultsTo:false,
-    },
-    replyTime:{
-      type:'datetime'
+    scenario:{
+      model:'scenario',
+      required : true
     }
   },
   getById : function(id, cb)
@@ -48,7 +28,7 @@ module.exports = {
       if(data.new_val != null && data.old_val == null)
       {
         socket.emit(data.new_val,{action:'create', new_val:data.new_val});
-        socket.emit('new_statistic', data);
+        socket.emit('new_kop', data);
       }
       //update data
       if(data.new_val != null && data.old_val != null)
