@@ -1982,3 +1982,4 @@ soyut.radiogram.init = function () {
 soyut.radiogram.init();
 
 //console.log(soyut.radiogram.yearNumToSimStr('2017'));
+

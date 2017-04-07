@@ -101,9 +101,10 @@ module.exports = {
             method: function (authServerUrl, remoteSocket, reqMsg, resCallback) {
                 var id = reqMsg.data.params.id;
                 var sendtime = reqMsg.data.params.sendtime;
+                var simtime = reqMsg.data.params.simtime;
                 var status = reqMsg.data.params.status;
 
-                r.table('Radiogram').update({id: id}, {composeStatus: status, SendTime: sendtime, simtime: sendtime}, function (err, results) {
+                r.table('Radiogram').update({id: id}, {composeStatus: status, SendTime: sendtime, simtime: simtime}, function (err, results) {
                     if (err) resCallback(true, err);
                     else {
                         if (results.replaced > 0){
