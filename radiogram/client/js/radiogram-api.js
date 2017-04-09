@@ -1166,7 +1166,7 @@ soyut.radiogram.RenderPrinterPDF = function(id, callback){
                                 var cHour = "";
                                 var cMinute = "";
                                 var tSimDate = "";
-                                if(data.simtime != null != data.simtime != undefined){
+                                if(data.simtime != null){
                                     var cSendDate = moment(data.simtime).format("DD")+'-'+moment(data.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(data.simtime).format("YYYY"))+' '+moment(data.simtime).format("hh")+':'+moment(data.simtime).format("mm");
                                     var cHour = moment(data.simtime).format('h');
                                     var cMinute = moment(data.simtime).format('mm');

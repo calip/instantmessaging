@@ -1285,7 +1285,7 @@ soyut.radiogram.renderMessageDetail = function (elSelector, message, state) {
                                 soyut.radiogram.renderListReceiversDetail(data.cc, function (cc) {
                                     //soyut.radiogram.renderUserDetail(data.sender, function (user) {
                                         var getSimTime = "";
-                                        if(data.simtime != null != data.simtime != undefined){
+                                        if(data.simtime != null){
                                             getSimTime = moment(data.simtime).format("DD")+'-'+moment(data.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(data.simtime).format("YYYY"))+' '+moment(data.simtime).format("hh")+':'+moment(data.simtime).format("mm");
                                         }
                                         else{
@@ -1346,15 +1346,15 @@ soyut.radiogram.renderMessageDetail = function (elSelector, message, state) {
                                         }
                                         
                                         var curSimTime = "-"
-                                        if(data.simtime != undefined || data.simtime != null){
+                                        if(data.simtime != null){
                                             var curSimTime = moment(data.simtime).format("DD")+'-'+moment(data.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(data.simtime).format("YYYY"))+' '+moment(data.simtime).format("hh")+':'+moment(data.simtime).format("mm");
                                         }
                                         var curSendTime = "-"
-                                        if(data.SendTime != undefined || data.SendTime != null){
+                                        if(data.SendTime != null){
                                             curSendTime = moment(data.SendTime).format('DD-MM-YYYY h:mm');
                                         }
                                         var curCreateTime = "-"
-                                        if(data.createTime != undefined || data.createTime != null){
+                                        if(data.createTime != null){
                                             curCreateTime = moment(data.createTime).format('DD-MM-YYYY h:mm');
                                         }
                                         
