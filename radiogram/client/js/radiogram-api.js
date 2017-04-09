@@ -2,6 +2,7 @@ soyut.radiogram = soyut.radiogram || soyut.Services.getInstance().getService("ra
 var socket = io.connect('https://'+ soyut.radiogram.origin);
 var scenarioService = soyut.Services.getInstance().getService("scenarioServer");
 var sessionService = soyut.Services.getInstance().getService("sessionServer");
+var clockService = soyut.Services.getInstance().getService("clockserver");
 
 if (Promise.promisifyAll) {
     Promise.promisifyAll(soyut.radiogram);
@@ -1094,44 +1095,53 @@ soyut.radiogram.RenderPrinterPDF = function(id, callback){
                 soyut.radiogram.renderListReceiversDetail(data.receivers, function (receivers) {
                     soyut.radiogram.renderListReceiversDetail(data.cc, function (cc) {
                         soyut.radiogram.renderUserDetail(data.sender, function (user) {
+                            soyut.rig.Rig_GetKop({scenario: soyut.Session.role.scenario}, function (err, kop) {
+                                var textArray = data.content.split('\n');
+                                var renderMessage = "";
+                                for (var i = 0; i < textArray.length; i++) {
+                                    renderMessage += textArray[i] + "<br />";
+                                }
 
-                            var textArray = data.content.split('\n');
-                            var renderMessage = "";
-                            for (var i = 0; i < textArray.length; i++) {
-                                renderMessage += textArray[i] + "<br />";
-                            }
+                                var cSendDate = "";
+                                var cHour = "";
+                                var cMinute = "";
+                                var tSimDate = "";
+                                if(data.simtime != null){
+                                    var cSendDate = moment(data.simtime).format("DD")+'-'+moment(data.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(data.simtime).format("YYYY"))+' '+moment(data.simtime).format("hh")+':'+moment(data.simtime).format("mm");
+                                    var cHour = moment(data.simtime).format('h');
+                                    var cMinute = moment(data.simtime).format('mm');
+                                    var tSimDate = moment(data.simtime).format("DD")+""+moment(data.simtime).format("MM")+" "+moment(data.simtime).format("h")+"."+moment(data.simtime).format("mm")+" WA";
+                                }
 
-                            var cSendDate = moment(data.SendTime).format('DD-MM-YYYY h:mm');
-                            var cHour = moment(data.SendTime).format('h');
-                            var cMinute = moment(data.SendTime).format('mm');
-                            var tSimDate = moment(data.SendTime).format("DD")+""+moment(data.SendTime).format("MM")+" "+moment(data.SendTime).format("h")+"."+moment(data.SendTime).format("mm")+" WA";
-                            soyut.radiogram.Printer_PrintToPDF({
-                                panggilan: data.panggilan,
-                                jenis: data.jenis,
-                                nomor: data.nomor,
-                                derajat: data.derajat,
-                                instruksi: data.instruksi,
-                                datetime: cSendDate,
-                                sender_Name: sender.position,
-                                receiver_Name: receivers,
-                                tembusan_Name: cc,
-                                klasifikasi: data.classification,
-                                number: data.Number,
-                                tanda_dinas: data.tandadinas,
-                                group: data.group,
-                                sendername: data.senderName,
-                                senderpangkat: data.senderRank,
-                                tanda_tangan: "",
-                                alamataksi: data.alamataksi,
-                                alamattembusan: data.alamattembusan,
-                                jam: cHour,
-                                tanggal: cMinute,
-                                cara: data.cara,
-                                paraf: data.paraf,
-                                message: data.content,
-                                simtime: tSimDate
-                            }, function (err, res) {
-                                callback(res);
+                                soyut.radiogram.Printer_PrintToPDF({
+                                    panggilan: data.panggilan,
+                                    jenis: data.jenis,
+                                    nomor: data.nomor,
+                                    derajat: data.derajat,
+                                    instruksi: data.instruksi,
+                                    datetime: cSendDate,
+                                    sender_Name: sender.position,
+                                    receiver_Name: receivers,
+                                    tembusan_Name: cc,
+                                    klasifikasi: data.classification,
+                                    number: data.Number,
+                                    tanda_dinas: data.tandadinas,
+                                    group: data.group,
+                                    sendername: data.senderName,
+                                    senderpangkat: data.senderRank,
+                                    tanda_tangan: "",
+                                    alamataksi: data.alamataksi,
+                                    alamattembusan: data.alamattembusan,
+                                    jam: cHour,
+                                    tanggal: cMinute,
+                                    cara: data.cara,
+                                    paraf: data.paraf,
+                                    message: data.content,
+                                    simtime: tSimDate,
+                                    kop: kop[0].title
+                                }, function (err, res) {
+                                    callback(res);
+                                });
                             });
                         });
                     });
@@ -1144,43 +1154,55 @@ soyut.radiogram.RenderPrinterPDF = function(id, callback){
                     soyut.radiogram.renderListReceiversDetail(data.cc, function (cc) {
                         soyut.radiogram.renderUserDetail(data.sender, function (user) {
                             
-                            var textArray = data.content.split('\n');
-                            var renderMessage = "";
-                            for (var i = 0; i < textArray.length; i++) {
-                                renderMessage += textArray[i] + "<br />";
-                            }
+                            soyut.rig.Rig_GetKop({scenario: soyut.Session.role.scenario}, function (err, kop) {
+                                
+                                var textArray = data.content.split('\n');
+                                var renderMessage = "";
+                                for (var i = 0; i < textArray.length; i++) {
+                                    renderMessage += textArray[i] + "<br />";
+                                }
 
-                            var cSendDate = moment(data.SendTime).format('DD-MM-YYYY h:mm');
-                            var cHour = moment(data.SendTime).format('h');
-                            var cMinute = moment(data.SendTime).format('mm');
-                            var tSimDate = moment(data.SendTime).format("DD")+""+moment(data.SendTime).format("MM")+" "+moment(data.SendTime).format("h")+"."+moment(data.SendTime).format("mm")+" WA";
-                            soyut.radiogram.Printer_PrintToPDF({
-                                panggilan: data.panggilan,
-                                jenis: data.jenis,
-                                nomor: data.nomor,
-                                derajat: data.derajat,
-                                instruksi: data.instruksi,
-                                datetime: cSendDate,
-                                sender_Name: sender.position,
-                                receiver_Name: receivers,
-                                tembusan_Name: cc,
-                                klasifikasi: data.classification,
-                                number: data.Number,
-                                tanda_dinas: data.tandadinas,
-                                group: data.group,
-                                sendername: data.senderName,
-                                senderpangkat: data.senderRank,
-                                tanda_tangan: "",
-                                alamataksi: data.alamataksi,
-                                alamattembusan: data.alamattembusan,
-                                jam: cHour,
-                                tanggal: cMinute,
-                                cara: data.cara,
-                                paraf: data.paraf,
-                                message: data.content,
-                                simtime: tSimDate
-                            }, function (err, res) {
-                                callback(res);
+                                var cSendDate = "";
+                                var cHour = "";
+                                var cMinute = "";
+                                var tSimDate = "";
+                                if(data.simtime != null != data.simtime != undefined){
+                                    var cSendDate = moment(data.simtime).format("DD")+'-'+moment(data.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(data.simtime).format("YYYY"))+' '+moment(data.simtime).format("hh")+':'+moment(data.simtime).format("mm");
+                                    var cHour = moment(data.simtime).format('h');
+                                    var cMinute = moment(data.simtime).format('mm');
+                                    var tSimDate = moment(data.simtime).format("DD")+""+moment(data.simtime).format("MM")+" "+moment(data.simtime).format("h")+"."+moment(data.simtime).format("mm")+" WA";
+                                }
+
+                                soyut.radiogram.Printer_PrintToPDF({
+                                    panggilan: data.panggilan,
+                                    jenis: data.jenis,
+                                    nomor: data.nomor,
+                                    derajat: data.derajat,
+                                    instruksi: data.instruksi,
+                                    datetime: cSendDate,
+                                    sender_Name: sender.position,
+                                    receiver_Name: receivers,
+                                    tembusan_Name: cc,
+                                    klasifikasi: data.classification,
+                                    number: data.Number,
+                                    tanda_dinas: data.tandadinas,
+                                    group: data.group,
+                                    sendername: data.senderName,
+                                    senderpangkat: data.senderRank,
+                                    tanda_tangan: "",
+                                    alamataksi: data.alamataksi,
+                                    alamattembusan: data.alamattembusan,
+                                    jam: cHour,
+                                    tanggal: cMinute,
+                                    cara: data.cara,
+                                    paraf: data.paraf,
+                                    message: data.content,
+                                    simtime: tSimDate,
+                                    kop: kop[0].title
+                                }, function (err, res) {
+                                    callback(res);
+                                });
+
                             });
 
                         });
@@ -1199,3 +1221,117 @@ soyut.radiogram.checkReceivers = function(selected, value, callback){
         }
     });
 }
+
+soyut.radiogram.AddRIGRadiogram = function(val){
+    console.log("add RIG")
+    var timeFrame = null;
+    function momentifyTimeFrame(timeFrameObj) {
+        timeFrameObj.actualStart = moment(timeFrameObj.actualStart);
+        timeFrameObj.actualEnd   = moment(timeFrameObj.actualEnd);
+        timeFrameObj.simStart    = moment(timeFrameObj.simStart);
+        timeFrameObj.simEnd      = moment(timeFrameObj.simEnd);
+        for (var syncPointId in timeFrameObj.syncPoints) {
+            if (timeFrameObj.syncPoints.hasOwnProperty(syncPointId)) {
+                var sp = timeFrameObj.syncPoints[syncPointId];
+                sp.actual = moment(sp.actual);
+                sp.sim    = moment(sp.sim);
+            }
+        }
+    };
+
+    function setCurrentTimeFrame(timeFrameObj) {
+        momentifyTimeFrame(timeFrameObj);
+        timeFrame = timeFrameObj;
+        timeFrame.syncPointsSorted = [];
+        for (var syncPointId in timeFrame.syncPoints) {
+            if (timeFrame.syncPoints.hasOwnProperty(syncPointId)) {
+                var sp = timeFrame.syncPoints[syncPointId];
+                timeFrame.syncPointsSorted.push(sp);
+            }
+        }
+        timeFrame.syncPointsSorted.sort(function(a, b) {
+            return moment(a.actual) - moment(b.actual);
+        });
+    };
+
+    function getSimTime(actualTime, callback) {
+        var error  = true;
+        var retObj = "invalid";
+        var now = moment(actualTime);
+        var syncPoints = timeFrame ? timeFrame.syncPointsSorted : null;
+        var syncPointCount = syncPoints ? syncPoints.length : 0;
+        if (syncPoints && syncPointCount > 0) {
+            var leftSp = null, rightSp = null;
+            if (syncPoints[0].actual > now) {
+                rightSp = syncPoints[0];
+            }
+            else if (syncPoints[syncPointCount-1].actual < now) {
+                leftSp = syncPoints[syncPointCount-1];
+            }
+            else {
+                var i = 0;
+                while (!leftSp && !rightSp && i < syncPointCount - 1) {
+                    var lTest = syncPoints[i].actual;
+                    var rTest = syncPoints[i+1].actual;
+                    if (lTest <= now && now <= rTest) {
+                        leftSp = syncPoints[i];
+                        rightSp = syncPoints[i + 1];
+                        break;
+                    }
+                    i++;
+                }
+            }
+
+            if (leftSp && rightSp) {
+                var actualSegmentLength = rightSp.actual - leftSp.actual;
+                var simSegmentLength = rightSp.sim - leftSp.sim;
+                var compression = simSegmentLength / actualSegmentLength;
+                var simTime = moment(leftSp.sim).add((now - leftSp.actual) * compression, 'ms');
+                error = false;
+                retObj = {
+                    simTime: simTime,
+                    compression: compression
+                }
+            }
+            else if (leftSp) {
+                error  = false;
+                retObj = { simTime: leftSp.sim, compression: 0 };
+            }
+            else if (rightSp) {
+                error  = false;
+                retObj = { simTime: rightSp.sim, compression: 0 };
+            }
+        }
+        callback(error, retObj);
+    };
+
+    function getCurrentActualTime(){
+        return moment();
+    };
+
+    scenarioService.scenario_listRoleGroups({scenario_id: soyut.Session.role.scenario}, function (err, res) {
+        //sementara pake ini dulu
+         var curtime = new Date(getCurrentActualTime());
+
+         clockService.timeFrame_getTimeFrame({id: res[0].timeframe}, function(err, result){
+            setCurrentTimeFrame(result);
+         });
+         getSimTime(curtime.toISOString(),function(err, reclock){
+            var curSimTime = new Date(reclock.simTime);
+            soyut.rig.Rig_AddRIGList({
+                rig: res[0].RIG,
+                scenario: soyut.Session.role.scenario,
+                title: '',
+                action: '',
+                description: '',
+                SendTime: curtime,
+                simtime: curSimTime,
+                radiogram: val
+            }, function(err, riglist){
+                console.log("save RIG list")
+            });
+
+         });
+    });
+}
+

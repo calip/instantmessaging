@@ -590,6 +590,9 @@
                         </button>
                         -->
                         <button class="btn btn-warning btn-wide" v-bind="loadPDFButton(contents.composeStatus)" type="button" @click="PrintPdf">
+                            Lihat ke PDF <i class="fa icon-file-pdf"></i>
+                        </button>
+                        <button class="btn btn-warning btn-wide" v-bind="loadPDFButton(contents.composeStatus)" type="button" @click="SavePdf">
                             Simpan ke PDF <i class="fa icon-file-pdf"></i>
                         </button>
                     </div>
@@ -629,7 +632,7 @@
                         </a>
                         -->
                         <a href="#" @click="PrintPDF()" class="btn btn-o btn-danger">
-                            Simpan Ke PDF
+                            Lihat Ke PDF
                         </a>
                     </div>
                 </div>
