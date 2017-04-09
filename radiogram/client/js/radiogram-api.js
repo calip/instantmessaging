@@ -466,7 +466,7 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
                     senderName: params.senderName,
                     senderRank: params.senderRank,
                     SendTime: reclock,
-                    simtime: null,
+                    simtime: reclock,
                     createTime: reclock,
                     parentId: null,
                     composeStatus: 'inbox'
@@ -503,7 +503,7 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
                     senderName: params.senderName,
                     senderRank: params.senderRank,
                     SendTime: reclock,
-                    simtime: null,
+                    simtime: reclock,
                     createTime: reclock,
                     parentId: null,
                     composeStatus: 'inbox'
@@ -548,7 +548,7 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
                         senderName: params.senderName,
                         senderRank: params.senderRank,
                         SendTime: reclock,
-                        simtime: null,
+                        simtime: reclock,
                         createTime: reclock,
                         parentId: null,
                         composeStatus: 'inbox'
@@ -585,7 +585,7 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
                         senderName: params.senderName,
                         senderRank: params.senderRank,
                         SendTime: reclock,
-                        simtime: null,
+                        simtime: reclock,
                         createTime: reclock,
                         parentId: null,
                         composeStatus: 'inbox'
@@ -622,7 +622,7 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
                 senderName: params.senderName,
                 senderRank: params.senderRank,
                 SendTime: reclock,
-                simtime: null,
+                simtime: reclock,
                 createTime: reclock
             }, function (err, results) {
                 if (!err) {
@@ -692,7 +692,7 @@ soyut.radiogram.SendRadiogram = function (params, callback) {
                 senderRank: params.senderRank,
                 composeStatus: 'inbox',
                 SendTime: reclock,
-                simtime: null,
+                simtime: reclock,
                 createTime: reclock,
                 parentId: null
                 }, function (err, res) {
@@ -728,7 +728,7 @@ soyut.radiogram.SendRadiogram = function (params, callback) {
             senderName: params.senderName,
             senderRank: params.senderRank,
             SendTime: reclock,
-            simtime: null,
+            simtime: reclock,
             createTime: reclock
         }, function (err, results) {
             if (!err) {
@@ -766,7 +766,7 @@ soyut.radiogram.DraftWasdalRadiogram = function (params, callback) {
                 senderName: params.senderName,
                 senderRank: params.senderRank,
                 SendTime: reclock,
-                simtime: null,
+                simtime: reclock,
                 createTime: reclock
             }, function (err, result) {
                 if (!err) {
@@ -812,7 +812,7 @@ soyut.radiogram.DraftWasdalRadiogram = function (params, callback) {
                             senderName: params.senderName,
                             senderRank: params.senderRank,
                             SendTime: reclock,
-                            simtime: null,
+                            simtime: reclock,
                             createTime: reclock,
                             parentId: parentId,
                             composeStatus: 'pending'
@@ -850,7 +850,7 @@ soyut.radiogram.DraftWasdalRadiogram = function (params, callback) {
                                 senderName: params.senderName,
                                 senderRank: params.senderRank,
                                 SendTime: reclock,
-                                simtime: null,
+                                simtime: reclock,
                                 createTime: reclock,
                                 parentId: parentId,
                                 composeStatus: 'pending'
@@ -895,7 +895,7 @@ soyut.radiogram.DraftWasdalRadiogram = function (params, callback) {
                                 senderName: params.senderName,
                                 senderRank: params.senderRank,
                                 SendTime: reclock,
-                                simtime: null,
+                                simtime: reclock,
                                 createTime: reclock,
                                 parentId: parentId,
                                 composeStatus: 'pending'
@@ -933,7 +933,7 @@ soyut.radiogram.DraftWasdalRadiogram = function (params, callback) {
                                     senderName: params.senderName,
                                     senderRank: params.senderRank,
                                     SendTime: reclock,
-                                    simtime: null,
+                                    simtime: reclock,
                                     createTime: reclock,
                                     parentId: parentId,
                                     composeStatus: 'pending'
@@ -1061,7 +1061,7 @@ soyut.radiogram.DraftRadiogram = function (params, callback) {
             senderName: params.senderName,
             senderRank: params.senderRank,
             SendTime: reclock,
-            simtime: null,
+            simtime: reclock,
             createTime: reclock
         }, function (err, result) {
             if (!err) {
