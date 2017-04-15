@@ -886,11 +886,15 @@ soyut.radiogram.renderListGroupMessage = function (elSelector, elChildren, messa
                                 rolegroup.forEach(function (rg) {
                                     getInboxRadiogram(m.id, rg.id, function (err, res) {
                                         res.forEach(function (i) {
+                                            var getRealTime = moment(i.simtime).format("DD")+'-'+moment(i.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(i.simtime).format("YYYY"))+' '+moment(i.simtime).format("hh")+':'+moment(i.simtime).format("mm");
+                                            var stringTime = '<span class="text">waktu Sebenarnya '+ moment(i.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
+                                                                '<span class="text">waktu Asumsi '+ getRealTime +'</span>';    
+
                                             arrData.push({
                                                 id: i.id,
                                                 content: i.content,
                                                 SendTime: i.SendTime,
-                                                simtime: i.simtime,
+                                                simtime: stringTime,
                                                 Number: i.Number,
                                                 readStatus: i.readStatus,
                                                 composeStatus: i.composeStatus,
@@ -910,11 +914,15 @@ soyut.radiogram.renderListGroupMessage = function (elSelector, elChildren, messa
                         rolegroup.forEach(function (rg) {
                             getOutboxRadiogram(rg.id, function (err, res) {
                                 res.forEach(function (i) {
+                                    var getRealTime = moment(i.simtime).format("DD")+'-'+moment(i.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(i.simtime).format("YYYY"))+' '+moment(i.simtime).format("hh")+':'+moment(i.simtime).format("mm");
+                                    var stringTime = '<span class="text">waktu Sebenarnya '+ moment(i.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
+                                                        '<span class="text">waktu Asumsi '+ getRealTime +'</span>';    
+                                                        
                                     arrData.push({
                                         id: i.id,
                                         content: i.content,
                                         SendTime: i.SendTime,
-                                        simtime: i.simtime,
+                                        simtime: stringTime,
                                         Number: i.Number,
                                         readStatus: i.readStatus,
                                         composeStatus: 'sent',
@@ -1216,7 +1224,7 @@ Vue.component('email-reader', {
                 return attr;
             }
             else{
-                if(!roleName.isWASDAL && !roleName.isSet && !roleName.isAddress){
+                if(!roleName.isWASDAL && roleName.isSet){
                     var attr;
                     attr = {
                         'style': 'display:none'
