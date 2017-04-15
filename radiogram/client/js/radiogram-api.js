@@ -186,6 +186,7 @@ function getListMessages(role, message) {
 soyut.radiogram.renderListReceiversDetail = function (role, callback) {
     if(role != null){
         getListReceiversDetail(role).then(function(result) {
+            
             var arr = '';
             result.forEach(function (i) {
                 if(i.data == undefined){
@@ -194,7 +195,7 @@ soyut.radiogram.renderListReceiversDetail = function (role, callback) {
                 else{
                     arr = arr + i.data.position+", ";
                 }
-            })
+            });
             var dataObj = {};
             dataObj = arr;
             callback(dataObj)
@@ -392,8 +393,13 @@ soyut.radiogram.renderRadiogramDetail = function (id, callback) {
 soyut.radiogram.renderUserDetail = function (id, callback) {
     getKey(id).then(function(result) {
         if (result.hasOwnProperty('user')) {
-            soyut.user.getUserByIdAsync(result.user).then(function (user) {
+            soyut.user.getUserByIdAsync(result.user)
+            .then(function (user) {
                 callback(user)
+            })
+            .catch(function (err) {
+                var dataObj = {};
+            callback(dataObj)
             });
         }
         else{
@@ -1076,10 +1082,10 @@ soyut.radiogram.SendDraftWasdalRadiogram = function (params, callback) {
         soyut.radiogram.Radiogram_GetListDraft({id: res.id, status: 'pending'}, function(err,result) {
             soyut.clock.getCurrentActualTime({}, function(err, reclock){
                 result.forEach(function(i){
-                    soyut.radiogram.Radiogram_SendDraft({id: i.id, sendtime: reclock, status: 'inbox'}, function(err,res) {
+                    soyut.radiogram.Radiogram_SendDraft({id: i.id, sendtime: reclock, simtime: reclock, status: 'inbox'}, function(err,res) {
                     });
                 });
-                soyut.radiogram.Radiogram_SendDraft({id: res.id, sendtime: reclock, status: 'sent'}, function(err,results) {
+                soyut.radiogram.Radiogram_SendDraft({id: res.id, sendtime: reclock, simtime: reclock, status: 'sent'}, function(err,results) {
                     callback("success");
                 });
             });

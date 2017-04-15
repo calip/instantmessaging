@@ -1337,8 +1337,9 @@ soyut.radiogram.renderMessageDetail = function (elSelector, message, state) {
                     else{
                         soyut.radiogram.renderSenderObj(data.sender, data.senderWasdal, function (sender) {
                             soyut.radiogram.renderListReceiversDetail(data.receivers, function (receivers) {
-                                soyut.radiogram.renderListReceiversDetail(data.cc, function (cc) {
-                                    //soyut.radiogram.renderUserDetail(data.sender, function (user) {
+                                 soyut.radiogram.renderListReceiversDetail(data.cc, function (cc) {
+                                    soyut.radiogram.renderUserDetail(data.sender, function (user) {
+
                                         var textArray = data.content.split('\n');
                                         var renderMessage = "";
                                         for (var i = 0; i < textArray.length; i++) {
@@ -1391,7 +1392,7 @@ soyut.radiogram.renderMessageDetail = function (elSelector, message, state) {
                                         };
 
                                         _this.$set(_this, 'contents', contents);
-                                    //});
+                                    });
                                 });
                             });
                         });
@@ -1438,13 +1439,52 @@ soyut.radiogram.renderMessageDetail = function (elSelector, message, state) {
                 });
             },
             SubmitMessage: function(content){
-                soyut.radiogram.SendDraftWasdalRadiogram(content, function (res) {
-                    $(getInstanceID("wdl-navigation-menu")).children().removeClass("active");
-                    $(getInstanceID("wdl-navigation-menu")).children().removeClass("open");
-                    soyut.radiogram.renderDraft();
+                if(roleName.isWASDAL){
+                    soyut.radiogram.SendDraftWasdalRadiogram(content, function (res) {
+                        $(getInstanceID("wdl-navigation-menu")).children().removeClass("active");
+                        $(getInstanceID("wdl-navigation-menu")).children().removeClass("open");
+                        soyut.radiogram.renderDraft();
 
-                    soyut.radiogram.AddRIGRadiogram(content.id);
-                })
+                        soyut.radiogram.AddRIGRadiogram(content.id);
+                    })
+                }
+                else{
+                    soyut.radiogram.Radiogram_GetById({id: content.id}, function(err,res) {
+                        
+                        soyut.radiogram.SendRadiogram({
+                            panggilan: res.panggilan,
+                            jenis: res.jenis,
+                            nomor: res.nomor,
+                            derajat: res.derajat,
+                            instruksi: res.instruksi,
+                            tandadinas: res.tandadinas,
+                            group: res.group,
+                            classification: res.classification,
+                            Number: res.Number,
+                            cara: res.cara,
+                            paraf: res.paraf,
+                            alamataksi: res.alamataksi,
+                            alamattembusan: res.alamattembusan,
+                            content: res.content,
+                            readStatus: 'unread',
+                            owner: res.sender,
+                            sender: res.sender,
+                            receivers: res.receivers,
+                            cc: res.cc,
+                            senderName: res.senderName,
+                            senderRank: res.senderRank
+                        }, function (results) {
+
+                            soyut.clock.getCurrentActualTime({}, function(err, reclock){
+                                soyut.radiogram.Radiogram_SendDraft({id: content.id, sendtime: reclock, simtime: reclock, status: 'sent'}, function(err,r) {
+                                });
+                            });
+                            $(getInstanceID("wdl-navigation-menu")).children().removeClass("active");
+                            $(getInstanceID("wdl-navigation-menu")).children().removeClass("open");
+                            soyut.radiogram.renderDraft();
+                        });
+                    })
+                }
             },
             EditMessage: function(content){
                 soyut.radiogram.EditMessage(content.id);
