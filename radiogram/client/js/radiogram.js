@@ -1328,7 +1328,7 @@ Vue.component('email-reader', {
                 return attr;
             }
             else{
-                if(!roleName.isWASDAL && !roleName.isSet && !roleName.isAddress){
+                if(!roleName.isWASDAL && !roleName.isSet){
                     var attr;
                     attr = {
                         'style': 'display:none'
