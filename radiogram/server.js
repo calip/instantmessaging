@@ -67,14 +67,6 @@ httpServer.listen(config.port, function () {
                 {
                   src: 'https://'+ config.hostname + ':' + config.port + '/module_radiogram.js',
                   url: '/scripts/module/radiogram/module_radiogram.js'
-                },
-                {
-                  src: 'https://'+ config.hostname + ':' + config.port + '/module_radiogram_statistic.js',
-                  url: '/scripts/module/radiogram/module_radiogram_statistic.js'
-                },
-                {
-                  src: 'https://'+ config.hostname + ':' + config.port + '/module_radiogram_kogas.js',
-                  url: '/scripts/module/radiogram/module_radiogram_kogas.js'
                 }
               ],
               function (isCallMethodSuccess, reply) {
