@@ -418,27 +418,27 @@ soyut.radiogram.renderContent = function () {
             $('.parent-sender').addClass('has-error');
             $('.sender-error').removeClass('valid');
             $('.sender-error').html('Harus diisi!');
-            error = "receivers Error";
+            error += "receivers Error";
         }
         else {
             $('.parent-sender').removeClass('has-error');
             $('.parent-sender').addClass('has-success');
             $('.sender-error').addClass('valid');
             $('.sender-error').html('');
-            error = "";
+            error += "";
         }
         if (receiverRole == "" || receiverRole == null) {
             $('.parent-receivers').addClass('has-error');
             $('.receivers-error').removeClass('valid');
             $('.receivers-error').html('Harus diisi!');
-            error = "receivers Error";
+            error += "receivers Error";
         }
         else {
             $('.parent-receivers').removeClass('has-error');
             $('.parent-receivers').addClass('has-success');
             $('.receivers-error').addClass('valid');
             $('.receivers-error').html('');
-            error = "";
+            error += "";
         }
 
         if(error != ""){
@@ -551,27 +551,27 @@ soyut.radiogram.renderContent = function () {
             $('.parent-sender').addClass('has-error');
             $('.sender-error').removeClass('valid');
             $('.sender-error').html('Harus diisi!');
-            error = "receivers Error";
+            error += "receivers Error";
         }
         else {
             $('.parent-sender').removeClass('has-error');
             $('.parent-sender').addClass('has-success');
             $('.sender-error').addClass('valid');
             $('.sender-error').html('');
-            error = "";
+            error += "";
         }
         if (receiverRole == "" || receiverRole == null) {
             $('.parent-receivers').addClass('has-error');
             $('.receivers-error').removeClass('valid');
             $('.receivers-error').html('Harus diisi!');
-            error = "receivers Error";
+            error += "receivers Error";
         }
         else {
             $('.parent-receivers').removeClass('has-error');
             $('.parent-receivers').addClass('has-success');
             $('.receivers-error').addClass('valid');
             $('.receivers-error').html('');
-            error = "";
+            error += "";
         }
 
         if(error != ""){
@@ -885,6 +885,11 @@ soyut.radiogram.renderListGroupMessage = function (elSelector, elChildren, messa
                             scenarioService.Role_getRoleByGroup({roleGroup: group}, function (err, rolegroup) {
                                 rolegroup.forEach(function (rg) {
                                     getInboxRadiogram(m.id, rg.id, function (err, res) {
+                                        res.sort(function(a,b){
+                                            var c = new Date(a.SendTime);
+                                            var d = new Date(b.SendTime);
+                                            return d-c;
+                                        });
                                         res.forEach(function (i) {
                                             var getRealTime = moment(i.simtime).format("DD")+'-'+moment(i.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(i.simtime).format("YYYY"))+' '+moment(i.simtime).format("hh")+':'+moment(i.simtime).format("mm");
                                             var stringTime = '<span class="text">waktu Sebenarnya '+ moment(i.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
@@ -913,6 +918,11 @@ soyut.radiogram.renderListGroupMessage = function (elSelector, elChildren, messa
                     scenarioService.Role_getRoleByGroup({roleGroup: group}, function (err, rolegroup) {
                         rolegroup.forEach(function (rg) {
                             getOutboxRadiogram(rg.id, function (err, res) {
+                                res.sort(function(a,b){
+                                    var c = new Date(a.SendTime);
+                                    var d = new Date(b.SendTime);
+                                    return d-c;
+                                });
                                 res.forEach(function (i) {
                                     var getRealTime = moment(i.simtime).format("DD")+'-'+moment(i.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(i.simtime).format("YYYY"))+' '+moment(i.simtime).format("hh")+':'+moment(i.simtime).format("mm");
                                     var stringTime = '<span class="text">waktu Sebenarnya '+ moment(i.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
@@ -1009,7 +1019,20 @@ soyut.radiogram.renderListMessage = function (elSelector, elChildren, message) {
                 if(roleName.isWASDAL){
                     var arrData =[];
                     soyut.radiogram.renderListWasdalMessages(message,function(res){
-                        //console.log(res[0].SendTime)
+                        if(message == "draft"){
+                            res.sort(function(a,b){
+                                var c = new Date(a.createTime);
+                                var d = new Date(b.createTime);
+                                return d-c;
+                            });
+                        }
+                        else{
+                            res.sort(function(a,b){
+                                var c = new Date(a.SendTime);
+                                var d = new Date(b.SendTime);
+                                return d-c;
+                            });
+                        }
                         res.forEach(function (vi) {
                            
                             if(message == "inbox") {
@@ -1042,32 +1065,52 @@ soyut.radiogram.renderListMessage = function (elSelector, elChildren, message) {
                                 var stringTime = '';
                                 if(message == 'draft'){
                                     stringTime = '<span class="text">dibuat '+moment(vi.createTime).format("DD-MM-YYYY h:mm")+'</span>';
+
+                                    soyut.radiogram.renderListReceiversDetail(vi.receivers, function (receivers) {
+                                        arrData.push({
+                                            id: vi.id,
+                                            title: vi.title,
+                                            content: vi.content,
+                                            SendTime: vi.createTime,
+                                            simtime: vi.createTime,
+                                            createTime: vi.createTime,
+                                            stringTime: stringTime,
+                                            Number: vi.Number,
+                                            readStatus: vi.readStatus,
+                                            composeStatus: vi.composeStatus,
+                                            receiverCallsign: receivers,
+                                            receiverRank: "",
+                                            receiverName: "",
+                                            receiverPhoto: ""
+                                        });
+                                        _this.$set(_this, 'messages', arrData);    
+                                    });
                                 }
                                 else{
                                     var getSimTime = moment(vi.simtime).format("DD")+'-'+moment(vi.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(vi.simtime).format("YYYY"))+' '+moment(vi.simtime).format("hh")+':'+moment(vi.simtime).format("mm");
                                     stringTime = '<span class="text">waktu Sebenarnya '+ moment(vi.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
                                                         '<span class="text">waktu Asumsi '+ getSimTime +'</span>';
-                                }
-                                
-                                soyut.radiogram.renderListReceiversDetail(vi.receivers, function (receivers) {
-                                    arrData.push({
-                                        id: vi.id,
-                                        title: vi.title,
-                                        content: vi.content,
-                                        SendTime: vi.SendTime,
-                                        simtime: vi.simtime,
-                                        createTime: vi.createTime,
-                                        stringTime: stringTime,
-                                        Number: vi.Number,
-                                        readStatus: vi.readStatus,
-                                        composeStatus: vi.composeStatus,
-                                        receiverCallsign: receivers,
-                                        receiverRank: "",
-                                        receiverName: "",
-                                        receiverPhoto: ""
+
+                                    soyut.radiogram.renderListReceiversDetail(vi.receivers, function (receivers) {
+                                        arrData.push({
+                                            id: vi.id,
+                                            title: vi.title,
+                                            content: vi.content,
+                                            SendTime: vi.SendTime,
+                                            simtime: vi.simtime,
+                                            createTime: vi.createTime,
+                                            stringTime: stringTime,
+                                            Number: vi.Number,
+                                            readStatus: vi.readStatus,
+                                            composeStatus: vi.composeStatus,
+                                            receiverCallsign: receivers,
+                                            receiverRank: "",
+                                            receiverName: "",
+                                            receiverPhoto: ""
+                                        });
+                                        _this.$set(_this, 'messages', arrData);    
                                     });
-                                    _this.$set(_this, 'messages', arrData);    
-                                });
+                                }
                             }
                         });
                     });
@@ -1075,6 +1118,20 @@ soyut.radiogram.renderListMessage = function (elSelector, elChildren, message) {
                 else{
                     var arrData =[];
                     soyut.radiogram.renderListMessages(message,function(res){
+                        if(message == "draft"){
+                            res.sort(function(a,b){
+                                var c = new Date(a.createTime);
+                                var d = new Date(b.createTime);
+                                return d-c;
+                            });
+                        }
+                        else{
+                            res.sort(function(a,b){
+                                var c = new Date(a.SendTime);
+                                var d = new Date(b.SendTime);
+                                return d-c;
+                            });
+                        }
                         res.forEach(function (i) {
                             if(message == "inbox") {
                                 soyut.radiogram.renderSenderObjWasdal(i.sender, i.senderWasdal, function (sender) {
@@ -1102,32 +1159,52 @@ soyut.radiogram.renderListMessage = function (elSelector, elChildren, message) {
                                 var stringTime = '';
                                 if(message == 'draft'){
                                     stringTime = '<span class="text">dibuat '+moment(i.createTime).format("DD-MM-YYYY h:mm")+'</span>';
+                                    
+                                    soyut.radiogram.renderListReceiversDetail(i.receivers, function (receivers) {
+                                        arrData.push({
+                                            id: i.id,
+                                            title: i.title,
+                                            content: i.content,
+                                            SendTime: i.createTime,
+                                            simtime: i.createTime,
+                                            createTime: i.createTime,
+                                            stringTime: stringTime,
+                                            Number: i.Number,
+                                            readStatus: i.readStatus,
+                                            composeStatus: i.composeStatus,
+                                            receiverCallsign: receivers
+                                        });
+                                        _this.$set(_this, 'messages', arrData);
+                                        
+                                    });
                                 }
                                 else{
                                     var getSimTime = moment(i.simtime).format("DD")+'-'+moment(i.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(i.simtime).format("YYYY"))+' '+moment(i.simtime).format("hh")+':'+moment(i.simtime).format("mm");
                                     stringTime = '<span class="text">waktu Sebenarnya '+ moment(i.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
                                                         '<span class="text">waktu Asumsi '+ getSimTime +'</span>';
+
+                                    soyut.radiogram.renderListReceiversDetail(i.receivers, function (receivers) {
+                                        arrData.push({
+                                            id: i.id,
+                                            title: i.title,
+                                            content: i.content,
+                                            SendTime: i.SendTime,
+                                            simtime: i.simtime,
+                                            createTime: i.createTime,
+                                            stringTime: stringTime,
+                                            Number: i.Number,
+                                            readStatus: i.readStatus,
+                                            composeStatus: i.composeStatus,
+                                            receiverCallsign: receivers
+                                        });
+                                        _this.$set(_this, 'messages', arrData);
+                                    });
                                 }
                                 
-                                soyut.radiogram.renderListReceiversDetail(i.receivers, function (receivers) {
-                                    arrData.push({
-                                        id: i.id,
-                                        title: i.title,
-                                        content: i.content,
-                                        SendTime: i.SendTime,
-                                        simtime: i.simtime,
-                                        createTime: i.createTime,
-                                        stringTime: stringTime,
-                                        Number: i.Number,
-                                        readStatus: i.readStatus,
-                                        composeStatus: i.composeStatus,
-                                        receiverCallsign: receivers
-                                    });
-                                    _this.$set(_this, 'messages', arrData);
-                                });
                             }
                         });
-                    }); 
+                    });
+
                 }
             },
             viewMessageDetail: function (val) {
@@ -1459,7 +1536,7 @@ soyut.radiogram.renderMessageDetail = function (elSelector, message, state) {
                 else{
                     soyut.radiogram.Radiogram_GetById({id: content.id}, function(err,res) {
                         
-                        soyut.radiogram.SendRadiogram({
+                        soyut.radiogram.SendReplyRadiogram({
                             panggilan: res.panggilan,
                             jenis: res.jenis,
                             nomor: res.nomor,
@@ -1490,8 +1567,9 @@ soyut.radiogram.renderMessageDetail = function (elSelector, message, state) {
                             $(getInstanceID("wdl-navigation-menu")).children().removeClass("active");
                             $(getInstanceID("wdl-navigation-menu")).children().removeClass("open");
                             soyut.radiogram.renderDraft();
+                            
                         });
-                    })
+                    });
                 }
             },
             EditMessage: function(content){

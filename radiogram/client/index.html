@@ -376,7 +376,7 @@
       </div>
     </div>
     <ul class="messages-list perfect-scrollbar">
-      <li v-for="message in messages" :class="LoadStatusMessage(message.id, message.readStatus, message.composeStatus)">
+      <li v-for="message in messages" :class="LoadStatusMessage(message.id, message.readStatus, message.composeStatus)" :data-date="message.simtime">
         <a href="#" @click="viewMessageDetail(message.id)">
           <span class="messages-item-from">{{ message.receiverCallsign | truncsender}}</span>
           <div class="messages-item-time" v-html="message.stringTime"></div>
