@@ -39,7 +39,8 @@ module.exports = {
       var simtime = reqMsg.data.params.simtime;
       var kop = reqMsg.data.params.kop;
       var renderMessage = message.replace(/(?:\r\n|\r|\n)/g, '<br />');
-      console.log(kop)
+      var test = message.split('\n');
+      console.log(test.length)
       var context = "./client/views/pdf.html";
       var pdfName = "radiogram-" + getDateTime() + ".pdf";
 
@@ -72,7 +73,10 @@ module.exports = {
       html = html.replace('{{simtime}}', simtime);
       html = html.replace('{{kop}}', kop);
 
-      var options = {format: 'Letter'};
+      var options = {
+        format: 'A4',
+        orientation: "portrait"
+      };
 
       pdf.create(html, options).toFile('./client/data/' + pdfName, function (err, res) {
         if (err) {

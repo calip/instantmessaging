@@ -1414,7 +1414,7 @@ soyut.radiogram.renderMessageDetail = function (elSelector, message, state) {
                     sender_Name: content.senderCallsign,
                     receiver_Name: content.receiverCallsign,
                     tembusan_Name: rolecc,
-                    klasifikasi: content.klasifikasi,
+                    klasifikasi: content.klasifikasi.toUpperCase(),
                     title: content.title,
                     number: content.no,
                     instruksi: content.instruksi,
