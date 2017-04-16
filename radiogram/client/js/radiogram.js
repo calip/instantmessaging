@@ -891,7 +891,6 @@ soyut.radiogram.renderListGroupMessage = function (elSelector, elChildren, messa
                                             return dateB - dateA;
                                         });
                                         res.forEach(function (i) {
-                                            console.log("gfdg " + i.SendTime);
                                             var getRealTime = moment(i.simtime).format("DD")+'-'+moment(i.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(i.simtime).format("YYYY"))+' '+moment(i.simtime).format("hh")+':'+moment(i.simtime).format("mm");
                                             var stringTime = '<span class="text">waktu Sebenarnya '+ moment(i.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
                                                                 '<span class="text">waktu Asumsi '+ getRealTime +'</span>';    
