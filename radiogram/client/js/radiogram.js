@@ -241,6 +241,7 @@ Vue.filter('truncsender', function (value) {
 });
 
 soyut.radiogram.SendNotification = function(title, content, id) {
+    console.log("load notif");
     var app = getAppInstance();
 
     soyut.Event.getInstance().invokeSystemEvent('notification', {

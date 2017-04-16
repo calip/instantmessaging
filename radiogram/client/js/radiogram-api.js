@@ -15,6 +15,7 @@ socket.on('new_radiogram', function (data) {
                 //if(data.new_val.owner == i.id){
                     console.log(i.position+" notification "+i.id)
                     if(data.new_val.composeStatus == 'inbox'){
+                        console.log("kirim notif");
                         soyut.radiogram.SendNotification(data.new_val.title, data.new_val.content, data.new_val.id);
             
                         soyut.radiogram.renderListMessage('.email-list', '.email-reader', data.new_val.composeStatus);
@@ -31,6 +32,7 @@ socket.on('new_radiogram', function (data) {
                         console.log(i.position+" notification "+i.id)
 
                         if(data.new_val.composeStatus == 'inbox'){
+                            console.log("kirim notif");
                             soyut.radiogram.SendNotification(data.new_val.title, data.new_val.content, data.new_val.id);
                 
                             soyut.radiogram.renderListMessage('.email-list', '.email-reader', data.new_val.composeStatus);
