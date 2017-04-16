@@ -267,6 +267,11 @@ soyut.radiogramdraft.renderListMessage = function (elSelector, elChildren, messa
 
                 var arrData =[];
                 soyut.radiogram.renderListWasdalMessages(message,function(res){
+                    res.sort(function(a,b){
+                        var c = new Date(a.createTime);
+                        var d = new Date(b.createTime);
+                        return d-c;
+                    });
                     res.forEach(function (vi) {
                         var stringTime = '';
                         if(message == 'draft'){

@@ -661,7 +661,10 @@ module.exports = {
                 var id = reqMsg.data.params.id;
                 var state = reqMsg.data.params.state;
                 var sender = reqMsg.data.params.sender;
-                r.table('Radiogram').find({owner:id, sender: sender, composeStatus:state}).exec(function (err, result) {
+                var field = reqMsg.data.params.field;
+                var sort = reqMsg.data.params.sort;
+
+                r.table('Radiogram').findOrder({owner:id, sender: sender, composeStatus:state}, field, sort).exec(function (err, result) {
                     if (err) {
                         return res.json({success: false, error: "record not found"});
                         throw err;

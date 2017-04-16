@@ -856,7 +856,7 @@ soyut.radiogram.renderListGroupMessage = function (elSelector, elChildren, messa
             LoadMessages: function () {
                 var _this = this;
                 var getInboxRadiogram = function (owner, sender, callback) {
-                    soyut.radiogram.Radiogram_GetInboxByRoleGroup({id: owner, sender: sender, state: message}, function (err, data) {
+                    soyut.radiogram.Radiogram_GetInboxByRoleGroup({id: owner, sender: sender, state: message, field:'SendTime', sort:'desc'}, function (err, data) {
                         if (!err) {
                             if (data.length > 0) {
                                 if (data != null) {
@@ -879,6 +879,7 @@ soyut.radiogram.renderListGroupMessage = function (elSelector, elChildren, messa
                 };
                 
                 if(message == "inbox") {
+                    
                     scenarioService.VRole_list({scenario: roleName.scenario}, function (err, role) {
                         var arrData =[];
                         role.forEach(function (m) {
@@ -886,11 +887,10 @@ soyut.radiogram.renderListGroupMessage = function (elSelector, elChildren, messa
                                 rolegroup.forEach(function (rg) {
                                     getInboxRadiogram(m.id, rg.id, function (err, res) {
                                         res.sort(function(a,b){
-                                            var c = new Date(a.SendTime);
-                                            var d = new Date(b.SendTime);
-                                            return d-c;
+                                            return new Date(b.SendTime) - new Date(a.SendTime);
                                         });
                                         res.forEach(function (i) {
+                                            console.log("gfdg "+i.SendTime)
                                             var getRealTime = moment(i.simtime).format("DD")+'-'+moment(i.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(i.simtime).format("YYYY"))+' '+moment(i.simtime).format("hh")+':'+moment(i.simtime).format("mm");
                                             var stringTime = '<span class="text">waktu Sebenarnya '+ moment(i.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
                                                                 '<span class="text">waktu Asumsi '+ getRealTime +'</span>';    
