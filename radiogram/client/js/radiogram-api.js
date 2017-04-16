@@ -12,7 +12,7 @@ socket.on('new_radiogram', function (data) {
     if(soyut.Session.role.isWASDAL){
         getListVRole(soyut.Session.role.scenario).then(function(result) {
             result.forEach(function(i){
-                //if(data.new_val.owner == i.id){
+                if(data.new_val.owner == i.id){
                     console.log(i.position+" notification "+i.id)
                     if(data.new_val.composeStatus == 'inbox'){
                         console.log("kirim notif");
@@ -20,7 +20,7 @@ socket.on('new_radiogram', function (data) {
             
                         soyut.radiogram.renderListMessage('.email-list', '.email-reader', data.new_val.composeStatus);
                     }
-                //}
+                }
             });
         });
     }
