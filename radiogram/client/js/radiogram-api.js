@@ -104,6 +104,67 @@ soyut.radiogram.renderListWasdalMessages = function (message,callback) {
     })
 };
 
+soyut.radiogram.renderListGroupWasdalMessages = function (message, group,callback) {
+    getListReceivers().then(function(result) {
+        getGroupRole(group).then(function(res){
+            res.forEach(function(i){
+                if(i.isAddress == true){
+                    getListWasdalGroupMessages(result, i.id, message).then(function(data) {
+                        var arr = []
+                        data.forEach(function (i) {
+                            i.forEach(function (e) {
+                                arr.push(e)
+                            })
+                        })
+                        var dataObj = {};
+                        dataObj = arr;
+                        callback(dataObj);
+                    });
+                }
+            });
+            
+        })
+    })
+};
+
+function getGroupRole(group) {
+    return new Promise (function(resolve,reject){
+        scenarioService.Role_getRoleByGroup({roleGroup: group}, function (e, data) {
+            if(e){
+                reject(e);
+            }else{
+                var dataObj = {};
+                dataObj = data;
+                resolve(dataObj);
+            }
+        });
+    });
+}
+
+function getListWasdalGroupMessages(role, group, message) {
+    return new Promise.map(role, function(i) {
+        return getGroupRadiogram(i.id, group, message).then(function(data) {
+            return data;
+        }).then(function(result) {
+            return result;
+        });
+    });
+}
+
+function getGroupRadiogram(role, group, message) {
+    return new Promise (function(resolve,reject){
+        soyut.radiogram.Radiogram_GetInboxByRoleGroup({id: role, sender: group, state: message, field:'SendTime', sort:'desc'}, function (e, data) {
+            if(e){
+                reject(e);
+            }else{
+                var dataObj = {};
+                dataObj = data;
+                resolve(dataObj);
+            }
+        });
+    });
+};
+
 function getRadiogram(role, message) {
     return new Promise (function(resolve,reject){
         soyut.radiogram.Radiogram_GetInboxByRole({id: role, state: message, field:'SendTime', sort:'desc'}, function (e, data) {

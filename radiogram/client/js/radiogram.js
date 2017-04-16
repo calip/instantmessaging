@@ -891,37 +891,29 @@ soyut.radiogram.renderListGroupMessage = function (elSelector, elChildren, messa
                 };
 
                 if(message == "inbox") {
-                    scenarioService.VRole_list({scenario: roleName.scenario}, function (err, role) {
-                        var arrData =[];
-                        role.forEach(function (m) {
-                            scenarioService.Role_getRoleByGroup({roleGroup: group}, function (err, rolegroup) {
-                                rolegroup.forEach(function (rg) {
-                                    getInboxRadiogram(m.id, rg.id, function (err, res) {
-                                        res.sort(function(a, b) {
-                                            var dateA = new Date(a.SendTime), 
-                                            dateB = new Date(b.SendTime);
-                                            return dateB - dateA;
-                                        });
-                                        res.forEach(function (i) {
-                                            var getRealTime = moment(i.simtime).format("DD")+'-'+moment(i.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(i.simtime).format("YYYY"))+' '+moment(i.simtime).format("hh")+':'+moment(i.simtime).format("mm");
-                                            var stringTime = '<span class="text">waktu Sebenarnya '+ moment(i.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
-                                                                '<span class="text">waktu Asumsi '+ getRealTime +'</span>';    
+                    var arrData =[];
+                    soyut.radiogram.renderListGroupWasdalMessages(message, group, function(res){
+                        res.sort(function(a, b) {
+                            var dateA = new Date(a.SendTime), 
+                            dateB = new Date(b.SendTime);
+                            return dateB - dateA;
+                        });
+                        res.forEach(function (i) {
+                            var getRealTime = moment(i.simtime).format("DD")+'-'+moment(i.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(i.simtime).format("YYYY"))+' '+moment(i.simtime).format("hh")+':'+moment(i.simtime).format("mm");
+                            var stringTime = '<span class="text">waktu Sebenarnya '+ moment(i.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
+                                                '<span class="text">waktu Asumsi '+ getRealTime +'</span>';    
 
-                                            arrData.push({
-                                                id: i.id,
-                                                content: i.content,
-                                                SendTime: i.SendTime,
-                                                simtime: stringTime,
-                                                Number: i.Number,
-                                                readStatus: i.readStatus,
-                                                composeStatus: i.composeStatus,
-                                                receiverCallsign: "PANGKOGAS"
-                                            });
-                                            _this.$set(_this, 'messages', arrData);
-                                        });
-                                    });
-                                });
+                            arrData.push({
+                                id: i.id,
+                                content: i.content,
+                                SendTime: i.SendTime,
+                                simtime: stringTime,
+                                Number: i.Number,
+                                readStatus: i.readStatus,
+                                composeStatus: i.composeStatus,
+                                receiverCallsign: "PANGKOGAS"
                             });
+                            _this.$set(_this, 'messages', arrData);
                         });
                     });
                 }
@@ -1675,7 +1667,8 @@ soyut.radiogram.SaveFilePDF = function(val) {
     }
 
     var strFolder = moment(new Date()).format('DD-MM-YYYY');
-    var tgtDir = "/"+strFolder;
+    var tgtDir = "/" + strFolder;
+
     fileSystem.ls(tgtDir, function (err, files) {
         if(files.length == 0){
             fileSystem.mkdir(tgtDir, function(err, res) {
