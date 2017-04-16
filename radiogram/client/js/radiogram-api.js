@@ -12,47 +12,35 @@ socket.on('new_radiogram', function (data) {
     if(soyut.Session.role.isWASDAL){
         getListVRole(soyut.Session.role.scenario).then(function(result) {
             result.forEach(function(i){
-                if(data.new_val.owner == i.id){
+                //if(data.new_val.owner == i.id){
                     console.log(i.position+" notification "+i.id)
                     if(data.new_val.composeStatus == 'inbox'){
-                        SendNotification(data.new_val.title, data.new_val.content, data.new_val.id);
+                        soyut.radiogram.SendNotification(data.new_val.title, data.new_val.content, data.new_val.id);
             
-                        //soyut.radiogram.renderListMessage('.email-list', '.email-reader', data.new_val.composeStatus);
+                        soyut.radiogram.renderListMessage('.email-list', '.email-reader', data.new_val.composeStatus);
                     }
-                }
+                //}
             });
         });
     }
     else{
         scenarioService.Role_getRoleByGroup({roleGroup: soyut.Session.role.roleGroup}, function(err,res) {
             res.forEach(function(i){
-                if(i.isAddress){
+                //if(i.isAddress){
                     if(data.new_val.owner == i.id){
                         console.log(i.position+" notification "+i.id)
 
                         if(data.new_val.composeStatus == 'inbox'){
-                            SendNotification(data.new_val.title, data.new_val.content, data.new_val.id);
+                            soyut.radiogram.SendNotification(data.new_val.title, data.new_val.content, data.new_val.id);
                 
-                            //soyut.radiogram.renderListMessage('.email-list', '.email-reader', data.new_val.composeStatus);
+                            soyut.radiogram.renderListMessage('.email-list', '.email-reader', data.new_val.composeStatus);
                         }
                     }
-                }
+                //}
             });
         });
     }
 });
-
-function SendNotification(title, content, id) {
-    //var app = getAppInstance();
-
-    soyut.Event.getInstance().invokeSystemEvent('notification', {
-        title: title, content: content, handler: function (d) {
-            console.log(id);
-            //app.launchActivity("soyut.module.app.radiogram.wasdal.main", {radiogramId: id});
-        }
-    });
-}
-
 
 soyut.radiogram.renderListSender = function (callback) {
     getListSender().then(function(result) {

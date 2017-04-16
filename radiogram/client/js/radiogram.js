@@ -240,6 +240,18 @@ Vue.filter('truncsender', function (value) {
     }
 });
 
+soyut.radiogram.SendNotification = function(title, content, id) {
+    var app = getAppInstance();
+
+    soyut.Event.getInstance().invokeSystemEvent('notification', {
+        title: title, content: content, handler: function (d) {
+            console.log(id);
+            //app.launchActivity("soyut.module.app.radiogram.main", {radiogramId: id});
+        }
+    });
+};
+
+
 soyut.radiogram.renderInbox = function () {
     soyut.radiogram.clearInput();
     $(getInstanceID("wdl-nav-inbox")).parent().addClass("active");
