@@ -877,20 +877,21 @@ soyut.radiogram.renderListGroupMessage = function (elSelector, elChildren, messa
                         }
                     });
                 };
-                
+
                 if(message == "inbox") {
-                    
                     scenarioService.VRole_list({scenario: roleName.scenario}, function (err, role) {
                         var arrData =[];
                         role.forEach(function (m) {
                             scenarioService.Role_getRoleByGroup({roleGroup: group}, function (err, rolegroup) {
                                 rolegroup.forEach(function (rg) {
                                     getInboxRadiogram(m.id, rg.id, function (err, res) {
-                                        res.sort(function(a,b){
-                                            return new Date(b.SendTime) - new Date(a.SendTime);
+                                        res.sort(function(a, b) {
+                                            var dateA = new Date(a.SendTime), 
+                                            dateB = new Date(b.SendTime);
+                                            return dateB - dateA;
                                         });
                                         res.forEach(function (i) {
-                                            console.log("gfdg "+i.SendTime)
+                                            console.log("gfdg " + i.SendTime);
                                             var getRealTime = moment(i.simtime).format("DD")+'-'+moment(i.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(i.simtime).format("YYYY"))+' '+moment(i.simtime).format("hh")+':'+moment(i.simtime).format("mm");
                                             var stringTime = '<span class="text">waktu Sebenarnya '+ moment(i.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
                                                                 '<span class="text">waktu Asumsi '+ getRealTime +'</span>';    
@@ -1301,7 +1302,7 @@ Vue.component('email-reader', {
                 return attr;
             }
             else{
-                if(!roleName.isWASDAL && roleName.isSet){
+                if(roleName.isSet){
                     var attr;
                     attr = {
                         'style': 'display:none'
@@ -1328,7 +1329,7 @@ Vue.component('email-reader', {
                 return attr;
             }
             else{
-                if(!roleName.isWASDAL && !roleName.isSet){
+                if(!roleName.isSet){
                     var attr;
                     attr = {
                         'style': 'display:none'
