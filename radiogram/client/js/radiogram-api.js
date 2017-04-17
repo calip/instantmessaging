@@ -18,7 +18,7 @@ socket.on('new_radiogram', function (data) {
                         console.log("kirim notif");
                         soyut.radiogram.SendNotification(data.new_val.title, data.new_val.content, data.new_val.id);
             
-                        soyut.radiogram.renderListMessage('.email-list', '.email-reader', data.new_val.composeStatus);
+                        //soyut.radiogram.renderListMessage('.email-list', '.email-reader', data.new_val.composeStatus);
                     }
                 }
             });
