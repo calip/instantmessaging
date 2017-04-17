@@ -1667,18 +1667,20 @@ soyut.radiogram.SaveFilePDF = function(val) {
         });
     }
 
-    var strFolder = moment(new Date()).format('DD-MM-YYYY');
-    var tgtDir = "/" + strFolder;
+    soyut.clock.getCurrentActualTime({}, function(err, reclock){
+        var strFolder = "RDG-" + moment(reclock).format('DD-MM-YYYY');
+        var tgtDir = "/" + strFolder;
 
-    fileSystem.ls(tgtDir, function (err, files) {
-        if(files.length == 0){
-            fileSystem.mkdir(tgtDir, function(err, res) {
+        fileSystem.ls(tgtDir, function (err, files) {
+            if(files.length == 0){
+                fileSystem.mkdir(tgtDir, function(err, res) {
+                    saveFileToSystem(tgtDir);
+                });
+            }
+            else{
                 saveFileToSystem(tgtDir);
-            });
-        }
-        else{
-            saveFileToSystem(tgtDir);
-        }
+            }
+        });
     });
 };
 
