@@ -1566,7 +1566,9 @@ soyut.radiogram.renderMessageDetail = function (elSelector, message, state) {
                         }, function (results) {
 
                             soyut.clock.getCurrentActualTime({}, function(err, reclock){
-                                soyut.radiogram.Radiogram_SendDraft({id: content.id, sendtime: reclock, simtime: reclock, status: 'sent'}, function(err,r) {
+                                soyut.clock.getSimTime(reclock, function(err, simclock){ 
+                                    soyut.radiogram.Radiogram_SendDraft({id: content.id, sendtime: reclock, simtime: simclock.simTime, status: 'sent'}, function(err,r) {
+                                    });
                                 });
                             });
                             $(getInstanceID("wdl-navigation-menu")).children().removeClass("active");
