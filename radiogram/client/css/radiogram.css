@@ -1,5 +1,8 @@
 .wdl-main {
   height: 100%;
+  color: #000000;
+  font-weight: bold;
+  font-size: 24px !important;
   /* ---------------------------------------------------------------------- */
   /*  Top Navbar
 /* ---------------------------------------------------------------------- */
@@ -906,6 +909,7 @@ Social Icons
   .wdl-main .wdl-sidebar > div nav > ul li a {
     border: none;
     font-weight: 300;
+    font-size: 24px;
     margin: 0;
     position: relative;
     text-decoration: none; }
@@ -984,6 +988,7 @@ Social Icons
   .wdl-main .wdl-sidebar > div nav > div > ul li a {
     border: none;
     font-weight: 300;
+    font-size: 24px;
     margin: 0;
     position: relative;
     text-decoration: none; }
@@ -1993,11 +1998,12 @@ Social Icons
   .wdl-main .text-muted {
     color: #c2c2c5; }
   .wdl-main .text-bold {
-    font-weight: bold !important; }
+    font-weight: bold !important;
+    font-size: 24px; }
   .wdl-main .text-extra-small {
     font-size: 11px !important; }
   .wdl-main .text-small {
-    font-size: 12px !important; }
+    font-size: 24px !important; }
   .wdl-main .text-large {
     font-size: 16px !important; }
   .wdl-main .text-extra-large {
@@ -3363,7 +3369,7 @@ Social Icons
     border-radius: 0 0 0 0 !important;
     color: #5b5b60;
     font-family: inherit;
-    font-size: 14px;
+    font-size: 24px;
     line-height: 1.2;
     padding: 5px 4px;
     transition-duration: 0.1s;
@@ -3481,7 +3487,8 @@ Social Icons
     color: #3c763d; }
   .wdl-main label {
     font-weight: normal;
-    color: #858585; }
+    font-size: 24px;
+    color: #000000; }
   .wdl-main span.input-icon, .wdl-main span.input-help {
     display: block;
     position: relative; }
@@ -5803,7 +5810,7 @@ Social Icons
     cursor: pointer;
     display: block;
     font-family: inherit;
-    font-size: 14px;
+    font-size: 24px;
     height: 29px;
     line-height: 27px;
     margin: 0;
@@ -7655,7 +7662,7 @@ Social Icons
     margin-top: 2px;
     color: #5b5b60; }
   .wdl-main .messages-list .messages-item .messages-item-time {
-    right: 15px;
+    right: 2px;
     top: 8px; }
   .wdl-main .messages-list .messages-item .messages-item-time .text {
     color: #5b5b60;
@@ -7689,11 +7696,11 @@ Social Icons
   .wdl-main .messages-list .messages-item .messages-item-time .messages-item-actions .tag-icon.green {
     background: #1FBBA6; }
   .wdl-main .messages-list .messages-item .messages-item-subject {
-    font-size: 14px;
+    font-size: 18px;
     margin-bottom: 4px;
     color: #5b5b60; }
   .wdl-main .messages-list .messages-item .messages-item-content {
-    font-size: 12px;
+    font-size: 14px;
     color: #5b5b60;
     margin-bottom: 4px; }
   .wdl-main .messages-list .messages-item .messages-item-preview {
@@ -8331,7 +8338,7 @@ Social Icons
   .wdl-main .wdl-sidebar nav > ul > li > a .item-media .fa-stack .fa-square {
     color: #007aff !important; }
   .wdl-main .wdl-sidebar nav > ul > li > a .item-inner {
-    color: #777 !important;
+    color: #000000 !important;
     border-bottom-color: #c8c7cc; }
   .wdl-main .wdl-sidebar nav > ul > li.hover {
     background: #f2f2f2 !important; }
@@ -8386,7 +8393,7 @@ Social Icons
   .wdl-main .wdl-sidebar nav > div > ul > li > a .item-media .fa-stack .fa-square {
     color: #007aff !important; }
   .wdl-main .wdl-sidebar nav > div > ul > li > a .item-inner {
-    color: #777 !important;
+    color: #000000 !important;
     border-bottom-color: #c8c7cc; }
   .wdl-main .wdl-sidebar nav > div > ul > li.hover {
     background: #f2f2f2 !important; }

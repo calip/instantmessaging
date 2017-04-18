@@ -722,8 +722,47 @@ soyut.radiogram.SendRadiogram = function (params, callback) {
     var listCC = [];
     
     soyut.clock.getCurrentActualTime({}, function(err, reclock){
-        if(listRcp[0] != undefined){
-            soyut.radiogram.Radiogram_SendReceiver({
+
+        soyut.clock.getSimTime(reclock, function(err, simclock){ 
+            if(listRcp[0] != undefined){
+                soyut.radiogram.Radiogram_SendReceiver({
+                    panggilan: params.panggilan,
+                    jenis: params.jenis,
+                    nomor: params.nomor,
+                    derajat: params.derajat,
+                    instruksi: params.instruksi,
+                    tandadinas: params.tandadinas,
+                    group: params.group,
+                    classification: params.classification,
+                    Number: params.Number,
+                    cara: params.cara,
+                    paraf: params.paraf,
+                    alamataksi: params.alamataksi,
+                    alamattembusan: params.alamattembusan,
+                    content: params.content,
+                    readStatus: 'unread',
+                    owner: listRcp[0],
+                    sender: params.sender,
+                    receivers: params.receivers,
+                    senderWasdal: soyut.Session.role.isWASDAL,
+                    cc: params.cc,
+                    session: soyut.Session.id,
+                    senderName: params.senderName,
+                    senderRank: params.senderRank,
+                    composeStatus: 'inbox',
+                    SendTime: reclock,
+                    simtime: simclock,
+                    createTime: reclock,
+                    parentId: null
+                    }, function (err, res) {
+                    if (!err) {
+                        //callback(result.data.generated_keys[0])
+                    }
+                });
+            }
+
+            //send
+            soyut.radiogram.Radiogram_Sending({
                 panggilan: params.panggilan,
                 jenis: params.jenis,
                 nomor: params.nomor,
@@ -739,7 +778,7 @@ soyut.radiogram.SendRadiogram = function (params, callback) {
                 alamattembusan: params.alamattembusan,
                 content: params.content,
                 readStatus: 'unread',
-                owner: listRcp[0],
+                owner: params.sender,
                 sender: params.sender,
                 receivers: params.receivers,
                 senderWasdal: soyut.Session.role.isWASDAL,
@@ -747,50 +786,15 @@ soyut.radiogram.SendRadiogram = function (params, callback) {
                 session: soyut.Session.id,
                 senderName: params.senderName,
                 senderRank: params.senderRank,
-                composeStatus: 'inbox',
                 SendTime: reclock,
-                simtime: reclock,
-                createTime: reclock,
-                parentId: null
-                }, function (err, res) {
+                simtime: simclock,
+                createTime: reclock
+            }, function (err, results) {
                 if (!err) {
-                    //callback(result.data.generated_keys[0])
+                    callback(results.data.generated_keys[0]);
                 }
             });
-        }
 
-        //send
-        soyut.radiogram.Radiogram_Sending({
-            panggilan: params.panggilan,
-            jenis: params.jenis,
-            nomor: params.nomor,
-            derajat: params.derajat,
-            instruksi: params.instruksi,
-            tandadinas: params.tandadinas,
-            group: params.group,
-            classification: params.classification,
-            Number: params.Number,
-            cara: params.cara,
-            paraf: params.paraf,
-            alamataksi: params.alamataksi,
-            alamattembusan: params.alamattembusan,
-            content: params.content,
-            readStatus: 'unread',
-            owner: params.sender,
-            sender: params.sender,
-            receivers: params.receivers,
-            senderWasdal: soyut.Session.role.isWASDAL,
-            cc: params.cc,
-            session: soyut.Session.id,
-            senderName: params.senderName,
-            senderRank: params.senderRank,
-            SendTime: reclock,
-            simtime: reclock,
-            createTime: reclock
-        }, function (err, results) {
-            if (!err) {
-                callback(results.data.generated_keys[0]);
-            }
         });
     });
 }
@@ -1440,4 +1444,3 @@ soyut.radiogram.AddRIGRadiogram = function(val){
          });
     });
 }
-

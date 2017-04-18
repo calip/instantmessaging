@@ -230,7 +230,7 @@ Vue.filter('truncate', function (value) {
 });
 
 Vue.filter('truncsender', function (value) {
-    var length = 15;
+    var length = 10;
 
     if (value.length <= length) {
         return value;
@@ -901,8 +901,8 @@ soyut.radiogram.renderListGroupMessage = function (elSelector, elChildren, messa
                         });
                         res.forEach(function (i) {
                             var getRealTime = moment(i.simtime).format("DD")+'-'+moment(i.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(i.simtime).format("YYYY"))+' '+moment(i.simtime).format("hh")+':'+moment(i.simtime).format("mm");
-                            var stringTime = '<span class="text">waktu Sebenarnya '+ moment(i.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
-                                                '<span class="text">waktu Asumsi '+ getRealTime +'</span>';    
+                            var stringTime = '<span class="text">ws '+ moment(i.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
+                                                '<span class="text">wa '+ getRealTime +'</span>';    
 
                             arrData.push({
                                 id: i.id,
@@ -930,8 +930,8 @@ soyut.radiogram.renderListGroupMessage = function (elSelector, elChildren, messa
                                 });
                                 res.forEach(function (i) {
                                     var getRealTime = moment(i.simtime).format("DD")+'-'+moment(i.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(i.simtime).format("YYYY"))+' '+moment(i.simtime).format("hh")+':'+moment(i.simtime).format("mm");
-                                    var stringTime = '<span class="text">waktu Sebenarnya '+ moment(i.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
-                                                        '<span class="text">waktu Asumsi '+ getRealTime +'</span>';    
+                                    var stringTime = '<span class="text">ws '+ moment(i.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
+                                                        '<span class="text">wa '+ getRealTime +'</span>';    
                                                         
                                     arrData.push({
                                         id: i.id,
@@ -1042,8 +1042,8 @@ soyut.radiogram.renderListMessage = function (elSelector, elChildren, message) {
                            
                             if(message == "inbox") {
                                 var getRealTime = moment(vi.simtime).format("DD")+'-'+moment(vi.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(vi.simtime).format("YYYY"))+' '+moment(vi.simtime).format("hh")+':'+moment(vi.simtime).format("mm");
-                                var stringTime = '<span class="text">waktu Sebenarnya '+ moment(vi.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
-                                                    '<span class="text">waktu Asumsi '+ getRealTime +'</span>';    
+                                var stringTime = '<span class="text">ws '+ moment(vi.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
+                                                    '<span class="text">wa '+ getRealTime +'</span>';    
 
                                 
                                 soyut.radiogram.renderSenderObjWasdal(vi.sender, vi.senderWasdal, function (sender) {
@@ -1093,8 +1093,8 @@ soyut.radiogram.renderListMessage = function (elSelector, elChildren, message) {
                                 }
                                 else{
                                     var getSimTime = moment(vi.simtime).format("DD")+'-'+moment(vi.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(vi.simtime).format("YYYY"))+' '+moment(vi.simtime).format("hh")+':'+moment(vi.simtime).format("mm");
-                                    stringTime = '<span class="text">waktu Sebenarnya '+ moment(vi.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
-                                                        '<span class="text">waktu Asumsi '+ getSimTime +'</span>';
+                                    stringTime = '<span class="text">ws '+ moment(vi.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
+                                                        '<span class="text">wa '+ getSimTime +'</span>';
 
                                     soyut.radiogram.renderListReceiversDetail(vi.receivers, function (receivers) {
                                         arrData.push({
@@ -1141,8 +1141,8 @@ soyut.radiogram.renderListMessage = function (elSelector, elChildren, message) {
                             if(message == "inbox") {
                                 soyut.radiogram.renderSenderObjWasdal(i.sender, i.senderWasdal, function (sender) {
                                     var getSimTime = moment(i.simtime).format("DD")+'-'+moment(i.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(i.simtime).format("YYYY"))+' '+moment(i.simtime).format("hh")+':'+moment(i.simtime).format("mm");
-                                    var stringTime = '<span class="text">waktu Sebenarnya '+ moment(i.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
-                                                        '<span class="text">waktu Asumsi '+ getSimTime +'</span>';
+                                    var stringTime = '<span class="text">ws '+ moment(i.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
+                                                        '<span class="text">wa '+ getSimTime +'</span>';
                                                         
                                     arrData.push({
                                         id: i.id,
@@ -1185,8 +1185,8 @@ soyut.radiogram.renderListMessage = function (elSelector, elChildren, message) {
                                 }
                                 else{
                                     var getSimTime = moment(i.simtime).format("DD")+'-'+moment(i.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(i.simtime).format("YYYY"))+' '+moment(i.simtime).format("hh")+':'+moment(i.simtime).format("mm");
-                                    stringTime = '<span class="text">waktu Sebenarnya '+ moment(i.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
-                                                        '<span class="text">waktu Asumsi '+ getSimTime +'</span>';
+                                    stringTime = '<span class="text">ws '+ moment(i.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
+                                                        '<span class="text">wa '+ getSimTime +'</span>';
 
                                     soyut.radiogram.renderListReceiversDetail(i.receivers, function (receivers) {
                                         arrData.push({
@@ -1646,7 +1646,7 @@ soyut.radiogram.SaveFilePDF = function(val) {
 
     function saveFileToSystem(targetFolder){
         soyut.storage.getStorageKeyAsync({userId: fileSystem.userid}).then(function(storageKey) {
-            var storagePath = targetFolder + "/" +val+".pdf";
+            var storagePath = targetFolder + "/" +val;
             var fileUrl = 'https://'+ curUrl[0] +':5454/storage/' + storageKey + '/' + storagePath;
 
             function getPosition(str, m, i) { return str.split(m, i).join(m).length; }

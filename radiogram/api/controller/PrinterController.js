@@ -40,9 +40,15 @@ module.exports = {
       var kop = reqMsg.data.params.kop;
       var renderMessage = message.replace(/(?:\r\n|\r|\n)/g, '<br />');
       var test = message.split('\n');
-      console.log(test.length)
+      console.log(test.length);
+
       var context = "./client/views/pdf.html";
-      var pdfName = "radiogram-" + getDateTime() + ".pdf";
+      var curNumber = replaceall(number,'/','-');
+          curNumber = replaceall(curNumber,' ','');
+          curNumber = replaceall(curNumber,'\"','');
+          curNumber = replaceall(curNumber,"'",'');
+          curNumber = replaceall(curNumber,'"','');
+      var pdfName = curNumber + "-" + getDateTime() + ".pdf";
 
       var html = fs.readFileSync(context, 'utf8');
 
@@ -72,6 +78,22 @@ module.exports = {
       html = html.replace('{{renderMessage}}', renderMessage);
       html = html.replace('{{simtime}}', simtime);
       html = html.replace('{{kop}}', kop);
+
+      function replaceall(str,replace,with_this){
+          var str_hasil ="";
+          var temp;
+
+          for(var i=0;i<str.length;i++) {
+              if (str[i] == replace){
+                  temp = with_this;
+              }
+              else {
+                  temp = str[i];
+              }
+              str_hasil += temp;
+          }
+          return str_hasil;
+      }
 
       var options = {
         format: 'A4',
