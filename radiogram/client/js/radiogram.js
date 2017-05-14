@@ -308,7 +308,7 @@ soyut.radiogram.renderTrash = function () {
     soyut.radiogram.renderListMessage('.email-list', '.email-reader', 'trash');
 };
 
-soyut.radiogram.renderCompose = function () {
+soyut.radiogram.renderCompose = function (referenceId) {
     soyut.radiogram.clearInput();
     $(getInstanceID("wdl-email-form")).removeClass('disable');
     $(getInstanceID("wdl-email-content")).addClass('disable');
@@ -329,6 +329,10 @@ soyut.radiogram.renderCompose = function () {
 
     if(!roleName.isSet && !roleName.isWASDAL){
         $(getInstanceID("Number")).attr('readonly', 'readonly');
+    }
+    if(referenceId != '') {
+        $(getInstanceID("referenceid")).val(referenceId);
+        soyut.radiogram.renderReplyMessage('.reply-message', referenceId);
     }
 
     if(roleName.isWASDAL){
@@ -387,7 +391,7 @@ soyut.radiogram.renderContent = function () {
         $(getInstanceID("wdl-navigation-menu")).children().removeClass("active");
         $(getInstanceID("wdl-navigation-menu")).children().removeClass("open");
 
-        soyut.radiogram.renderCompose();
+        soyut.radiogram.renderCompose('');
     });
 
     $(getInstanceID("wdl-nav-kop")).click(function (event) {
@@ -1583,7 +1587,7 @@ soyut.radiogram.renderMessageDetail = function (elSelector, message, state) {
                 soyut.radiogram.EditMessage(content.id);
             },
             ReplyMessage: function (content) {
-                soyut.radiogram.renderCompose();
+                soyut.radiogram.renderCompose(content.id);
             },
             MoveMessage: function(content){
                 var r = confirm("Anda Yakin?");
@@ -1618,6 +1622,196 @@ soyut.radiogram.renderMessageDetail = function (elSelector, message, state) {
         }
     });
     
+};
+
+Vue.component('email-reply', {
+    props: ['contents'],
+    template: '#email-reply',
+    methods: {
+        moment: function (date) {
+            return moment(date);
+        },
+        ViewDetail: function () {
+            this.$root.ViewDetail();
+        }
+    }
+});
+
+soyut.radiogram.renderReplyMessage = function (elSelector, message) {
+    var vm;
+
+    var $el = $(elSelector);
+    $el.html('');
+
+    $el.append('<email-reply :contents="contents"></email-reply>');
+
+    vm = new Vue({
+        el: elSelector,
+        data: {
+            contents: ''
+        },
+        mounted: function () {
+            this.$nextTick(function () {
+                this.LoadMessages();
+            });
+        },
+        methods:{
+            LoadMessages: function () {
+                var _this = this;
+
+                soyut.radiogram.renderMessageObj(message, function(data){
+
+                    if (roleName.isWASDAL) {
+                        soyut.radiogram.renderSenderObjWasdal(data.sender, data.senderWasdal, function (sender) {
+                            soyut.radiogram.renderListReceiversDetail(data.receivers, function (receivers) {
+                                soyut.radiogram.renderListReceiversDetail(data.cc, function (cc) {
+                                    //soyut.radiogram.renderUserDetail(data.sender, function (user) {
+                                    var getSimTime = "";
+                                    if(data.simtime != null){
+                                        getSimTime = moment(data.simtime).format("DD")+'-'+moment(data.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(data.simtime).format("YYYY"))+' '+moment(data.simtime).format("hh")+':'+moment(data.simtime).format("mm");
+                                    }
+                                    else{
+                                        getSimTime = "-";
+                                    }
+
+                                    var textArray = data.content.split('\n');
+                                    var renderMessage = "";
+                                    for (var i = 0; i < textArray.length; i++) {
+                                        renderMessage += textArray[i] + "<br />";
+                                    }
+                                    var contents = {
+                                        id: data.id,
+                                        content: data.content,
+                                        tembusan: data.cc,
+                                        renderMessages: renderMessage,
+                                        SendTime: data.SendTime,
+                                        simtime: getSimTime,
+                                        senderRole: data.sender,
+                                        senderCallsign: sender.position,
+                                        senderRank: data.senderRank,
+                                        senderName: data.senderName,
+                                        senderPhoto: "",
+                                        senderSignature: "",
+                                        panggilan: data.panggilan,
+                                        jenis: data.jenis,
+                                        nomor: data.nomor,
+                                        derajat: data.derajat,
+                                        instruksi: data.instruksi,
+                                        klasifikasi: data.classification.toUpperCase(),
+                                        no: data.Number,
+                                        cara: data.cara,
+                                        paraf: data.paraf,
+                                        tandadinas: data.tandadinas,
+                                        group: data.group,
+                                        alamataksi: data.alamataksi,
+                                        alamattembusan: data.alamattembusan,
+                                        composeStatus: data.composeStatus,
+                                        receiverDetail: receivers,
+                                        ccDetail: cc
+                                    };
+
+                                    _this.$set(_this, 'contents', contents);
+                                    //});
+                                });
+                            });
+                        });
+                    }
+                    else{
+                        soyut.radiogram.renderSenderObj(data.sender, data.senderWasdal, function (sender) {
+                            soyut.radiogram.renderListReceiversDetail(data.receivers, function (receivers) {
+                                soyut.radiogram.renderListReceiversDetail(data.cc, function (cc) {
+                                    soyut.radiogram.renderUserDetail(data.sender, function (user) {
+
+                                        var textArray = data.content.split('\n');
+                                        var renderMessage = "";
+                                        for (var i = 0; i < textArray.length; i++) {
+                                            renderMessage += textArray[i] + "<br />";
+                                        }
+
+                                        var curSimTime = "-"
+                                        if(data.simtime != null){
+                                            var curSimTime = moment(data.simtime).format("DD")+'-'+moment(data.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(data.simtime).format("YYYY"))+' '+moment(data.simtime).format("hh")+':'+moment(data.simtime).format("mm");
+                                        }
+                                        var curSendTime = "-"
+                                        if(data.SendTime != null){
+                                            curSendTime = moment(data.SendTime).format('DD-MM-YYYY h:mm');
+                                        }
+                                        var curCreateTime = "-"
+                                        if(data.createTime != null){
+                                            curCreateTime = moment(data.createTime).format('DD-MM-YYYY h:mm');
+                                        }
+
+                                        var contents = {
+                                            id: data.id,
+                                            content: data.content,
+                                            tembusan: data.cc,
+                                            renderMessages: renderMessage,
+                                            SendTime: curSendTime,
+                                            simtime: curSimTime,
+                                            createTime: curCreateTime,
+                                            senderRole: data.sender,
+                                            senderCallsign: sender.position,
+                                            senderRank: data.senderRank,
+                                            senderName: data.senderName,
+                                            senderPhoto: "",
+                                            senderSignature: "",
+                                            panggilan: data.panggilan,
+                                            jenis: data.jenis,
+                                            nomor: data.nomor,
+                                            derajat: data.derajat,
+                                            instruksi: data.instruksi,
+                                            klasifikasi: data.classification.toUpperCase(),
+                                            no: data.Number,
+                                            cara: data.cara,
+                                            paraf: data.paraf,
+                                            tandadinas: data.tandadinas,
+                                            group: data.group,
+                                            alamataksi: data.alamataksi,
+                                            alamattembusan: data.alamattembusan,
+                                            composeStatus: data.composeStatus,
+                                            receiverDetail: receivers,
+                                            ccDetail: cc
+                                        };
+
+                                        _this.$set(_this, 'contents', contents);
+                                    });
+                                });
+                            });
+                        });
+                    }
+                });
+            },
+            ViewDetail: function () {
+                var status = $(".view-reply-status").val();
+                if(status == 0) {
+                    $(".intruksi-tr").removeClass('hide');
+                    $(".tembusan-tr").removeClass('hide');
+                    $(".tandadinas-tr").removeClass('hide');
+                    $(".klasifikasi-tr").removeClass('hide');
+                    $(".message-tr").removeClass('hide');
+                    $(".pengirim-tr").removeClass('hide');
+                    $(".nama-tr").removeClass('hide');
+                    $(".pangkat-tr").removeClass('hide');
+                    $(".signature-tr").removeClass('hide');
+
+                    $(".view-reply-status").val('1');
+                }
+                else {
+                    $(".intruksi-tr").addClass('hide');
+                    $(".tembusan-tr").addClass('hide');
+                    $(".tandadinas-tr").addClass('hide');
+                    $(".klasifikasi-tr").addClass('hide');
+                    $(".message-tr").addClass('hide');
+                    $(".pengirim-tr").addClass('hide');
+                    $(".nama-tr").addClass('hide');
+                    $(".pangkat-tr").addClass('hide');
+                    $(".signature-tr").addClass('hide');
+
+                    $(".view-reply-status").val('0');
+                }
+            }
+        }
+    });
 };
 
 soyut.radiogram.SavePdf = function(val){
