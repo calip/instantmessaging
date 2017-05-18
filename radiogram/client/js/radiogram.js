@@ -308,7 +308,7 @@ soyut.radiogram.renderTrash = function () {
     soyut.radiogram.renderListMessage('.email-list', '.email-reader', 'trash');
 };
 
-soyut.radiogram.renderCompose = function (referenceId) {
+soyut.radiogram.renderCompose = function (referenceId, refSender) {
     soyut.radiogram.clearInput();
     $(getInstanceID("wdl-email-form")).removeClass('disable');
     $(getInstanceID("wdl-email-content")).addClass('disable');
@@ -335,12 +335,16 @@ soyut.radiogram.renderCompose = function (referenceId) {
         soyut.radiogram.renderReplyMessage('.reply-message', referenceId);
     }
 
+    console.log("tess "+refSender)
+
     if(roleName.isWASDAL){
+        $(getInstanceID("ref_sender")).val(refSender);
         soyut.radiogram.renderSenderWasdal('new', null);
         soyut.radiogram.renderReceiverWasdal('new', null);
         soyut.radiogram.renderCCWasdal('new', null);
     }
     else{
+        $(getInstanceID("ref_sender")).val('');
         soyut.radiogram.renderComposeSender('new', null);
         soyut.radiogram.renderComposeReceivers('new', null);
         soyut.radiogram.renderComposeCC('new', null);
@@ -391,7 +395,7 @@ soyut.radiogram.renderContent = function () {
         $(getInstanceID("wdl-navigation-menu")).children().removeClass("active");
         $(getInstanceID("wdl-navigation-menu")).children().removeClass("open");
 
-        soyut.radiogram.renderCompose('');
+        soyut.radiogram.renderCompose('','');
     });
 
     $(getInstanceID("wdl-nav-kop")).click(function (event) {
@@ -428,6 +432,7 @@ soyut.radiogram.renderContent = function () {
         var paraf = $(getInstanceID("paraf")).val();
         var jam = $(getInstanceID("jam")).val();
         var tanggal = $(getInstanceID("tanggal")).val();
+        var refsender = $(getInstanceID("ref_sender")).val();
 
         var error = "";
 
@@ -483,13 +488,13 @@ soyut.radiogram.renderContent = function () {
                     receivers: receiverRole,
                     cc: tembusan,
                     senderName: senderName,
-                    senderRank: senderRank
+                    senderRank: senderRank,
+                    refsender: refsender
                 },function(res){
                     soyut.radiogram.clearInput();
                     //console.log(res)
                     soyut.radiogram.AddRIGRadiogram(res);
 
-                    
                     $(getInstanceID("wdl-email-content")).addClass('disable');
                     $(getInstanceID("wdl-email-form")).addClass('disable');
                     $(getInstanceID("wdl-email-view")).addClass('disable');
@@ -1244,6 +1249,9 @@ Vue.component('email-reader', {
         ReplyMessage: function () {
             this.$root.ReplyMessage(this.contents);
         },
+        ReplyCurrrentMessage: function () {
+            this.$root.ReplyCurrrentMessage(this.contents);
+        },
         SubmitMessage: function(){
             this.$root.SubmitMessage(this.contents);
         },
@@ -1299,6 +1307,24 @@ Vue.component('email-reader', {
                     'style': 'display:none'
                 };
                 return attr;
+            }
+        },
+        loadReplyCurrentButton: function (val) {
+            if(val == 'draft' || val == 'sent' || val == 'trash'){
+                var attr;
+                attr = {
+                    'style': 'display:none'
+                };
+                return attr;
+            }
+            else{
+                if(roleName.isSet){
+                    var attr;
+                    attr = {
+                        'style': 'display:none'
+                    };
+                    return attr;
+                }
             }
         },
         loadReplyButton: function(val){
@@ -1587,7 +1613,10 @@ soyut.radiogram.renderMessageDetail = function (elSelector, message, state) {
                 soyut.radiogram.EditMessage(content.id);
             },
             ReplyMessage: function (content) {
-                soyut.radiogram.renderCompose(content.id);
+                soyut.radiogram.renderCompose(content.id, '');
+            },
+            ReplyCurrrentMessage: function (content) {
+                soyut.radiogram.renderCompose(content.id, content.senderRole);
             },
             MoveMessage: function(content){
                 var r = confirm("Anda Yakin?");

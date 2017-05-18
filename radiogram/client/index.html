@@ -233,7 +233,7 @@
                                       <tr>
                                           <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Nomor</td>
                                           <td colspan="4" class="parent-no" style="border-bottom: none; border-right: none;">
-                                              <input type="hidden" name="referenceid" id="referenceid" value="">
+                                              <input type="text" name="referenceid" id="referenceid" value="">
                                               <input type="text" placeholder="Nomor" name="Number" class="form-control Number" id="Number">
                                               <span class="no-error help-block valid"></span>
                                           </td>
@@ -242,6 +242,7 @@
                                       </tr>
                                       <tr>
                                           <td colspan="8" style="border-left:2px solid #000000;">
+                                              <input type="text" name="ref_sender" id="ref_sender" value="">
                                               <input type="hidden" name="cur_pos" id="cur_pos" value="0">
                                               <input type="hidden" name="cur_word" id="cur_word" value="0">
                                               <input type="hidden" name="cur_sent" id="cur_sent" value="0">
@@ -740,7 +741,10 @@
                     </div>
                     <div class="col-md-6">
                         <button class="btn btn-primary btn-wide pull-right btn-replyMessage" v-bind="loadReplyButton(contents.composeStatus)" type="button" @click="ReplyMessage">
-                            Balas <i class="fa icon-arrow-right"></i>
+                            Balas Semua <i class="fa icon-arrow-right"></i>
+                        </button>
+                        <button class="btn btn-primary btn-wide pull-right btn-ReplyCurrrentMessage" v-bind="loadReplyCurrentButton(contents.composeStatus)" type="button" @click="ReplyCurrrentMessage">
+                            Balas ke Kogas <i class="fa icon-arrow-right"></i>
                         </button>
                         <button class="btn btn-primary btn-wide pull-right" type="button" v-bind="loadSentButton(contents.composeStatus)" @click="SubmitMessage()">
                             Kirim <i class="fa icon-arrow-right"></i>
