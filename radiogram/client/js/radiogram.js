@@ -204,20 +204,6 @@ soyut.radiogram.isMobile = function() {
 //     });
 // });
 
-soyut.radiogram.listTembusan = [];
-soyut.radiogram.preProcessAuthor = function(dbAuthor, callback) {
-    sessionService.RoleKey_get({role: dbAuthor.id, session: soyutSession.id}, function (err, result) {
-        if (err) {
-            callback(true, err);
-        }
-        else {
-            callback(false, result);
-        }
-    });
-};
-soyut.radiogram.preProcessAuthorAsync = Promise.promisify(soyut.radiogram.preProcessAuthor);
-
-
 Vue.filter('truncate', function (value) {
     var length = 50;
 
@@ -723,8 +709,6 @@ soyut.radiogram.renderContent = function () {
 };
 
 soyut.radiogram.clearInput = function(){
-    soyut.radiogram.listTembusan = [];
-
     $(getInstanceID("btnSubmitMessage")).css({display:''});
 
     $(getInstanceID("editId")).val('');
