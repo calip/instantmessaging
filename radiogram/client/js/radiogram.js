@@ -321,8 +321,6 @@ soyut.radiogram.renderCompose = function (referenceId, refSender) {
         soyut.radiogram.renderReplyMessage('.reply-message', referenceId);
     }
 
-    console.log("tess "+refSender)
-
     if(roleName.isWASDAL){
         $(getInstanceID("ref_sender")).val(refSender);
         soyut.radiogram.renderSenderWasdal('new', null);
@@ -344,10 +342,33 @@ soyut.radiogram.renderKop = function () {
     $(getInstanceID("wdl-email-send")).addClass('disable');
     $(getInstanceID("wdl-email-view")).addClass('disable');
     $(getInstanceID("wdl-kop-form")).removeClass('disable');
-
 };
 
 soyut.radiogram.renderContent = function () {
+
+    $(".btn-font-size").click(function (event) {
+        var id = $(this).attr("data-id");
+        var fontsize = '14px';
+
+        if(id == 0){
+            fontsize = '14px';
+        }
+        else if(id == 1){
+            fontsize = '18px';
+        }
+        else if(id == 2){
+            fontsize = '24px';
+        }
+
+        $('.wdl-main .wdl-sidebar > div nav > ul li > a').css({"font-size": fontsize});
+        $('.wdl-sidebar > div nav > div > ul li > a').css({"font-size": fontsize});
+        $('.button-o').css({"font-size": fontsize});
+        $('.messages-list .messages-item .messages-item-content').css({"font-size": fontsize});
+        $('.messages-list .messages-item .messages-item-subject').css({"font-size": fontsize});
+        $('.messages-list .messages-item .messages-item-from').css({"font-size": fontsize});
+        $('textarea, select, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"]').css({"font-size": fontsize});
+        $('.btn').css({"font-size": fontsize});
+    });
 
     $(getInstanceID("wdl-nav-inbox")).click(function (event) {
         $(getInstanceID("wdl-navigation-menu")).children().removeClass("active");
@@ -478,7 +499,6 @@ soyut.radiogram.renderContent = function () {
                     refsender: refsender
                 },function(res){
                     soyut.radiogram.clearInput();
-                    //console.log(res)
                     soyut.radiogram.AddRIGRadiogram(res);
 
                     $(getInstanceID("wdl-email-content")).addClass('disable');
@@ -968,6 +988,16 @@ Vue.component('email-list', {
     methods: {
         moment: function (date) {
             return moment(date);
+        },
+        FindRadiogram: function () {
+            var filter = $('.txt-filter-list').val();
+
+            $('ul.messages-list > li').each(function(){
+                var currentLiText = $(this).text();
+                var showCurrentLi = currentLiText.indexOf(filter) !== -1;
+
+                $(this).toggle(showCurrentLi);
+            });
         },
         MarkMessage: function(val){
             console.log("mark "+val)
@@ -2260,20 +2290,33 @@ soyut.radiogram.renderComposeReceivers = function (state, value) {
     $(getInstanceID("list-receiver")).html('');
     if(state == 'new'){
         soyut.radiogram.renderListReceivers(function(res){
-            var html = '<select name="optReceiver[]" multiple id="optReceiver" class="form-control optReceiver">';
-            res.forEach(function (i) {
-                html += '<option value="'+i.id+'">'+i.position+'</option>'; 
-            });
-            html +='</select>';
-            html +='<span class="receivers-error help-block valid"></span>';
-            $(getInstanceID("list-receiver")).append(html);
+            // soyut.radiogram.renderListRole(function(list) {
+            //     soyut.radiogram.renderGroupAddress(roleName.roleGroup, function (gprole) {
+            //
+                    var html = '<select name="optReceiver[]" multiple id="optReceiver" class="form-control optReceiver">';
+            //
+            //         list.forEach(function (r) {
+            //             if (r.id != gprole[0].id) {
+            //                 html += '<option value="' + r.id + '">' + r.position + ' (' + r.groupName + ')</option>';
+            //             }
+            //         });
 
-            $('.optReceiver').multiselect({
-                columns: 1,
-                placeholder: 'Cari...',
-                search: true,
-                selectAll: true
-            });
+                    res.forEach(function (i) {
+                        html += '<option value="' + i.id + '">' + i.position + '</option>';
+                    });
+                    html += '</select>';
+                    html += '<span class="receivers-error help-block valid"></span>';
+                    $(getInstanceID("list-receiver")).append(html);
+
+                    $('.optReceiver').multiselect({
+                        columns: 1,
+                        placeholder: 'Cari...',
+                        search: true,
+                        selectAll: true
+                    });
+
+            //     });
+            // });
         });
     }
     else{

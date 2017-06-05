@@ -90,6 +90,67 @@ function getListReceivers() {
     });
 }
 
+soyut.radiogram.renderListRole = function (callback) {
+    getNonDirectorListRoleGroup().then(function (result) {
+        getListRoleAddress(result).then(function(data) {
+            var arr = []
+            data.forEach(function (i) {
+                arr.push(i);
+            });
+            var dataObj = {};
+            dataObj = arr;
+            callback(dataObj);
+        });
+    });
+};
+
+function getListRoleAddress(role) {
+    return new Promise.map(role, function(i) {
+        return getAddressRolegroup(i.id).then(function(data) {
+            var objData = {
+                callsign: data[0].callsign,
+                createdAt: data[0].createdAt,
+                id: data[0].id,
+                index: data[0].index,
+                isAddress: data[0].isAddress,
+                isAlias: data[0].isAlias,
+                isSet: data[0].isSet,
+                isWASDAL: data[0].isWASDAL,
+                position: data[0].position,
+                positionCode: data[0].positionCode,
+                rank: data[0].rank,
+                roleGroup: data[0].roleGroup,
+                scenario: data[0].scenario,
+                updatedAt: data[0].updatedAt,
+                groupName: i.name
+            };
+            return objData;
+        }).then(function(result) {
+            return result;
+        });
+    });
+}
+
+soyut.radiogram.renderGroupAddress = function (rolegroup, callback) {
+    getAddressRolegroup(rolegroup).then(function(result) {
+        callback(result)
+    });
+};
+
+function getAddressRolegroup(group) {
+    return new Promise (function(resolve,reject){
+        scenarioService.Role_getAddressRoleGroup({rolegroup: group}, function (e, data) {
+            if(e){
+                reject(e);
+            }else{
+                var dataObj = {};
+                dataObj = data;
+                resolve(dataObj);
+            }
+        });
+    });
+}
+
 soyut.radiogram.renderListWasdalMessages = function (message,callback) {
     getListReceivers().then(function(result) {
         getListWasdalMessages(result, message).then(function(data) {
@@ -359,6 +420,57 @@ function getListReceiversDetail(role) {
     });
 }
 
+
+soyut.radiogram.renderListNonDirectorRoleGroup = function (callback) {
+    getNonDirectorListRoleGroup().then(function (result) {
+        callback(result);
+    });
+};
+
+function getNonDirectorListRoleGroup() {
+    return new Promise (function(resolve,reject){
+        sessionService.Session_getScenario({id: soyut.Session.id},function(err,scenario){
+            scenarioService.scenario_listNonDirectorRoleGroups({scenario_id: '58db5569372532a75f41ddd3'}, function (e, data) {
+                if(e){
+                    reject(e);
+                }else{
+                    var dataObj = {};
+                    dataObj = data;
+                    resolve(dataObj);
+                }
+            });
+        });
+    });
+}
+
+soyut.radiogram.renderListDirectorRoleGroup = function (callback) {
+    getDirectorListRoleGroup().then(function (result) {
+        callback(result);
+    });
+};
+
+function getDirectorListRoleGroup() {
+    return new Promise (function(resolve,reject){
+        sessionService.Session_getScenario({id: soyut.Session.id},function(err,scenario){
+            scenarioService.scenario_listDirectorRoleGroups({scenario_id: scenario}, function (e, data) {
+                if(e){
+                    reject(e);
+                }else{
+                    var dataObj = {};
+                    dataObj = data;
+                    resolve(dataObj);
+                }
+            });
+        });
+    });
+};
+
+soyut.radiogram.renderMessageObj = function (id, callback) {
+    getContentRadiogram(id).then(function(result) {
+        callback(result)
+    });
+};
+
 soyut.radiogram.renderRoleGroup = function (callback) {
     getRoleGroup().then(function(result) {
         callback(result)
@@ -487,10 +599,7 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
         var listReceiver = [];
         var listCC = [];
 
-        console.log("no "+params.Number+" ref "+params.refsender)
         if(params.refsender != ''){
-            console.log("balas per kogas");
-
             soyut.clock.getCurrentActualTime({}, function(err, reclock){
                 soyut.clock.getSimTime(reclock, function(err, simclock){
 

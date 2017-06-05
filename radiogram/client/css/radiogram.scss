@@ -1,8 +1,6 @@
 .wdl-main {
   height: 100%;
-  color: #000000;
-  font-weight: bold;
-  font-size: 24px !important;
+  color: #000;
 
   .mainTitle {
     margin: 20px 0;
@@ -267,6 +265,7 @@
   .navbar .navbar-header a {
     line-height: 65px;
     height: 65px;
+    color: #000;
   }
   .navbar .navbar-header .navbar-brand {
     padding: 0 5px 0 15px;
@@ -953,8 +952,7 @@
   }
   .wdl-sidebar > div nav > ul li a {
     border: none;
-    font-weight: 300;
-    font-size: 24px;
+    font-weight: 400;
     margin: 0;
     position: relative;
     text-decoration: none;
@@ -1059,8 +1057,7 @@
   }
   .wdl-sidebar > div nav > div > ul li a {
     border: none;
-    font-weight: 300;
-    font-size: 24px;
+    font-weight: 400;
     margin: 0;
     position: relative;
     text-decoration: none;
@@ -1415,8 +1412,8 @@
   }
 
   .navbar-title {
-    color: #808285;
-    font-size: 10px;
+    color: #444444;
+    font-size: 14px;
     letter-spacing: 0.2px;
     padding-left: 15px !important;
     padding-right: 15px !important;
@@ -1429,6 +1426,9 @@
     display: none;
   }
 
+  .column-clean {
+    padding: 0;
+  }
   .navbar-form {
     background: #e2e2e4;
     border: none;
@@ -2567,7 +2567,6 @@
 
   .text-bold {
     font-weight: bold !important;
-    font-size: 24px;
   }
 
   .text-extra-small {
@@ -2575,7 +2574,7 @@
   }
 
   .text-small {
-    font-size: 24px !important;
+    font-size: 12px !important;
   }
 
   .text-large {
@@ -4553,7 +4552,7 @@
     border-radius: 0 0 0 0 !important;
     color: #5b5b60;
     font-family: inherit;
-    font-size: 24px;
+    font-size: 14px;
     line-height: 1.2;
     padding: 5px 4px;
     transition-duration: 0.1s;
@@ -4710,8 +4709,7 @@
 
   label {
     font-weight: normal;
-    font-size: 24px;
-    color: #000000;
+    color: #000;
   }
 
   span.input-icon, span.input-help {
@@ -7860,7 +7858,7 @@
     cursor: pointer;
     display: block;
     font-family: inherit;
-    font-size: 18px;
+    font-size: 14px;
     height: 29px;
     line-height: 27px;
     margin: 0;
@@ -10392,9 +10390,10 @@ Social Icons
   .messages-list .messages-item .messages-item-from {
     margin-top: 2px;
     color: #5b5b60;
+    font-size: 14px;
   }
   .messages-list .messages-item .messages-item-time {
-    right: 2px;
+    right: 15px;
     top: 8px;
   }
   .messages-list .messages-item .messages-item-time .text {
@@ -10438,12 +10437,12 @@ Social Icons
     background: #1FBBA6;
   }
   .messages-list .messages-item .messages-item-subject {
-    font-size: 18px;
+    font-size: 14px;
     margin-bottom: 4px;
     color: #5b5b60;
   }
   .messages-list .messages-item .messages-item-content {
-    font-size: 14px;
+    font-size: 12px;
     color: #5b5b60;
     margin-bottom: 4px;
   }
@@ -11356,7 +11355,7 @@ Social Icons
     border-right-color: #c8c7cc !important;
   }
   .wdl-sidebar nav .navbar-title {
-    color: #aaaaaa;
+    color: #8e8d8d;
   }
   .wdl-sidebar nav > ul {
     background: #ffffff !important;
@@ -11373,7 +11372,7 @@ Social Icons
     color: #007aff !important;
   }
   .wdl-sidebar nav > ul > li > a .item-inner {
-    color: #000000 !important;
+    color: #000 !important;
     border-bottom-color: #c8c7cc;
   }
   .wdl-sidebar nav > ul > li.hover {
@@ -11456,7 +11455,7 @@ Social Icons
     color: #007aff !important;
   }
   .wdl-sidebar nav > div > ul > li > a .item-inner {
-    color: #000000 !important;
+    color: #000 !important;
     border-bottom-color: #c8c7cc;
   }
   .wdl-sidebar nav > div > ul > li.hover {

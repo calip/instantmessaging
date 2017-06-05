@@ -106,7 +106,36 @@
               </div>
 
               <!-- start: NAVBAR COLLAPSE -->
-              <div class="navbar-collapse collapse"></div>
+              <div class="navbar-collapse collapse">
+
+                  <ul class="nav navbar-right">
+                      <!-- start: LANGUAGE SWITCHER -->
+                      <li class="dropdown">
+                          <a href class="dropdown-toggle" data-toggle="dropdown">
+                              <i class="icon-font-size"></i> Ukuran Font
+                          </a>
+                          <ul role="menu" class="dropdown-menu dropdown-light fadeInUpShort">
+                              <li>
+                                  <a href="#" class="menu-toggler btn-font-size" data-id="0">
+                                      14 px
+                                  </a>
+                              </li>
+                              <li>
+                                  <a href="#" class="menu-toggler btn-font-size" data-id="1">
+                                      18 px
+                                  </a>
+                              </li>
+                              <li>
+                                  <a href="#" class="menu-toggler btn-font-size" data-id="2">
+                                      24 px
+                                  </a>
+                              </li>
+                          </ul>
+                      </li>
+                      <!-- start: LANGUAGE SWITCHER -->
+                  </ul>
+
+              </div>
           </header>
 
           <!-- main content -->
@@ -379,7 +408,7 @@
     <div class="wrap-options">
       <div class="messages-search">
         <form>
-          <input type="text" placeholder="Cari radiogram..." class="form-control underline">
+            <input type="text" placeholder="Cari radiogram..." @keyup="FindRadiogram()" class="txt-filter-list form-control underline">
         </form>
       </div>
     </div>
