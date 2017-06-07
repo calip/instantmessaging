@@ -1251,6 +1251,7 @@ soyut.radiogram.SendReplyRadiogram = function (params, callback) {
                     owner: listRcp[0],
                     sender: params.sender,
                     receivers: params.receivers,
+                    kreceivers: params.kreceivers,
                     senderWasdal: soyut.Session.role.isWASDAL,
                     cc: params.cc,
                     session: soyut.Session.id,

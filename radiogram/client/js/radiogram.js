@@ -1653,6 +1653,7 @@ soyut.radiogram.renderMessageDetail = function (elSelector, message, state) {
                             owner: res.sender,
                             sender: res.sender,
                             receivers: res.receivers,
+                            kreceivers: res.kreceivers,
                             cc: res.cc,
                             senderName: res.senderName,
                             senderRank: res.senderRank
