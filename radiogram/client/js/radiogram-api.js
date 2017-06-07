@@ -1230,7 +1230,45 @@ soyut.radiogram.SendReplyRadiogram = function (params, callback) {
 
     soyut.clock.getCurrentActualTime({}, function(err, reclock){
 
-        soyut.clock.getSimTime(reclock, function(err, simclock){ 
+        soyut.clock.getSimTime(reclock, function(err, simclock){
+            params.kreceivers.forEach(function (i) {
+                soyut.radiogram.Radiogram_SendReceiver({
+                    panggilan: params.panggilan,
+                    jenis: params.jenis,
+                    nomor: params.nomor,
+                    derajat: params.derajat,
+                    instruksi: params.instruksi,
+                    tandadinas: params.tandadinas,
+                    group: params.group,
+                    classification: params.classification,
+                    Number: params.Number,
+                    cara: params.cara,
+                    paraf: params.paraf,
+                    alamataksi: params.alamataksi,
+                    alamattembusan: params.alamattembusan,
+                    content: params.content,
+                    readStatus: 'unread',
+                    owner: i,
+                    sender: params.sender,
+                    receivers: params.receivers,
+                    kreceivers: params.kreceivers,
+                    senderWasdal: soyut.Session.role.isWASDAL,
+                    cc: params.cc,
+                    session: soyut.Session.id,
+                    senderName: params.senderName,
+                    senderRank: params.senderRank,
+                    composeStatus: 'inbox',
+                    SendTime: reclock,
+                    simtime: simclock.simTime,
+                    createTime: reclock,
+                    parentId: null
+                }, function (err, res2) {
+                    if (!err) {
+                        //callback(res.data.generated_keys[0])
+                    }
+                });
+            });
+
             if(listRcp[0] != undefined){
                 soyut.radiogram.Radiogram_SendReceiver({
                     panggilan: params.panggilan,
