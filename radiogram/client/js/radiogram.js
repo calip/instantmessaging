@@ -1379,6 +1379,13 @@ Vue.component('email-reader', {
                     };
                     return attr;
                 }
+                if(!roleName.isWASDAL) {
+                    var attr;
+                    attr = {
+                        'style': 'display:none'
+                    };
+                    return attr;
+                }
             }
         },
         loadReplyButton: function(val){
