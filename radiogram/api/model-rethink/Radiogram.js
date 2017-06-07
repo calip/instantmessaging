@@ -20,6 +20,9 @@ module.exports = {
     receivers:{
       model:'array'
     },
+    kreceivers:{
+      model:'array'
+    },
     cc:{
       type:'array'
     },
