@@ -1238,11 +1238,11 @@ soyut.radiogram.renderListMessage = function (elSelector, elChildren, message) {
             viewMessageDetail: function (val) {
                 soyut.radiogram.Radiogram_GetById({id: val}, function (err, data) {
                     if(data.readStatus == 'unread' && data.composeStatus == 'inbox'){
-                        if(!roleName.isWASDAL){
+                        //if(!roleName.isWASDAL){
                             soyut.radiogram.Radiogram_UpdateReadStatus({id: data.id}, function (err, res) {
                                 console.log("radigram telah di baca");
                             });
-                        }
+                        // }
                     }
                     soyut.radiogram.renderListMessage('.email-list', '.email-reader', data.composeStatus);
                     soyut.radiogram.renderMessageDetail('.email-reader', val, message);
