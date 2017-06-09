@@ -366,6 +366,7 @@ soyut.radiogram.renderContent = function () {
         $('.messages-list .messages-item .messages-item-content').css({"font-size": fontsize});
         $('.messages-list .messages-item .messages-item-subject').css({"font-size": fontsize});
         $('.messages-list .messages-item .messages-item-from').css({"font-size": fontsize});
+        $('.wdl-main').css({"font-size": fontsize});
         $('textarea, select, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"]').css({"font-size": fontsize});
         $('.btn').css({"font-size": fontsize});
     });
@@ -1229,21 +1230,22 @@ soyut.radiogram.renderListMessage = function (elSelector, elChildren, message) {
                                     stringTime = '<span class="text">dibuat '+moment(i.createTime).format("DD-MM-YYYY h:mm")+'</span>';
 
                                     soyut.radiogram.renderListReceiversDetail(i.receivers, function (receivers) {
-                                        arrData.push({
-                                            id: i.id,
-                                            title: i.title,
-                                            content: i.content,
-                                            SendTime: i.createTime,
-                                            simtime: i.createTime,
-                                            createTime: i.createTime,
-                                            stringTime: stringTime,
-                                            Number: i.Number,
-                                            readStatus: i.readStatus,
-                                            composeStatus: i.composeStatus,
-                                            receiverCallsign: receivers
+                                        soyut.radiogram.renderListKogasDetail(i.kreceivers, function (kreceivers) {
+                                            arrData.push({
+                                                id: i.id,
+                                                title: i.title,
+                                                content: i.content,
+                                                SendTime: i.createTime,
+                                                simtime: i.createTime,
+                                                createTime: i.createTime,
+                                                stringTime: stringTime,
+                                                Number: i.Number,
+                                                readStatus: i.readStatus,
+                                                composeStatus: i.composeStatus,
+                                                receiverCallsign: kreceivers + " " + receivers,
+                                            });
+                                            _this.$set(_this, 'messages', arrData);
                                         });
-                                        _this.$set(_this, 'messages', arrData);
-
                                     });
                                 }
                                 else{
@@ -1252,20 +1254,22 @@ soyut.radiogram.renderListMessage = function (elSelector, elChildren, message) {
                                                         '<span class="text">wa '+ getSimTime +'</span>';
 
                                     soyut.radiogram.renderListReceiversDetail(i.receivers, function (receivers) {
-                                        arrData.push({
-                                            id: i.id,
-                                            title: i.title,
-                                            content: i.content,
-                                            SendTime: i.SendTime,
-                                            simtime: i.simtime,
-                                            createTime: i.createTime,
-                                            stringTime: stringTime,
-                                            Number: i.Number,
-                                            readStatus: i.readStatus,
-                                            composeStatus: i.composeStatus,
-                                            receiverCallsign: receivers
+                                        soyut.radiogram.renderListKogasDetail(i.kreceivers, function (kreceivers) {
+                                            arrData.push({
+                                                id: i.id,
+                                                title: i.title,
+                                                content: i.content,
+                                                SendTime: i.SendTime,
+                                                simtime: i.simtime,
+                                                createTime: i.createTime,
+                                                stringTime: stringTime,
+                                                Number: i.Number,
+                                                readStatus: i.readStatus,
+                                                composeStatus: i.composeStatus,
+                                                receiverCallsign: kreceivers + " " + receivers,
+                                            });
+                                            _this.$set(_this, 'messages', arrData);
                                         });
-                                        _this.$set(_this, 'messages', arrData);
                                     });
                                 }
 
@@ -1517,66 +1521,70 @@ soyut.radiogram.renderMessageDetail = function (elSelector, message, state) {
                     }
                     else{
                         soyut.radiogram.renderSenderObj(data.sender, data.senderWasdal, function (sender) {
-                            soyut.radiogram.renderListReceiversDetail(data.receivers, function (receivers) {
-                                soyut.radiogram.renderListKogasDetail(data.kreceivers, function (kreceivers) {
-                                    soyut.radiogram.renderListReceiversDetail(data.cc, function (cc) {
-                                        soyut.radiogram.renderUserDetail(data.sender, function (user) {
+                            soyut.radiogram.renderSenderGroup(sender.roleGroup, function (senderrg) {
 
-                                            var textArray = data.content.split('\n');
-                                            var renderMessage = "";
-                                            for (var i = 0; i < textArray.length; i++) {
-                                                renderMessage += textArray[i] + "<br />";
-                                            }
+                                soyut.radiogram.renderListReceiversDetail(data.receivers, function (receivers) {
+                                    soyut.radiogram.renderListKogasDetail(data.kreceivers, function (kreceivers) {
+                                        soyut.radiogram.renderListReceiversDetail(data.cc, function (cc) {
+                                            soyut.radiogram.renderUserDetail(data.sender, function (user) {
 
-                                            var curSimTime = "-"
-                                            if (data.simtime != null) {
-                                                var curSimTime = moment(data.simtime).format("DD") + '-' + moment(data.simtime).format("MM") + '-' + soyut.radiogram.yearNumToSimStr(moment(data.simtime).format("YYYY")) + ' ' + moment(data.simtime).format("hh") + ':' + moment(data.simtime).format("mm");
-                                            }
-                                            var curSendTime = "-"
-                                            if (data.SendTime != null) {
-                                                curSendTime = moment(data.SendTime).format('DD-MM-YYYY h:mm');
-                                            }
-                                            var curCreateTime = "-"
-                                            if (data.createTime != null) {
-                                                curCreateTime = moment(data.createTime).format('DD-MM-YYYY h:mm');
-                                            }
+                                                var textArray = data.content.split('\n');
+                                                var renderMessage = "";
+                                                for (var i = 0; i < textArray.length; i++) {
+                                                    renderMessage += textArray[i] + "<br />";
+                                                }
 
-                                            var contents = {
-                                                id: data.id,
-                                                content: data.content,
-                                                tembusan: data.cc,
-                                                renderMessages: renderMessage,
-                                                SendTime: curSendTime,
-                                                simtime: curSimTime,
-                                                createTime: curCreateTime,
-                                                senderRole: data.sender,
-                                                senderCallsign: sender.position,
-                                                senderRank: data.senderRank,
-                                                senderName: data.senderName,
-                                                senderPhoto: "",
-                                                senderSignature: "",
-                                                panggilan: data.panggilan,
-                                                jenis: data.jenis,
-                                                nomor: data.nomor,
-                                                derajat: data.derajat,
-                                                instruksi: data.instruksi,
-                                                klasifikasi: data.classification.toUpperCase(),
-                                                no: data.Number,
-                                                cara: data.cara,
-                                                paraf: data.paraf,
-                                                tandadinas: data.tandadinas,
-                                                group: data.group,
-                                                alamataksi: data.alamataksi,
-                                                alamattembusan: data.alamattembusan,
-                                                composeStatus: data.composeStatus,
-                                                receiverDetail: kreceivers +" "+ receivers,
-                                                ccDetail: cc
-                                            };
+                                                var curSimTime = "-"
+                                                if (data.simtime != null) {
+                                                    var curSimTime = moment(data.simtime).format("DD") + '-' + moment(data.simtime).format("MM") + '-' + soyut.radiogram.yearNumToSimStr(moment(data.simtime).format("YYYY")) + ' ' + moment(data.simtime).format("hh") + ':' + moment(data.simtime).format("mm");
+                                                }
+                                                var curSendTime = "-"
+                                                if (data.SendTime != null) {
+                                                    curSendTime = moment(data.SendTime).format('DD-MM-YYYY h:mm');
+                                                }
+                                                var curCreateTime = "-"
+                                                if (data.createTime != null) {
+                                                    curCreateTime = moment(data.createTime).format('DD-MM-YYYY h:mm');
+                                                }
 
-                                            _this.$set(_this, 'contents', contents);
+                                                var contents = {
+                                                    id: data.id,
+                                                    content: data.content,
+                                                    tembusan: data.cc,
+                                                    renderMessages: renderMessage,
+                                                    SendTime: curSendTime,
+                                                    simtime: curSimTime,
+                                                    createTime: curCreateTime,
+                                                    senderRole: data.sender,
+                                                    senderCallsign: sender.position +" ("+ senderrg.name +")",
+                                                    senderRank: data.senderRank,
+                                                    senderName: data.senderName,
+                                                    senderPhoto: "",
+                                                    senderSignature: "",
+                                                    panggilan: data.panggilan,
+                                                    jenis: data.jenis,
+                                                    nomor: data.nomor,
+                                                    derajat: data.derajat,
+                                                    instruksi: data.instruksi,
+                                                    klasifikasi: data.classification.toUpperCase(),
+                                                    no: data.Number,
+                                                    cara: data.cara,
+                                                    paraf: data.paraf,
+                                                    tandadinas: data.tandadinas,
+                                                    group: data.group,
+                                                    alamataksi: data.alamataksi,
+                                                    alamattembusan: data.alamattembusan,
+                                                    composeStatus: data.composeStatus,
+                                                    receiverDetail: kreceivers + " " + receivers,
+                                                    ccDetail: cc
+                                                };
+
+                                                _this.$set(_this, 'contents', contents);
+                                            });
                                         });
                                     });
                                 });
+
                             });
                         });
                     }
@@ -2302,7 +2310,7 @@ soyut.radiogram.renderComposeSender = function (state, value) {
             html += '<option value="">Cari..</option>';
             res.forEach(function (i) {
                 if(i.isAddress){
-                    html += '<option value="'+ i.id +'">'+ i.position +'</option>';
+                    html += '<option value="'+ i.id +'">'+ i.position + ' (' + roleName.roleGroupName + ')</option>';
                 }
             });
             html +='</select>';
@@ -2324,7 +2332,7 @@ soyut.radiogram.renderComposeSender = function (state, value) {
                             selected = "selected";
                         }
                     }
-                    html += '<option value="'+ i.id +'" '+selected+'>'+ i.position +'</option>';
+                    html += '<option value="'+ i.id +'" '+selected+'>'+ i.position + ' (' + roleName.roleGroupName + ')</option>';
                 }
             });
             html +='</select>';
@@ -2483,10 +2491,8 @@ soyut.radiogram.renderCurrentUser = function () {
 
 soyut.radiogram.renderCurrentWasdal = function () {
     if(soyut.Session.role.roleGroup != null) {
-        soyut.radiogram.renderRoleGroup(function(res){
-            var html = '<h4>' + roleName.position + ' </h4><h4 class="text-small">Wasdal: '+ res.name +'</h4>';
-            $(getInstanceID("detail-user")).html(html);
-        });
+        var html = '<h4>' + roleName.position + ' </h4><h4 class="text-small">Wasdal: '+ roleName.roleGroupName +'</h4>';
+        $(getInstanceID("detail-user")).html(html);
     }
     else {
         alert("Role group belum di assign!");

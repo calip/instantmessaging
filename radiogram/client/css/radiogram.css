@@ -1,6 +1,6 @@
 .wdl-main {
   height: 100%;
-  color: #000;
+  color: #000 !important;
   /* ---------------------------------------------------------------------- */
   /*  Top Navbar
 /* ---------------------------------------------------------------------- */
@@ -7283,7 +7283,7 @@ Social Icons
     border-bottom: 1px solid #ddd; }
   .wdl-main .table > thead > tr > th, .wdl-main .table > tbody > tr > th, .wdl-main .table > tfoot > tr > th, .wdl-main .table > thead > tr > td, .wdl-main .table > tbody > tr > td, .wdl-main .table > tfoot > tr > td {
     border-bottom: 1px solid #e2e2e4;
-    color: #5b5b60 !important;
+    color: #000 !important;
     border-top: none; }
   .wdl-main .table-hover > tbody > tr:hover > td, .wdl-main .table-hover > tbody > tr:hover > th {
     background-color: #e7e7e9; }
@@ -7657,13 +7657,13 @@ Social Icons
     margin-left: 0; }
   .wdl-main .messages-list .messages-item .messages-item-from {
     margin-top: 2px;
-    color: #5b5b60;
+    color: #000;
     font-size: 14px; }
   .wdl-main .messages-list .messages-item .messages-item-time {
     right: 15px;
     top: 8px; }
   .wdl-main .messages-list .messages-item .messages-item-time .text {
-    color: #5b5b60;
+    color: #000;
     font-size: 11px; }
   .wdl-main .messages-list .messages-item .messages-item-time .messages-item-actions {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
@@ -7696,10 +7696,10 @@ Social Icons
   .wdl-main .messages-list .messages-item .messages-item-subject {
     font-size: 14px;
     margin-bottom: 4px;
-    color: #5b5b60; }
+    color: #000; }
   .wdl-main .messages-list .messages-item .messages-item-content {
     font-size: 12px;
-    color: #5b5b60;
+    color: #000;
     margin-bottom: 4px; }
   .wdl-main .messages-list .messages-item .messages-item-preview {
     color: #aeacb4;

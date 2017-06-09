@@ -59,7 +59,7 @@
         transform-origin: -10% -10%;
         position: absolute;
         left: 0px;
-        top: 160px;
+        top: 200px;
     }
 
     #address { width: 250px; height: 150px; float: left; }
@@ -138,18 +138,17 @@
   <div id="kop">Nomor Registrasi</div>
   <div id="header">FORMULIR BERITA</div>
   <div class="rotate">Ruang diluar garis tebal hanya untuk petugas KOMLEK</div>
-  <table id="items">
 
-    <tr>
-      <td style="width: 4%; border-left: 1px solid #ffffff; border-bottom: 1px solid #ffffff;"></td>
+  <table id="items">
+    <tr class="item-row">
+      <td rowspan="13" style="width: 4%; border-right: 1px solid #ffffff; border-left: 1px solid #ffffff; border-bottom: 1px solid #ffffff;border-right: 2px solid #000000;"></td>
       <th colspan="2" style="padding: 5px;border-right: 1px solid #000000; border-left: 1px solid #ffffff; border-bottom: 1px solid #ffffff;">Panggilan (Petunjuk Pa Komlek)</th>
-      <th style="padding: 5px; border-right: 1px solid #000000; border-bottom: 1px solid #ffffff;">Jenis</th>
+      <th style="padding: 5px; border-right: 1px solid #000000; border-bottom: 1px solid #ffffff;">jenis</th>
       <th style="padding: 5px;border-right: 1px solid #000000; border-bottom: 1px solid #ffffff;">nomor</th>
-      <th colspan="2" style="padding: 5px; border-right: 1px solid #000000; border-bottom: 1px solid #ffffff;">Derajat</th>
-      <th colspan="2" style="border-right: 1px solid #ffffff; border-bottom: 1px solid #ffffff;">Instruksi Pengiriman</th>
+      <th colspan="2" style="padding: 5px; border-right: 1px solid #000000; border-bottom: 1px solid #ffffff;">derajat</th>
+      <th colspan="2" style="border-right: 1px solid #ffffff; border-bottom: 1px solid #ffffff;">instruksi Pengiriman</th>
     </tr>
     <tr class="item-row">
-      <td rowspan="12" style="border-right: 1px solid #ffffff; border-left: 1px solid #ffffff; border-bottom: 1px solid #ffffff;border-right: 2px solid #000000;">&nbsp;</td>
       <td colspan="2" class="text-center" style="border-right: 1px solid #000000; padding: 5px;"><label>{{panggilan}}</label></td>
       <td class="text-center" style="border-right: 1px solid #000000; padding: 5px;"><label>{{jenis}}</label></td>
       <td class="text-center" style="border-right: 1px solid #000000; padding: 5px;"><label>{{nomor}}</label></td>
@@ -157,33 +156,39 @@
       <td colspan="2" class="text-center" style="padding: 5px; border-right: 1px solid #ffffff;"><label>{{instruksi}}</label></td>
     </tr>
     <tr class="item-row">
-      <td colspan="6" style="padding: 5px; border-top:2px solid #000000; border-left:2px solid #000000; border-bottom: 1px solid #ffffff; border-right: 2px solid #000000;"><div style="width:100px; float: left">Dari</div> : <label>{{sender_Name}}</label></td>
+      <td style="padding: 5px; border-top:2px solid #000000; border-left:2px solid #000000; border-bottom: 1px solid #ffffff;">Dari</td>
+      <td colspan="5" style="padding: 5px; border-top:2px solid #000000; border-bottom: 1px solid #ffffff; border-right: 2px solid #000000;">{{sender_Name}}</td>
       <th colspan="2" style="padding: 5px; border-right: 1px solid #ffffff; border-bottom: 1px solid #ffffff;">Tanggal/Waktu Pengajuan</th>
     </tr>
     <tr class="item-row">
-      <td colspan="6" style="padding: 5px; border-left:2px solid #000000; border-bottom: 1px solid #ffffff; border-right: 2px solid #000000"><div style="width:100px; float: left">Kepada</div> : <label>{{receiver_Name}}</label></td>
-      <td colspan="2" class="text-center" style="padding: 5px; border-right: 1px solid #ffffff;"><label>{{datetime}}</label></td>
+      <td style="padding: 5px; border-left:2px solid #000000; border-bottom: 1px solid #ffffff;">Kepada</td>
+      <td colspan="5" style="padding: 5px; border-bottom: 1px solid #ffffff; border-right: 2px solid #000000">{{receiver_Name}}</td>
+      <td colspan="2" class="text-center" style="padding: 5px; border-right: 1px solid #ffffff;">{{datetime}}</td>
     </tr>
     <tr class="item-row">
-      <td colspan="6" style="padding: 5px; border-left:2px solid #000000; border-bottom: 1px solid #000; border-right: 2px solid #000000"><div style="width:100px; float: left">Tembusan</div> : <label>{{tembusan_Name}}</label></td>
-      <th class="text-center" style="padding: 5px; border-right: 1px solid #000000; border-bottom: 1px solid #ffffff;">Tanda Dinas</th>
+      <td style="padding: 5px; border-left:2px solid #000000; border-bottom: 1px solid #000;">Tembusan</td>
+      <td colspan="5" style="padding: 5px; border-bottom: 1px solid #000; border-right: 2px solid #000000">{{tembusan_Name}}</td>
+      <th class="text-center" style="padding: 5px; border-right: 1px solid #000000; border-bottom: 1px solid #ffffff;">Tanda dinas</th>
       <th class="text-center" style="padding: 5px; border-right: 1px solid #ffffff; border-bottom: 1px solid #ffffff;">Group</th>
     </tr>
     <tr class="item-row">
-      <td colspan="6" style="padding: 5px;border-left:2px solid #000000; border-bottom: 1px solid #ffffff;  border-top: 1px solid #000000; border-right: 2px solid #000000"><div style="width:100px; float: left">Klasifikasi</div> : <label>{{klasifikasi}}</label></td>
+      <td style="padding: 5px;border-left:2px solid #000000; border-bottom: 1px solid #ffffff;  border-top: 1px solid #000000;">Klasifikasi</td>
+      <td style="padding: 5px; border-bottom: 1px solid #ffffff;  border-top: 1px solid #000000; border-right: 2px solid #000000" colspan="5">{{klasifikasi}}</td>
       <td class="text-center" style="padding: 5px;border-right: 1px solid #000000;border-bottom: 1px solid #ffffff;"><label>{{tanda_dinas}}</label></td>
       <td class="text-center" style="padding: 5px;border-bottom: 1px solid #ffffff; border-right: 1px solid #ffffff;"><label>{{group}}</label></td>
     </tr>
     <tr class="item-row">
-      <td colspan="6" style="padding: 5px;border-left:2px solid #000000; border-right:2px solid #000000; border-bottom: 1px solid #ffffff; "><div style="width:100px; float: left">Nomor</div> : <label>{{number}}</label></td>
+      <td style="padding: 5px;border-left:2px solid #000000; border-bottom: 1px solid #ffffff;">Nomor</td>
+      <td style="padding: 5px; border-right:2px solid #000000; border-bottom: 1px solid #ffffff;" colspan="5">{{number}}</td>
       <td style="padding: 5px;border-right: 1px solid #000000;border-bottom:1px solid #000000;"></td>
-      <td style="padding: 5px;border-bottom:1px solid #000000; border-right: 1px solid #ffffff;"></td>
+      <td style="padding: 5px;border-right: 1px solid #ffffff;border-bottom:1px solid #000000;"></td>
     </tr>
     <tr class="item-row" style="padding: 5px;border-left:2px solid #000000; border-right: 2px solid #ffffff;">
       <td colspan="8" style="height:250px; vertical-align: top; padding: 10px; border-bottom: 1px solid #ffffff;border-left:2px solid #000000;">
         <p style="white-space: pre-wrap;">{{renderMessage}}</p>
       </td>
     </tr>
+
     <tr class="item-row" style="border-left:2px solid #000000; border-right: 2px solid #ffffff;">
       <td colspan="2" style="padding: 10px;border-left:2px solid #000000;"></td>
       <td colspan="6" style="padding: 10px;">
@@ -198,25 +203,27 @@
       <th style="padding: 5px;border-top:2px solid #000000; border-right: 1px solid #ffffff;" class="text-center">Paraf</th>
     </tr>
     <tr class="item-row">
-      <td colspan="2" style="padding: 5px;border-left:2px solid #000000;border-bottom:1px solid #ffffff;"><div style="width:100px; float: left">Nama</div> : <label>{{sendername}}</label></td>
+      <td style="padding: 5px;border-left:2px solid #000000;border-bottom:1px solid #ffffff;">Nama</td>
+      <td style="padding: 5px;border-bottom:1px solid #ffffff;">{{sendername}}</td>
       <td class="text-center" style="padding: 5px;border-left:2px solid #000000;"><label>Aksi</label></td>
-      <td class="text-center" style="padding: 5px;border-left:1px solid #000000;">Tembusan</td>
-      <td class="text-center" style="padding: 5px;border-left:1px solid #000000;border-right:1px solid #000000;">Jam</td>
-      <td class="text-center" style="padding: 5px;border-right:1px solid #000000;">Tanggal</td>
+      <td class="text-center" style="padding: 5px;border-left:1px solid #000000;"><label>Tembusan</label></td>
+      <td class="text-center" style="padding: 5px;border-left:1px solid #000000;border-right:1px solid #000000;"><label>Jam</label></td>
+      <td class="text-center" style="padding: 5px;border-right:1px solid #000000;"><label>Tangggal</label></td>
       <td rowspan="3" class="text-center" style="padding: 5px;border-right: 1px solid #000000; border-bottom: 1px solid #ffffff;"><label>{{cara}}</label></td>
       <td rowspan="3" class="text-center" style="padding: 5px; border-right: 1px solid #ffffff; border-bottom: 1px solid #ffffff;"><label>{{paraf}}</label></td>
     </tr>
     <tr class="item-row">
-      <td colspan="2" style="padding: 5px;border-left:2px solid #000000; border-bottom:1px solid #ffffff; border-bottom: 1px solid #ffffff;"><div style="width:100px; float: left">Pangkat</div> : <label>{{senderpangkat}}</label></td>
+      <td style="padding: 5px;border-left:2px solid #000000; border-bottom:1px solid #ffffff; border-bottom: 1px solid #ffffff;">Pangkat</td>
+      <td style="padding: 5px;border-bottom:1px solid #ffffff; border-bottom: 1px solid #ffffff;">{{senderpangkat}}</td>
       <td rowspan="2" class="text-center" style="padding: 5px;border-left:2px solid #000000; border-bottom: 1px solid #ffffff;"><label>{{alamataksi}}</label></td>
       <td rowspan="2" class="text-center" style="padding: 5px;border-left:1px solid #000000; border-bottom: 1px solid #ffffff;"><label>{{alamattembusan}}</label></td>
       <td rowspan="2" style="border-left:1px solid #000000;padding: 5px;border-right:1px solid #000000; border-bottom: 1px solid #ffffff;" class="text-center"><label>{{jam}}</label></td>
       <td rowspan="2" class="text-center" style="padding: 5px; border-bottom: 1px solid #ffffff;"><label>{{tanggal}}</label></td>
     </tr>
     <tr class="item-row">
-      <td colspan="2" style="border-left:2px solid #000000; vertical-align: top;padding: 5px; border-bottom: 1px solid #ffffff;"><div style="width:100px; float: left">Tanda Tangan</div> <img src="{{tanda_tangan}}" width="100"></td>
+      <td style="vertical-align: top;padding: 5px; border-bottom: 1px solid #ffffff;">Tanda Tangan</td>
+      <td style="vertical-align: top;padding: 5px; border-bottom: 1px solid #ffffff;"><img src="{{tanda_tangan}}" width="100"></td>
     </tr>
-
   </table>
 
 </div>
