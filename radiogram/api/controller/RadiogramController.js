@@ -304,6 +304,7 @@ module.exports = {
                 var sender = reqMsg.data.params.sender;
                 var senderWasdal = reqMsg.data.params.senderWasdal;
                 var receivers = reqMsg.data.params.receivers;
+                var kreceivers = reqMsg.data.params.kreceivers;
                 var cc = reqMsg.data.params.cc;
                 var session = reqMsg.data.params.session;
                 var SendTime = reqMsg.data.params.SendTime;
@@ -334,6 +335,7 @@ module.exports = {
                         senderRank: senderRank,
                         senderWasdal: senderWasdal,
                         receivers: receivers,
+                        kreceivers: kreceivers,
                         cc: cc,
                         composeStatus: 'sent',
                         session: session,
@@ -372,6 +374,7 @@ module.exports = {
                 var sender = reqMsg.data.params.sender;
                 var senderWasdal = reqMsg.data.params.senderWasdal;
                 var receivers = reqMsg.data.params.receivers;
+                var kreceivers = reqMsg.data.params.kreceivers;
                 var cc = reqMsg.data.params.cc;
                 var session = reqMsg.data.params.session;
                 var SendTime = reqMsg.data.params.SendTime;
@@ -404,6 +407,7 @@ module.exports = {
                         senderRank: senderRank,
                         senderWasdal: senderWasdal,
                         receivers: receivers,
+                        kreceivers: kreceivers,
                         cc: cc,
                         composeStatus: composeStatus,
                         session: session,
