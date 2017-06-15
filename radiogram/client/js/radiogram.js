@@ -345,7 +345,6 @@ soyut.radiogram.renderKop = function () {
 };
 
 soyut.radiogram.renderContent = function () {
-
     $(".btn-font-size").click(function (event) {
         var id = $(this).attr("data-id");
         var fontsize = '14px';
@@ -2801,7 +2800,15 @@ soyut.radiogram.init = function () {
     soyut.radiogram.sidebarHandler();
     soyut.radiogram.renderInbox();
     soyut.radiogram.renderContent();
-    
+
+    $('.wdl-main .wdl-sidebar > div nav > ul li > a').css({"font-size": '24px'});
+    $('.wdl-sidebar > div nav > div > ul li > a').css({"font-size": '24px'});
+    $('.button-o').css({"font-size": '24px'});
+    $('.messages-list .messages-item .messages-item-content').css({"font-size": '24px'});
+    $('.messages-list .messages-item .messages-item-subject').css({"font-size": '24px'});
+    $('.messages-list .messages-item .messages-item-from').css({"font-size": '24px'});
+    $('textarea, select, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"]').css({"font-size": '24px'});
+    $('.btn').css({"font-size": '24px'});
     
     $(".derajat").select2({ width: '100%' });
 
