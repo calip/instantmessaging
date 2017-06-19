@@ -1,5 +1,6 @@
 .wdl-main {
   height: 100%;
+  font-size: 24px;
   color: #000 !important;
   /* ---------------------------------------------------------------------- */
   /*  Top Navbar
@@ -978,7 +979,7 @@ Social Icons
     padding: 0; }
   .wdl-main .wdl-sidebar > div nav > div > ul li > a {
     margin-top: -1px !important;
-    font-size: 14px; }
+    font-size: 24px; }
   .wdl-main .wdl-sidebar > div nav > ul li > a:active:focus {
     background: #d5d4d8; }
   .wdl-main .no-touch .wdl-sidebar > div nav > div > ul li > a:hover .item-inner {
@@ -3367,7 +3368,7 @@ Social Icons
     border-radius: 0 0 0 0 !important;
     color: #5b5b60;
     font-family: inherit;
-    font-size: 14px;
+    font-size: 24px;
     line-height: 1.2;
     padding: 5px 4px;
     transition-duration: 0.1s;
@@ -7658,7 +7659,7 @@ Social Icons
   .wdl-main .messages-list .messages-item .messages-item-from {
     margin-top: 2px;
     color: #000;
-    font-size: 14px; }
+    font-size: 24px; }
   .wdl-main .messages-list .messages-item .messages-item-time {
     right: 15px;
     top: 8px; }
@@ -7694,11 +7695,11 @@ Social Icons
   .wdl-main .messages-list .messages-item .messages-item-time .messages-item-actions .tag-icon.green {
     background: #1FBBA6; }
   .wdl-main .messages-list .messages-item .messages-item-subject {
-    font-size: 14px;
+    font-size: 24px;
     margin-bottom: 4px;
     color: #000; }
   .wdl-main .messages-list .messages-item .messages-item-content {
-    font-size: 12px;
+    font-size: 24px;
     color: #000;
     margin-bottom: 4px; }
   .wdl-main .messages-list .messages-item .messages-item-preview {
