@@ -536,41 +536,6 @@ soyut.radiogram.renderContent = function () {
                         }
                         else {
                             klsrcvr.push(mi[0]);
-
-                            soyut.radiogram.SendWasdalRadiogram({
-                                panggilan: panggilan,
-                                jenis: jenis,
-                                nomor: nomor,
-                                derajat: derajat,
-                                instruksi: instruksi,
-                                tandadinas: tandadinas,
-                                group: group,
-                                classification: klasifikasi,
-                                Number: no,
-                                cara: cara,
-                                paraf: paraf,
-                                alamataksi: alamataksi,
-                                alamattembusan: alamattembusan,
-                                content: message,
-                                readStatus: 'unread',
-                                sender: senderRole,
-                                receivers: lsrcvr,
-                                kreceivers: klsrcvr,
-                                cc: tembusan,
-                                senderName: senderName,
-                                senderRank: senderRank,
-                                refsender: refsender
-                            },function(res){
-                                soyut.radiogram.clearInput();
-                                soyut.radiogram.AddRIGRadiogram(res);
-
-                                $(getInstanceID("wdl-email-content")).addClass('disable');
-                                $(getInstanceID("wdl-email-form")).addClass('disable');
-                                $(getInstanceID("wdl-email-view")).addClass('disable');
-                                $(getInstanceID("wdl-kop-form")).addClass('disable');
-                                $(getInstanceID("wdl-email-send")).removeClass('disable');
-                                soyut.radiogram.renderSendingResult('.email-result', res);
-                            });
                         }
                     }
                 });
@@ -729,33 +694,6 @@ soyut.radiogram.renderContent = function () {
                             }
                             else {
                                 klsrcvr.push(mi[0]);
-
-                                soyut.radiogram.DraftWasdalRadiogram({
-                                    panggilan: panggilan,
-                                    jenis: jenis,
-                                    nomor: nomor,
-                                    derajat: derajat,
-                                    instruksi: instruksi,
-                                    tandadinas: tandadinas,
-                                    group: group,
-                                    classification: klasifikasi,
-                                    Number: no,
-                                    cara: cara,
-                                    paraf: paraf,
-                                    alamataksi: alamataksi,
-                                    alamattembusan: alamattembusan,
-                                    content: message,
-                                    readStatus: 'unread',
-                                    sender: senderRole,
-                                    receivers: lsrcvr,
-                                    kreceivers: klsrcvr,
-                                    cc: tembusan,
-                                    senderName: senderName,
-                                    senderRank: senderRank
-                                },function(res){
-                                    soyut.radiogram.clearInput();
-                                    soyut.radiogram.renderDraft();
-                                });
                             }
                         }
                     });

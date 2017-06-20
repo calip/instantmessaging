@@ -711,6 +711,7 @@ function getKey(id) {
 };
 
 soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
+    console.log(params.kreceivers)
     getListPangkogas().then(function(result) {
 
         if(params.refsender != ''){
