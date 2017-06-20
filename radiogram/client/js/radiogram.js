@@ -964,8 +964,8 @@ soyut.radiogram.renderListGroupMessage = function (elSelector, elChildren, messa
         methods: {
             LoadMessages: function () {
                 var _this = this;
-                var getInboxRadiogram = function (owner, sender, callback) {
-                    soyut.radiogram.Radiogram_GetInboxByRoleGroup({id: owner, sender: sender, state: message, field:'SendTime', sort:'desc'}, function (err, data) {
+                var getInboxRadiogram = function (owner, callback) {
+                    soyut.radiogram.Radiogram_GetInboxByRole({id: owner, state: 'inbox', field:'SendTime', sort:'desc'}, function (err, data) {
                         if (!err) {
                             if (data.length > 0) {
                                 if (data != null) {
@@ -976,7 +976,7 @@ soyut.radiogram.renderListGroupMessage = function (elSelector, elChildren, messa
                     });
                 };
                 var getOutboxRadiogram = function (owner, callback) {
-                    soyut.radiogram.Radiogram_GetInboxByRole({id: owner, state: 'inbox', field:'SendTime', sort:'desc'}, function (err, data) {
+                    soyut.radiogram.Radiogram_GetInboxByRole({id: owner, state: 'sent', field:'SendTime', sort:'desc'}, function (err, data) {
                         if (!err) {
                             if (data.length > 0) {
                                 if (data != null) {
@@ -989,28 +989,33 @@ soyut.radiogram.renderListGroupMessage = function (elSelector, elChildren, messa
 
                 if(message == "inbox") {
                     var arrData =[];
-                    soyut.radiogram.renderListGroupWasdalMessages(message, group, function(res){
-                        res.sort(function(a, b) {
-                            var dateA = new Date(a.SendTime),
-                            dateB = new Date(b.SendTime);
-                            return dateB - dateA;
-                        });
-                        res.forEach(function (i) {
-                            var getRealTime = moment(i.simtime).format("DD")+'-'+moment(i.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(i.simtime).format("YYYY"))+' '+moment(i.simtime).format("hh")+':'+moment(i.simtime).format("mm");
-                            var stringTime = '<span class="text">ws '+ moment(i.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
-                                                '<span class="text">wa '+ getRealTime +'</span>';
+                    scenarioService.Role_getRoleByGroup({roleGroup: group}, function (err, rolegroup) {
+                        console.log(rolegroup)
+                        rolegroup.forEach(function (rg) {
+                            getInboxRadiogram(rg.id, function (err, res) {
+                                res.sort(function (a, b) {
+                                    var dateA = new Date(a.SendTime),
+                                        dateB = new Date(b.SendTime);
+                                    return dateB - dateA;
+                                });
+                                res.forEach(function (i) {
+                                    var getRealTime = moment(i.simtime).format("DD") + '-' + moment(i.simtime).format("MM") + '-' + soyut.radiogram.yearNumToSimStr(moment(i.simtime).format("YYYY")) + ' ' + moment(i.simtime).format("hh") + ':' + moment(i.simtime).format("mm");
+                                    var stringTime = '<span class="text">ws ' + moment(i.SendTime).format("DD-MM-YYYY h:mm") + '</span>' +
+                                        '<span class="text">wa ' + getRealTime + '</span>';
 
-                            arrData.push({
-                                id: i.id,
-                                content: i.content,
-                                SendTime: i.SendTime,
-                                simtime: stringTime,
-                                Number: i.Number,
-                                readStatus: i.readStatus,
-                                composeStatus: i.composeStatus,
-                                receiverCallsign: "PANGKOGAS"
+                                    arrData.push({
+                                        id: i.id,
+                                        content: i.content,
+                                        SendTime: i.SendTime,
+                                        simtime: stringTime,
+                                        Number: i.Number,
+                                        readStatus: i.readStatus,
+                                        composeStatus: i.composeStatus,
+                                        receiverCallsign: "PANGKOGAS"
+                                    });
+                                    _this.$set(_this, 'messages', arrData);
+                                });
                             });
-                            _this.$set(_this, 'messages', arrData);
                         });
                     });
                 }
@@ -1144,7 +1149,9 @@ soyut.radiogram.renderListMessage = function (elSelector, elChildren, message) {
                                 return d-c;
                             });
                         }
+                        console.log("cobaaaa");
                         res.forEach(function (vi) {
+
                             if(message == "inbox") {
                                 var getRealTime = moment(vi.simtime).format("DD")+'-'+moment(vi.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(vi.simtime).format("YYYY"))+' '+moment(vi.simtime).format("hh")+':'+moment(vi.simtime).format("mm");
                                 var stringTime = '<span class="text">ws '+ moment(vi.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+

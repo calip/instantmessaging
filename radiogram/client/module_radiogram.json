@@ -2,7 +2,7 @@
   "appId":"soyut.module.app.radiogram",
   "appName":"Radiogram",
   "version":"1.0.0",
-  "isMultiInstance":true,
+  "isMultiInstance":false,
   "icon":"icon.png",
   "startup" : false,
   "isWidget" : false,
