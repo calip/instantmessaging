@@ -23,7 +23,16 @@ module.exports = {
     kreceivers:{
       model:'array'
     },
+    alsreceivers:{
+      model:'array'
+    },
     cc:{
+      type:'array'
+    },
+    kcc:{
+      type:'array'
+    },
+    alscc:{
       type:'array'
     },
     session:{
