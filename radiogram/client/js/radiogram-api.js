@@ -90,6 +90,29 @@ function getListReceivers() {
     });
 }
 
+soyut.radiogram.renderListAlias = function (callback) {
+    getListAlias().then(function (result) {
+        callback(result);
+    });
+};
+
+function getListAlias() {
+    return new Promise (function(resolve,reject){
+        sessionService.Session_getScenario({id: soyut.Session.id},function(err,scenario){
+            scenarioService.scenario_getAliasContent({scenario: scenario}, function (e, data) {
+                if(e){
+                    reject(e);
+                }else{
+                    var dataObj = {};
+                    dataObj = data;
+                    resolve(dataObj);
+                }
+            });
+
+        });
+    });
+}
+
 soyut.radiogram.renderListRole = function (callback) {
     getNonDirectorListRoleGroup().then(function (result) {
         getListRoleAddress(result).then(function(data) {
@@ -193,6 +216,26 @@ soyut.radiogram.renderListGroupWasdalMessages = function (message, group,callbac
 function getGroupRole(group) {
     return new Promise (function(resolve,reject){
         scenarioService.Role_getRoleByGroup({roleGroup: group}, function (e, data) {
+            if(e){
+                reject(e);
+            }else{
+                var dataObj = {};
+                dataObj = data;
+                resolve(dataObj);
+            }
+        });
+    });
+}
+
+soyut.radiogram.renderAliasDetail = function (alias, callback) {
+    getAliasDetail(alias).then(function(result){
+        callback(result)
+    });
+}
+
+function getAliasDetail(alias) {
+    return new Promise (function(resolve,reject){
+        scenarioService.scenario_getAliasDetails({id: alias}, function (e, data) {
             if(e){
                 reject(e);
             }else{

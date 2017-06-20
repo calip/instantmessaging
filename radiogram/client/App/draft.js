@@ -173,39 +173,79 @@ soyut.radiogramdraft.renderContent = function () {
                     lsrcvr.push(mi[0]);
                 }
                 else {
-                    klsrcvr.push(mi[0]);
-                }
-            });
+                    if(mi[1] == "als") {
+                        soyut.radiogram.renderAliasDetail(mi[0], function (i) {
+                            i.roles.forEach(function (m) {
+                                klsrcvr.push(m)
+                            });
 
-            soyut.radiogram.DraftWasdalRadiogram({
-                panggilan: panggilan,
-                jenis: jenis,
-                nomor: nomor,
-                derajat: derajat,
-                instruksi: instruksi,
-                tandadinas: tandadinas,
-                group: group,
-                classification: klasifikasi,
-                Number: no,
-                cara: cara,
-                paraf: paraf,
-                alamataksi: alamataksi,
-                alamattembusan: alamattembusan,
-                content: message,
-                readStatus: 'unread',
-                sender: senderRole,
-                receivers: lsrcvr,
-                kreceivers: klsrcvr,
-                cc: tembusan,
-                senderName: senderName,
-                senderRank: senderRank
-            },function(res){
-                soyut.radiogram.clearInput();
-                $(getInstanceID("wdl-email-content")).addClass('disable');
-                $(getInstanceID("wdl-email-form")).addClass('disable');
-                $(getInstanceID("wdl-email-view")).addClass('disable');
-                $(getInstanceID("wdl-email-send")).removeClass('disable');
-                soyut.radiogramdraft.renderDraft();
+                            soyut.radiogram.DraftWasdalRadiogram({
+                                panggilan: panggilan,
+                                jenis: jenis,
+                                nomor: nomor,
+                                derajat: derajat,
+                                instruksi: instruksi,
+                                tandadinas: tandadinas,
+                                group: group,
+                                classification: klasifikasi,
+                                Number: no,
+                                cara: cara,
+                                paraf: paraf,
+                                alamataksi: alamataksi,
+                                alamattembusan: alamattembusan,
+                                content: message,
+                                readStatus: 'unread',
+                                sender: senderRole,
+                                receivers: lsrcvr,
+                                kreceivers: klsrcvr,
+                                cc: tembusan,
+                                senderName: senderName,
+                                senderRank: senderRank
+                            },function(res){
+                                soyut.radiogram.clearInput();
+                                $(getInstanceID("wdl-email-content")).addClass('disable');
+                                $(getInstanceID("wdl-email-form")).addClass('disable');
+                                $(getInstanceID("wdl-email-view")).addClass('disable');
+                                $(getInstanceID("wdl-email-send")).removeClass('disable');
+                                soyut.radiogramdraft.renderDraft();
+                            });
+                        });
+                    }
+                    else {
+                        klsrcvr.push(mi[0]);
+
+                        soyut.radiogram.DraftWasdalRadiogram({
+                            panggilan: panggilan,
+                            jenis: jenis,
+                            nomor: nomor,
+                            derajat: derajat,
+                            instruksi: instruksi,
+                            tandadinas: tandadinas,
+                            group: group,
+                            classification: klasifikasi,
+                            Number: no,
+                            cara: cara,
+                            paraf: paraf,
+                            alamataksi: alamataksi,
+                            alamattembusan: alamattembusan,
+                            content: message,
+                            readStatus: 'unread',
+                            sender: senderRole,
+                            receivers: lsrcvr,
+                            kreceivers: klsrcvr,
+                            cc: tembusan,
+                            senderName: senderName,
+                            senderRank: senderRank
+                        },function(res){
+                            soyut.radiogram.clearInput();
+                            $(getInstanceID("wdl-email-content")).addClass('disable');
+                            $(getInstanceID("wdl-email-form")).addClass('disable');
+                            $(getInstanceID("wdl-email-view")).addClass('disable');
+                            $(getInstanceID("wdl-email-send")).removeClass('disable');
+                            soyut.radiogramdraft.renderDraft();
+                        });
+                    }
+                }
             });
         }
     });
@@ -526,57 +566,19 @@ soyut.radiogramdraft.renderReceiverWasdal = function (state, value) {
     if(state == 'new'){
         soyut.radiogram.renderListReceivers(function(res){
             soyut.radiogram.renderListRole(function(list) {
-                var html = '<select name="optReceiver[]" multiple id="optReceiver" class="form-control optReceiver">';
-
-                list.forEach(function (r) {
-                    html += '<option value="' + r.id + ':role' + '">' + r.position + ' (' + r.groupName + ')</option>';
-                });
-
-                res.forEach(function (i) {
-                    html += '<option value="' + i.id + ':vrole' + '">' + i.position + '</option>';
-                });
-
-                html += '</select>';
-                html += '<span class="receivers-error help-block valid"></span>';
-                $(getInstanceID("list-receiver")).append(html);
-
-                $('.optReceiver').multiselect({
-                    columns: 1,
-                    placeholder: 'Cari...',
-                    search: true,
-                    selectAll: true
-                });
-            });
-        });
-    }
-    else{
-        if(value != null){
-            soyut.radiogram.renderListReceivers(function(res){
-                soyut.radiogram.renderListRole(function(list) {
+                soyut.radiogram.renderListAlias(function(als) {
                     var html = '<select name="optReceiver[]" multiple id="optReceiver" class="form-control optReceiver">';
 
-                    list.forEach(function (m) {
-                        var selected = "";
-                        if (kvalue != null) {
-                            soyut.radiogram.checkReceivers(kvalue, m.id, function (sel) {
-                                if (sel) {
-                                    selected += "selected";
-                                }
-                            });
-                        }
-                        html += '<option value="' + m.id + ':role' + '" ' + selected + '>' + m.position + ' (' + m.groupName + ')</option>';
+                    als.forEach(function (l) {
+                        html += '<option value="' + l.id + ':als' + '">' + l.name + '</option>';
+                    });
+
+                    list.forEach(function (r) {
+                        html += '<option value="' + r.id + ':role' + '">' + r.position + ' (' + r.groupName + ')</option>';
                     });
 
                     res.forEach(function (i) {
-                        var selected = "";
-                        if (value != null) {
-                            soyut.radiogram.checkReceivers(value, i.id, function (sel) {
-                                if (sel) {
-                                    selected += "selected";
-                                }
-                            });
-                        }
-                        html += '<option value="' + i.id + ':vrole' + '" ' + selected + '>' + i.position + '</option>';
+                        html += '<option value="' + i.id + ':vrole' + '">' + i.position + '</option>';
                     });
 
                     html += '</select>';
@@ -588,6 +590,66 @@ soyut.radiogramdraft.renderReceiverWasdal = function (state, value) {
                         placeholder: 'Cari...',
                         search: true,
                         selectAll: true
+                    });
+                });
+            });
+        });
+    }
+    else{
+        if(value != null){
+            soyut.radiogram.renderListReceivers(function(res){
+                soyut.radiogram.renderListRole(function(list) {
+                    soyut.radiogram.renderListAlias(function(als) {
+
+                        var html = '<select name="optReceiver[]" multiple id="optReceiver" class="form-control optReceiver">';
+
+                        als.forEach(function (l) {
+
+                            var selected = "";
+                            if (kvalue != null) {
+                                soyut.radiogram.checkReceivers(kvalue, l.id, function (sel) {
+                                    if (sel) {
+                                        selected += "selected";
+                                    }
+                                });
+                            }
+                            html += '<option value="' + l.id + ':als' + '" ' + selected + '>' + l.name + '</option>';
+                        });
+                        
+                        list.forEach(function (m) {
+                            var selected = "";
+                            if (kvalue != null) {
+                                soyut.radiogram.checkReceivers(kvalue, m.id, function (sel) {
+                                    if (sel) {
+                                        selected += "selected";
+                                    }
+                                });
+                            }
+                            html += '<option value="' + m.id + ':role' + '" ' + selected + '>' + m.position + ' (' + m.groupName + ')</option>';
+                        });
+
+                        res.forEach(function (i) {
+                            var selected = "";
+                            if (value != null) {
+                                soyut.radiogram.checkReceivers(value, i.id, function (sel) {
+                                    if (sel) {
+                                        selected += "selected";
+                                    }
+                                });
+                            }
+                            html += '<option value="' + i.id + ':vrole' + '" ' + selected + '>' + i.position + '</option>';
+                        });
+
+                        html += '</select>';
+                        html += '<span class="receivers-error help-block valid"></span>';
+                        $(getInstanceID("list-receiver")).append(html);
+
+                        $('.optReceiver').multiselect({
+                            columns: 1,
+                            placeholder: 'Cari...',
+                            search: true,
+                            selectAll: true
+                        });
                     });
                 });
             });
