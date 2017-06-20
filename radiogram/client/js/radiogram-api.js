@@ -1086,52 +1086,6 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
                         });
                     }
 
-                    if(params.alsreceivers.length > 0) {
-                        params.alsreceivers.forEach(function (als) {
-                            soyut.radiogram.renderAliasDetail(als, function (alist) {
-                                alist.roles.forEach(function (dl) {
-                                    soyut.radiogram.Radiogram_SendReceiverWasdal({
-                                        panggilan: params.panggilan,
-                                        jenis: params.jenis,
-                                        nomor: params.nomor,
-                                        derajat: params.derajat,
-                                        instruksi: params.instruksi,
-                                        tandadinas: params.tandadinas,
-                                        group: params.group,
-                                        classification: params.classification,
-                                        Number: params.Number,
-                                        cara: params.cara,
-                                        paraf: params.paraf,
-                                        alamataksi: params.alamataksi,
-                                        alamattembusan: params.alamattembusan,
-                                        content: params.content,
-                                        readStatus: 'unread',
-                                        owner: dl,
-                                        sender: params.sender,
-                                        receivers: params.receivers,
-                                        kreceivers: params.kreceivers,
-                                        alsreceivers: params.alsreceivers,
-                                        senderWasdal: soyut.Session.role.isWASDAL,
-                                        cc: params.cc,
-                                        kcc: params.kcc,
-                                        alscc: params.alscc,
-                                        session: soyut.Session.id,
-                                        senderName: params.senderName,
-                                        senderRank: params.senderRank,
-                                        SendTime: reclock,
-                                        simtime: simclock.simTime,
-                                        createTime: reclock,
-                                        parentId: null,
-                                        composeStatus: 'inbox'
-                                    }, function (err, res) {
-                                        if (!err) {
-                                        }
-                                    });
-                                });
-                            });
-                        });
-                    }
-
                     if(params.kcc.length > 0) {
                         params.kcc.forEach(function (i) {
                             soyut.radiogram.Radiogram_SendReceiverWasdal({
