@@ -1284,7 +1284,6 @@ soyut.radiogram.renderListMessage = function (elSelector, elChildren, message) {
                             });
                         }
                         res.forEach(function (vi) {
-
                             if(message == "inbox") {
                                 var getRealTime = moment(vi.simtime).format("DD")+'-'+moment(vi.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(vi.simtime).format("YYYY"))+' '+moment(vi.simtime).format("hh")+':'+moment(vi.simtime).format("mm");
                                 var stringTime = '<span class="text">ws '+ moment(vi.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
@@ -1363,9 +1362,14 @@ soyut.radiogram.renderListMessage = function (elSelector, elChildren, message) {
                                     });
                                 }
                                 else{
-                                    var getSimTime = moment(vi.simtime).format("DD")+'-'+moment(vi.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(vi.simtime).format("YYYY"))+' '+moment(vi.simtime).format("hh")+':'+moment(vi.simtime).format("mm");
-                                    stringTime = '<span class="text">ws '+ moment(vi.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
-                                                        '<span class="text">wa '+ getSimTime +'</span>';
+                                    if(vi.SendTime != null){
+                                        var getSimTime = moment(vi.simtime).format("DD")+'-'+moment(vi.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(vi.simtime).format("YYYY"))+' '+moment(vi.simtime).format("hh")+':'+moment(vi.simtime).format("mm");
+                                        stringTime = '<span class="text">ws '+ moment(vi.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
+                                            '<span class="text">wa '+ getSimTime +'</span>';
+                                    }
+                                    else {
+                                        stringTime = '<span class="text">dibuat '+moment(vi.createTime).format("DD-MM-YYYY h:mm")+'</span>';
+                                    }
 
                                     soyut.radiogram.renderListReceiversDetail(vi.receivers, function (receivers) {
                                         soyut.radiogram.renderListKogasDetail(vi.kreceivers, function (kreceivers) {
@@ -2031,7 +2035,10 @@ soyut.radiogram.renderMessageDetail = function (elSelector, message, state) {
                             sender: res.sender,
                             receivers: res.receivers,
                             kreceivers: res.kreceivers,
+                            alsreceivers: res.alsreceivers,
                             cc: res.cc,
+                            kcc: res.kcc,
+                            alscc: res.alscc,
                             senderName: res.senderName,
                             senderRank: res.senderRank
                         }, function (results) {
@@ -2059,8 +2066,8 @@ soyut.radiogram.renderMessageDetail = function (elSelector, message, state) {
                 soyut.radiogram.renderCompose(content.id, content.senderRole);
             },
             MoveMessage: function(content){
-                var r = confirm("Anda Yakin?");
-                if (r == true) {
+                function handleOkButton() {
+                    console.log('radiogram Warning, delete radiogram');
                     soyut.radiogram.Radiogram_UpdateToTrash({id: content.id}, function (err, data) {
                         if(!err){
                             switch(state){
@@ -2077,16 +2084,38 @@ soyut.radiogram.renderMessageDetail = function (elSelector, message, state) {
                         }
                     });
                 }
+                function handleCancelButton() {
+                    console.log('radiogram delete cancelled');
+                }
+
+                function handleCloseButton() {
+                    console.log('radiogram box closed');
+                }
+                soyut.radiogram.alert.Alert('Anda yakin untuk menghapus data radiogram ?', true)
+                    .OnClose(handleCloseButton)
+                    .OnCancelButton(handleCancelButton)
+                    .OnOkButton(handleOkButton.bind(this));
             },
             DeleteMessage: function(content){
-                var r = confirm("Anda Yakin?");
-                if (r == true) {
+                function handleOkButton() {
+                    console.log('radiogram Warning, delete radiogram');
                     soyut.radiogram.Radiogram_delete({id: content.id}, function (err, data) {
                         if(!err){
                             soyut.radiogram.renderTrash();
                         }
                     });
                 }
+                function handleCancelButton() {
+                    console.log('radiogram delete cancelled');
+                }
+
+                function handleCloseButton() {
+                    console.log('radiogram box closed');
+                }
+                soyut.radiogram.alert.Alert('Anda yakin untuk menghapus data radiogram ?', true)
+                    .OnClose(handleCloseButton)
+                    .OnCancelButton(handleCancelButton)
+                    .OnOkButton(handleOkButton.bind(this));
             }
         }
     });
