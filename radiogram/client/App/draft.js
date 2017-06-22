@@ -184,18 +184,22 @@ soyut.radiogramdraft.renderContent = function () {
             var lscc = [];
             var klcc = [];
             var alcc = [];
-            tembusan.forEach(function (i) {
-                var mi = i.split(":");
-                if(mi[1] == "vrole"){
-                    lscc.push(mi[0]);
+            if(tembusan != undefined || tembusan != null) {
+                if (tembusan.length > 0) {
+                    tembusan.forEach(function (i) {
+                        var mi = i.split(":");
+                        if (mi[1] == "vrole") {
+                            lscc.push(mi[0]);
+                        }
+                        else if (mi[1] == 'role') {
+                            klcc.push(mi[0]);
+                        }
+                        else {
+                            alcc.push(mi[0]);
+                        }
+                    });
                 }
-                else if(mi[1] == 'role') {
-                    klcc.push(mi[0]);
-                }
-                else {
-                    alcc.push(mi[0]);
-                }
-            });
+            }
 
             soyut.radiogram.DraftWasdalRadiogram({
                 panggilan: panggilan,
@@ -320,23 +324,25 @@ soyut.radiogramdraft.renderListMessage = function (elSelector, elChildren, messa
                         
                         soyut.radiogram.renderListReceiversDetail(vi.receivers, function (receivers) {
                             soyut.radiogram.renderListKogasDetail(vi.kreceivers, function (kreceivers) {
-                                arrData.push({
-                                    id: vi.id,
-                                    title: vi.title,
-                                    content: vi.content,
-                                    SendTime: vi.SendTime,
-                                    simtime: vi.simtime,
-                                    createTime: vi.createTime,
-                                    stringTime: stringTime,
-                                    Number: vi.Number,
-                                    readStatus: vi.readStatus,
-                                    composeStatus: vi.composeStatus,
-                                    receiverCallsign: kreceivers + " " + receivers,
-                                    receiverRank: "",
-                                    receiverName: "",
-                                    receiverPhoto: ""
+                                soyut.radiogram.renderListAliasDetail(vi.alsreceivers, function (alsreceivers) {
+                                    arrData.push({
+                                        id: vi.id,
+                                        title: vi.title,
+                                        content: vi.content,
+                                        SendTime: vi.SendTime,
+                                        simtime: vi.simtime,
+                                        createTime: vi.createTime,
+                                        stringTime: stringTime,
+                                        Number: vi.Number,
+                                        readStatus: vi.readStatus,
+                                        composeStatus: vi.composeStatus,
+                                        receiverCallsign: alsreceivers + " " + kreceivers + " " + receivers,
+                                        receiverRank: "",
+                                        receiverName: "",
+                                        receiverPhoto: ""
+                                    });
+                                    _this.$set(_this, 'messages', arrData);
                                 });
-                                _this.$set(_this, 'messages', arrData);
                             });
                         });
                     });

@@ -1340,23 +1340,25 @@ soyut.radiogram.renderListMessage = function (elSelector, elChildren, message) {
                                     stringTime = '<span class="text">dibuat '+moment(vi.createTime).format("DD-MM-YYYY h:mm")+'</span>';
                                     soyut.radiogram.renderListReceiversDetail(vi.receivers, function (receivers) {
                                         soyut.radiogram.renderListKogasDetail(vi.kreceivers, function (kreceivers) {
-                                            arrData.push({
-                                                id: vi.id,
-                                                title: vi.title,
-                                                content: vi.content,
-                                                SendTime: vi.createTime,
-                                                simtime: vi.createTime,
-                                                createTime: vi.createTime,
-                                                stringTime: stringTime,
-                                                Number: vi.Number,
-                                                readStatus: vi.readStatus,
-                                                composeStatus: vi.composeStatus,
-                                                receiverCallsign: kreceivers + " " + receivers,
-                                                receiverRank: "",
-                                                receiverName: "",
-                                                receiverPhoto: ""
+                                            soyut.radiogram.renderListAliasDetail(vi.alsreceivers, function (alsreceivers) {
+                                                arrData.push({
+                                                    id: vi.id,
+                                                    title: vi.title,
+                                                    content: vi.content,
+                                                    SendTime: vi.createTime,
+                                                    simtime: vi.createTime,
+                                                    createTime: vi.createTime,
+                                                    stringTime: stringTime,
+                                                    Number: vi.Number,
+                                                    readStatus: vi.readStatus,
+                                                    composeStatus: vi.composeStatus,
+                                                    receiverCallsign: alsreceivers +" "+ kreceivers + " " + receivers,
+                                                    receiverRank: "",
+                                                    receiverName: "",
+                                                    receiverPhoto: ""
+                                                });
+                                                _this.$set(_this, 'messages', arrData);
                                             });
-                                            _this.$set(_this, 'messages', arrData);
                                         });
                                     });
                                 }
