@@ -336,7 +336,7 @@ soyut.radiogram.renderCompose = function (referenceId, refSender) {
         $(getInstanceID("ref_sender")).val('');
         soyut.radiogram.renderComposeSender('new', null);
         soyut.radiogram.renderComposeReceivers('new', null, null);
-        soyut.radiogram.renderComposeCC('new', null);
+        soyut.radiogram.renderComposeCC('new', null, null);
     }
 };
 
@@ -503,18 +503,22 @@ soyut.radiogram.renderContent = function () {
                 var lscc = [];
                 var klcc = [];
                 var alcc = [];
-                tembusan.forEach(function (i) {
-                    var mi = i.split(":");
-                    if(mi[1] == "vrole"){
-                        lscc.push(mi[0]);
+                if(tembusan != undefined || tembusan != null) {
+                    if (tembusan.length > 0) {
+                        tembusan.forEach(function (i) {
+                            var mi = i.split(":");
+                            if (mi[1] == "vrole") {
+                                lscc.push(mi[0]);
+                            }
+                            else if (mi[1] == 'role') {
+                                klcc.push(mi[0]);
+                            }
+                            else {
+                                alcc.push(mi[0]);
+                            }
+                        });
                     }
-                    else if(mi[1] == 'role') {
-                        klcc.push(mi[0]);
-                    }
-                    else {
-                        alcc.push(mi[0]);
-                    }
-                });
+                }
 
                 soyut.radiogram.SendWasdalRadiogram({
                     panggilan: panggilan,
@@ -567,6 +571,22 @@ soyut.radiogram.renderContent = function () {
                     }
                 });
 
+                var lscc = [];
+                var klcc = [];
+                if(tembusan != undefined || tembusan != null) {
+                    if (tembusan.length > 0) {
+                        tembusan.forEach(function (i) {
+                            var mi = i.split(":");
+                            if (mi[1] == "vrole") {
+                                lscc.push(mi[0]);
+                            }
+                            else {
+                                klcc.push(mi[0]);
+                            }
+                        });
+                    }
+                }
+
                 soyut.radiogram.SendRadiogram({
                     panggilan: panggilan,
                     jenis: jenis,
@@ -587,7 +607,8 @@ soyut.radiogram.renderContent = function () {
                     sender: senderRole,
                     receivers: lsrcvr,
                     kreceivers: klsrcvr,
-                    cc: tembusan,
+                    cc: lscc,
+                    kcc: klcc,
                     senderName: senderName,
                     senderRank: senderRank
                 }, function (res) {
@@ -683,18 +704,22 @@ soyut.radiogram.renderContent = function () {
                     var lscc = [];
                     var klcc = [];
                     var alcc = [];
-                    tembusan.forEach(function (i) {
-                        var mi = i.split(":");
-                        if(mi[1] == "vrole"){
-                            lscc.push(mi[0]);
+                    if(tembusan != undefined || tembusan != null) {
+                        if (tembusan.length > 0) {
+                            tembusan.forEach(function (i) {
+                                var mi = i.split(":");
+                                if (mi[1] == "vrole") {
+                                    lscc.push(mi[0]);
+                                }
+                                else if (mi[1] == 'role') {
+                                    klcc.push(mi[0]);
+                                }
+                                else {
+                                    alcc.push(mi[0]);
+                                }
+                            });
                         }
-                        else if(mi[1] == 'role') {
-                            klcc.push(mi[0]);
-                        }
-                        else {
-                            alcc.push(mi[0]);
-                        }
-                    });
+                    }
 
                     soyut.radiogram.DraftWasdalRadiogram({
                         panggilan: panggilan,
@@ -739,6 +764,22 @@ soyut.radiogram.renderContent = function () {
                         }
                     });
 
+                    var lscc = [];
+                    var klcc = [];
+                    if(tembusan != undefined || tembusan != null) {
+                        if (tembusan.length > 0) {
+                            tembusan.forEach(function (i) {
+                                var mi = i.split(":");
+                                if (mi[1] == "vrole") {
+                                    lscc.push(mi[0]);
+                                }
+                                else {
+                                    klcc.push(mi[0]);
+                                }
+                            });
+                        }
+                    }
+
                     soyut.radiogram.DraftRadiogram({
                         panggilan: panggilan,
                         jenis: jenis,
@@ -758,7 +799,8 @@ soyut.radiogram.renderContent = function () {
                         sender: senderRole,
                         receivers: lsrcvr,
                         kreceivers: klsrcvr,
-                        cc: tembusan,
+                        cc: lscc,
+                        kcc: klcc,
                         senderName: senderName,
                         senderRank: senderRank
                     },function(res){
@@ -788,18 +830,22 @@ soyut.radiogram.renderContent = function () {
                     var lscc = [];
                     var klcc = [];
                     var alcc = [];
-                    tembusan.forEach(function (i) {
-                        var mi = i.split(":");
-                        if(mi[1] == "vrole"){
-                            lscc.push(mi[0]);
+                    if(tembusan != undefined || tembusan != null) {
+                        if (tembusan.length > 0) {
+                            tembusan.forEach(function (i) {
+                                var mi = i.split(":");
+                                if (mi[1] == "vrole") {
+                                    lscc.push(mi[0]);
+                                }
+                                else if (mi[1] == 'role') {
+                                    klcc.push(mi[0]);
+                                }
+                                else {
+                                    alcc.push(mi[0]);
+                                }
+                            });
                         }
-                        else if(mi[1] == 'role') {
-                            klcc.push(mi[0]);
-                        }
-                        else {
-                            alcc.push(mi[0]);
-                        }
-                    });
+                    }
 
                     soyut.radiogram.renderRadiogramDetail(editId, function(res){
                         soyut.radiogram.UpdateDraftWasdalRadiogram({
@@ -848,6 +894,22 @@ soyut.radiogram.renderContent = function () {
                             }
                         });
 
+                        var lscc = [];
+                        var klcc = [];
+                        if(tembusan != undefined || tembusan != null) {
+                            if (tembusan.length > 0) {
+                                tembusan.forEach(function (i) {
+                                    var mi = i.split(":");
+                                    if (mi[1] == "vrole") {
+                                        lscc.push(mi[0]);
+                                    }
+                                    else {
+                                        klcc.push(mi[0]);
+                                    }
+                                });
+                            }
+                        }
+
                         soyut.radiogram.UpdateDraftRadiogram({
                             id: res.id,
                             panggilan: panggilan,
@@ -868,7 +930,8 @@ soyut.radiogram.renderContent = function () {
                             sender: senderRole,
                             receivers: lsrcvr,
                             kreceivers: klsrcvr,
-                            cc: tembusan,
+                            cc: lscc,
+                            kcc: klcc,
                             senderName: senderName,
                             senderRank: senderRank
                         },function(res){
@@ -1829,61 +1892,63 @@ soyut.radiogram.renderMessageDetail = function (elSelector, message, state) {
                                     soyut.radiogram.renderListReceiversDetail(data.receivers, function (receivers) {
                                         soyut.radiogram.renderListKogasDetail(data.kreceivers, function (kreceivers) {
                                             soyut.radiogram.renderListReceiversDetail(data.cc, function (cc) {
-                                                // soyut.radiogram.renderUserDetail(data.sender, function (user) {
+                                                soyut.radiogram.renderListKogasDetail(data.kcc, function (kcc) {
+                                                    // soyut.radiogram.renderUserDetail(data.sender, function (user) {
 
-                                                var textArray = data.content.split('\n');
-                                                var renderMessage = "";
-                                                for (var i = 0; i < textArray.length; i++) {
-                                                    renderMessage += textArray[i] + "<br />";
-                                                }
+                                                    var textArray = data.content.split('\n');
+                                                    var renderMessage = "";
+                                                    for (var i = 0; i < textArray.length; i++) {
+                                                        renderMessage += textArray[i] + "<br />";
+                                                    }
 
-                                                var curSimTime = "-"
-                                                if (data.simtime != null) {
-                                                    var curSimTime = moment(data.simtime).format("DD") + '-' + moment(data.simtime).format("MM") + '-' + soyut.radiogram.yearNumToSimStr(moment(data.simtime).format("YYYY")) + ' ' + moment(data.simtime).format("hh") + ':' + moment(data.simtime).format("mm");
-                                                }
-                                                var curSendTime = "-"
-                                                if (data.SendTime != null) {
-                                                    curSendTime = moment(data.SendTime).format('DD-MM-YYYY h:mm');
-                                                }
-                                                var curCreateTime = "-"
-                                                if (data.createTime != null) {
-                                                    curCreateTime = moment(data.createTime).format('DD-MM-YYYY h:mm');
-                                                }
+                                                    var curSimTime = "-"
+                                                    if (data.simtime != null) {
+                                                        var curSimTime = moment(data.simtime).format("DD") + '-' + moment(data.simtime).format("MM") + '-' + soyut.radiogram.yearNumToSimStr(moment(data.simtime).format("YYYY")) + ' ' + moment(data.simtime).format("hh") + ':' + moment(data.simtime).format("mm");
+                                                    }
+                                                    var curSendTime = "-"
+                                                    if (data.SendTime != null) {
+                                                        curSendTime = moment(data.SendTime).format('DD-MM-YYYY h:mm');
+                                                    }
+                                                    var curCreateTime = "-"
+                                                    if (data.createTime != null) {
+                                                        curCreateTime = moment(data.createTime).format('DD-MM-YYYY h:mm');
+                                                    }
 
-                                                var contents = {
-                                                    id: data.id,
-                                                    content: data.content,
-                                                    tembusan: data.cc,
-                                                    renderMessages: renderMessage,
-                                                    SendTime: curSendTime,
-                                                    simtime: curSimTime,
-                                                    createTime: curCreateTime,
-                                                    senderRole: data.sender,
-                                                    senderCallsign: sender.position +" ("+ senderrg.name +")",
-                                                    senderRank: data.senderRank,
-                                                    senderName: data.senderName,
-                                                    senderPhoto: "",
-                                                    senderSignature: "",
-                                                    panggilan: data.panggilan,
-                                                    jenis: data.jenis,
-                                                    nomor: data.nomor,
-                                                    derajat: data.derajat,
-                                                    instruksi: data.instruksi,
-                                                    klasifikasi: data.classification.toUpperCase(),
-                                                    no: data.Number,
-                                                    cara: data.cara,
-                                                    paraf: data.paraf,
-                                                    tandadinas: data.tandadinas,
-                                                    group: data.group,
-                                                    alamataksi: data.alamataksi,
-                                                    alamattembusan: data.alamattembusan,
-                                                    composeStatus: data.composeStatus,
-                                                    receiverDetail: kreceivers + " " + receivers,
-                                                    ccDetail: cc
-                                                };
+                                                    var contents = {
+                                                        id: data.id,
+                                                        content: data.content,
+                                                        tembusan: data.cc,
+                                                        renderMessages: renderMessage,
+                                                        SendTime: curSendTime,
+                                                        simtime: curSimTime,
+                                                        createTime: curCreateTime,
+                                                        senderRole: data.sender,
+                                                        senderCallsign: sender.position + " (" + senderrg.name + ")",
+                                                        senderRank: data.senderRank,
+                                                        senderName: data.senderName,
+                                                        senderPhoto: "",
+                                                        senderSignature: "",
+                                                        panggilan: data.panggilan,
+                                                        jenis: data.jenis,
+                                                        nomor: data.nomor,
+                                                        derajat: data.derajat,
+                                                        instruksi: data.instruksi,
+                                                        klasifikasi: data.classification.toUpperCase(),
+                                                        no: data.Number,
+                                                        cara: data.cara,
+                                                        paraf: data.paraf,
+                                                        tandadinas: data.tandadinas,
+                                                        group: data.group,
+                                                        alamataksi: data.alamataksi,
+                                                        alamattembusan: data.alamattembusan,
+                                                        composeStatus: data.composeStatus,
+                                                        receiverDetail: kreceivers + " " + receivers,
+                                                        ccDetail: kcc + " " + cc
+                                                    };
 
-                                                _this.$set(_this, 'contents', contents);
-                                                // });
+                                                    _this.$set(_this, 'contents', contents);
+                                                    // });
+                                                });
                                             });
                                         });
                                     });
@@ -2386,7 +2451,7 @@ soyut.radiogram.EditMessage = function(val){
         else{
             soyut.radiogram.renderComposeSender('edit', res.sender);
             soyut.radiogram.renderComposeReceivers('edit', res.receivers, res.kreceivers);
-            soyut.radiogram.renderComposeCC('edit', res.cc);
+            soyut.radiogram.renderComposeCC('edit', res.cc, res.kcc);
         }
 
         $(getInstanceID("editId")).val(res.id);
@@ -2881,47 +2946,78 @@ soyut.radiogram.renderComposeReceivers = function (state, value, kvalue) {
     }
 };
 
-soyut.radiogram.renderComposeCC = function (state, value) {
+soyut.radiogram.renderComposeCC = function (state, value, kvalue) {
     $(getInstanceID("list-tembusan")).html('');
     if(state == 'new'){
         soyut.radiogram.renderListReceivers(function(res){
-            var html = '<select name="optCC[]" multiple id="optCC" class="optCC">';
-            res.forEach(function (i) {
-                html += '<option value="'+ i.id +'">'+ i.position +'</option>';
-            });
-            html +='</select>';
-            $(getInstanceID("list-tembusan")).append(html);
+            soyut.radiogram.renderListRole(function(list) {
+                soyut.radiogram.renderGroupAddress(roleName.roleGroup, function (gprole) {
+                    var html = '<select name="optCC[]" multiple id="optCC" class="optCC">';
 
-            $('.optCC').multiselect({
-                columns: 1,
-                placeholder: 'Cari...',
-                search: true,
-                selectAll: true
+                    list.forEach(function (r) {
+                        if (r.id != gprole[0].id) {
+                            html += '<option value="' + r.id + ':role' + '">' + r.position + ' (' + r.groupName + ')</option>';
+                        }
+                    });
+
+                    res.forEach(function (i) {
+                        html += '<option value="' + i.id + ':vrole' + '">' + i.position + '</option>';
+                    });
+                    html += '</select>';
+                    $(getInstanceID("list-tembusan")).append(html);
+
+                    $('.optCC').multiselect({
+                        columns: 1,
+                        placeholder: 'Cari...',
+                        search: true,
+                        selectAll: true
+                    });
+                });
             });
         });
     }
     else{
         soyut.radiogram.renderListReceivers(function(res){
-            var html = '<select name="optCC[]" multiple id="optCC" class="optCC">';
-            res.forEach(function (i) {
-                var selected = "";
-                if(value != null){
-                    soyut.radiogram.checkReceivers(value, i.id, function(sel){
-                        if(sel){
-                            selected += "selected";
+            soyut.radiogram.renderListRole(function(list) {
+                soyut.radiogram.renderGroupAddress(roleName.roleGroup, function (gprole) {
+
+                    var html = '<select name="optCC[]" multiple id="optCC" class="optCC">';
+
+                    list.forEach(function (m) {
+                        var selected = "";
+                        if (kvalue != null) {
+                            soyut.radiogram.checkReceivers(kvalue, m.id, function (sel) {
+                                if (sel) {
+                                    selected += "selected";
+                                }
+                            });
+                        }
+                        if (m.id != gprole[0].id) {
+                            html += '<option value="' + m.id + ':role' + '" ' + selected + '>' + m.position + ' (' + m.groupName + ')</option>';
                         }
                     });
-                }
-                html += '<option value="'+ i.id +'" '+selected+'>'+ i.position +'</option>';
-            });
-            html +='</select>';
-            $(getInstanceID("list-tembusan")).append(html);
 
-            $('.optCC').multiselect({
-                columns: 1,
-                placeholder: 'Cari...',
-                search: true,
-                selectAll: true
+                    res.forEach(function (i) {
+                        var selected = "";
+                        if (value != null) {
+                            soyut.radiogram.checkReceivers(value, i.id, function (sel) {
+                                if (sel) {
+                                    selected += "selected";
+                                }
+                            });
+                        }
+                        html += '<option value="' + i.id + ':vrole' + '" ' + selected + '>' + i.position + '</option>';
+                    });
+                    html += '</select>';
+                    $(getInstanceID("list-tembusan")).append(html);
+
+                    $('.optCC').multiselect({
+                        columns: 1,
+                        placeholder: 'Cari...',
+                        search: true,
+                        selectAll: true
+                    });
+                });
             });
         });
     }

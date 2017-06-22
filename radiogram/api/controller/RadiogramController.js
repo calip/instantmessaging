@@ -170,7 +170,10 @@ module.exports = {
                 var senderWasdal = reqMsg.data.params.senderWasdal;
                 var receivers = reqMsg.data.params.receivers;
                 var kreceivers = reqMsg.data.params.kreceivers;
+                var alsreceivers = reqMsg.data.params.alsreceivers;
                 var cc = reqMsg.data.params.cc;
+                var kcc = reqMsg.data.params.kcc;
+                var alscc = reqMsg.data.params.alscc;
                 var session = reqMsg.data.params.session;
                 var SendTime = reqMsg.data.params.SendTime;
                 var simtime = reqMsg.data.params.simtime;
@@ -203,7 +206,10 @@ module.exports = {
                         senderWasdal: senderWasdal,
                         receivers: receivers,
                         kreceivers: kreceivers,
+                        alsreceivers: alsreceivers,
                         cc: cc,
+                        kcc: kcc,
+                        alscc: alscc,
                         composeStatus: composeStatus,
                         session: session,
                         SendTime: SendTime,
@@ -242,7 +248,10 @@ module.exports = {
                 var senderWasdal = reqMsg.data.params.senderWasdal;
                 var receivers = reqMsg.data.params.receivers;
                 var kreceivers = reqMsg.data.params.kreceivers;
+                var alsreceivers = reqMsg.data.params.alsreceivers;
                 var cc = reqMsg.data.params.cc;
+                var kcc = reqMsg.data.params.kcc;
+                var alscc = reqMsg.data.params.alscc;
                 var session = reqMsg.data.params.session;
                 var SendTime = reqMsg.data.params.SendTime;
                 var simtime = reqMsg.data.params.simtime;
@@ -273,7 +282,10 @@ module.exports = {
                         senderWasdal: senderWasdal,
                         receivers: receivers,
                         kreceivers: kreceivers,
+                        alsreceivers: alsreceivers,
                         cc: cc,
+                        kcc: kcc,
+                        alscc: alscc,
                         composeStatus: 'sent',
                         session: session,
                         SendTime: SendTime,
