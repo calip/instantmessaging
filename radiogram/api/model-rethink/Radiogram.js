@@ -70,6 +70,9 @@ module.exports = {
       enum:['read','unread'],
       defaultsTo:'unread'
     },
+    materi:{
+      type:'array'
+    },
     createTime:{
       type:'datetime'
     },

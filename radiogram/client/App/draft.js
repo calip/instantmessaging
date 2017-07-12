@@ -93,6 +93,7 @@ soyut.radiogramdraft.renderCompose = function () {
         $(getInstanceID("btnSubmitMessage")).css({display:'none'});
     }
 
+    soyut.radiogramdraft.renderMateriWasdal('new', null);
     soyut.radiogramdraft.renderSenderWasdal('new', null);
     soyut.radiogramdraft.renderReceiverWasdal('new', null);
     soyut.radiogramdraft.renderCCWasdal('new', null);
@@ -117,6 +118,7 @@ soyut.radiogramdraft.renderContent = function () {
         var senderRole = $(".optSender").val();
         var receiverRole = $(".optReceiver").val();
         var tembusan = $(".optCC").val();
+        var materi = $(".optMateri").val();
         var tandadinas = $(getInstanceID("tandadinas")).val();
         var group = $(getInstanceID("group")).val();
         var klasifikasi = $(getInstanceID("klasifikasi")).val();
@@ -210,6 +212,7 @@ soyut.radiogramdraft.renderContent = function () {
                 tandadinas: tandadinas,
                 group: group,
                 classification: klasifikasi,
+                materi: materi,
                 Number: no,
                 cara: cara,
                 paraf: paraf,
@@ -414,6 +417,16 @@ soyut.radiogramdraft.renderMessageDetail = function (elSelector, message, state)
             LoadMessages: function () {
                 var _this = this;
                 soyut.radiogram.renderMessageObj(message, function(data){
+                    var arrMateri = [];
+                    if(data.materi != null ) {
+                        data.materi.forEach(function (i) {
+                            arrMateri = arrMateri + i + ", ";
+                        });
+                    }
+                    else {
+                        arrMateri = '';
+                    }
+
                     soyut.radiogram.renderSenderObj(data.sender, data.senderWasdal, function (sender) {
                         if(data.senderWasdal) {
                             soyut.radiogram.renderListReceiversDetail(data.receivers, function (receivers) {
@@ -438,6 +451,7 @@ soyut.radiogramdraft.renderMessageDetail = function (elSelector, message, state)
                                                         senderCallsign: sender.position,
                                                         senderRank: data.senderRank,
                                                         senderName: data.senderName,
+                                                        materi: arrMateri,
                                                         senderPhoto: "",
                                                         senderSignature: "",
                                                         panggilan: data.panggilan,
@@ -488,6 +502,7 @@ soyut.radiogramdraft.renderMessageDetail = function (elSelector, message, state)
                                                 senderCallsign: sender.position + " (" + senderrg.name + ")",
                                                 senderRank: data.senderRank,
                                                 senderName: data.senderName,
+                                                materi: arrMateri,
                                                 senderPhoto: "",
                                                 senderSignature: "",
                                                 panggilan: data.panggilan,
@@ -552,6 +567,55 @@ soyut.radiogramdraft.renderMessageDetail = function (elSelector, message, state)
             }
         }
     });
+};
+
+soyut.radiogram.renderMateriWasdal = function (state, value) {
+    $(getInstanceID("list-materi")).html('');
+    if(state == 'new'){
+        var html = '<select name="optMateri[]" multiple id="optMateri" class="form-control optMateri">';
+        html += '<option value="intelijen">INTELIJEN</option>';
+        html += '<option value="operasi">OPERASI</option>';
+        html += '<option value="personel">PERSONEL</option>';
+        html += '<option value="logistik">LOGISTIK</option>';
+        html += '<option value="komlek">KOMLEK</option>';
+        html += '</select>';
+        $(getInstanceID("list-materi")).append(html);
+
+        $('.optMateri').multiselect({
+            columns: 1,
+            placeholder: 'Cari...',
+            search: true,
+            selectAll: true
+        });
+    }
+    else {
+        if(value != null){
+            var html = '<select name="optMateri[]" multiple id="optMateri" class="form-control optMateri">';
+
+            var listMateri = ["intelijen", "operasi", "personel", "logistik", "komlek"];
+            listMateri.forEach(function (m) {
+                var selected = "";
+                if (value != null) {
+                    soyut.radiogram.checkMateriSelected(value, m, function (sel) {
+                        if (sel) {
+                            selected += "selected";
+                        }
+                    });
+                }
+                html += '<option value="' + m + '" ' + selected + '>' + m.toUpperCase() + '</option>';
+            });
+
+            html += '</select>';
+            $(getInstanceID("list-materi")).append(html);
+
+            $('.optMateri').multiselect({
+                columns: 1,
+                placeholder: 'Cari...',
+                search: true,
+                selectAll: true
+            });
+        }
+    }
 };
 
 soyut.radiogramdraft.renderReceiverWasdal = function (state, value) {

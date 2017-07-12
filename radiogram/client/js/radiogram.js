@@ -328,12 +328,14 @@ soyut.radiogram.renderCompose = function (referenceId, refSender) {
 
     if(roleName.isWASDAL){
         $(getInstanceID("ref_sender")).val(refSender);
+        soyut.radiogram.renderMateriWasdal('new', null);
         soyut.radiogram.renderSenderWasdal('new', null);
         soyut.radiogram.renderReceiverWasdal('new', null, null, null);
         soyut.radiogram.renderCCWasdal('new', null, null, null);
     }
     else{
         $(getInstanceID("ref_sender")).val('');
+        soyut.radiogram.renderMateri('new', null);
         soyut.radiogram.renderComposeSender('new', null);
         soyut.radiogram.renderComposeReceivers('new', null, null);
         soyut.radiogram.renderComposeCC('new', null, null);
@@ -435,6 +437,7 @@ soyut.radiogram.renderContent = function () {
         var senderRole = $(".optSender").val();
         var receiverRole = $(".optReceiver").val();
         var tembusan = $(".optCC").val();
+        var materi = $(".optMateri").val();
         var tandadinas = $(getInstanceID("tandadinas")).val();
         var group = $(getInstanceID("group")).val();
         var klasifikasi = $(getInstanceID("klasifikasi")).val();
@@ -529,6 +532,7 @@ soyut.radiogram.renderContent = function () {
                     tandadinas: tandadinas,
                     group: group,
                     classification: klasifikasi,
+                    materi: materi,
                     Number: no,
                     cara: cara,
                     paraf: paraf,
@@ -596,6 +600,7 @@ soyut.radiogram.renderContent = function () {
                     tandadinas: tandadinas,
                     group: group,
                     classification: klasifikasi,
+                    materi: materi,
                     Number: no,
                     cara: cara,
                     paraf: paraf,
@@ -635,6 +640,7 @@ soyut.radiogram.renderContent = function () {
         var senderRole = $(".optSender").val();
         var receiverRole = $(".optReceiver").val();
         var tembusan = $(".optCC").val();
+        var materi = $(".optMateri").val();
         var tandadinas = $(getInstanceID("tandadinas")).val();
         var group = $(getInstanceID("group")).val();
         var klasifikasi = $(getInstanceID("klasifikasi")).val();
@@ -730,6 +736,7 @@ soyut.radiogram.renderContent = function () {
                         tandadinas: tandadinas,
                         group: group,
                         classification: klasifikasi,
+                        materi: materi,
                         Number: no,
                         cara: cara,
                         paraf: paraf,
@@ -789,6 +796,7 @@ soyut.radiogram.renderContent = function () {
                         tandadinas: tandadinas,
                         group: group,
                         classification: klasifikasi,
+                        materi: materi,
                         Number: no,
                         cara: cara,
                         paraf: paraf,
@@ -858,6 +866,7 @@ soyut.radiogram.renderContent = function () {
                             tandadinas: tandadinas,
                             group: group,
                             classification: klasifikasi,
+                            materi: materi,
                             Number: no,
                             cara: cara,
                             paraf: paraf,
@@ -920,6 +929,7 @@ soyut.radiogram.renderContent = function () {
                             tandadinas: tandadinas,
                             group: group,
                             classification: klasifikasi,
+                            materi: materi,
                             Number: no,
                             cara: cara,
                             paraf: paraf,
@@ -1702,6 +1712,15 @@ soyut.radiogram.renderMessageDetail = function (elSelector, message, state) {
                 var _this = this;
 
                 soyut.radiogram.renderMessageObj(message, function(data){
+                    var arrMateri = [];
+                    if(data.materi != null ) {
+                        data.materi.forEach(function (i) {
+                            arrMateri = arrMateri + i + ", ";
+                        });
+                    }
+                    else {
+                        arrMateri = '';
+                    }
 
                     if (roleName.isWASDAL) {
                         soyut.radiogram.renderSenderObj(data.sender, data.senderWasdal, function (sender) {
@@ -1736,6 +1755,7 @@ soyut.radiogram.renderMessageDetail = function (elSelector, message, state) {
                                                             senderCallsign: sender.position,
                                                             senderRank: data.senderRank,
                                                             senderName: data.senderName,
+                                                            materi: arrMateri,
                                                             senderPhoto: "",
                                                             senderSignature: "",
                                                             panggilan: data.panggilan,
@@ -1794,6 +1814,7 @@ soyut.radiogram.renderMessageDetail = function (elSelector, message, state) {
                                                         senderCallsign: sender.position +" ("+ senderrg.name +")",
                                                         senderRank: data.senderRank,
                                                         senderName: data.senderName,
+                                                        materi: arrMateri,
                                                         senderPhoto: "",
                                                         senderSignature: "",
                                                         panggilan: data.panggilan,
@@ -1864,6 +1885,7 @@ soyut.radiogram.renderMessageDetail = function (elSelector, message, state) {
                                                             senderCallsign: sender.position,
                                                             senderRank: data.senderRank,
                                                             senderName: data.senderName,
+                                                            materi: arrMateri,
                                                             senderPhoto: "",
                                                             senderSignature: "",
                                                             panggilan: data.panggilan,
@@ -1932,6 +1954,7 @@ soyut.radiogram.renderMessageDetail = function (elSelector, message, state) {
                                                         senderCallsign: sender.position + " (" + senderrg.name + ")",
                                                         senderRank: data.senderRank,
                                                         senderName: data.senderName,
+                                                        materi: arrMateri,
                                                         senderPhoto: "",
                                                         senderSignature: "",
                                                         panggilan: data.panggilan,
@@ -2024,6 +2047,7 @@ soyut.radiogram.renderMessageDetail = function (elSelector, message, state) {
                             tandadinas: res.tandadinas,
                             group: res.group,
                             classification: res.classification,
+                            materi: res.materi,
                             Number: res.Number,
                             cara: res.cara,
                             paraf: res.paraf,
@@ -2158,6 +2182,15 @@ soyut.radiogram.renderReplyMessage = function (elSelector, message) {
                 var _this = this;
 
                 soyut.radiogram.renderMessageObj(message, function(data){
+                    var arrMateri = [];
+                    if(data.materi != null ) {
+                        data.materi.forEach(function (i) {
+                            arrMateri = arrMateri + i + ", ";
+                        });
+                    }
+                    else {
+                        arrMateri = '';
+                    }
 
                     if (roleName.isWASDAL) {
                         soyut.radiogram.renderSenderObj(data.sender, data.senderWasdal, function (sender) {
@@ -2190,6 +2223,7 @@ soyut.radiogram.renderReplyMessage = function (elSelector, message) {
                                                 senderCallsign: sender.position + " (" + senderrg.name + ")",
                                                 senderRank: data.senderRank,
                                                 senderName: data.senderName,
+                                                materi: arrMateri,
                                                 senderPhoto: "",
                                                 senderSignature: "",
                                                 panggilan: data.panggilan,
@@ -2255,6 +2289,7 @@ soyut.radiogram.renderReplyMessage = function (elSelector, message) {
                                                 senderCallsign: sender.position,
                                                 senderRank: data.senderRank,
                                                 senderName: data.senderName,
+                                                materi: arrMateri,
                                                 senderPhoto: "",
                                                 senderSignature: "",
                                                 panggilan: data.panggilan,
@@ -2316,6 +2351,7 @@ soyut.radiogram.renderReplyMessage = function (elSelector, message) {
                                                     senderCallsign: sender.position + " (" + senderrg.name + ")",
                                                     senderRank: data.senderRank,
                                                     senderName: data.senderName,
+                                                    materi: arrMateri,
                                                     senderPhoto: "",
                                                     senderSignature: "",
                                                     panggilan: data.panggilan,
@@ -2381,13 +2417,16 @@ soyut.radiogram.renderReplyMessage = function (elSelector, message) {
 
 soyut.radiogram.SavePdf = function(val){
     soyut.radiogram.RenderPrinterPDF(val, function(res){
-        soyut.radiogram.SaveFilePDF(res);
+        soyut.radiogram.SaveFilePDF(res, function (err, result) {
+            soyut.radiogram.Show_PdfViewer(result);
+        });
     });
 }
 
-soyut.radiogram.SaveFilePDF = function(val) {
+soyut.radiogram.SaveFilePDF = function(val, callback) {
     var dataurl = "https://"+soyut.radiogram.origin+"/data/"+val;
     var curUrl = soyut.radiogram.origin.split(':');
+    var storageServer = 'storage.soyut';
 
     function getFile(url, callback) {
         var xhr = new XMLHttpRequest();
@@ -2408,7 +2447,7 @@ soyut.radiogram.SaveFilePDF = function(val) {
     function saveFileToSystem(targetFolder){
         soyut.storage.getStorageKeyAsync({userId: fileSystem.userid}).then(function(storageKey) {
             var storagePath = targetFolder + "/" +val;
-            var fileUrl = 'https://'+ curUrl[0] +':5454/storage/' + storageKey + '/' + storagePath;
+            var fileUrl = 'https://'+ storageServer +':5454/storage/' + storageKey + storagePath;
 
             function getPosition(str, m, i) { return str.split(m, i).join(m).length; }
 
@@ -2422,7 +2461,8 @@ soyut.radiogram.SaveFilePDF = function(val) {
                     path: storagePath,
                     dataBuffer: dataBuffer
                 }).then(function() {
-                    alert("File PDF telah berhasil di simpan ke file browser!")
+                    console.log("File PDF telah berhasil di simpan ke file browser!");
+                    callback(false, fileUrl);
                 });
             });
         });
@@ -2446,8 +2486,23 @@ soyut.radiogram.SaveFilePDF = function(val) {
 };
 
 soyut.radiogram.PrintPDF = function(val){
-    soyut.radiogram.RenderPrinterPDF(val, function(res){
-        soyut.radiogram.Show_PdfViewer(res);
+    $(getInstanceID('printerAlertModal')).modal();
+    $(getInstanceID('printerAlertModal')).appendTo(".wdl-main");
+    $('.modal-backdrop').css("z-index", "-1");
+    $(getInstanceID("btn-print-radiogram")).click(function(event) {
+        soyut.radiogram.RenderPrinterPDF(val, function(res){
+            soyut.radiogram.SaveFilePDF(res, function (err, result) {
+                console.log(result);
+                soyut.printserver.print({
+                    docURL : result,
+                    origin : 'Radiogram',
+                    provider : 'Uray-IPP-Printer',
+                    printer : 'EPSON L850 Series'
+                }, function(print){
+                    console.log(print)
+                })
+            });
+        });
     });
 }
 
@@ -2475,11 +2530,13 @@ soyut.radiogram.EditMessage = function(val){
 
     soyut.radiogram.renderRadiogramDetail(val, function(res){
         if(roleName.isWASDAL){
+            soyut.radiogram.renderMateriWasdal('edit', res.materi);
             soyut.radiogram.renderSenderWasdal('edit', res.sender);
             soyut.radiogram.renderReceiverWasdal('edit', res.receivers, res.kreceivers, res.alsreceivers);
             soyut.radiogram.renderCCWasdal('edit', res.cc, res.kcc, res.alscc);
         }
         else{
+            soyut.radiogram.renderMateri('edit', res.materi);
             soyut.radiogram.renderComposeSender('edit', res.sender);
             soyut.radiogram.renderComposeReceivers('edit', res.receivers, res.kreceivers);
             soyut.radiogram.renderComposeCC('edit', res.cc, res.kcc);
@@ -2620,6 +2677,55 @@ soyut.radiogram.SetSenderDetail = function(val){
 }
 
 /*sender and receiver WASDAL */
+soyut.radiogram.renderMateriWasdal = function (state, value) {
+    $(getInstanceID("list-materi")).html('');
+    if(state == 'new'){
+        var html = '<select name="optMateri[]" multiple id="optMateri" class="form-control optMateri">';
+        html += '<option value="intelijen">INTELIJEN</option>';
+        html += '<option value="operasi">OPERASI</option>';
+        html += '<option value="personel">PERSONEL</option>';
+        html += '<option value="logistik">LOGISTIK</option>';
+        html += '<option value="komlek">KOMLEK</option>';
+        html += '</select>';
+        $(getInstanceID("list-materi")).append(html);
+
+        $('.optMateri').multiselect({
+            columns: 1,
+            placeholder: 'Cari...',
+            search: true,
+            selectAll: true
+        });
+    }
+    else {
+        if(value != null){
+            var html = '<select name="optMateri[]" multiple id="optMateri" class="form-control optMateri">';
+
+            var listMateri = ["intelijen", "operasi", "personel", "logistik", "komlek"];
+            listMateri.forEach(function (m) {
+                var selected = "";
+                if (value != null) {
+                    soyut.radiogram.checkMateriSelected(value, m, function (sel) {
+                        if (sel) {
+                            selected += "selected";
+                        }
+                    });
+                }
+                html += '<option value="' + m + '" ' + selected + '>' + m.toUpperCase() + '</option>';
+            });
+
+            html += '</select>';
+            $(getInstanceID("list-materi")).append(html);
+
+            $('.optMateri').multiselect({
+                columns: 1,
+                placeholder: 'Cari...',
+                search: true,
+                selectAll: true
+            });
+        }
+    }
+};
+
 soyut.radiogram.renderReceiverWasdal = function (state, value, kvalue, alvalue) {
     $(getInstanceID("list-receiver")).html('');
     if(state == 'new'){
@@ -2849,6 +2955,55 @@ soyut.radiogram.renderCCWasdal = function (state, value, kvalue, alvalue) {
 };
 
 /*sender and receiver user */
+soyut.radiogram.renderMateri = function (state, value) {
+    $(getInstanceID("list-materi")).html('');
+    if(state == 'new'){
+        var html = '<select name="optMateri[]" multiple id="optMateri" class="form-control optMateri">';
+        html += '<option value="intelijen">INTELIJEN</option>';
+        html += '<option value="operasi">OPERASI</option>';
+        html += '<option value="personel">PERSONEL</option>';
+        html += '<option value="logistik">LOGISTIK</option>';
+        html += '<option value="komlek">KOMLEK</option>';
+        html += '</select>';
+        $(getInstanceID("list-materi")).append(html);
+
+        $('.optMateri').multiselect({
+            columns: 1,
+            placeholder: 'Cari...',
+            search: true,
+            selectAll: true
+        });
+    }
+    else {
+        if(value != null){
+            var html = '<select name="optMateri[]" multiple id="optMateri" class="form-control optMateri">';
+
+            var listMateri = ["intelijen", "operasi", "personel", "logistik", "komlek"];
+            listMateri.forEach(function (m) {
+                var selected = "";
+                if (value != null) {
+                    soyut.radiogram.checkMateriSelected(value, m, function (sel) {
+                        if (sel) {
+                            selected += "selected";
+                        }
+                    });
+                }
+                html += '<option value="' + m + '" ' + selected + '>' + m.toUpperCase() + '</option>';
+            });
+
+            html += '</select>';
+            $(getInstanceID("list-materi")).append(html);
+
+            $('.optMateri').multiselect({
+                columns: 1,
+                placeholder: 'Cari...',
+                search: true,
+                selectAll: true
+            });
+        }
+    }
+};
+
 soyut.radiogram.renderComposeSender = function (state, value) {
     $(getInstanceID("list-sender")).html('');
     if(state == 'new'){

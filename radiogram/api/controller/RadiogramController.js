@@ -42,6 +42,7 @@ module.exports = {
                 var tandadinas = reqMsg.data.params.tandadinas;
                 var groups = reqMsg.data.params.group;
                 var classification = reqMsg.data.params.classification;
+                var materi = reqMsg.data.params.materi;
                 var Number = reqMsg.data.params.Number;
                 var cara = reqMsg.data.params.cara;
                 var paraf = reqMsg.data.params.paraf;
@@ -76,6 +77,7 @@ module.exports = {
                         alamataksi: alamataksi,
                         alamattembusan: alamattembusan,
                         classification: classification,
+                        materi: materi,
                         Number:Number,
                         content: content,
                         readStatus: readStatus,
@@ -158,6 +160,7 @@ module.exports = {
                 var tandadinas = reqMsg.data.params.tandadinas;
                 var groups = reqMsg.data.params.group;
                 var classification = reqMsg.data.params.classification;
+                var materi = reqMsg.data.params.materi;
                 var Number = reqMsg.data.params.Number;
                 var cara = reqMsg.data.params.cara;
                 var paraf = reqMsg.data.params.paraf;
@@ -196,6 +199,7 @@ module.exports = {
                         alamataksi: alamataksi,
                         alamattembusan: alamattembusan,
                         classification: classification,
+                        materi: materi,
                         Number:Number,
                         content: content,
                         readStatus: readStatus,
@@ -236,6 +240,7 @@ module.exports = {
                 var tandadinas = reqMsg.data.params.tandadinas;
                 var groups = reqMsg.data.params.group;
                 var classification = reqMsg.data.params.classification;
+                var materi = reqMsg.data.params.materi;
                 var Number = reqMsg.data.params.Number;
                 var cara = reqMsg.data.params.cara;
                 var paraf = reqMsg.data.params.paraf;
@@ -272,6 +277,7 @@ module.exports = {
                         alamataksi: alamataksi,
                         alamattembusan: alamattembusan,
                         classification: classification,
+                        materi: materi,
                         Number:Number,
                         content: content,
                         readStatus: readStatus,
@@ -311,6 +317,7 @@ module.exports = {
                 var tandadinas = reqMsg.data.params.tandadinas;
                 var groups = reqMsg.data.params.group;
                 var classification = reqMsg.data.params.classification;
+                var materi = reqMsg.data.params.materi;
                 var Number = reqMsg.data.params.Number;
                 var cara = reqMsg.data.params.cara;
                 var paraf = reqMsg.data.params.paraf;
@@ -347,6 +354,7 @@ module.exports = {
                         alamataksi: alamataksi,
                         alamattembusan: alamattembusan,
                         classification: classification,
+                        materi: materi,
                         Number:Number,
                         content: content,
                         readStatus: readStatus,
@@ -387,6 +395,7 @@ module.exports = {
                 var tandadinas = reqMsg.data.params.tandadinas;
                 var groups = reqMsg.data.params.group;
                 var classification = reqMsg.data.params.classification;
+                var materi = reqMsg.data.params.materi;
                 var Number = reqMsg.data.params.Number;
                 var cara = reqMsg.data.params.cara;
                 var paraf = reqMsg.data.params.paraf;
@@ -425,6 +434,7 @@ module.exports = {
                         alamataksi: alamataksi,
                         alamattembusan: alamattembusan,
                         classification: classification,
+                        materi: materi,
                         Number:Number,
                         content: content,
                         readStatus: readStatus,
@@ -467,6 +477,7 @@ module.exports = {
                 var tandadinas = reqMsg.data.params.tandadinas;
                 var groups = reqMsg.data.params.group;
                 var classification = reqMsg.data.params.classification;
+                var materi = reqMsg.data.params.materi;
                 var Number = reqMsg.data.params.Number;
                 var cara = reqMsg.data.params.cara;
                 var paraf = reqMsg.data.params.paraf;
@@ -492,6 +503,7 @@ module.exports = {
                     tandadinas: tandadinas,
                     group: groups,
                     classification: classification,
+                    materi: materi,
                     Number: Number,
                     cara: cara,
                     paraf: paraf,

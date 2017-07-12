@@ -260,6 +260,12 @@
                                           <td style="border-bottom: none;"></td>
                                       </tr>
                                       <tr>
+                                          <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right:none;">Materi</td>
+                                          <td colspan="4" class="parent-materi" style="border-bottom: none; border-right: none;" id="list-materi"></td>
+                                          <td style="border-bottom: none; border-right: none;"></td>
+                                          <td style="border-bottom: none;"></td>
+                                      </tr>
+                                      <tr>
                                           <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Nomor</td>
                                           <td colspan="4" class="parent-no" style="border-bottom: none; border-right: none;">
                                               <input type="hidden" name="referenceid" id="referenceid" value="">
@@ -450,6 +456,7 @@
 <template id="email-reply">
     <div class="table-responsive">
         <div class="table-responsive">
+            <p>Materi : {{contents.materi}}</p>
             <table class="table table-bordered">
                 <thead>
                 <tr @click="ViewDetail">
@@ -591,6 +598,7 @@
             <div class="col-md-12">
 
                 <div class="table-responsive">
+                    <p>Materi : {{contents.materi}}</p>
                     <table class="table table-bordered">
                         <thead>
                         <tr>
@@ -762,10 +770,10 @@
                         </button>
                         -->
                         <button class="btn btn-warning btn-wide" v-bind="loadPDFButton(contents.composeStatus)" type="button" @click="PrintPdf">
-                            Lihat ke PDF <i class="fa icon-file-pdf"></i>
+                            Print PDF <i class="fa icon-file-pdf"></i>
                         </button>
                         <button class="btn btn-warning btn-wide" v-bind="loadPDFButton(contents.composeStatus)" type="button" @click="SavePdf">
-                            Simpan ke PDF <i class="fa icon-file-pdf"></i>
+                            Lihat PDF <i class="fa icon-file-pdf"></i>
                         </button>
                     </div>
                     <div class="col-md-6">
@@ -1000,3 +1008,24 @@
         </div>
     </div>
 </template>
+
+<div id="printerAlertModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Silahkan Pilih printer?</h4>
+            </div>
+            <div class="modal-body">
+                <select id="printer-name" name="printer-name" class="form-control">
+                    <option value="AYU">AYU</option>
+                    <option value="MATRA-I">MATRA-I</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btn-print-radiogram" class="btn btn-primary"><i class="icon-printer"></i> Print</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+            </div>
+        </div>
+    </div>
+</div>

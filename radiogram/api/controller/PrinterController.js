@@ -48,7 +48,8 @@ module.exports = {
           curNumber = replaceall(curNumber,'\"','');
           curNumber = replaceall(curNumber,"'",'');
           curNumber = replaceall(curNumber,'"','');
-      var pdfName = curNumber + "-" + getDateTime() + ".pdf";
+      // var pdfName = curNumber + "-" + getDateTime() + ".pdf";
+      var pdfName = curNumber + ".pdf";
 
       var html = fs.readFileSync(context, 'utf8');
 
