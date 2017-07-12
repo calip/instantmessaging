@@ -596,6 +596,60 @@ soyut.radiogram.renderMessageObj = function (id, callback) {
     });
 };
 
+soyut.radiogram.renderProviderPrinter = function (rolegroup, callback) {
+    getPrinterProvider(rolegroup).then(function(result) {
+        getDetailPrinter(result).then(function(data) {
+            var arr = []
+            data.forEach(function (i) {
+                i.forEach(function (e) {
+                    arr.push(e)
+                })
+            })
+            var dataObj = {};
+            dataObj = arr;
+            callback(dataObj);
+        });
+    });
+};
+
+function getDetailPrinter(provider) {
+    return new Promise.map(provider, function(i) {
+        return getPrinter(i).then(function(data) {
+            return data;
+        }).then(function(result) {
+            return result;
+        });
+    });
+}
+
+function getPrinter(print) {
+    return new Promise (function(resolve,reject){
+        scenarioService.scenario_getPrinterDetails({id: print}, function (e, data) {
+            if(e){
+                reject(e);
+            }else{
+                var dataObj = {};
+                dataObj = data;
+                resolve(dataObj);
+            }
+        });
+    });
+};
+
+function getPrinterProvider(rolegroup) {
+    return new Promise (function(resolve,reject){
+        scenarioService.scenario_getRoleGroupPrinters({id: rolegroup}, function (e, data) {
+            if(e){
+                reject(e);
+            }else{
+                var dataObj = {};
+                dataObj = data;
+                resolve(dataObj);
+            }
+        });
+    });
+}
+
 soyut.radiogram.renderRoleGroup = function (callback) {
     getRoleGroup().then(function(result) {
         callback(result)
