@@ -328,14 +328,14 @@ soyut.radiogram.renderCompose = function (referenceId, refSender) {
 
     if(roleName.isWASDAL){
         $(getInstanceID("ref_sender")).val(refSender);
-        soyut.radiogram.renderMateriWasdal('new', null);
+        // soyut.radiogram.renderMateriWasdal('new', null);
         soyut.radiogram.renderSenderWasdal('new', null);
         soyut.radiogram.renderReceiverWasdal('new', null, null, null);
         soyut.radiogram.renderCCWasdal('new', null, null, null);
     }
     else{
         $(getInstanceID("ref_sender")).val('');
-        soyut.radiogram.renderMateri('new', null);
+        // soyut.radiogram.renderMateri('new', null);
         soyut.radiogram.renderComposeSender('new', null);
         soyut.radiogram.renderComposeReceivers('new', null, null);
         soyut.radiogram.renderComposeCC('new', null, null);
@@ -437,7 +437,7 @@ soyut.radiogram.renderContent = function () {
         var senderRole = $(".optSender").val();
         var receiverRole = $(".optReceiver").val();
         var tembusan = $(".optCC").val();
-        var materi = $(".optMateri").val();
+        // var materi = $(".optMateri").val();
         var tandadinas = $(getInstanceID("tandadinas")).val();
         var group = $(getInstanceID("group")).val();
         var klasifikasi = $(getInstanceID("klasifikasi")).val();
@@ -532,7 +532,7 @@ soyut.radiogram.renderContent = function () {
                     tandadinas: tandadinas,
                     group: group,
                     classification: klasifikasi,
-                    materi: materi,
+                    materi: null,
                     Number: no,
                     cara: cara,
                     paraf: paraf,
@@ -600,7 +600,7 @@ soyut.radiogram.renderContent = function () {
                     tandadinas: tandadinas,
                     group: group,
                     classification: klasifikasi,
-                    materi: materi,
+                    materi: null,
                     Number: no,
                     cara: cara,
                     paraf: paraf,
@@ -640,7 +640,7 @@ soyut.radiogram.renderContent = function () {
         var senderRole = $(".optSender").val();
         var receiverRole = $(".optReceiver").val();
         var tembusan = $(".optCC").val();
-        var materi = $(".optMateri").val();
+        // var materi = $(".optMateri").val();
         var tandadinas = $(getInstanceID("tandadinas")).val();
         var group = $(getInstanceID("group")).val();
         var klasifikasi = $(getInstanceID("klasifikasi")).val();
@@ -736,7 +736,7 @@ soyut.radiogram.renderContent = function () {
                         tandadinas: tandadinas,
                         group: group,
                         classification: klasifikasi,
-                        materi: materi,
+                        materi: null,
                         Number: no,
                         cara: cara,
                         paraf: paraf,
@@ -796,7 +796,7 @@ soyut.radiogram.renderContent = function () {
                         tandadinas: tandadinas,
                         group: group,
                         classification: klasifikasi,
-                        materi: materi,
+                        materi: null,
                         Number: no,
                         cara: cara,
                         paraf: paraf,
@@ -866,7 +866,7 @@ soyut.radiogram.renderContent = function () {
                             tandadinas: tandadinas,
                             group: group,
                             classification: klasifikasi,
-                            materi: materi,
+                            materi: null,
                             Number: no,
                             cara: cara,
                             paraf: paraf,
@@ -929,7 +929,7 @@ soyut.radiogram.renderContent = function () {
                             tandadinas: tandadinas,
                             group: group,
                             classification: klasifikasi,
-                            materi: materi,
+                            materi: null,
                             Number: no,
                             cara: cara,
                             paraf: paraf,
@@ -2181,9 +2181,9 @@ soyut.radiogram.renderReplyMessage = function (elSelector, message) {
             LoadMessages: function () {
                 var _this = this;
 
-                soyut.radiogram.renderMessageObj(message, function(data){
+                soyut.radiogram.renderMessageObj(message, function(data) {
                     var arrMateri = [];
-                    if(data.materi != null ) {
+                    if (data.materi != null) {
                         data.materi.forEach(function (i) {
                             arrMateri = arrMateri + i + ", ";
                         });
@@ -2194,123 +2194,62 @@ soyut.radiogram.renderReplyMessage = function (elSelector, message) {
 
                     if (roleName.isWASDAL) {
                         soyut.radiogram.renderSenderObj(data.sender, data.senderWasdal, function (sender) {
-                            soyut.radiogram.renderSenderGroup(sender.roleGroup, function (senderrg) {
-                                soyut.radiogram.renderListReceiversDetail(data.receivers, function (receivers) {
-                                    soyut.radiogram.renderListKogasDetail(data.kreceivers, function (kreceivers) {
-                                        soyut.radiogram.renderListReceiversDetail(data.cc, function (cc) {
-                                            //soyut.radiogram.renderUserDetail(data.sender, function (user) {
-                                            var getSimTime = "";
-                                            if (data.simtime != null) {
-                                                getSimTime = moment(data.simtime).format("DD") + '-' + moment(data.simtime).format("MM") + '-' + soyut.radiogram.yearNumToSimStr(moment(data.simtime).format("YYYY")) + ' ' + moment(data.simtime).format("hh") + ':' + moment(data.simtime).format("mm");
-                                            }
-                                            else {
-                                                getSimTime = "-";
-                                            }
-
-                                            var textArray = data.content.split('\n');
-                                            var renderMessage = "";
-                                            for (var i = 0; i < textArray.length; i++) {
-                                                renderMessage += textArray[i] + "<br />";
-                                            }
-                                            var contents = {
-                                                id: data.id,
-                                                content: data.content,
-                                                tembusan: data.cc,
-                                                renderMessages: renderMessage,
-                                                SendTime: data.SendTime,
-                                                simtime: getSimTime,
-                                                senderRole: data.sender,
-                                                senderCallsign: sender.position + " (" + senderrg.name + ")",
-                                                senderRank: data.senderRank,
-                                                senderName: data.senderName,
-                                                materi: arrMateri,
-                                                senderPhoto: "",
-                                                senderSignature: "",
-                                                panggilan: data.panggilan,
-                                                jenis: data.jenis,
-                                                nomor: data.nomor,
-                                                derajat: data.derajat,
-                                                instruksi: data.instruksi,
-                                                klasifikasi: data.classification.toUpperCase(),
-                                                no: data.Number,
-                                                cara: data.cara,
-                                                paraf: data.paraf,
-                                                tandadinas: data.tandadinas,
-                                                group: data.group,
-                                                alamataksi: data.alamataksi,
-                                                alamattembusan: data.alamattembusan,
-                                                composeStatus: data.composeStatus,
-                                                receiverDetail: kreceivers + " " + receivers,
-                                                ccDetail: cc
-                                            };
-
-                                            _this.$set(_this, 'contents', contents);
-                                            //});
-                                        });
-                                    });
-                                });
-                            });
-                        });
-                    }
-                    else{
-                        soyut.radiogram.renderSenderObj(data.sender, data.senderWasdal, function (sender) {
                             if(data.senderWasdal) {
                                 soyut.radiogram.renderListReceiversDetail(data.receivers, function (receivers) {
                                     soyut.radiogram.renderListKogasDetail(data.kreceivers, function (kreceivers) {
-                                        soyut.radiogram.renderListReceiversDetail(data.cc, function (cc) {
-                                            var textArray = data.content.split('\n');
-                                            var renderMessage = "";
-                                            for (var i = 0; i < textArray.length; i++) {
-                                                renderMessage += textArray[i] + "<br />";
-                                            }
+                                        soyut.radiogram.renderListAliasDetail(data.alsreceivers, function (alsreceivers) {
+                                            soyut.radiogram.renderListReceiversDetail(data.cc, function (cc) {
+                                                soyut.radiogram.renderListKogasDetail(data.kcc, function (kcc) {
+                                                    soyut.radiogram.renderListAliasDetail(data.alscc, function (alscc) {
+                                                        var getSimTime = "";
+                                                        if (data.simtime != null) {
+                                                            getSimTime = moment(data.simtime).format("DD") + '-' + moment(data.simtime).format("MM") + '-' + soyut.radiogram.yearNumToSimStr(moment(data.simtime).format("YYYY")) + ' ' + moment(data.simtime).format("hh") + ':' + moment(data.simtime).format("mm");
+                                                        }
+                                                        else {
+                                                            getSimTime = "-";
+                                                        }
 
-                                            var curSimTime = "-"
-                                            if (data.simtime != null) {
-                                                var curSimTime = moment(data.simtime).format("DD") + '-' + moment(data.simtime).format("MM") + '-' + soyut.radiogram.yearNumToSimStr(moment(data.simtime).format("YYYY")) + ' ' + moment(data.simtime).format("hh") + ':' + moment(data.simtime).format("mm");
-                                            }
-                                            var curSendTime = "-"
-                                            if (data.SendTime != null) {
-                                                curSendTime = moment(data.SendTime).format('DD-MM-YYYY h:mm');
-                                            }
-                                            var curCreateTime = "-"
-                                            if (data.createTime != null) {
-                                                curCreateTime = moment(data.createTime).format('DD-MM-YYYY h:mm');
-                                            }
+                                                        var textArray = data.content.split('\n');
+                                                        var renderMessage = "";
+                                                        for (var i = 0; i < textArray.length; i++) {
+                                                            renderMessage += textArray[i] + "<br />";
+                                                        }
+                                                        var contents = {
+                                                            id: data.id,
+                                                            content: data.content,
+                                                            tembusan: data.cc,
+                                                            renderMessages: renderMessage,
+                                                            SendTime: data.SendTime,
+                                                            simtime: getSimTime,
+                                                            senderRole: data.sender,
+                                                            senderCallsign: sender.position,
+                                                            senderRank: data.senderRank,
+                                                            senderName: data.senderName,
+                                                            materi: arrMateri,
+                                                            senderPhoto: "",
+                                                            senderSignature: "",
+                                                            panggilan: data.panggilan,
+                                                            jenis: data.jenis,
+                                                            nomor: data.nomor,
+                                                            derajat: data.derajat,
+                                                            instruksi: data.instruksi,
+                                                            klasifikasi: data.classification.toUpperCase(),
+                                                            no: data.Number,
+                                                            cara: data.cara,
+                                                            paraf: data.paraf,
+                                                            tandadinas: data.tandadinas,
+                                                            group: data.group,
+                                                            alamataksi: data.alamataksi,
+                                                            alamattembusan: data.alamattembusan,
+                                                            composeStatus: data.composeStatus,
+                                                            receiverDetail: alsreceivers + " " + kreceivers + " " + receivers,
+                                                            ccDetail: alscc + " " + cc + " " + kcc
+                                                        };
 
-                                            var contents = {
-                                                id: data.id,
-                                                content: data.content,
-                                                tembusan: data.cc,
-                                                renderMessages: renderMessage,
-                                                SendTime: curSendTime,
-                                                simtime: curSimTime,
-                                                createTime: curCreateTime,
-                                                senderRole: data.sender,
-                                                senderCallsign: sender.position,
-                                                senderRank: data.senderRank,
-                                                senderName: data.senderName,
-                                                materi: arrMateri,
-                                                senderPhoto: "",
-                                                senderSignature: "",
-                                                panggilan: data.panggilan,
-                                                jenis: data.jenis,
-                                                nomor: data.nomor,
-                                                derajat: data.derajat,
-                                                instruksi: data.instruksi,
-                                                klasifikasi: data.classification.toUpperCase(),
-                                                no: data.Number,
-                                                cara: data.cara,
-                                                paraf: data.paraf,
-                                                tandadinas: data.tandadinas,
-                                                group: data.group,
-                                                alamataksi: data.alamataksi,
-                                                alamattembusan: data.alamattembusan,
-                                                composeStatus: data.composeStatus,
-                                                receiverDetail: kreceivers + " " + receivers,
-                                                ccDetail: cc
-                                            };
-
-                                            _this.$set(_this, 'contents', contents);
+                                                        _this.$set(_this, 'contents', contents);
+                                                    });
+                                                });
+                                            });
                                         });
                                     });
                                 });
@@ -2320,59 +2259,195 @@ soyut.radiogram.renderReplyMessage = function (elSelector, message) {
                                     soyut.radiogram.renderListReceiversDetail(data.receivers, function (receivers) {
                                         soyut.radiogram.renderListKogasDetail(data.kreceivers, function (kreceivers) {
                                             soyut.radiogram.renderListReceiversDetail(data.cc, function (cc) {
-                                                var textArray = data.content.split('\n');
-                                                var renderMessage = "";
-                                                for (var i = 0; i < textArray.length; i++) {
-                                                    renderMessage += textArray[i] + "<br />";
-                                                }
+                                                soyut.radiogram.renderListKogasDetail(data.kcc, function (kcc) {
+                                                    var getSimTime = "";
+                                                    if (data.simtime != null) {
+                                                        getSimTime = moment(data.simtime).format("DD") + '-' + moment(data.simtime).format("MM") + '-' + soyut.radiogram.yearNumToSimStr(moment(data.simtime).format("YYYY")) + ' ' + moment(data.simtime).format("hh") + ':' + moment(data.simtime).format("mm");
+                                                    }
+                                                    else {
+                                                        getSimTime = "-";
+                                                    }
 
-                                                var curSimTime = "-"
-                                                if (data.simtime != null) {
-                                                    var curSimTime = moment(data.simtime).format("DD") + '-' + moment(data.simtime).format("MM") + '-' + soyut.radiogram.yearNumToSimStr(moment(data.simtime).format("YYYY")) + ' ' + moment(data.simtime).format("hh") + ':' + moment(data.simtime).format("mm");
-                                                }
-                                                var curSendTime = "-"
-                                                if (data.SendTime != null) {
-                                                    curSendTime = moment(data.SendTime).format('DD-MM-YYYY h:mm');
-                                                }
-                                                var curCreateTime = "-"
-                                                if (data.createTime != null) {
-                                                    curCreateTime = moment(data.createTime).format('DD-MM-YYYY h:mm');
-                                                }
+                                                    var textArray = data.content.split('\n');
+                                                    var renderMessage = "";
+                                                    for (var i = 0; i < textArray.length; i++) {
+                                                        renderMessage += textArray[i] + "<br />";
+                                                    }
+                                                    var contents = {
+                                                        id: data.id,
+                                                        content: data.content,
+                                                        tembusan: data.cc,
+                                                        renderMessages: renderMessage,
+                                                        SendTime: data.SendTime,
+                                                        simtime: getSimTime,
+                                                        senderRole: data.sender,
+                                                        senderCallsign: sender.position +" ("+ senderrg.name +")",
+                                                        senderRank: data.senderRank,
+                                                        senderName: data.senderName,
+                                                        materi: arrMateri,
+                                                        senderPhoto: "",
+                                                        senderSignature: "",
+                                                        panggilan: data.panggilan,
+                                                        jenis: data.jenis,
+                                                        nomor: data.nomor,
+                                                        derajat: data.derajat,
+                                                        instruksi: data.instruksi,
+                                                        klasifikasi: data.classification.toUpperCase(),
+                                                        no: data.Number,
+                                                        cara: data.cara,
+                                                        paraf: data.paraf,
+                                                        tandadinas: data.tandadinas,
+                                                        group: data.group,
+                                                        alamataksi: data.alamataksi,
+                                                        alamattembusan: data.alamattembusan,
+                                                        composeStatus: data.composeStatus,
+                                                        receiverDetail: kreceivers + " " + receivers,
+                                                        ccDetail: cc + " " + kcc
+                                                    };
 
-                                                var contents = {
-                                                    id: data.id,
-                                                    content: data.content,
-                                                    tembusan: data.cc,
-                                                    renderMessages: renderMessage,
-                                                    SendTime: curSendTime,
-                                                    simtime: curSimTime,
-                                                    createTime: curCreateTime,
-                                                    senderRole: data.sender,
-                                                    senderCallsign: sender.position + " (" + senderrg.name + ")",
-                                                    senderRank: data.senderRank,
-                                                    senderName: data.senderName,
-                                                    materi: arrMateri,
-                                                    senderPhoto: "",
-                                                    senderSignature: "",
-                                                    panggilan: data.panggilan,
-                                                    jenis: data.jenis,
-                                                    nomor: data.nomor,
-                                                    derajat: data.derajat,
-                                                    instruksi: data.instruksi,
-                                                    klasifikasi: data.classification.toUpperCase(),
-                                                    no: data.Number,
-                                                    cara: data.cara,
-                                                    paraf: data.paraf,
-                                                    tandadinas: data.tandadinas,
-                                                    group: data.group,
-                                                    alamataksi: data.alamataksi,
-                                                    alamattembusan: data.alamattembusan,
-                                                    composeStatus: data.composeStatus,
-                                                    receiverDetail: kreceivers + " " + receivers,
-                                                    ccDetail: cc
-                                                };
+                                                    _this.$set(_this, 'contents', contents);
+                                                });
+                                            });
+                                        });
+                                    });
+                                });
+                            }
+                        });
+                    }
+                    else{
+                        soyut.radiogram.renderSenderObj(data.sender, data.senderWasdal, function (sender) {
+                            if(data.senderWasdal) {
+                                soyut.radiogram.renderListReceiversDetail(data.receivers, function (receivers) {
+                                    soyut.radiogram.renderListKogasDetail(data.kreceivers, function (kreceivers) {
+                                        soyut.radiogram.renderListAliasDetail(data.alsreceivers, function (alsreceivers) {
+                                            soyut.radiogram.renderListReceiversDetail(data.cc, function (cc) {
+                                                soyut.radiogram.renderListKogasDetail(data.kcc, function (kcc) {
+                                                    soyut.radiogram.renderListAliasDetail(data.alscc, function (alscc) {
 
-                                                _this.$set(_this, 'contents', contents);
+                                                        var textArray = data.content.split('\n');
+                                                        var renderMessage = "";
+                                                        for (var i = 0; i < textArray.length; i++) {
+                                                            renderMessage += textArray[i] + "<br />";
+                                                        }
+
+                                                        var curSimTime = "-"
+                                                        if (data.simtime != null) {
+                                                            var curSimTime = moment(data.simtime).format("DD") + '-' + moment(data.simtime).format("MM") + '-' + soyut.radiogram.yearNumToSimStr(moment(data.simtime).format("YYYY")) + ' ' + moment(data.simtime).format("hh") + ':' + moment(data.simtime).format("mm");
+                                                        }
+                                                        var curSendTime = "-"
+                                                        if (data.SendTime != null) {
+                                                            curSendTime = moment(data.SendTime).format('DD-MM-YYYY h:mm');
+                                                        }
+                                                        var curCreateTime = "-"
+                                                        if (data.createTime != null) {
+                                                            curCreateTime = moment(data.createTime).format('DD-MM-YYYY h:mm');
+                                                        }
+
+                                                        var contents = {
+                                                            id: data.id,
+                                                            content: data.content,
+                                                            tembusan: data.cc,
+                                                            renderMessages: renderMessage,
+                                                            SendTime: curSendTime,
+                                                            simtime: curSimTime,
+                                                            createTime: curCreateTime,
+                                                            senderRole: data.sender,
+                                                            senderCallsign: sender.position,
+                                                            senderRank: data.senderRank,
+                                                            senderName: data.senderName,
+                                                            materi: arrMateri,
+                                                            senderPhoto: "",
+                                                            senderSignature: "",
+                                                            panggilan: data.panggilan,
+                                                            jenis: data.jenis,
+                                                            nomor: data.nomor,
+                                                            derajat: data.derajat,
+                                                            instruksi: data.instruksi,
+                                                            klasifikasi: data.classification.toUpperCase(),
+                                                            no: data.Number,
+                                                            cara: data.cara,
+                                                            paraf: data.paraf,
+                                                            tandadinas: data.tandadinas,
+                                                            group: data.group,
+                                                            alamataksi: data.alamataksi,
+                                                            alamattembusan: data.alamattembusan,
+                                                            composeStatus: data.composeStatus,
+                                                            receiverDetail: alsreceivers + " " + kreceivers + " " + receivers,
+                                                            ccDetail: alscc + " " + cc + " " + kcc
+                                                        };
+
+                                                        _this.$set(_this, 'contents', contents);
+                                                        // });
+                                                    });
+                                                });
+                                            });
+                                        });
+                                    });
+                                });
+                            }
+                            else {
+                                soyut.radiogram.renderSenderGroup(sender.roleGroup, function (senderrg) {
+                                    soyut.radiogram.renderListReceiversDetail(data.receivers, function (receivers) {
+                                        soyut.radiogram.renderListKogasDetail(data.kreceivers, function (kreceivers) {
+                                            soyut.radiogram.renderListReceiversDetail(data.cc, function (cc) {
+                                                soyut.radiogram.renderListKogasDetail(data.kcc, function (kcc) {
+                                                    // soyut.radiogram.renderUserDetail(data.sender, function (user) {
+
+                                                    var textArray = data.content.split('\n');
+                                                    var renderMessage = "";
+                                                    for (var i = 0; i < textArray.length; i++) {
+                                                        renderMessage += textArray[i] + "<br />";
+                                                    }
+
+                                                    var curSimTime = "-"
+                                                    if (data.simtime != null) {
+                                                        var curSimTime = moment(data.simtime).format("DD") + '-' + moment(data.simtime).format("MM") + '-' + soyut.radiogram.yearNumToSimStr(moment(data.simtime).format("YYYY")) + ' ' + moment(data.simtime).format("hh") + ':' + moment(data.simtime).format("mm");
+                                                    }
+                                                    var curSendTime = "-"
+                                                    if (data.SendTime != null) {
+                                                        curSendTime = moment(data.SendTime).format('DD-MM-YYYY h:mm');
+                                                    }
+                                                    var curCreateTime = "-"
+                                                    if (data.createTime != null) {
+                                                        curCreateTime = moment(data.createTime).format('DD-MM-YYYY h:mm');
+                                                    }
+
+                                                    var contents = {
+                                                        id: data.id,
+                                                        content: data.content,
+                                                        tembusan: data.cc,
+                                                        renderMessages: renderMessage,
+                                                        SendTime: curSendTime,
+                                                        simtime: curSimTime,
+                                                        createTime: curCreateTime,
+                                                        senderRole: data.sender,
+                                                        senderCallsign: sender.position + " (" + senderrg.name + ")",
+                                                        senderRank: data.senderRank,
+                                                        senderName: data.senderName,
+                                                        materi: arrMateri,
+                                                        senderPhoto: "",
+                                                        senderSignature: "",
+                                                        panggilan: data.panggilan,
+                                                        jenis: data.jenis,
+                                                        nomor: data.nomor,
+                                                        derajat: data.derajat,
+                                                        instruksi: data.instruksi,
+                                                        klasifikasi: data.classification.toUpperCase(),
+                                                        no: data.Number,
+                                                        cara: data.cara,
+                                                        paraf: data.paraf,
+                                                        tandadinas: data.tandadinas,
+                                                        group: data.group,
+                                                        alamataksi: data.alamataksi,
+                                                        alamattembusan: data.alamattembusan,
+                                                        composeStatus: data.composeStatus,
+                                                        receiverDetail: kreceivers + " " + receivers,
+                                                        ccDetail: kcc + " " + cc
+                                                    };
+
+                                                    _this.$set(_this, 'contents', contents);
+                                                    // });
+                                                });
                                             });
                                         });
                                     });
@@ -2495,8 +2570,8 @@ soyut.radiogram.PrintPDF = function(val){
                 soyut.printserver.print({
                     docURL : result,
                     origin : 'Radiogram',
-                    provider : "Soyut-Printer-Provider",
-                    printer : "EPSON L850 Series (Copy 1)"
+                    provider : "Kogab",
+                    printer : "EPSON L850 Series"
                 }, function(print){
                     console.log(print)
                 })
@@ -2529,13 +2604,13 @@ soyut.radiogram.EditMessage = function(val){
 
     soyut.radiogram.renderRadiogramDetail(val, function(res){
         if(roleName.isWASDAL){
-            soyut.radiogram.renderMateriWasdal('edit', res.materi);
+            // soyut.radiogram.renderMateriWasdal('edit', res.materi);
             soyut.radiogram.renderSenderWasdal('edit', res.sender);
             soyut.radiogram.renderReceiverWasdal('edit', res.receivers, res.kreceivers, res.alsreceivers);
             soyut.radiogram.renderCCWasdal('edit', res.cc, res.kcc, res.alscc);
         }
         else{
-            soyut.radiogram.renderMateri('edit', res.materi);
+            // soyut.radiogram.renderMateri('edit', res.materi);
             soyut.radiogram.renderComposeSender('edit', res.sender);
             soyut.radiogram.renderComposeReceivers('edit', res.receivers, res.kreceivers);
             soyut.radiogram.renderComposeCC('edit', res.cc, res.kcc);

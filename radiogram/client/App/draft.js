@@ -93,7 +93,7 @@ soyut.radiogramdraft.renderCompose = function () {
         $(getInstanceID("btnSubmitMessage")).css({display:'none'});
     }
 
-    soyut.radiogramdraft.renderMateriWasdal('new', null);
+    // soyut.radiogramdraft.renderMateriWasdal('new', null);
     soyut.radiogramdraft.renderSenderWasdal('new', null);
     soyut.radiogramdraft.renderReceiverWasdal('new', null);
     soyut.radiogramdraft.renderCCWasdal('new', null);
@@ -118,7 +118,7 @@ soyut.radiogramdraft.renderContent = function () {
         var senderRole = $(".optSender").val();
         var receiverRole = $(".optReceiver").val();
         var tembusan = $(".optCC").val();
-        var materi = $(".optMateri").val();
+        // var materi = $(".optMateri").val();
         var tandadinas = $(getInstanceID("tandadinas")).val();
         var group = $(getInstanceID("group")).val();
         var klasifikasi = $(getInstanceID("klasifikasi")).val();
@@ -212,7 +212,7 @@ soyut.radiogramdraft.renderContent = function () {
                 tandadinas: tandadinas,
                 group: group,
                 classification: klasifikasi,
-                materi: materi,
+                materi: null,
                 Number: no,
                 cara: cara,
                 paraf: paraf,

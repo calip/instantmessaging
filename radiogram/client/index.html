@@ -259,12 +259,14 @@
                                           <td style="border-bottom: none; border-right: none;"></td>
                                           <td style="border-bottom: none;"></td>
                                       </tr>
+                                      <!--
                                       <tr>
                                           <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right:none;">Materi</td>
                                           <td colspan="4" class="parent-materi" style="border-bottom: none; border-right: none;" id="list-materi"></td>
                                           <td style="border-bottom: none; border-right: none;"></td>
                                           <td style="border-bottom: none;"></td>
                                       </tr>
+                                      -->
                                       <tr>
                                           <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Nomor</td>
                                           <td colspan="4" class="parent-no" style="border-bottom: none; border-right: none;">
@@ -456,7 +458,6 @@
 <template id="email-reply">
     <div class="table-responsive">
         <div class="table-responsive">
-            <p>Materi : {{contents.materi}}</p>
             <table class="table table-bordered">
                 <thead>
                 <tr @click="ViewDetail">
@@ -598,7 +599,6 @@
             <div class="col-md-12">
 
                 <div class="table-responsive">
-                    <p>Materi : {{contents.materi}}</p>
                     <table class="table table-bordered">
                         <thead>
                         <tr>
@@ -1018,7 +1018,7 @@
             </div>
             <div class="modal-body">
                 <select id="printer-name" name="printer-name" class="form-control">
-                    <option value="EPSON L850 Series (Copy 1)">EPSON L850 Series (Copy 1)</option>
+                    <option value="EPSON L850 Series">EPSON L850 Series</option>
                 </select>
             </div>
             <div class="modal-footer">

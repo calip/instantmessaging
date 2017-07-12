@@ -1880,6 +1880,51 @@ soyut.radiogram.DraftWasdalRadiogram = function (params, callback) {
                             });
                         }
                     }
+                    if(params.kcc != undefined || params.kcc != null) {
+                        if (params.kcc.length > 0) {
+                            params.kcc.forEach(function (i) {
+                                soyut.radiogram.Radiogram_SendReceiverWasdal({
+                                    panggilan: params.panggilan,
+                                    jenis: params.jenis,
+                                    nomor: params.nomor,
+                                    derajat: params.derajat,
+                                    instruksi: params.instruksi,
+                                    tandadinas: params.tandadinas,
+                                    group: params.group,
+                                    classification: params.classification,
+                                    materi: params.materi,
+                                    Number: params.Number,
+                                    cara: params.cara,
+                                    paraf: params.paraf,
+                                    alamataksi: params.alamataksi,
+                                    alamattembusan: params.alamattembusan,
+                                    content: params.content,
+                                    readStatus: 'unread',
+                                    owner: i,
+                                    sender: params.sender,
+                                    receivers: params.receivers,
+                                    kreceivers: params.kreceivers,
+                                    alsreceivers: params.alsreceivers,
+                                    senderWasdal: soyut.Session.role.isWASDAL,
+                                    cc: params.cc,
+                                    kcc: params.kcc,
+                                    alscc: params.alscc,
+                                    session: soyut.Session.id,
+                                    senderName: params.senderName,
+                                    senderRank: params.senderRank,
+                                    SendTime: reclock,
+                                    simtime: reclock,
+                                    createTime: reclock,
+                                    parentId: parentId,
+                                    composeStatus: 'pending'
+                                }, function (err, res) {
+                                    if (!err) {
+                                    }
+                                });
+                            });
+                        }
+                    }
+
                     callback("success");
                 }
             });
