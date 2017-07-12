@@ -2492,12 +2492,11 @@ soyut.radiogram.PrintPDF = function(val){
     $(getInstanceID("btn-print-radiogram")).click(function(event) {
         soyut.radiogram.RenderPrinterPDF(val, function(res){
             soyut.radiogram.SaveFilePDF(res, function (err, result) {
-                console.log(result);
                 soyut.printserver.print({
                     docURL : result,
                     origin : 'Radiogram',
-                    provider : 'Uray-IPP-Printer',
-                    printer : 'EPSON L850 Series'
+                    provider : "Soyut-Printer-Provider",
+                    printer : "EPSON L850 Series (Copy 1)"
                 }, function(print){
                     console.log(print)
                 })
