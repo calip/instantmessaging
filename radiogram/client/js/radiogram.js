@@ -2561,10 +2561,20 @@ soyut.radiogram.SaveFilePDF = function(val, callback) {
 };
 
 soyut.radiogram.selectProvider = function (val) {
-    var html = 'Printer: <select id="printer-name" name="printer-name" class="printer-name form-control">';
-    html += '<option value="EPSON L850 Series">EPSON L850 Series</option>';
-    html += '</select>';
-    $(getInstanceID('lp-printer')).html(html);
+    console.log("provider selected "+val);
+    if(val != undefined){
+        soyut.printserver.listProviders(function(res){
+            var provider = res.providers[val];
+            console.log("pro "+ provider);
+            var html = 'Printer: <select id="printer-name" name="printer-name" class="printer-name form-control">';
+            provider.printers.forEach(function(i){
+                console.log(i);
+                html += '<option value="'+ i +'">'+ i +'</option>';
+            });
+            html += '</select>';
+            $(getInstanceID('lp-printer')).html(html);
+        });
+    }
 };
 
 soyut.radiogram.PrintPDF = function(val){
@@ -2579,25 +2589,26 @@ soyut.radiogram.PrintPDF = function(val){
         });
         html += '</select>';
         $(getInstanceID('lp-provider')).html(html);
+        soyut.radiogram.selectProvider($('.provider-name').val());
     });
 
-        $(getInstanceID("btn-print-radiogram")).click(function (event) {
-            soyut.radiogram.RenderPrinterPDF(val, function (res) {
-                soyut.radiogram.SaveFilePDF(res, function (err, result) {
-                    var providerName = $('.provider-name').val();
-                    var printerName = $('.printer-name').val();
-                    console.log("print "+providerName+" - "+ printerName);
-                    soyut.printserver.print({
-                        docURL : result,
-                        origin : 'Radiogram',
-                        provider : providerName,
-                        printer : printerName
-                    }, function(print){
-                        console.log(print)
-                    })
-                });
+    $(getInstanceID("btn-print-radiogram")).click(function (event) {
+        soyut.radiogram.RenderPrinterPDF(val, function (res) {
+            soyut.radiogram.SaveFilePDF(res, function (err, result) {
+                var providerName = $('.provider-name').val();
+                var printerName = $('.printer-name').val();
+                console.log("print "+providerName+" - "+ printerName);
+                soyut.printserver.print({
+                    docURL : result,
+                    origin : 'Radiogram',
+                    provider : providerName,
+                    printer : printerName
+                }, function(print){
+                    console.log(print)
+                })
             });
         });
+    });
 };
 
 soyut.radiogram.EditMessage = function(val){
