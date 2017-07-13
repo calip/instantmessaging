@@ -2498,7 +2498,7 @@ soyut.radiogram.SavePdf = function(val){
     });
 }
 
-soyut.radiogram.SaveFilePDF = function(val, callback) {
+soyut.radiogram.SaveFilePDF = function(val, rescallback) {
     var dataurl = "https://"+soyut.radiogram.origin+"/data/"+val;
     var curUrl = soyut.radiogram.origin.split(':');
     var storageServer = 'storage.soyut';
@@ -2537,7 +2537,7 @@ soyut.radiogram.SaveFilePDF = function(val, callback) {
                     dataBuffer: dataBuffer
                 }).then(function() {
                     console.log("File PDF telah berhasil di simpan ke file browser!");
-                    callback(false, fileUrl);
+                    rescallback(false, fileUrl);
                 });
             });
         });
