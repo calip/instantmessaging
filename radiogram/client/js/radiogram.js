@@ -295,7 +295,7 @@ soyut.radiogram.renderTrash = function () {
     soyut.radiogram.renderListMessage('.email-list', '.email-reader', 'trash');
 };
 
-soyut.radiogram.renderCompose = function (referenceId, refSender, refmateri) {
+soyut.radiogram.renderCompose = function (referenceId, refSender, refmateri, refauthor) {
     $('.wdl-main').css({"font-size": fontSize});
     $('textarea, select, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"]').css({"font-size": fontSize});
     $('.btn').css({"font-size": fontSize});
@@ -323,6 +323,7 @@ soyut.radiogram.renderCompose = function (referenceId, refSender, refmateri) {
     }
     if(referenceId != '') {
         $(getInstanceID("referenceid")).val(referenceId);
+        $(getInstanceID("refauthor")).val(refauthor);
         soyut.radiogram.renderReplyMessage('.reply-message', referenceId);
         soyut.radiogram.renderMateri('edit', refmateri);
     }
@@ -479,6 +480,7 @@ soyut.radiogram.renderContent = function () {
         var jam = $(getInstanceID("jam")).val();
         var tanggal = $(getInstanceID("tanggal")).val();
         var refsender = $(getInstanceID("ref_sender")).val();
+        var refauthor = $(getInstanceID("refauthor")).val();
 
         var error = "";
 
@@ -688,6 +690,7 @@ soyut.radiogram.renderContent = function () {
         var paraf = $(getInstanceID("paraf")).val();
         var jam = $(getInstanceID("jam")).val();
         var tanggal = $(getInstanceID("tanggal")).val();
+        var refauthor = $(getInstanceID("refauthor")).val();
 
         var error = "";
 
@@ -826,6 +829,14 @@ soyut.radiogram.renderContent = function () {
                         }
                     }
 
+                    var arAuthor = ''
+                    if(roleName.isSet){
+                        arAuthor = refauthor;
+                    }
+                    else {
+                        arAuthor = roleName.position;
+                    }
+
                     soyut.radiogram.DraftRadiogram({
                         panggilan: panggilan,
                         jenis: jenis,
@@ -850,7 +861,7 @@ soyut.radiogram.renderContent = function () {
                         kcc: klcc,
                         senderName: senderName,
                         senderRank: senderRank,
-                        author: roleName.position
+                        author: arAuthor
                     },function(res){
                         soyut.radiogram.clearInput();
                         soyut.radiogram.renderInbox();
@@ -960,6 +971,14 @@ soyut.radiogram.renderContent = function () {
                             }
                         }
 
+                        var arAuthor = ''
+                        if(roleName.isSet){
+                            arAuthor = refauthor;
+                        }
+                        else {
+                            arAuthor = roleName.position;
+                        }
+
                         soyut.radiogram.UpdateDraftRadiogram({
                             id: res.id,
                             panggilan: panggilan,
@@ -985,7 +1004,7 @@ soyut.radiogram.renderContent = function () {
                             kcc: klcc,
                             senderName: senderName,
                             senderRank: senderRank,
-                            author: roleName.position
+                            author: arAuthor
                         },function(res){
                             soyut.radiogram.clearInput();
                             soyut.radiogram.renderDraft();
@@ -2156,7 +2175,7 @@ soyut.radiogram.renderMessageDetail = function (elSelector, message, state) {
                 soyut.radiogram.EditMessage(content.id);
             },
             ReplyMessage: function (content) {
-                soyut.radiogram.renderCompose(content.id, '', content.materi);
+                soyut.radiogram.renderCompose(content.id, '', content.materi, content.author);
             },
             ReplyCurrrentMessage: function (content) {
                 soyut.radiogram.renderCompose(content.id, content.senderRole, content.materi);
