@@ -325,11 +325,9 @@ soyut.radiogram.renderCompose = function (referenceId, refSender, refmateri) {
         $(getInstanceID("referenceid")).val(referenceId);
         soyut.radiogram.renderReplyMessage('.reply-message', referenceId);
         soyut.radiogram.renderMateri('edit', refmateri);
-        $(getInstanceID("list-materi")).css('visibility', 'hidden');
     }
     else {
         soyut.radiogram.renderMateri('new', null);
-        $(getInstanceID("list-materi")).css('visibility', 'hidden');
     }
 
     if(roleName.isWASDAL){
@@ -338,6 +336,7 @@ soyut.radiogram.renderCompose = function (referenceId, refSender, refmateri) {
         soyut.radiogram.renderSenderWasdal('new', null);
         soyut.radiogram.renderReceiverWasdal('new', null, null, null);
         soyut.radiogram.renderCCWasdal('new', null, null, null);
+
     }
     else{
         $(getInstanceID("ref_sender")).val('');
@@ -345,6 +344,7 @@ soyut.radiogram.renderCompose = function (referenceId, refSender, refmateri) {
         soyut.radiogram.renderComposeSender('new', null);
         soyut.radiogram.renderComposeReceivers('new', null, null);
         soyut.radiogram.renderComposeCC('new', null, null);
+        $(getInstanceID("list-materi")).css('visibility', 'hidden');
     }
 };
 
