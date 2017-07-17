@@ -35,6 +35,9 @@ module.exports = {
     alscc:{
       type:'array'
     },
+    author:{
+      type: 'string'
+    },
     session:{
       model:'Session',
       required : true

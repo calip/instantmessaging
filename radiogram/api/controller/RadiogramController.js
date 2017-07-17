@@ -63,6 +63,7 @@ module.exports = {
                 var createTime = reqMsg.data.params.createTime;
                 var senderName = reqMsg.data.params.senderName;
                 var senderRank = reqMsg.data.params.senderRank;
+                var author = reqMsg.data.params.author;
 
                 r.table('Radiogram').insert({
                         panggilan: panggilan,
@@ -77,6 +78,7 @@ module.exports = {
                         alamataksi: alamataksi,
                         alamattembusan: alamattembusan,
                         classification: classification,
+                        author: author,
                         materi: materi,
                         Number:Number,
                         content: content,
@@ -185,6 +187,7 @@ module.exports = {
                 var senderRank = reqMsg.data.params.senderRank;
                 var parentId = reqMsg.data.params.parentId;
                 var composeStatus = reqMsg.data.params.composeStatus;
+                var author = reqMsg.data.params.author;
 
                 r.table('Radiogram').insert({
                         panggilan: panggilan,
@@ -199,6 +202,7 @@ module.exports = {
                         alamataksi: alamataksi,
                         alamattembusan: alamattembusan,
                         classification: classification,
+                        author: author,
                         materi: materi,
                         Number:Number,
                         content: content,
@@ -263,6 +267,7 @@ module.exports = {
                 var createTime = reqMsg.data.params.createTime;
                 var senderName = reqMsg.data.params.senderName;
                 var senderRank = reqMsg.data.params.senderRank;
+                var author = reqMsg.data.params.author;
 
                 r.table('Radiogram').insert({
                         panggilan: panggilan,
@@ -277,6 +282,7 @@ module.exports = {
                         alamataksi: alamataksi,
                         alamattembusan: alamattembusan,
                         classification: classification,
+                        author: author,
                         materi: materi,
                         Number:Number,
                         content: content,
@@ -340,6 +346,7 @@ module.exports = {
                 var createTime = reqMsg.data.params.createTime;
                 var senderName = reqMsg.data.params.senderName;
                 var senderRank = reqMsg.data.params.senderRank;
+                var author = reqMsg.data.params.author;
 
                 r.table('Radiogram').insert({
                         panggilan: panggilan,
@@ -354,6 +361,7 @@ module.exports = {
                         alamataksi: alamataksi,
                         alamattembusan: alamattembusan,
                         classification: classification,
+                        author: author,
                         materi: materi,
                         Number:Number,
                         content: content,
@@ -420,6 +428,7 @@ module.exports = {
                 var senderRank = reqMsg.data.params.senderRank;
                 var parentId = reqMsg.data.params.parentId;
                 var composeStatus = reqMsg.data.params.composeStatus;
+                var author = reqMsg.data.params.author;
 
                 r.table('Radiogram').insert({
                         panggilan: panggilan,
@@ -434,6 +443,7 @@ module.exports = {
                         alamataksi: alamataksi,
                         alamattembusan: alamattembusan,
                         classification: classification,
+                        author: author,
                         materi: materi,
                         Number:Number,
                         content: content,
@@ -493,6 +503,7 @@ module.exports = {
                 var alscc = reqMsg.data.params.alscc;
                 var senderName = reqMsg.data.params.senderName;
                 var senderRank = reqMsg.data.params.senderRank;
+                var author = reqMsg.data.params.author;
 
                 r.table('Radiogram').update({id: id}, {
                     panggilan: panggilan,
@@ -503,6 +514,7 @@ module.exports = {
                     tandadinas: tandadinas,
                     group: groups,
                     classification: classification,
+                    author: author,
                     materi: materi,
                     Number: Number,
                     cara: cara,

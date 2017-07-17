@@ -69,6 +69,65 @@
                 </a>
               </li>
             </ul>
+              <!-- materi -->
+              <div class="navbar-title" id="materi-content">
+                  <span id="materi-name">MATERI </span>
+              </div>
+              <div id="materi-list">
+                  <ul class="folders wdl-folders">
+                      <li>
+                          <div class="item-content">
+                              <div class="item-media">
+                                  <input type="checkbox" name="select-materi" class="select-materi" value="intelijen">
+                              </div>
+                              <div class="item-inner">
+                                  <span class="title"> INTELIJEN </span>
+                              </div>
+                          </div>
+                      </li>
+                      <li>
+                          <div class="item-content">
+                              <div class="item-media">
+                                  <input type="checkbox" name="select-materi" class="select-materi" value="operasi">
+                              </div>
+                              <div class="item-inner">
+                                  <span class="title"> OPERASI </span>
+                              </div>
+                          </div>
+                      </li>
+                      <li>
+                          <div class="item-content">
+                              <div class="item-media">
+                                  <input type="checkbox" name="select-materi" class="select-materi" value="personel">
+                              </div>
+                              <div class="item-inner">
+                                  <span class="title"> PERSONEL </span>
+                              </div>
+                          </div>
+                      </li>
+                      <li>
+                          <div class="item-content">
+                              <div class="item-media">
+                                  <input type="checkbox" name="select-materi" class="select-materi" value="logistik">
+                              </div>
+                              <div class="item-inner">
+                                  <span class="title"> LOGISTIK </span>
+                              </div>
+                          </div>
+                      </li>
+                      <li>
+                          <div class="item-content">
+                              <div class="item-media">
+                                  <input type="checkbox" name="select-materi" class="select-materi" value="komlek">
+                              </div>
+                              <div class="item-inner">
+                                  <span class="title"> KOMLEK </span>
+                              </div>
+                          </div>
+                      </li>
+                  </ul>
+              </div>
+              <!-- end materi -->
             <!-- group -->
             <div class="navbar-title">
                 <span id="role-group-name">KOGAS </span>
@@ -329,6 +388,9 @@
                                       </tr>
                                       </tbody>
                                   </table>
+                                  <div class="form-group" id="list-materi">
+
+                                  </div>
                               </div>
 
                               <div class="row">
@@ -421,7 +483,7 @@
       </div>
     </div>
     <ul class="messages-list perfect-scrollbar">
-      <li v-for="message in messages" :class="LoadStatusMessage(message.id, message.readStatus, message.composeStatus)" :data-date="message.simtime">
+      <li v-for="message in messages" :class="LoadStatusMessage(message.id, message.readStatus, message.composeStatus)" :data-date="message.simtime" :data-type="message.materi">
         <a href="#" @click="viewMessageDetail(message.id)">
           <span class="messages-item-from">{{ message.receiverCallsign | truncsender}}</span>
           <div class="messages-item-time" v-html="message.stringTime"></div>
@@ -747,10 +809,15 @@
                         </tr>
                         <tr>
                             <td class="text-bold" style="border-left:2px solid #000000; border-right: none;">TTD</td>
-                            <td><input type="hidden" name="signature" class="signature" v-model="contents.senderSignature"><img :src="contents.senderSignature" width="100" class="sender-signature" name="sender-signature"></td>
+                            <td>
+                                <input type="hidden" name="signature" class="signature" v-model="contents.senderSignature">
+                                <input type="hidden" name="materi" class="materi" v-model="contents.materi">
+                                <img :src="contents.senderSignature" width="100" class="sender-signature" name="sender-signature">
+                            </td>
                         </tr>
                         </tbody>
                     </table>
+                    <div class="row" v-html="contents.attributes"></div>
                 </div>
 
                 <div class="row">
