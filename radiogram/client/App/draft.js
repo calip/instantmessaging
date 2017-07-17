@@ -93,7 +93,7 @@ soyut.radiogramdraft.renderCompose = function () {
         $(getInstanceID("btnSubmitMessage")).css({display:'none'});
     }
 
-    // soyut.radiogramdraft.renderMateriWasdal('new', null);
+    soyut.radiogram.renderMateriWasdal('new', null);
     soyut.radiogramdraft.renderSenderWasdal('new', null);
     soyut.radiogramdraft.renderReceiverWasdal('new', null);
     soyut.radiogramdraft.renderCCWasdal('new', null);
@@ -118,7 +118,7 @@ soyut.radiogramdraft.renderContent = function () {
         var senderRole = $(".optSender").val();
         var receiverRole = $(".optReceiver").val();
         var tembusan = $(".optCC").val();
-        // var materi = $(".optMateri").val();
+        var materi = $("input:checkbox[name=checkbox-materi]:checked");
         var tandadinas = $(getInstanceID("tandadinas")).val();
         var group = $(getInstanceID("group")).val();
         var klasifikasi = $(getInstanceID("klasifikasi")).val();
@@ -167,6 +167,11 @@ soyut.radiogramdraft.renderContent = function () {
             return false;
         }
         else {
+            var arrMateri = [];
+            materi.each(function(){
+                arrMateri.push($(this).val());
+            });
+
             var lsrcvr = [];
             var klsrcvr = [];
             var alsrcvr = [];
@@ -212,7 +217,7 @@ soyut.radiogramdraft.renderContent = function () {
                 tandadinas: tandadinas,
                 group: group,
                 classification: klasifikasi,
-                materi: null,
+                materi: arrMateri,
                 Number: no,
                 cara: cara,
                 paraf: paraf,
@@ -228,7 +233,8 @@ soyut.radiogramdraft.renderContent = function () {
                 kcc: klcc,
                 alscc: alcc,
                 senderName: senderName,
-                senderRank: senderRank
+                senderRank: senderRank,
+                author: roleName.position
             },function(res){
                 soyut.radiogram.clearInput();
                 $(getInstanceID("wdl-email-content")).addClass('disable');
@@ -417,14 +423,25 @@ soyut.radiogramdraft.renderMessageDetail = function (elSelector, message, state)
             LoadMessages: function () {
                 var _this = this;
                 soyut.radiogram.renderMessageObj(message, function(data){
-                    var arrMateri = [];
+                    var arrMateri = '';
                     if(data.materi != null ) {
                         data.materi.forEach(function (i) {
-                            arrMateri = arrMateri + i + ", ";
+                            arrMateri = arrMateri + i.toUpperCase() + ", ";
                         });
                     }
                     else {
                         arrMateri = '';
+                    }
+
+                    var attributes = '';
+                    if(roleName.isWASDAL) {
+                        attributes +=
+                            '<div class="col-md-8">' +
+                            '<div class="form-group"><p class="text-bold">MATERI :</p> ' + arrMateri + ' </div>' +
+                            '</div>' +
+                            '<div class="col-md-4 pull-right">' +
+                            '<div class="form-group pull-right"><p class="text-bold">Author</p> ' + data.author + '</div>' +
+                            '</div>';
                     }
 
                     soyut.radiogram.renderSenderObj(data.sender, data.senderWasdal, function (sender) {
@@ -451,7 +468,8 @@ soyut.radiogramdraft.renderMessageDetail = function (elSelector, message, state)
                                                         senderCallsign: sender.position,
                                                         senderRank: data.senderRank,
                                                         senderName: data.senderName,
-                                                        materi: arrMateri,
+                                                        materi: data.materi,
+                                                        attributes: attributes,
                                                         senderPhoto: "",
                                                         senderSignature: "",
                                                         panggilan: data.panggilan,
@@ -502,7 +520,8 @@ soyut.radiogramdraft.renderMessageDetail = function (elSelector, message, state)
                                                 senderCallsign: sender.position + " (" + senderrg.name + ")",
                                                 senderRank: data.senderRank,
                                                 senderName: data.senderName,
-                                                materi: arrMateri,
+                                                materi: data.materi,
+                                                attributes: attributes,
                                                 senderPhoto: "",
                                                 senderSignature: "",
                                                 panggilan: data.panggilan,
@@ -572,49 +591,46 @@ soyut.radiogramdraft.renderMessageDetail = function (elSelector, message, state)
 soyut.radiogram.renderMateriWasdal = function (state, value) {
     $(getInstanceID("list-materi")).html('');
     if(state == 'new'){
-        var html = '<select name="optMateri[]" multiple id="optMateri" class="form-control optMateri">';
-        html += '<option value="intelijen">INTELIJEN</option>';
-        html += '<option value="operasi">OPERASI</option>';
-        html += '<option value="personel">PERSONEL</option>';
-        html += '<option value="logistik">LOGISTIK</option>';
-        html += '<option value="komlek">KOMLEK</option>';
-        html += '</select>';
-        $(getInstanceID("list-materi")).append(html);
+        var html = '<h3>MATERI :</h3>' +
+            '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="intelijen">INTELIJEN</label>' +
+            '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="operasi">OPERASI</label>' +
+            '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="personel">PERSONEL</label>' +
+            '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="logistik">LOGISTIK</label>' +
+            '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="komlek">KOMLEK</label>';
 
-        $('.optMateri').multiselect({
-            columns: 1,
-            placeholder: 'Cari...',
-            search: true,
-            selectAll: true
-        });
+        $(getInstanceID("list-materi")).append(html);
     }
     else {
-        if(value != null){
-            var html = '<select name="optMateri[]" multiple id="optMateri" class="form-control optMateri">';
+        var checked1 = '';
+        var checked2 = '';
+        var checked3 = '';
+        var checked4 = '';
+        var checked5 = '';
+        value.forEach(function (i) {
+            if(i == 'intelijen'){
+                checked1 = 'checked';
+            }
+            else if(i == 'operasi'){
+                checked2 = 'checked';
+            }
+            else if(i == 'personel'){
+                checked3 = 'checked';
+            }
+            else if(i == 'logistik'){
+                checked4 = 'checked';
+            }
+            else if(i == 'komlek'){
+                checked5 = 'checked';
+            }
+        });
+        var html = '<h3>MATERI :</h3>';
+        html += '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="intelijen" '+ checked1 +'>INTELIJEN</label>';
+        html += '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="operasi" '+ checked2 +'>OPERASI</label>';
+        html += '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="personel" '+ checked3 +'>PERSONEL</label>';
+        html += '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="logistik" '+ checked4 +'>LOGISTIK</label>';
+        html += '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="komlek" '+ checked5 +'>KOMLEK</label>';
 
-            var listMateri = ["intelijen", "operasi", "personel", "logistik", "komlek"];
-            listMateri.forEach(function (m) {
-                var selected = "";
-                if (value != null) {
-                    soyut.radiogram.checkMateriSelected(value, m, function (sel) {
-                        if (sel) {
-                            selected += "selected";
-                        }
-                    });
-                }
-                html += '<option value="' + m + '" ' + selected + '>' + m.toUpperCase() + '</option>';
-            });
-
-            html += '</select>';
-            $(getInstanceID("list-materi")).append(html);
-
-            $('.optMateri').multiselect({
-                columns: 1,
-                placeholder: 'Cari...',
-                search: true,
-                selectAll: true
-            });
-        }
+        $(getInstanceID("list-materi")).append(html);
     }
 };
 
