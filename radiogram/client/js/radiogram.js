@@ -1183,13 +1183,8 @@ soyut.radiogram.renderListGroupMessage = function (elSelector, elChildren, messa
                     getMateri.push($(this).val());
                 });
 
-                function containAll(arr1, arr2) {
-                    for(var i=0, len = arr1.length; i < len; i++) {
-                        if (arr2.indexOf(arr1[i]) == -1){
-                            return false;
-                        }
-                        return true;
-                    }
+                function findEqual(arr1, arr2) {
+                    return JSON.stringify(arr1) == JSON.stringify(arr2);
                 }
 
                 var getInboxRadiogram = function (owner, callback) {
@@ -1228,7 +1223,7 @@ soyut.radiogram.renderListGroupMessage = function (elSelector, elChildren, messa
                                 });
                                 res.forEach(function (i) {
                                     if(getMateri.length > 0 ) {
-                                        if (containAll(i.materi, getMateri)) {
+                                        if (findEqual(i.materi, getMateri)) {
                                             var getRealTime = moment(i.simtime).format("DD") + '-' + moment(i.simtime).format("MM") + '-' + soyut.radiogram.yearNumToSimStr(moment(i.simtime).format("YYYY")) + ' ' + moment(i.simtime).format("hh") + ':' + moment(i.simtime).format("mm");
                                             var stringTime = '<span class="text">ws ' + moment(i.SendTime).format("DD-MM-YYYY h:mm") + '</span>' +
                                                 '<span class="text">wa ' + getRealTime + '</span>';
@@ -1281,7 +1276,7 @@ soyut.radiogram.renderListGroupMessage = function (elSelector, elChildren, messa
                                     });
                                     res.forEach(function (i) {
                                         if(getMateri.length > 0 ) {
-                                            if (containAll(i.materi, getMateri)) {
+                                            if (findEqual(i.materi, getMateri)) {
                                                 var getRealTime = moment(i.simtime).format("DD") + '-' + moment(i.simtime).format("MM") + '-' + soyut.radiogram.yearNumToSimStr(moment(i.simtime).format("YYYY")) + ' ' + moment(i.simtime).format("hh") + ':' + moment(i.simtime).format("mm");
                                                 var stringTime = '<span class="text">ws ' + moment(i.SendTime).format("DD-MM-YYYY h:mm") + '</span>' +
                                                     '<span class="text">wa ' + getRealTime + '</span>';
@@ -1429,18 +1424,13 @@ soyut.radiogram.renderListMessage = function (elSelector, elChildren, message) {
                         }
                         var countArr = 0;
 
-                        function containAll(arr1, arr2) {
-                            for(var i=0, len = arr1.length; i < len; i++) {
-                                if (arr2.indexOf(arr1[i]) == -1){
-                                    return false;
-                                }
-                                return true;
-                            }
+                        function findEqual(arr1, arr2) {
+                            return JSON.stringify(arr1) == JSON.stringify(arr2);
                         }
 
                         res.forEach(function (vi) {
                             if(getMateri.length > 0 ) {
-                                if (containAll(vi.materi, getMateri)) {
+                                if(findEqual(vi.materi, getMateri)){
 
                                     countArr++;
                                     var arrMateri = '';
@@ -1821,30 +1811,6 @@ soyut.radiogram.renderListMessage = function (elSelector, elChildren, message) {
                     });
 
                 }
-            },
-            LoadList: function () {
-                var materi = $("input:checkbox[name=select-materi]:checked");
-                var arrMateri = [];
-                materi.each(function () {
-                    arrMateri.push($(this).val());
-                });
-
-                var listMateri = '';
-                arrMateri.forEach(function (i) {
-                    listMateri = listMateri + i + " ";
-                });
-
-                console.log(arrMateri, listMateri)
-                console.log("asdasd")
-                // $('ul.messages-list > li').each(function(){
-                //     console.log("cccc")
-                //     var currentLiText = $(this).attr('data-type');
-                //     console.log(currentLiText);
-                //     console.log(listMateri)
-                //     // var showCurrentLi = currentLiText.indexOf(listMateri) !== -1;
-                //     //
-                //     // $(this).toggle(showCurrentLi);
-                // });
             },
             viewMessageDetail: function (val) {
                 soyut.radiogram.Radiogram_GetById({id: val}, function (err, data) {
@@ -2938,7 +2904,8 @@ soyut.radiogram.PrintPDF = function(val){
                     provider : providerName,
                     printer : printerName
                 }, function(print){
-                    console.log(print)
+                    console.log(print);
+                    $(getInstanceID('printerAlertModal')).modal('hide');
                 })
             });
         });
