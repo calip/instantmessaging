@@ -357,6 +357,13 @@ soyut.radiogram.renderKop = function () {
     $(getInstanceID("wdl-kop-form")).removeClass('disable');
 };
 
+soyut.radiogram.renderSelectedMateri = function () {
+    console.log("aaaa")
+    $('ul.messages-list > li').each(function(){
+        console.log("ok")
+    });
+};
+
 soyut.radiogram.renderContent = function () {
     $('.wdl-main .wdl-sidebar > div nav > ul li > a').css({"font-size": fontSize});
     $('.wdl-sidebar > div nav > div > ul li > a').css({"font-size": fontSize});
@@ -433,26 +440,26 @@ soyut.radiogram.renderContent = function () {
         console.log("save kop surat")
     });
 
-    $('.select-materi').click(function (event) {
-        var materi = $("input:checkbox[name=select-materi]:checked");
-        var arrMateri = [];
-        materi.each(function () {
-            arrMateri.push($(this).val());
-        });
-
-        var listMateri = '';
-        arrMateri.forEach(function (i) {
-            listMateri = listMateri + i + " ";
-        });
-
-        $('ul.messages-list > li').each(function(){
-
-            var currentLiText = $(this).attr('data-type');
-            var showCurrentLi = currentLiText.indexOf(listMateri) !== -1;
-
-            $(this).toggle(showCurrentLi);
-        });
-    });
+    // $('.select-materi').click(function (event) {
+    //     var materi = $("input:checkbox[name=select-materi]:checked");
+    //     var arrMateri = [];
+    //     materi.each(function () {
+    //         arrMateri.push($(this).val());
+    //     });
+    //
+    //     var listMateri = '';
+    //     arrMateri.forEach(function (i) {
+    //         listMateri = listMateri + i + " ";
+    //     });
+    //
+    //     $('ul.messages-list > li').each(function(){
+    //         var currentLiText = $(this).attr('data-type');
+    //         console.log(currentLiText)
+    //         // var showCurrentLi = currentLiText.indexOf(listMateri) !== -1;
+    //         //
+    //         // $(this).toggle(showCurrentLi);
+    //     });
+    // });
 
     $(getInstanceID("btnSubmitMessage")).click(function (event) {
         var editId = $(getInstanceID("editId")).val();
@@ -1169,6 +1176,22 @@ soyut.radiogram.renderListGroupMessage = function (elSelector, elChildren, messa
         methods: {
             LoadMessages: function () {
                 var _this = this;
+
+                var selmateri = $("input:checkbox[name=select-materi]:checked");
+                var getMateri = [];
+                selmateri.each(function () {
+                    getMateri.push($(this).val());
+                });
+
+                function containAll(arr1, arr2) {
+                    for(var i=0, len = arr1.length; i < len; i++) {
+                        if (arr2.indexOf(arr1[i]) == -1){
+                            return false;
+                        }
+                        return true;
+                    }
+                }
+
                 var getInboxRadiogram = function (owner, callback) {
                     soyut.radiogram.Radiogram_GetInboxByRole({id: owner, state: 'inbox', field:'SendTime', sort:'desc'}, function (err, data) {
                         if (!err) {
@@ -1204,21 +1227,42 @@ soyut.radiogram.renderListGroupMessage = function (elSelector, elChildren, messa
                                     return dateB - dateA;
                                 });
                                 res.forEach(function (i) {
-                                    var getRealTime = moment(i.simtime).format("DD") + '-' + moment(i.simtime).format("MM") + '-' + soyut.radiogram.yearNumToSimStr(moment(i.simtime).format("YYYY")) + ' ' + moment(i.simtime).format("hh") + ':' + moment(i.simtime).format("mm");
-                                    var stringTime = '<span class="text">ws ' + moment(i.SendTime).format("DD-MM-YYYY h:mm") + '</span>' +
-                                        '<span class="text">wa ' + getRealTime + '</span>';
+                                    if(getMateri.length > 0 ) {
+                                        if (containAll(i.materi, getMateri)) {
+                                            var getRealTime = moment(i.simtime).format("DD") + '-' + moment(i.simtime).format("MM") + '-' + soyut.radiogram.yearNumToSimStr(moment(i.simtime).format("YYYY")) + ' ' + moment(i.simtime).format("hh") + ':' + moment(i.simtime).format("mm");
+                                            var stringTime = '<span class="text">ws ' + moment(i.SendTime).format("DD-MM-YYYY h:mm") + '</span>' +
+                                                '<span class="text">wa ' + getRealTime + '</span>';
 
-                                    arrData.push({
-                                        id: i.id,
-                                        content: i.content,
-                                        SendTime: i.SendTime,
-                                        simtime: stringTime,
-                                        Number: i.Number,
-                                        readStatus: i.readStatus,
-                                        composeStatus: i.composeStatus,
-                                        receiverCallsign: "PANGKOGAS"
-                                    });
-                                    _this.$set(_this, 'messages', arrData);
+                                            arrData.push({
+                                                id: i.id,
+                                                content: i.content,
+                                                SendTime: i.SendTime,
+                                                simtime: stringTime,
+                                                Number: i.Number,
+                                                readStatus: i.readStatus,
+                                                composeStatus: i.composeStatus,
+                                                receiverCallsign: "PANGKOGAS"
+                                            });
+                                            _this.$set(_this, 'messages', arrData);
+                                        }
+                                    }
+                                    else {
+                                        var getRealTime = moment(i.simtime).format("DD") + '-' + moment(i.simtime).format("MM") + '-' + soyut.radiogram.yearNumToSimStr(moment(i.simtime).format("YYYY")) + ' ' + moment(i.simtime).format("hh") + ':' + moment(i.simtime).format("mm");
+                                        var stringTime = '<span class="text">ws ' + moment(i.SendTime).format("DD-MM-YYYY h:mm") + '</span>' +
+                                            '<span class="text">wa ' + getRealTime + '</span>';
+
+                                        arrData.push({
+                                            id: i.id,
+                                            content: i.content,
+                                            SendTime: i.SendTime,
+                                            simtime: stringTime,
+                                            Number: i.Number,
+                                            readStatus: i.readStatus,
+                                            composeStatus: i.composeStatus,
+                                            receiverCallsign: "PANGKOGAS"
+                                        });
+                                        _this.$set(_this, 'messages', arrData);
+                                    }
                                 });
                             });
                         });
@@ -1229,28 +1273,51 @@ soyut.radiogram.renderListGroupMessage = function (elSelector, elChildren, messa
                     scenarioService.Role_getRoleByGroup({roleGroup: group}, function (err, rolegroup) {
                         rolegroup.forEach(function (rg) {
                             getOutboxRadiogram(rg.id, function (err, res) {
-                                res.sort(function(a,b){
-                                    var c = new Date(a.SendTime);
-                                    var d = new Date(b.SendTime);
-                                    return d-c;
-                                });
-                                res.forEach(function (i) {
-                                    var getRealTime = moment(i.simtime).format("DD")+'-'+moment(i.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(i.simtime).format("YYYY"))+' '+moment(i.simtime).format("hh")+':'+moment(i.simtime).format("mm");
-                                    var stringTime = '<span class="text">ws '+ moment(i.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
-                                                        '<span class="text">wa '+ getRealTime +'</span>';
-
-                                    arrData.push({
-                                        id: i.id,
-                                        content: i.content,
-                                        SendTime: i.SendTime,
-                                        simtime: stringTime,
-                                        Number: i.Number,
-                                        readStatus: i.readStatus,
-                                        composeStatus: 'sent',
-                                        receiverCallsign: "PANGKOGAS"
+                                if(containAll(res.materi, getMateri)) {
+                                    res.sort(function (a, b) {
+                                        var c = new Date(a.SendTime);
+                                        var d = new Date(b.SendTime);
+                                        return d - c;
                                     });
-                                    _this.$set(_this, 'messages', arrData);
-                                });
+                                    res.forEach(function (i) {
+                                        if(getMateri.length > 0 ) {
+                                            if (containAll(i.materi, getMateri)) {
+                                                var getRealTime = moment(i.simtime).format("DD") + '-' + moment(i.simtime).format("MM") + '-' + soyut.radiogram.yearNumToSimStr(moment(i.simtime).format("YYYY")) + ' ' + moment(i.simtime).format("hh") + ':' + moment(i.simtime).format("mm");
+                                                var stringTime = '<span class="text">ws ' + moment(i.SendTime).format("DD-MM-YYYY h:mm") + '</span>' +
+                                                    '<span class="text">wa ' + getRealTime + '</span>';
+
+                                                arrData.push({
+                                                    id: i.id,
+                                                    content: i.content,
+                                                    SendTime: i.SendTime,
+                                                    simtime: stringTime,
+                                                    Number: i.Number,
+                                                    readStatus: i.readStatus,
+                                                    composeStatus: 'sent',
+                                                    receiverCallsign: "PANGKOGAS"
+                                                });
+                                                _this.$set(_this, 'messages', arrData);
+                                            }
+                                        }
+                                        else {
+                                            var getRealTime = moment(i.simtime).format("DD") + '-' + moment(i.simtime).format("MM") + '-' + soyut.radiogram.yearNumToSimStr(moment(i.simtime).format("YYYY")) + ' ' + moment(i.simtime).format("hh") + ':' + moment(i.simtime).format("mm");
+                                            var stringTime = '<span class="text">ws ' + moment(i.SendTime).format("DD-MM-YYYY h:mm") + '</span>' +
+                                                '<span class="text">wa ' + getRealTime + '</span>';
+
+                                            arrData.push({
+                                                id: i.id,
+                                                content: i.content,
+                                                SendTime: i.SendTime,
+                                                simtime: stringTime,
+                                                Number: i.Number,
+                                                readStatus: i.readStatus,
+                                                composeStatus: 'sent',
+                                                receiverCallsign: "PANGKOGAS"
+                                            });
+                                            _this.$set(_this, 'messages', arrData);
+                                        }
+                                    });
+                                }
                             });
                         });
                     });
@@ -1337,6 +1404,12 @@ soyut.radiogram.renderListMessage = function (elSelector, elChildren, message) {
             LoadMessages: function () {
                 var _this = this;
 
+                var selmateri = $("input:checkbox[name=select-materi]:checked");
+                var getMateri = [];
+                selmateri.each(function () {
+                    getMateri.push($(this).val());
+                });
+
                 if(roleName.isWASDAL){
                     var arrData =[];
                     soyut.radiogram.renderListWasdalMessages(message,function(res){
@@ -1354,110 +1427,40 @@ soyut.radiogram.renderListMessage = function (elSelector, elChildren, message) {
                                 return d-c;
                             });
                         }
-                        res.forEach(function (vi) {
-                            var arrMateri = '';
-                            if(vi.materi != null ) {
-                                vi.materi.forEach(function (i) {
-                                    arrMateri = arrMateri + i + " ";
-                                });
-                            }
-                            else {
-                                arrMateri = '';
-                            }
+                        var countArr = 0;
 
-                            if(message == "inbox") {
-                                var getRealTime = moment(vi.simtime).format("DD")+'-'+moment(vi.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(vi.simtime).format("YYYY"))+' '+moment(vi.simtime).format("hh")+':'+moment(vi.simtime).format("mm");
-                                var stringTime = '<span class="text">ws '+ moment(vi.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
-                                                    '<span class="text">wa '+ getRealTime +'</span>';
-
-
-                                soyut.radiogram.renderSenderObj(vi.sender, vi.senderWasdal, function (sender) {
-                                    if(vi.senderWasdal) {
-                                        arrData.push({
-                                            id: vi.id,
-                                            title: vi.title,
-                                            content: vi.content,
-                                            SendTime: vi.SendTime,
-                                            simtime: vi.simtime,
-                                            createTime: vi.createTime,
-                                            stringTime: stringTime,
-                                            materi: arrMateri,
-                                            Number: vi.Number,
-                                            readStatus: vi.readStatus,
-                                            composeStatus: vi.composeStatus,
-                                            receiverCallsign: sender.position,
-                                            receiverRank: "",
-                                            receiverName: "",
-                                            receiverPhoto: ""
-                                        });
-                                        _this.$set(_this, 'messages', arrData);
-                                    }
-                                    else {
-                                        soyut.radiogram.renderSenderGroup(sender.roleGroup, function (senderrg) {
-                                            arrData.push({
-                                                id: vi.id,
-                                                title: vi.title,
-                                                content: vi.content,
-                                                SendTime: vi.SendTime,
-                                                simtime: vi.simtime,
-                                                createTime: vi.createTime,
-                                                stringTime: stringTime,
-                                                materi: arrMateri,
-                                                Number: vi.Number,
-                                                readStatus: vi.readStatus,
-                                                composeStatus: vi.composeStatus,
-                                                receiverCallsign: sender.position + " (" + senderrg.name + ")",
-                                                receiverRank: "",
-                                                receiverName: "",
-                                                receiverPhoto: ""
-                                            });
-                                            _this.$set(_this, 'messages', arrData);
-                                        });
-                                    }
-                                })
-                            }
-                            else{
-                                var stringTime = '';
-                                if(message == 'draft'){
-                                    stringTime = '<span class="text">dibuat '+moment(vi.createTime).format("DD-MM-YYYY h:mm")+'</span>';
-                                    soyut.radiogram.renderListReceiversDetail(vi.receivers, function (receivers) {
-                                        soyut.radiogram.renderListKogasDetail(vi.kreceivers, function (kreceivers) {
-                                            soyut.radiogram.renderListAliasDetail(vi.alsreceivers, function (alsreceivers) {
-                                                arrData.push({
-                                                    id: vi.id,
-                                                    title: vi.title,
-                                                    content: vi.content,
-                                                    SendTime: vi.createTime,
-                                                    simtime: vi.createTime,
-                                                    createTime: vi.createTime,
-                                                    stringTime: stringTime,
-                                                    materi: arrMateri,
-                                                    Number: vi.Number,
-                                                    readStatus: vi.readStatus,
-                                                    composeStatus: vi.composeStatus,
-                                                    receiverCallsign: alsreceivers +" "+ kreceivers + " " + receivers,
-                                                    receiverRank: "",
-                                                    receiverName: "",
-                                                    receiverPhoto: ""
-                                                });
-                                                _this.$set(_this, 'messages', arrData);
-                                            });
-                                        });
-                                    });
+                        function containAll(arr1, arr2) {
+                            for(var i=0, len = arr1.length; i < len; i++) {
+                                if (arr2.indexOf(arr1[i]) == -1){
+                                    return false;
                                 }
-                                else{
-                                    if(vi.SendTime != null){
-                                        var getSimTime = moment(vi.simtime).format("DD")+'-'+moment(vi.simtime).format("MM")+'-'+ soyut.radiogram.yearNumToSimStr(moment(vi.simtime).format("YYYY"))+' '+moment(vi.simtime).format("hh")+':'+moment(vi.simtime).format("mm");
-                                        stringTime = '<span class="text">ws '+ moment(vi.SendTime).format("DD-MM-YYYY h:mm") +'</span>'+
-                                            '<span class="text">wa '+ getSimTime +'</span>';
+                                return true;
+                            }
+                        }
+
+                        res.forEach(function (vi) {
+                            if(getMateri.length > 0 ) {
+                                if (containAll(vi.materi, getMateri)) {
+
+                                    countArr++;
+                                    var arrMateri = '';
+                                    if (vi.materi != null) {
+                                        vi.materi.forEach(function (i) {
+                                            arrMateri = arrMateri + i + " ";
+                                        });
                                     }
                                     else {
-                                        stringTime = '<span class="text">dibuat '+moment(vi.createTime).format("DD-MM-YYYY h:mm")+'</span>';
+                                        arrMateri = '';
                                     }
 
-                                    soyut.radiogram.renderListReceiversDetail(vi.receivers, function (receivers) {
-                                        soyut.radiogram.renderListKogasDetail(vi.kreceivers, function (kreceivers) {
-                                            soyut.radiogram.renderListAliasDetail(vi.alsreceivers, function (alsreceivers) {
+                                    if (message == "inbox") {
+                                        var getRealTime = moment(vi.simtime).format("DD") + '-' + moment(vi.simtime).format("MM") + '-' + soyut.radiogram.yearNumToSimStr(moment(vi.simtime).format("YYYY")) + ' ' + moment(vi.simtime).format("hh") + ':' + moment(vi.simtime).format("mm");
+                                        var stringTime = '<span class="text">ws ' + moment(vi.SendTime).format("DD-MM-YYYY h:mm") + '</span>' +
+                                            '<span class="text">wa ' + getRealTime + '</span>';
+
+
+                                        soyut.radiogram.renderSenderObj(vi.sender, vi.senderWasdal, function (sender) {
+                                            if (vi.senderWasdal) {
                                                 arrData.push({
                                                     id: vi.id,
                                                     title: vi.title,
@@ -1470,15 +1473,231 @@ soyut.radiogram.renderListMessage = function (elSelector, elChildren, message) {
                                                     Number: vi.Number,
                                                     readStatus: vi.readStatus,
                                                     composeStatus: vi.composeStatus,
-                                                    receiverCallsign: alsreceivers +" "+ kreceivers + " " + receivers,
+                                                    receiverCallsign: sender.position,
+                                                    receiverRank: "",
+                                                    receiverName: "",
+                                                    receiverPhoto: ""
+                                                });
+                                                _this.$set(_this, 'messages', arrData);
+                                            }
+                                            else {
+                                                soyut.radiogram.renderSenderGroup(sender.roleGroup, function (senderrg) {
+                                                    arrData.push({
+                                                        id: vi.id,
+                                                        title: vi.title,
+                                                        content: vi.content,
+                                                        SendTime: vi.SendTime,
+                                                        simtime: vi.simtime,
+                                                        createTime: vi.createTime,
+                                                        stringTime: stringTime,
+                                                        materi: arrMateri,
+                                                        Number: vi.Number,
+                                                        readStatus: vi.readStatus,
+                                                        composeStatus: vi.composeStatus,
+                                                        receiverCallsign: sender.position + " (" + senderrg.name + ")",
+                                                        receiverRank: "",
+                                                        receiverName: "",
+                                                        receiverPhoto: ""
+                                                    });
+                                                    _this.$set(_this, 'messages', arrData);
+                                                });
+                                            }
+                                        })
+                                    }
+                                    else {
+                                        var stringTime = '';
+                                        if (message == 'draft') {
+                                            stringTime = '<span class="text">dibuat ' + moment(vi.createTime).format("DD-MM-YYYY h:mm") + '</span>';
+                                            soyut.radiogram.renderListReceiversDetail(vi.receivers, function (receivers) {
+                                                soyut.radiogram.renderListKogasDetail(vi.kreceivers, function (kreceivers) {
+                                                    soyut.radiogram.renderListAliasDetail(vi.alsreceivers, function (alsreceivers) {
+                                                        arrData.push({
+                                                            id: vi.id,
+                                                            title: vi.title,
+                                                            content: vi.content,
+                                                            SendTime: vi.createTime,
+                                                            simtime: vi.createTime,
+                                                            createTime: vi.createTime,
+                                                            stringTime: stringTime,
+                                                            materi: arrMateri,
+                                                            Number: vi.Number,
+                                                            readStatus: vi.readStatus,
+                                                            composeStatus: vi.composeStatus,
+                                                            receiverCallsign: alsreceivers + " " + kreceivers + " " + receivers,
+                                                            receiverRank: "",
+                                                            receiverName: "",
+                                                            receiverPhoto: ""
+                                                        });
+                                                        _this.$set(_this, 'messages', arrData);
+                                                    });
+                                                });
+                                            });
+                                        }
+                                        else {
+                                            if (vi.SendTime != null) {
+                                                var getSimTime = moment(vi.simtime).format("DD") + '-' + moment(vi.simtime).format("MM") + '-' + soyut.radiogram.yearNumToSimStr(moment(vi.simtime).format("YYYY")) + ' ' + moment(vi.simtime).format("hh") + ':' + moment(vi.simtime).format("mm");
+                                                stringTime = '<span class="text">ws ' + moment(vi.SendTime).format("DD-MM-YYYY h:mm") + '</span>' +
+                                                    '<span class="text">wa ' + getSimTime + '</span>';
+                                            }
+                                            else {
+                                                stringTime = '<span class="text">dibuat ' + moment(vi.createTime).format("DD-MM-YYYY h:mm") + '</span>';
+                                            }
+
+                                            soyut.radiogram.renderListReceiversDetail(vi.receivers, function (receivers) {
+                                                soyut.radiogram.renderListKogasDetail(vi.kreceivers, function (kreceivers) {
+                                                    soyut.radiogram.renderListAliasDetail(vi.alsreceivers, function (alsreceivers) {
+                                                        arrData.push({
+                                                            id: vi.id,
+                                                            title: vi.title,
+                                                            content: vi.content,
+                                                            SendTime: vi.SendTime,
+                                                            simtime: vi.simtime,
+                                                            createTime: vi.createTime,
+                                                            stringTime: stringTime,
+                                                            materi: arrMateri,
+                                                            Number: vi.Number,
+                                                            readStatus: vi.readStatus,
+                                                            composeStatus: vi.composeStatus,
+                                                            receiverCallsign: alsreceivers + " " + kreceivers + " " + receivers,
+                                                            receiverRank: "",
+                                                            receiverName: "",
+                                                            receiverPhoto: ""
+                                                        });
+                                                        _this.$set(_this, 'messages', arrData);
+                                                    });
+                                                });
+                                            });
+                                        }
+                                    }
+                                }
+                            }
+                            else {
+                                countArr++;
+                                var arrMateri = '';
+                                if (vi.materi != null) {
+                                    vi.materi.forEach(function (i) {
+                                        arrMateri = arrMateri + i + " ";
+                                    });
+                                }
+                                else {
+                                    arrMateri = '';
+                                }
+
+                                if (message == "inbox") {
+                                    var getRealTime = moment(vi.simtime).format("DD") + '-' + moment(vi.simtime).format("MM") + '-' + soyut.radiogram.yearNumToSimStr(moment(vi.simtime).format("YYYY")) + ' ' + moment(vi.simtime).format("hh") + ':' + moment(vi.simtime).format("mm");
+                                    var stringTime = '<span class="text">ws ' + moment(vi.SendTime).format("DD-MM-YYYY h:mm") + '</span>' +
+                                        '<span class="text">wa ' + getRealTime + '</span>';
+
+
+                                    soyut.radiogram.renderSenderObj(vi.sender, vi.senderWasdal, function (sender) {
+                                        if (vi.senderWasdal) {
+                                            arrData.push({
+                                                id: vi.id,
+                                                title: vi.title,
+                                                content: vi.content,
+                                                SendTime: vi.SendTime,
+                                                simtime: vi.simtime,
+                                                createTime: vi.createTime,
+                                                stringTime: stringTime,
+                                                materi: arrMateri,
+                                                Number: vi.Number,
+                                                readStatus: vi.readStatus,
+                                                composeStatus: vi.composeStatus,
+                                                receiverCallsign: sender.position,
+                                                receiverRank: "",
+                                                receiverName: "",
+                                                receiverPhoto: ""
+                                            });
+                                            _this.$set(_this, 'messages', arrData);
+                                        }
+                                        else {
+                                            soyut.radiogram.renderSenderGroup(sender.roleGroup, function (senderrg) {
+                                                arrData.push({
+                                                    id: vi.id,
+                                                    title: vi.title,
+                                                    content: vi.content,
+                                                    SendTime: vi.SendTime,
+                                                    simtime: vi.simtime,
+                                                    createTime: vi.createTime,
+                                                    stringTime: stringTime,
+                                                    materi: arrMateri,
+                                                    Number: vi.Number,
+                                                    readStatus: vi.readStatus,
+                                                    composeStatus: vi.composeStatus,
+                                                    receiverCallsign: sender.position + " (" + senderrg.name + ")",
                                                     receiverRank: "",
                                                     receiverName: "",
                                                     receiverPhoto: ""
                                                 });
                                                 _this.$set(_this, 'messages', arrData);
                                             });
+                                        }
+                                    })
+                                }
+                                else {
+                                    var stringTime = '';
+                                    if (message == 'draft') {
+                                        stringTime = '<span class="text">dibuat ' + moment(vi.createTime).format("DD-MM-YYYY h:mm") + '</span>';
+                                        soyut.radiogram.renderListReceiversDetail(vi.receivers, function (receivers) {
+                                            soyut.radiogram.renderListKogasDetail(vi.kreceivers, function (kreceivers) {
+                                                soyut.radiogram.renderListAliasDetail(vi.alsreceivers, function (alsreceivers) {
+                                                    arrData.push({
+                                                        id: vi.id,
+                                                        title: vi.title,
+                                                        content: vi.content,
+                                                        SendTime: vi.createTime,
+                                                        simtime: vi.createTime,
+                                                        createTime: vi.createTime,
+                                                        stringTime: stringTime,
+                                                        materi: arrMateri,
+                                                        Number: vi.Number,
+                                                        readStatus: vi.readStatus,
+                                                        composeStatus: vi.composeStatus,
+                                                        receiverCallsign: alsreceivers + " " + kreceivers + " " + receivers,
+                                                        receiverRank: "",
+                                                        receiverName: "",
+                                                        receiverPhoto: ""
+                                                    });
+                                                    _this.$set(_this, 'messages', arrData);
+                                                });
+                                            });
                                         });
-                                    });
+                                    }
+                                    else {
+                                        if (vi.SendTime != null) {
+                                            var getSimTime = moment(vi.simtime).format("DD") + '-' + moment(vi.simtime).format("MM") + '-' + soyut.radiogram.yearNumToSimStr(moment(vi.simtime).format("YYYY")) + ' ' + moment(vi.simtime).format("hh") + ':' + moment(vi.simtime).format("mm");
+                                            stringTime = '<span class="text">ws ' + moment(vi.SendTime).format("DD-MM-YYYY h:mm") + '</span>' +
+                                                '<span class="text">wa ' + getSimTime + '</span>';
+                                        }
+                                        else {
+                                            stringTime = '<span class="text">dibuat ' + moment(vi.createTime).format("DD-MM-YYYY h:mm") + '</span>';
+                                        }
+
+                                        soyut.radiogram.renderListReceiversDetail(vi.receivers, function (receivers) {
+                                            soyut.radiogram.renderListKogasDetail(vi.kreceivers, function (kreceivers) {
+                                                soyut.radiogram.renderListAliasDetail(vi.alsreceivers, function (alsreceivers) {
+                                                    arrData.push({
+                                                        id: vi.id,
+                                                        title: vi.title,
+                                                        content: vi.content,
+                                                        SendTime: vi.SendTime,
+                                                        simtime: vi.simtime,
+                                                        createTime: vi.createTime,
+                                                        stringTime: stringTime,
+                                                        materi: arrMateri,
+                                                        Number: vi.Number,
+                                                        readStatus: vi.readStatus,
+                                                        composeStatus: vi.composeStatus,
+                                                        receiverCallsign: alsreceivers + " " + kreceivers + " " + receivers,
+                                                        receiverRank: "",
+                                                        receiverName: "",
+                                                        receiverPhoto: ""
+                                                    });
+                                                    _this.$set(_this, 'messages', arrData);
+                                                });
+                                            });
+                                        });
+                                    }
                                 }
                             }
                         });
@@ -1602,6 +1821,30 @@ soyut.radiogram.renderListMessage = function (elSelector, elChildren, message) {
                     });
 
                 }
+            },
+            LoadList: function () {
+                var materi = $("input:checkbox[name=select-materi]:checked");
+                var arrMateri = [];
+                materi.each(function () {
+                    arrMateri.push($(this).val());
+                });
+
+                var listMateri = '';
+                arrMateri.forEach(function (i) {
+                    listMateri = listMateri + i + " ";
+                });
+
+                console.log(arrMateri, listMateri)
+                console.log("asdasd")
+                // $('ul.messages-list > li').each(function(){
+                //     console.log("cccc")
+                //     var currentLiText = $(this).attr('data-type');
+                //     console.log(currentLiText);
+                //     console.log(listMateri)
+                //     // var showCurrentLi = currentLiText.indexOf(listMateri) !== -1;
+                //     //
+                //     // $(this).toggle(showCurrentLi);
+                // });
             },
             viewMessageDetail: function (val) {
                 soyut.radiogram.Radiogram_GetById({id: val}, function (err, data) {
