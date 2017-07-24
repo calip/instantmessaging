@@ -1772,7 +1772,7 @@ function getListWasdalMessages(role, message) {
 function getRadiogram(role, message) {
     var field = 'SendTime';
     if(message == 'draft'){
-        field = '';
+        field = 'createTime';
     }
     return new Promise (function(resolve,reject){
         soyut.radiogram.Radiogram_GetInboxByRole({id: role, state: message, field:field, sort:'desc'}, function (e, data) {
