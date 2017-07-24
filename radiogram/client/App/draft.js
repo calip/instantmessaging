@@ -1214,8 +1214,10 @@ soyut.radiogram.rigRenderSelectedMateri = function () {
 
 soyut.radiogram.rigRenderCurrentWasdal = function () {
     if(soyut.Session.role.roleGroup != null) {
-        var html = '<h4>' + roleName.position + ' </h4><h4 class="text-small">WASDAL: '+ roleName.roleGroupName.toUpperCase() +'</h4>';
-        $(getInstanceID("detail-user")).html(html);
+        var htmlKogas = '<h3>WASDAL: '+ roleName.roleGroupName.toUpperCase() +'</h3>';
+        var htmlUser = '<h1 class="mainTitle">' + roleName.position + '</h1>';
+        $(getInstanceID("detail-kogas")).html(htmlKogas);
+        $(getInstanceID("detail-user")).html(htmlUser);
     }
     else {
         alert("Role group belum di assign!");
@@ -1325,7 +1327,7 @@ soyut.radiogram.rigRenderReceiverWasdal = function (state, value) {
                         columns: 1,
                         placeholder: 'Cari...',
                         search: true,
-                        selectAll: true
+                        selectAll: false
                     });
 
                 });
@@ -1383,7 +1385,7 @@ soyut.radiogram.rigRenderReceiverWasdal = function (state, value) {
                             columns: 1,
                             placeholder: 'Cari...',
                             search: true,
-                            selectAll: true
+                            selectAll: false
                         });
                     });
                 });
@@ -1460,7 +1462,7 @@ soyut.radiogram.rigRenderCCWasdal = function (state, value) {
                         columns: 1,
                         placeholder: 'Cari...',
                         search: true,
-                        selectAll: true
+                        selectAll: false
                     });
 
                 });
@@ -1517,7 +1519,7 @@ soyut.radiogram.rigRenderCCWasdal = function (state, value) {
                             columns: 1,
                             placeholder: 'Cari...',
                             search: true,
-                            selectAll: true
+                            selectAll: false
                         });
                     });
                 });
