@@ -1,5 +1,6 @@
 .rdgdraft-main {
   height: 100%;
+  font-size: 24px;
   color: #000 !important;
 
   .mainTitle {
@@ -74,6 +75,7 @@
     animation: spin 2s infinite linear;
   }
 
+
   td.rotate {
     /* Something you can count on */
     height: 140px;
@@ -91,6 +93,7 @@
   td.rotate > div > span {
     padding: 5px;
   }
+
 
   @media (min-width: 992px) {
     .app-navbar-fixed {
@@ -252,25 +255,21 @@
   }
   @media (min-width: 768px) {
     .navbar .navbar-header {
-      width: 360px;
+      width: 260px;
     }
   }
   @media (min-width: 992px) {
     .navbar .navbar-header {
       border-right: 1px solid #c8c7cc;
-      width: 360px;
     }
   }
   .navbar .navbar-header a {
     line-height: 65px;
     height: 65px;
+    color: #000;
   }
   .navbar .navbar-header .navbar-brand {
-    padding: 0 15px;
-  }
-  .navbar .navbar-header .navbar-compose {
-    padding: 0 15px;
-    margin: 20px;
+    padding: 0 5px 0 15px;
   }
   .navbar .navbar-header .navbar-brand img {
     display: inline-block;
@@ -954,7 +953,7 @@
   }
   .rdgdraft-sidebar > div nav > ul li a {
     border: none;
-    font-weight: 300;
+    font-weight: 400;
     margin: 0;
     position: relative;
     text-decoration: none;
@@ -988,6 +987,112 @@
   .rdgdraft-sidebar > div nav > ul li.open > a .icon-arrow:before {
     content: "\e64b";
   }
+
+
+  /*tambahan*/
+  .rdgdraft-sidebar > div nav > div > ul {
+    background: #ffffff;
+    list-style: none;
+    margin: 10px 0;
+    padding: 0;
+    border-top: 1px solid #c8c7cc;
+    border-bottom: 1px solid #c8c7cc;
+  }
+  .rdgdraft-sidebar > div nav > div > ul > li a {
+    color: #8e8e93;
+    border-bottom: none;
+  }
+  .rdgdraft-sidebar > div nav > div > ul > li a i {
+    font-weight: normal;
+  }
+  .rdgdraft-sidebar > div nav > div > ul > li > a {
+    display: table;
+  }
+  .rdgdraft-sidebar > div nav > div > ul > li.hover {
+    background: #efeff0;
+  }
+  .no-touch .rdgdraft-sidebar > div nav > div > ul > li:hover {
+    background: #efeff0;
+  }
+  .rdgdraft-sidebar > div nav > div > ul > li.active {
+    background: #c8c7cc;
+  }
+  .rdgdraft-sidebar > div nav > div > ul > li.active > a {
+    border-top: none !important;
+    color: #ffffff;
+  }
+  .rdgdraft-sidebar > div nav > div > ul > li.active > a i {
+    color: #ffffff;
+  }
+  .rdgdraft-sidebar > div nav > div > ul li {
+    border: none;
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+  }
+  .no-touch .rdgdraft-sidebar > div nav > div > ul li {
+    -moz-transition: background-color 300ms linear;
+    -o-transition: background-color 300ms linear;
+    -webkit-transition: background-color 300ms linear;
+    transition: background-color 300ms linear;
+  }
+  @media (min-width: 992px) {
+    .app-sidebar-closed .rdgdraft-sidebar > div nav > div > ul li ul.sub-menu {
+      display: none !important;
+    }
+  }
+  .rdgdraft-sidebar > div nav > div > ul li.active > ul.sub-menu {
+    display: block;
+    padding: 0;
+  }
+  .rdgdraft-sidebar > div nav > div > ul li > a {
+    margin-top: -1px !important;
+    font-size: 24px;
+  }
+  .rdgdraft-sidebar > div nav > ul li > a:active:focus {
+    background: #d5d4d8;
+  }
+  .no-touch .rdgdraft-sidebar > div nav > div > ul li > a:hover .item-inner {
+    border-bottom-color: transparent;
+  }
+  .rdgdraft-sidebar > div nav > div > ul li a {
+    border: none;
+    font-weight: 400;
+    margin: 0;
+    position: relative;
+    text-decoration: none;
+  }
+  .rdgdraft-sidebar > div nav > div > ul li a i[class*="ti-"] {
+    margin-right: 5px;
+    display: inline-block;
+    font-size: 17px;
+    position: relative;
+    top: 2px;
+  }
+  .rdgdraft-sidebar > div nav > div > ul li a .icon-arrow {
+    float: right;
+    margin-right: 6px !important;
+    font-style: normal;
+    font-weight: normal;
+    color: #c8c7cc;
+    font-size: 12px;
+  }
+  .rdgdraft-sidebar > div nav > div > ul li a .icon-arrow:before {
+    content: "\e64a";
+    font-family: themify;
+  }
+  .rdgdraft-sidebar > div nav > div > ul li.open {
+    background: #edecee;
+  }
+  .rdgdraft-sidebar > div nav > div > ul li.open > a .icon-arrow {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1;
+  }
+  .rdgdraft-sidebar > div nav > div > ul li.open > a .icon-arrow:before {
+    content: "\e64b";
+  }
+  /*tutup tambahan*/
 
   ul.sub-menu {
     clear: both;
@@ -1308,8 +1413,8 @@
   }
 
   .navbar-title {
-    color: #808285;
-    font-size: 10px;
+    color: #444444;
+    font-size: 14px;
     letter-spacing: 0.2px;
     padding-left: 15px !important;
     padding-right: 15px !important;
@@ -1322,6 +1427,9 @@
     display: none;
   }
 
+  .column-clean {
+    padding: 0;
+  }
   .navbar-form {
     background: #e2e2e4;
     border: none;
@@ -1393,6 +1501,7 @@
   @media (min-width: 992px) {
     .main-content {
       margin-top: 65px;
+      margin-left: 260px;
     }
     .app-navbar-fixed .main-content {
       margin-top: 0;
@@ -1410,6 +1519,7 @@
   }
   @media (max-width: 991px) {
     .main-content {
+      padding-top: 65px;
     }
   }
 
@@ -4443,7 +4553,7 @@
     border-radius: 0 0 0 0 !important;
     color: #5b5b60;
     font-family: inherit;
-    font-size: 14px;
+    font-size: 24px;
     line-height: 1.2;
     padding: 5px 4px;
     transition-duration: 0.1s;
@@ -4600,7 +4710,7 @@
 
   label {
     font-weight: normal;
-    color: #858585;
+    color: #000;
   }
 
   span.input-icon, span.input-help {
@@ -9740,7 +9850,7 @@ Social Icons
 
   .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
     border-bottom: 1px solid #e2e2e4;
-    color: #5b5b60 !important;
+    color: #000 !important;
     border-top: none;
   }
 
@@ -10222,7 +10332,7 @@ Social Icons
     position: relative;
   }
   .messages-list .messages-item:hover {
-    background-color: white;
+    background-color: #f7f7f7;
     cursor: pointer !important;
   }
   .messages-list .messages-item:hover .messages-item-star {
@@ -10230,7 +10340,10 @@ Social Icons
     opacity: 0.3;
   }
   .messages-list .messages-item.active {
-    background-color: white;
+    background-color: #f7f7f7;
+  }
+  .messages-list .messages-item.unread {
+    background-color: #f9f9f9;
   }
   .messages-list .messages-item.starred .messages-item-star {
     display: block;
@@ -10264,7 +10377,7 @@ Social Icons
   .messages-list .messages-item .messages-item-attachment {
     left: 7px;
     top: 25px;
-    color: #5F8295;
+    color: #5b5b60;
   }
   .messages-list .messages-item .messages-item-avatar {
     border-radius: 4px;
@@ -10276,9 +10389,9 @@ Social Icons
     margin-left: 0;
   }
   .messages-list .messages-item .messages-item-from {
-    font-weight: bold;
     margin-top: 2px;
     color: #000;
+    font-size: 24px;
   }
   .messages-list .messages-item .messages-item-time {
     right: 15px;
@@ -10325,12 +10438,12 @@ Social Icons
     background: #1FBBA6;
   }
   .messages-list .messages-item .messages-item-subject {
-    font-size: 14px;
+    font-size: 24px;
     margin-bottom: 4px;
     color: #000;
   }
   .messages-list .messages-item .messages-item-content {
-    font-size: 12px;
+    font-size: 24px;
     color: #000;
     margin-bottom: 4px;
   }
@@ -11243,7 +11356,7 @@ Social Icons
     border-right-color: #c8c7cc !important;
   }
   .rdgdraft-sidebar nav .navbar-title {
-    color: #aaaaaa;
+    color: #8e8d8d;
   }
   .rdgdraft-sidebar nav > ul {
     background: #ffffff !important;
@@ -11260,7 +11373,7 @@ Social Icons
     color: #007aff !important;
   }
   .rdgdraft-sidebar nav > ul > li > a .item-inner {
-    color: #777 !important;
+    color: #000 !important;
     border-bottom-color: #c8c7cc;
   }
   .rdgdraft-sidebar nav > ul > li.hover {
@@ -11326,6 +11439,86 @@ Social Icons
     border-color: #007aff !important;
     color: #007aff !important;
   }
+
+  /*tambahan*/
+  .rdgdraft-sidebar nav > div > ul {
+    background: #ffffff !important;
+    border-bottom-color: #c8c7cc !important;
+    border-top-color: #c8c7cc !important;
+  }
+  .rdgdraft-sidebar nav > div > ul > li a:active:focus {
+    background: #e6e6e6 !important;
+  }
+  .rdgdraft-sidebar nav > div > ul > li > a .item-media > i {
+    color: #007aff !important;
+  }
+  .rdgdraft-sidebar nav > div > ul > li > a .item-media .fa-stack .fa-square {
+    color: #007aff !important;
+  }
+  .rdgdraft-sidebar nav > div > ul > li > a .item-inner {
+    color: #000 !important;
+    border-bottom-color: #c8c7cc;
+  }
+  .rdgdraft-sidebar nav > div > ul > li.hover {
+    background: #f2f2f2 !important;
+  }
+  .rdgdraft-sidebar nav > div > ul > li.open {
+    background: #f2f2f2 !important;
+  }
+  .no-touch .rdgdraft-sidebar nav > div > ul > li:hover {
+    background: #f2f2f2 !important;
+  }
+  .rdgdraft-sidebar nav > div > ul > li.active {
+    background: #007aff !important;
+  }
+  .rdgdraft-sidebar nav > div > ul > li.active:hover {
+    background: #007aff !important;
+  }
+  @media (min-width: 992px) {
+    .rdgdraft-sidebar nav > div > ul > li.active:before {
+      border-right-color: #c8c7cc !important;
+    }
+    .rdgdraft-sidebar nav > div > ul > li.active:after {
+      border-right-color: #FAFAFA !important;
+    }
+  }
+  .rdgdraft-sidebar nav > div > ul > li.active > a:active:focus {
+    background: #006ee6 !important;
+  }
+  .rdgdraft-sidebar nav > div > ul > li.active > a .item-inner {
+    color: #ffffff !important;
+  }
+  .rdgdraft-sidebar nav > div > ul > li.active > a .item-media > i {
+    color: #ffffff !important;
+  }
+  .rdgdraft-sidebar nav > div > ul > li.active > a .item-media .fa-stack .fa-square {
+    color: #007aff !important;
+  }
+  .rdgdraft-sidebar nav > div > ul > li.active .sub-menu {
+    background: #f7f7f7;
+  }
+  .rdgdraft-sidebar nav > div > ul .sub-menu {
+    background: #f7f7f7;
+  }
+  .rdgdraft-sidebar nav > div > ul .sub-menu > li.open {
+    background: #f2f2f2 !important;
+  }
+  .rdgdraft-sidebar nav > div > ul .sub-menu > li a {
+    color: #777;
+  }
+  .rdgdraft-sidebar nav > div > ul .sub-menu > li.active a {
+    background: #e0e0e0 !important;
+  }
+  .rdgdraft-sidebar nav div ul > li.hover {
+    background: #f2f2f2;
+  }
+  .no-touch .rdgdraft-sidebar nav div ul > li:hover {
+    background: #f2f2f2;
+  }
+  .rdgdraft-sidebar nav div ul > li.open {
+    background: #f2f2f2;
+  }
+  /*tambahan*/
 
   @media (min-width: 992px) {
     .app-sidebar-closed .app-aside .search-form {

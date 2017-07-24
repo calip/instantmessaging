@@ -28,9 +28,9 @@
       "class":"soyut.module.app.radiogram.main",
       "title":"Radiogram",
       "launcher" : true,
+      "isMultiInstance":false,
+      "externalUse": false,
       "libraryScript":[
-        {"name":"wdl_select2","url":"/libs/select2/select2.js"},
-        {"name":"wdl_multiselect","url":"/libs/multiselect/multiselect.js"},
         {"name":"wdl_scrollbar","url":"/libs/pscrollbar/pscrollbar.min.js"},
         {"name":"wdl_formatter","url":"/js/InputFormatter.js"}
       ],
@@ -40,9 +40,7 @@
       ],
       "styles":[
         {"name":"wdl_style","url":"/css/radiogram.css"},
-        {"name":"wdl_scrollbarcss","url":"/libs/pscrollbar/pscrollbar.min.css"},
-        {"name":"wdl_selectcss","url":"/libs/multiselect/multiselect.css"},
-        {"name":"wdl_select2css","url":"/libs/select2/select2.css"}
+        {"name":"wdl_scrollbarcss","url":"/libs/pscrollbar/pscrollbar.min.css"}
       ],
       "contents":[
         {"name":"wdl_index","url":"/index.html"}
@@ -54,8 +52,6 @@
       "launcher" : false,
       "externalUse": true,
       "libraryScript":[
-        {"name":"rdgd_select2","url":"/libs/select2/select2.js"},
-        {"name":"rdgd_multiselect","url":"/libs/multiselect/multiselect.js"},
         {"name":"rdgd_scrollbar","url":"/libs/pscrollbar/pscrollbar.min.js"},
         {"name":"rdgd_formatter","url":"/js/InputFormatter.js"}
       ],
@@ -65,9 +61,7 @@
       ],
       "styles":[
         {"name":"rdgd_style","url":"/css/draft.css"},
-        {"name":"rdgd_scrollbarcss","url":"/libs/pscrollbar/pscrollbar.min.css"},
-        {"name":"rdgd_selectcss","url":"/libs/multiselect/multiselect.css"},
-        {"name":"rdgd_select2css","url":"/libs/select2/select2.css"}
+        {"name":"rdgd_scrollbarcss","url":"/libs/pscrollbar/pscrollbar.min.css"}
       ],
       "contents":[
         {"name":"rdgd_index","url":"/App/draft.html"}

@@ -1,453 +1,418 @@
 <div class="wdl-main">
 
-  <div class="wdl-app">
-      <!-- sidebar -->
-      <div class="sidebar app-aside wdl-sidebar">
-        <div class="sidebar-container perfect-scrollbar">
-          <nav>
+    <div class="wdl-app">
+        <!-- sidebar -->
+        <div class="sidebar app-aside wdl-sidebar">
+            <div class="sidebar-container perfect-scrollbar">
+                <nav>
 
-            <!-- start: DOCUMENTATION BUTTON -->
-            <div class="wrapper">
-              <a href="#" id="wdl-nav-compose" class="button-o">
-                <i class="fa icon-new-message"></i>
-                <span>Buat Radiogram</span>
-              </a>
-            </div>
-            <!-- end: DOCUMENTATION BUTTON -->
+                    <!-- start: DOCUMENTATION BUTTON -->
+                    <div class="wrapper">
+                        <a href="#" id="wdl-nav-compose" class="button-o">
+                            <i class="fa icon-new-message"></i>
+                            <span>BUAT RADIOGRAM</span>
+                        </a>
+                    </div>
+                    <!-- end: DOCUMENTATION BUTTON -->
 
-            <!-- start: MAIN NAVIGATION MENU -->
-            <div class="navbar-title">
-              <span>Menu Utama</span>
-            </div>
-            <ul class="main-navigation-menu" id="wdl-navigation-menu">
-              <li>
-                <a href="#" id="wdl-nav-inbox">
-                  <div class="item-content">
-                    <div class="item-media">
-                      <i class="fa icon-email26"></i>
+                    <!-- start: MAIN NAVIGATION MENU -->
+                    <div class="navbar-title">
+                        <span>Menu Utama</span>
                     </div>
-                    <div class="item-inner">
-                      <span class="title"> Kotak Masuk </span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#" id="wdl-nav-sent">
-                  <div class="item-content">
-                    <div class="item-media">
-                      <i class="fa icon-email147"></i>
-                    </div>
-                    <div class="item-inner">
-                      <span class="title"> Kotak Keluar </span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#" id="wdl-nav-draft">
-                  <div class="item-content">
-                    <div class="item-media">
-                      <i class="fa icon-draft"></i>
-                    </div>
-                    <div class="item-inner">
-                      <span class="title"> Draft </span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#" id="wdl-nav-trash">
-                    <div class="item-content">
-                        <div class="item-media">
-                            <i class="fa icon-trash"></i>
-                        </div>
-                        <div class="item-inner">
-                            <span class="title"> Kotak Sampah </span>
-                        </div>
-                    </div>
-                </a>
-              </li>
-            </ul>
-              <!-- materi -->
-              <div class="navbar-title" id="materi-content">
-                  <span id="materi-name">MATERI </span>
-              </div>
-              <div id="materi-list">
-                  <ul class="folders wdl-folders">
-                      <li>
-                          <div class="item-content">
-                              <div class="item-media">
-                                  <input type="checkbox" name="select-materi" class="select-materi" value="intelijen">
-                              </div>
-                              <div class="item-inner">
-                                  <span class="title"> INTELIJEN </span>
-                              </div>
-                          </div>
-                      </li>
-                      <li>
-                          <div class="item-content">
-                              <div class="item-media">
-                                  <input type="checkbox" name="select-materi" class="select-materi" value="operasi">
-                              </div>
-                              <div class="item-inner">
-                                  <span class="title"> OPERASI </span>
-                              </div>
-                          </div>
-                      </li>
-                      <li>
-                          <div class="item-content">
-                              <div class="item-media">
-                                  <input type="checkbox" name="select-materi" class="select-materi" value="personel">
-                              </div>
-                              <div class="item-inner">
-                                  <span class="title"> PERSONEL </span>
-                              </div>
-                          </div>
-                      </li>
-                      <li>
-                          <div class="item-content">
-                              <div class="item-media">
-                                  <input type="checkbox" name="select-materi" class="select-materi" value="logistik">
-                              </div>
-                              <div class="item-inner">
-                                  <span class="title"> LOGISTIK </span>
-                              </div>
-                          </div>
-                      </li>
-                      <li>
-                          <div class="item-content">
-                              <div class="item-media">
-                                  <input type="checkbox" name="select-materi" class="select-materi" value="komlek">
-                              </div>
-                              <div class="item-inner">
-                                  <span class="title"> KOMLEK </span>
-                              </div>
-                          </div>
-                      </li>
-                  </ul>
-              </div>
-              <!-- end materi -->
-            <!-- group -->
-            <div class="navbar-title">
-                <span id="role-group-name">KOGAS </span>
-            </div>
-            <div class="role-group-list"></div>
-            <!-- end group -->
-            <!-- start: DOCUMENTATION BUTTON
-            <div class="wrapper" id="kop-menu">
-              <a href="#" id="wdl-nav-kop" class="button-o">
-                <i class="fa icon-settings"></i>
-                <span>KOP Surat</span>
-              </a>
-            </div>
-            end: DOCUMENTATION BUTTON -->
-          </nav>
-        </div>
-      </div>
-      <!-- sidebar -->
-      <div class="app-content">
-          <!-- start: TOP NAVBAR -->
-          <header class="navbar navbar-default navbar-static-top">
-              <!-- start: NAVBAR HEADER -->
-              <div class="navbar-header">
-                  <a href="#" class="sidebar-mobile-toggler pull-left hidden-md hidden-lg" class="btn btn-navbar sidebar-toggle" data-toggle-class="app-slide-off" data-toggle-target="#app" data-toggle-click-outside="#sidebar">
-                      <i class="ti-align-justify"></i>
-                  </a>
-                  <a class="navbar-brand" href="#" id="detail-user"></a>
-                  <a href="#" class="sidebar-toggler pull-right visible-md visible-lg" data-toggle-class="app-sidebar-closed" data-toggle-target="#app">
-                      <i class="ti-align-justify"></i>
-                  </a>
-                  <a class="pull-right menu-toggler visible-xs-block" id="menu-toggler" data-toggle="collapse" href=".navbar-collapse">
-                      <span class="sr-only">Toggle navigation</span>
-                      <i class="ti-view-grid"></i>
-                  </a>
-              </div>
 
-              <!-- start: NAVBAR COLLAPSE -->
-              <div class="navbar-collapse collapse">
-
-                  <ul class="nav navbar-right">
-                      <!-- start: LANGUAGE SWITCHER -->
-                      <li class="dropdown">
-                          <a href class="dropdown-toggle" data-toggle="dropdown">
-                              <i class="icon-font-size"></i> Ukuran Font
-                          </a>
-                          <ul role="menu" class="dropdown-menu dropdown-light fadeInUpShort">
-                              <li>
-                                  <a href="#" class="menu-toggler btn-font-size" data-id="0">
-                                      14 px
-                                  </a>
-                              </li>
-                              <li>
-                                  <a href="#" class="menu-toggler btn-font-size" data-id="1">
-                                      18 px
-                                  </a>
-                              </li>
-                              <li>
-                                  <a href="#" class="menu-toggler btn-font-size" data-id="2">
-                                      24 px
-                                  </a>
-                              </li>
-                          </ul>
-                      </li>
-                      <!-- start: LANGUAGE SWITCHER -->
-                  </ul>
-
-              </div>
-          </header>
-
-          <!-- main content -->
-          <div class="main-content">
-              
-              <div class="wrap-content container email-kop disable" id="wdl-kop-form">
-                  
-                  <div class="container-fluid container-fullw">
-                      <div class="row">
-                          <div class="col-md-12">
-                            <div class="row margin-top-30">
-                                <div class="col-lg-12">
-                                    <div class="panel panel-white">
-                                        <div class="panel-heading">
-                                            <h5 class="panel-title">KOP Surat</h5>
-                                        </div>
-                                        <div class="panel-body">
-                                            <form role="form" class="form-horizontal">
-                                                <div class="form-group">
-                                                    <label class="col-sm-2 control-label" for="input-kop">
-                                                        KOP Surat
-                                                    </label>
-                                                    <div class="col-sm-10">
-                                                        <input type="text" placeholder="Kop Surat" id="input-kop" name="input-kop" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group margin-bottom-0">
-                                                    <div class="col-sm-offset-2 col-sm-10">
-                                                        <button class="btn btn-o btn-success" type="button" id="btnSaveKop">
-                                                            Simpan
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
+                    <ul class="main-navigation-menu" id="wdl-navigation-menu">
+                        <li>
+                            <a href="#" id="wdl-nav-inbox">
+                                <div class="item-content">
+                                    <div class="item-media">
+                                        <i class="fa icon-email26"></i>
+                                    </div>
+                                    <div class="item-inner">
+                                        <span class="title"> KOTAK MASUK </span>
+                                        <span class="badge pull-right" id="wdl-sum-inbox"></span>
                                     </div>
                                 </div>
+                            </a>
+                            <ul class="sub-menu wdl-kogas-list">
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" id="wdl-nav-sent">
+                                <div class="item-content">
+                                    <div class="item-media">
+                                        <i class="fa icon-email147"></i>
+                                    </div>
+                                    <div class="item-inner">
+                                        <span class="title"> KOTAK KELUAR </span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" id="wdl-nav-draft">
+                                <div class="item-content">
+                                    <div class="item-media">
+                                        <i class="fa icon-draft"></i>
+                                    </div>
+                                    <div class="item-inner">
+                                        <span class="title"> DRAFT </span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" id="wdl-nav-trash">
+                                <div class="item-content">
+                                    <div class="item-media">
+                                        <i class="fa icon-trash"></i>
+                                    </div>
+                                    <div class="item-inner">
+                                        <span class="title"> KOTAK SAMPAH </span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- materi -->
+                    <div class="navbar-title">
+                        <span id="materi-name">MATERI </span>
+                    </div>
+                    <div id="materi-list">
+                        <ul class="folders wdl-folders">
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media">
+                                        <input type="checkbox" name="select-materi" class="select-materi" value="intelijen">
+                                    </div>
+                                    <div class="item-inner">
+                                        <span class="title"> INTELIJEN </span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media">
+                                        <input type="checkbox" name="select-materi" class="select-materi" value="operasi">
+                                    </div>
+                                    <div class="item-inner">
+                                        <span class="title"> OPERASI </span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media">
+                                        <input type="checkbox" name="select-materi" class="select-materi" value="personel">
+                                    </div>
+                                    <div class="item-inner">
+                                        <span class="title"> PERSONEL </span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media">
+                                        <input type="checkbox" name="select-materi" class="select-materi" value="logistik">
+                                    </div>
+                                    <div class="item-inner">
+                                        <span class="title"> LOGISTIK </span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media">
+                                        <input type="checkbox" name="select-materi" class="select-materi" value="komlek">
+                                    </div>
+                                    <div class="item-inner">
+                                        <span class="title"> KOMLEK </span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- end materi -->
+                    <!-- group -->
+                    <div class="navbar-title">
+                        <span id="role-group-name">MONITORING KOGAS </span>
+                    </div>
+                    <div class="role-group-list"></div>
+                    <!-- end group -->
+                    <!-- start: DOCUMENTATION BUTTON
+                    <div class="wrapper" id="kop-menu">
+                      <a href="#" id="wdl-nav-kop" class="button-o">
+                        <i class="fa icon-settings"></i>
+                        <span>KOP Surat</span>
+                      </a>
+                    </div>
+                    end: DOCUMENTATION BUTTON -->
+                </nav>
+            </div>
+        </div>
+        <!-- sidebar -->
+        <div class="app-content">
+            <!-- start: TOP NAVBAR -->
+            <header class="navbar navbar-default navbar-static-top">
+                <!-- start: NAVBAR HEADER -->
+                <div class="navbar-header">
+                    <a href="#" class="sidebar-mobile-toggler pull-left hidden-md hidden-lg" class="btn btn-navbar sidebar-toggle" data-toggle-class="app-slide-off" data-toggle-target="#app" data-toggle-click-outside="#sidebar">
+                        <i class="ti-align-justify"></i>
+                    </a>
+                    <a class="navbar-brand" href="#" id="detail-user"></a>
+                    <a href="#" class="sidebar-toggler pull-right visible-md visible-lg" data-toggle-class="app-sidebar-closed" data-toggle-target="#app">
+                        <i class="ti-align-justify"></i>
+                    </a>
+                    <a class="pull-right menu-toggler visible-xs-block" id="menu-toggler" data-toggle="collapse" href=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <i class="ti-view-grid"></i>
+                    </a>
+                </div>
+
+                <!-- start: NAVBAR COLLAPSE -->
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-right">
+                        <!-- start: LANGUAGE SWITCHER -->
+                        <li class="dropdown">
+                            <a href class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-font-size"></i> Ukuran Font
+                            </a>
+                            <ul role="menu" class="dropdown-menu dropdown-light fadeInUpShort">
+                                <li>
+                                    <a href="#" class="menu-toggler btn-font-size" data-id="0">
+                                        14 px
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="menu-toggler btn-font-size" data-id="1">
+                                        18 px
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="menu-toggler btn-font-size" data-id="2">
+                                        24 px
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- start: LANGUAGE SWITCHER -->
+                    </ul>
+                </div>
+            </header>
+
+            <!-- main content -->
+            <div class="main-content">
+
+                <div class="wrap-content container" id="wdl-email-content">
+                    <div class="wrap-messages">
+                        <div id="inbox" class="inbox">
+                            <!-- start: EMAIL LIST -->
+                            <div class="col email-list"></div>
+                            <!-- end: EMAIL LIST -->
+
+                            <!-- start: EMAIL READER -->
+                            <div class="email-reader perfect-scrollbar" style="overflow-y:auto;"></div>
+                            <!-- end: EMAIL READER -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wrap-content container email-result disable" id="wdl-email-send">
+
+                </div>
+
+                <div class="wrap-content container email-preview disable" id="wdl-email-view">
+
+                </div>
+
+                <div class="wrap-content container email-compose disable" id="wdl-email-form">
+
+                    <div class="container-fluid container-fullw">
+                        <div class="row">
+                            <div class="col-md-12 reply-message">
+
                             </div>
-                          </div>
-                      </div>
-                  </div>
+                        </div>
 
-              </div>
+                        <div class="row">
+                            <div class="col-md-12">
 
-              <div class="wrap-content container email-compose disable" id="wdl-email-form">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <td class="" style="border-bottom: none; width:1%"></td>
+                                            <td colspan="2" class="text-center text-bold bg-light-grey" style="width:10%">Panggilan</td>
+                                            <td class="text-center text-bold bg-light-grey">Jenis</td>
+                                            <td class="text-center text-bold bg-light-grey">nomor</td>
+                                            <td class="text-center text-bold bg-light-grey" colspan="2">Derajat</td>
+                                            <td class="text-center text-bold bg-light-grey" colspan="2" style="width:15%">Instruksi Pengiriman</td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td class="text-center rotate" rowspan="12"><div><span><b>Ruang di luar garis hanya untuk petugas KOMLEK</b><span></div></td>
+                                            <td class="text-center" colspan="2">
+                                                <input type="hidden" name="editId" id="editId" value="">
+                                                <input type="text" placeholder="Panggilan" name="panggilan" class="form-control panggilan" id="panggilan" value="">
+                                            </td>
+                                            <td class="text-center">
+                                                <input type="text" placeholder="Jenis" name="jenis" class="form-control jenis" id="jenis" value="">
+                                            </td>
+                                            <td class="text-center">
+                                                <input type="text" placeholder="Nomor" class="form-control nomor" id="nomor" value="">
+                                            </td>
+                                            <td class="text-center" colspan="2">
+                                                <select name="derajat" class="form-control derajat" id="derajat" style="display:none">
+                                                    <option value="P" selected>P</option>
+                                                    <option value="OP">OP</option>
+                                                    <option value="O">O</option>
+                                                </select>
+                                            </td>
+                                            <td class="text-center" colspan="2">
+                                                <input type="text" placeholder="Instruksi Pengiriman" name="instruksi" id="instruksi" class="form-control instruksi" value="">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" class="text-bold" style="border-top:2px solid #000000; border-left:2px solid #000000; border-bottom: none; border-right: none">Dari</td>
+                                            <td colspan="4" class="parent-sender" style="border-top:2px solid #000000; border-right:2px solid #000000; border-bottom: none;" id="list-sender"></td>
+                                            <td class="text-center text-bold bg-light-grey">Tanda Dinas</td>
+                                            <td class="text-center text-bold bg-light-grey">Group</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none">Kepada</td>
+                                            <td colspan="4" class="parent-receivers" style="border-right:2px solid #000000; border-bottom: none;" id="list-receiver"></td>
+                                            <td class="text-center" style="border-bottom: none;"><input type="text" placeholder="Tanda Dinas" class="form-control" value="" id="tandadinas"></td>
+                                            <td class="text-center" style="border-bottom: none;"><input type="text" placeholder="group" class="form-control" value="0" name="group" id="group" readonly></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom:2px solid #000000; border-right: none;">Tembusan</td>
+                                            <td colspan="4" style="border-right:2px solid #000000; border-bottom:2px solid #000000;" id="list-tembusan"></td>
+                                            <td style="border-bottom:2px solid #000000"></td>
+                                            <td style="border-bottom:2px solid #000000"></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right:none;">Klasifikasi</td>
+                                            <td colspan="4" class="parent-klasifikasi" style="border-bottom: none; border-right: none;">
+                                                <select name="klasifikasi" class="form-control klasifikasi" id="klasifikasi">
+                                                    <option value="Biasa" selected>BIASA</option>
+                                                    <option value="Rahasia">RAHASIA</option>
+                                                    <option value="Sangat Rahasia">SANGAT RAHASIA</option>
+                                                </select>
+                                                <span class="klasifikasi-error help-block valid"></span>
+                                            </td>
+                                            <td style="border-bottom: none; border-right: none;"></td>
+                                            <td style="border-bottom: none;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Nomor</td>
+                                            <td colspan="4" class="parent-no" style="border-bottom: none; border-right: none;">
+                                                <input type="hidden" name="referenceid" id="referenceid" value="">
+                                                <input type="hidden" name="refauthor" id="refauthor" value="">
+                                                <input type="text" placeholder="Nomor" name="Number" class="form-control Number" id="Number">
+                                                <span class="no-error help-block valid"></span>
+                                            </td>
+                                            <td style="border-bottom: none; border-right: none;"></td>
+                                            <td style="border-bottom: none;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="8" style="border-left:2px solid #000000;">
+                                                <input type="hidden" name="ref_sender" id="ref_sender" value="">
+                                                <input type="hidden" name="cur_pos" id="cur_pos" value="0">
+                                                <input type="hidden" name="cur_word" id="cur_word" value="0">
+                                                <input type="hidden" name="cur_sent" id="cur_sent" value="0">
+                                                <input type="hidden" name="cur_line" id="cur_line" value="0">
+                                                <input type="hidden" name="colm_count" id="colm_count" value="0">
+                                                <input type="hidden" id="char_count" name="char_count" value="0">
+                                                <input type="hidden" id="word_count" name="word_count" value="0">
+                                                <input type="hidden" id="sent_count" name="sent_count" value="0">
+                                                <input type="hidden" id="line_count" name="line_count" value="0">
+                                                <input type="hidden" id="sel_char_count" name="sel_char_count" value="0">
+                                                <input type="hidden" id="sel_word_count" name="sel_word_count" value="0">
+                                                <input type="hidden" id="sel_sent_count" name="sel_sent_count" value="0">
+                                                <input type="hidden" id="sel_line_count" name="sel_line_count" value="0">
 
-                  <div class="container-fluid container-fullw">
-                      <div class="row">
-                          <div class="col-md-12 reply-message">
+                                                <input type="hidden" id="status" name="status" value="0">
+                                                <textarea name="message-input" class="message-input form-control" id="message-input" wrap="off" rows="10" onclick="cpcount('');" onkeyup="cpcount(''); totalcount();" style="min-height: 550px;"></textarea>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center text-bold bg-light-grey" colspan="2" style="border-left:2px solid #000000;">Pengirim</td>
+                                            <td class="text-center text-bold bg-light-grey" colspan="2" style="border-right:2px solid #000000;">Derajat</td>
+                                            <td class="text-center text-bold bg-light-grey" colspan="2" style="border-top:2px solid #000000;">Dikirim/Diterima</td>
+                                            <td class="text-center text-bold bg-light-grey" style="border-top:2px solid #000000;">Cara</td>
+                                            <td class="text-center text-bold bg-light-grey" style="border-top:2px solid #000000;">Paraf</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Nama</td>
+                                            <td style="border-bottom: none;"><input type="text" placeholder="" readonly class="form-control sender-name" name="sender-name" id="sender-name" value=""></td>
+                                            <td class="text-center text-bold">Aksi</td>
+                                            <td class="text-center text-bold" style="border-right:2px solid #000000;">Tembusan</td>
+                                            <td class="text-center text-bold">Jam</td>
+                                            <td class="text-center text-bold">Tanggal</td>
+                                            <td class="text-center vertical-align-top" rowspan="3"><input type="text" placeholder="" name="cara" class="form-control cara" value="" id="cara"></td>
+                                            <td class="text-center vertical-align-top" rowspan="3"><input type="text" placeholder="" name="paraf" class="form-control paraf" value="" id="paraf"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Pangkat</td>
+                                            <td style="border-bottom: none;"><input type="text" placeholder="" readonly class="form-control sender-pangkat" name="sender-pangkat" id="sender-pangkat" value=""></td>
+                                            <td class="text-center vertical-align-top" rowspan="2"><input type="text" placeholder="" name="alamataksi" class="form-control alamataksi" value="" id="alamataksi"></td>
+                                            <td class="text-center vertical-align-top" rowspan="2" style="border-right:2px solid #000000;"><input type="text" placeholder="" name="alamattembusan" class="form-control alamattembusan" id="alamattembusan" value=""></td>
+                                            <td class="text-center vertical-align-top" rowspan="2"><input type="text" placeholder="" name="jam" class="form-control jam" value="" id="jam"></td>
+                                            <td class="text-center vertical-align-top" rowspan="2"><input type="text" placeholder="" name="tanggal" class="form-control tanggal" value="" id="tanggal"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-bold" style="border-left:2px solid #000000; border-right: none;">TTD</td>
+                                            <td><input type="hidden" name="signature" id="signature" class="signature"><img width="100" class="sender-signature" id="sender-signature" name="sender-signature"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="form-group" id="list-materi">
 
-                          </div>
-                      </div>
+                                    </div>
+                                    <div class="form-group" id="list-approval">
 
-                      <div class="row">
-                          <div class="col-md-12">
+                                    </div>
+                                </div>
 
-                              <div class="table-responsive">
-                                  <table class="table table-bordered">
-                                      <thead>
-                                      <tr>
-                                          <td class="" style="border-bottom: none; width:1%"></td>
-                                          <td colspan="2" class="text-center text-bold bg-light-grey" style="width:10%">Panggilan</td>
-                                          <td class="text-center text-bold bg-light-grey">Jenis</td>
-                                          <td class="text-center text-bold bg-light-grey">nomor</td>
-                                          <td class="text-center text-bold bg-light-grey" colspan="2">Derajat</td>
-                                          <td class="text-center text-bold bg-light-grey" colspan="2" style="width:15%">Instruksi Pengiriman</td>
-                                      </tr>
-                                      </thead>
-                                      <tbody>
-                                      <tr>
-                                          <td class="text-center rotate" rowspan="12"><div><span><b>Ruang di luar garis hanya untuk petugas KOMLEK</b><span></div></td>
-                                          <td class="text-center" colspan="2">
-                                              <input type="hidden" name="editId" id="editId" value="">
-                                              <input type="text" placeholder="Panggilan" name="panggilan" class="form-control panggilan" id="panggilan" value="">
-                                          </td>
-                                          <td class="text-center">
-                                              <input type="text" placeholder="Jenis" name="jenis" class="form-control jenis" id="jenis" value="">
-                                          </td>
-                                          <td class="text-center">
-                                              <input type="text" placeholder="Nomor" class="form-control nomor" id="nomor" value="">
-                                          </td>
-                                          <td class="text-center" colspan="2">
-                                              <select name="derajat" class="form-control derajat" id="derajat" style="display:none">
-                                                  <option value="P" selected>P</option>
-                                                  <option value="OP">OP</option>
-                                                  <option value="O">O</option>
-                                              </select>
-                                          </td>
-                                          <td class="text-center" colspan="2">
-                                              <input type="text" placeholder="Instruksi Pengiriman" name="instruksi" id="instruksi" class="form-control instruksi" value="">
-                                          </td>
-                                      </tr>
-                                      <tr>
-                                          <td colspan="2" class="text-bold" style="border-top:2px solid #000000; border-left:2px solid #000000; border-bottom: none; border-right: none">Dari</td>
-                                          <td colspan="4" class="parent-sender" style="border-top:2px solid #000000; border-right:2px solid #000000; border-bottom: none;" id="list-sender"></td>
-                                          <td class="text-center text-bold bg-light-grey">Tanda Dinas</td>
-                                          <td class="text-center text-bold bg-light-grey">Group</td>
-                                      </tr>
-                                      <tr>
-                                          <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none">Kepada</td>
-                                          <td colspan="4" class="parent-receivers" style="border-right:2px solid #000000; border-bottom: none;" id="list-receiver"></td>
-                                          <td class="text-center" style="border-bottom: none;"><input type="text" placeholder="Tanda Dinas" class="form-control" value="" id="tandadinas"></td>
-                                          <td class="text-center" style="border-bottom: none;"><input type="text" placeholder="group" class="form-control" value="0" name="group" id="group" readonly></td>
-                                      </tr>
-                                      <tr>
-                                          <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom:2px solid #000000; border-right: none;">Tembusan</td>
-                                          <td colspan="4" style="border-right:2px solid #000000; border-bottom:2px solid #000000;" id="list-tembusan"></td>
-                                          <td style="border-bottom:2px solid #000000"></td>
-                                          <td style="border-bottom:2px solid #000000"></td>
-                                      </tr>
-                                      <tr>
-                                          <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right:none;">Klasifikasi</td>
-                                          <td colspan="4" class="parent-klasifikasi" style="border-bottom: none; border-right: none;">
-                                              <select name="klasifikasi" class="form-control klasifikasi" id="klasifikasi">
-                                                  <option value="Biasa" selected>BIASA</option>
-                                                  <option value="Rahasia">RAHASIA</option>
-                                                  <option value="Sangat Rahasia">SANGAT RAHASIA</option>
-                                              </select>
-                                              <span class="klasifikasi-error help-block valid"></span>
-                                          </td>
-                                          <td style="border-bottom: none; border-right: none;"></td>
-                                          <td style="border-bottom: none;"></td>
-                                      </tr>
-                                      <!--
-                                      <tr>
-                                          <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right:none;">Materi</td>
-                                          <td colspan="4" class="parent-materi" style="border-bottom: none; border-right: none;" id="list-materi"></td>
-                                          <td style="border-bottom: none; border-right: none;"></td>
-                                          <td style="border-bottom: none;"></td>
-                                      </tr>
-                                      -->
-                                      <tr>
-                                          <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Nomor</td>
-                                          <td colspan="4" class="parent-no" style="border-bottom: none; border-right: none;">
-                                              <input type="hidden" name="referenceid" id="referenceid" value="">
-                                              <input type="hidden" name="refauthor" id="refauthor" value="">
-                                              <input type="text" placeholder="Nomor" name="Number" class="form-control Number" id="Number">
-                                              <span class="no-error help-block valid"></span>
-                                          </td>
-                                          <td style="border-bottom: none; border-right: none;"></td>
-                                          <td style="border-bottom: none;"></td>
-                                      </tr>
-                                      <tr>
-                                          <td colspan="8" style="border-left:2px solid #000000;">
-                                              <input type="hidden" name="ref_sender" id="ref_sender" value="">
-                                              <input type="hidden" name="cur_pos" id="cur_pos" value="0">
-                                              <input type="hidden" name="cur_word" id="cur_word" value="0">
-                                              <input type="hidden" name="cur_sent" id="cur_sent" value="0">
-                                              <input type="hidden" name="cur_line" id="cur_line" value="0">
-                                              <input type="hidden" name="colm_count" id="colm_count" value="0">
-                                              <input type="hidden" id="char_count" name="char_count" value="0">
-                                              <input type="hidden" id="word_count" name="word_count" value="0">
-                                              <input type="hidden" id="sent_count" name="sent_count" value="0">
-                                              <input type="hidden" id="line_count" name="line_count" value="0">
-                                              <input type="hidden" id="sel_char_count" name="sel_char_count" value="0">
-                                              <input type="hidden" id="sel_word_count" name="sel_word_count" value="0">
-                                              <input type="hidden" id="sel_sent_count" name="sel_sent_count" value="0">
-                                              <input type="hidden" id="sel_line_count" name="sel_line_count" value="0">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button class="btn btn-primary btn-o btn-wide" type="button" id="btnSaveMessage">
+                                            <i class="fa icon-draft"></i> Draft
+                                        </button>
+                                        <button class="btn btn-primary btn-wide" type="button" id="btnSubmitMessage">
+                                            Kirim <i class="fa icon-arrow-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
 
-                                              <input type="hidden" id="status" name="status" value="0">
-                                              <textarea name="message-input" class="message-input form-control" id="message-input" wrap="off" rows="10" onclick="cpcount('');" onkeyup="cpcount(''); totalcount();" style="min-height: 550px;"></textarea>
-                                          </td>
-                                      </tr>
-                                      <tr>
-                                          <td class="text-center text-bold bg-light-grey" colspan="2" style="border-left:2px solid #000000;">Pengirim</td>
-                                          <td class="text-center text-bold bg-light-grey" colspan="2" style="border-right:2px solid #000000;">Derajat</td>
-                                          <td class="text-center text-bold bg-light-grey" colspan="2" style="border-top:2px solid #000000;">Dikirim/Diterima</td>
-                                          <td class="text-center text-bold bg-light-grey" style="border-top:2px solid #000000;">Cara</td>
-                                          <td class="text-center text-bold bg-light-grey" style="border-top:2px solid #000000;">Paraf</td>
-                                      </tr>
-                                      <tr>
-                                          <td class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Nama</td>
-                                          <td style="border-bottom: none;"><input type="text" placeholder="" readonly class="form-control sender-name" name="sender-name" id="sender-name" value=""></td>
-                                          <td class="text-center text-bold">Aksi</td>
-                                          <td class="text-center text-bold" style="border-right:2px solid #000000;">Tembusan</td>
-                                          <td class="text-center text-bold">Jam</td>
-                                          <td class="text-center text-bold">Tanggal</td>
-                                          <td class="text-center vertical-align-top" rowspan="3"><input type="text" placeholder="" name="cara" class="form-control cara" value="" id="cara"></td>
-                                          <td class="text-center vertical-align-top" rowspan="3"><input type="text" placeholder="" name="paraf" class="form-control paraf" value="" id="paraf"></td>
-                                      </tr>
-                                      <tr>
-                                          <td class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Pangkat</td>
-                                          <td style="border-bottom: none;"><input type="text" placeholder="" readonly class="form-control sender-pangkat" name="sender-pangkat" id="sender-pangkat" value=""></td>
-                                          <td class="text-center vertical-align-top" rowspan="2"><input type="text" placeholder="" name="alamataksi" class="form-control alamataksi" value="" id="alamataksi"></td>
-                                          <td class="text-center vertical-align-top" rowspan="2" style="border-right:2px solid #000000;"><input type="text" placeholder="" name="alamattembusan" class="form-control alamattembusan" id="alamattembusan" value=""></td>
-                                          <td class="text-center vertical-align-top" rowspan="2"><input type="text" placeholder="" name="jam" class="form-control jam" value="" id="jam"></td>
-                                          <td class="text-center vertical-align-top" rowspan="2"><input type="text" placeholder="" name="tanggal" class="form-control tanggal" value="" id="tanggal"></td>
-                                      </tr>
-                                      <tr>
-                                          <td class="text-bold" style="border-left:2px solid #000000; border-right: none;">TTD</td>
-                                          <td><input type="hidden" name="signature" id="signature" class="signature"><img width="100" class="sender-signature" id="sender-signature" name="sender-signature"></td>
-                                      </tr>
-                                      </tbody>
-                                  </table>
-                                  <div class="form-group" id="list-materi">
+                            </div>
+                        </div>
+                    </div>
 
-                                  </div>
-                              </div>
+                </div>
 
-                              <div class="row">
-                                  <div class="col-md-12">
-                                      <button class="btn btn-primary btn-o btn-wide" type="button" id="btnSaveMessage">
-                                          <i class="fa icon-draft"></i> Draft
-                                      </button>
-                                      <!--<button class="btn btn-info btn-wide" type="button" id="btnPreviewMessage">
-                                          Pratinjau <i class="fa icon-arrow-right"></i>
-                                      </button>
-                                      -->
-                                      <button class="btn btn-primary btn-wide" type="button" id="btnSubmitMessage">
-                                          Kirim <i class="fa icon-arrow-right"></i>
-                                      </button>
-                                  </div>
-                              </div>
+            </div>
+            <!-- main content -->
 
-                          </div>
-                      </div>
-                  </div>
-
-              </div>
-
-              <div class="wrap-content container email-result disable" id="wdl-email-send">
-
-              </div>
-
-              <div class="wrap-content container email-preview disable" id="wdl-email-view">
-
-              </div>
-
-              <div class="wrap-content container" id="wdl-email-content">
-                  <div class="wrap-messages">
-                      <div id="inbox" class="inbox">
-                          <!-- start: EMAIL LIST -->
-                          <div class="col email-list"></div>
-                          <!-- end: EMAIL LIST -->
-
-                          <!-- start: EMAIL READER -->
-                          <div class="email-reader perfect-scrollbar" style="overflow-y:auto;"></div>
-                          <!-- end: EMAIL READER -->
-                      </div>
-                  </div>
-              </div>
-
-          </div>
-          <!-- main content -->
-
-      </div>
-  </div>
+        </div>
+    </div>
 
 </div>
 
+<template id="kogas-list">
+    <div>
+        <li v-for="group in groups" v-bind="loadAttribute(group.id)">
+            <a href="#" @click="ViewInboxGroup(group.id)">
+                <span class="title"> {{group.name}} </span>
+            </a>
+        </li>
+    </div>
+</template>
+
 <template id="role-group-list">
     <ul class="folders wdl-folders">
-        <li v-for="group in groups">
+        <li v-for="group in groups" v-bind="loadDataAttribute(group.id)">
             <a href="#" v-bind="loadAttribute(group.id)">
                 <div class="item-content">
                     <div class="item-media">
@@ -475,47 +440,49 @@
 </template>
 
 <template id="email-list">
-  <div class="wrap-list">
-    <div class="wrap-options">
-      <div class="messages-search">
-        <form>
-            <input type="text" placeholder="Cari radiogram..." @keyup="FindRadiogram()" class="txt-filter-list form-control underline">
-        </form>
-      </div>
+    <div class="wrap-list">
+        <div class="wrap-options">
+            <div class="messages-search">
+                <input type="text" placeholder="Cari radiogram..." @keyup="FindRadiogram()" class="txt-filter-list form-control underline">
+            </div>
+        </div>
+        <ul class="messages-list perfect-scrollbar">
+            <li v-for="message in messages" :class="LoadStatusMessage(message.id, message.readStatus, message.composeStatus, message.sender.roleGroup)" :data-date="message.simtime" :data-group="message.sender.roleGroup" :data-status="message.readStatus" :data-materi="message.materi" :data-id="message.id">
+                <a href="#" @click="viewMessageDetail(message.id)">
+                    <span class="messages-item-from">{{ message.receiverDetail, message.senderDetail, message.composeStatus | fromfilter }}</span>
+                    <div class="messages-item-time">
+                        <span class="text">{{ message.SendTime, message.createTime, message.composeStatus | wstime }}</span>
+                        <span class="text">{{ message.simtime, message.composeStatus | watime }}</span>
+                    </div>
+                    <span class="messages-item-subject"> {{message.Number}}</span>
+                    <span class="messages-item-content">{{ message.content | truncate}}.....</span>
+                </a>
+            </li>
+        </ul>
     </div>
-    <ul class="messages-list perfect-scrollbar">
-      <li v-for="message in messages" :class="LoadStatusMessage(message.id, message.readStatus, message.composeStatus)" :data-date="message.simtime" :data-type="message.materi">
-        <a href="#" @click="viewMessageDetail(message.id)">
-          <span class="messages-item-from">{{ message.receiverCallsign | truncsender}}</span>
-          <div class="messages-item-time" v-html="message.stringTime"></div>
-          <span class="messages-item-subject"> {{message.Number}}</span>
-          <span class="messages-item-content">{{ message.content | truncate}}.....</span>
-        </a>
-      </li>
-    </ul>
-  </div>
 </template>
 
 <template id="wasdal-list">
-  <div class="wrap-list">
-    <div class="wrap-options">
-      <div class="messages-search">
-        <form>
-          <input type="text" placeholder="Search messages..." class="form-control underline">
-        </form>
-      </div>
+    <div class="wrap-list">
+        <div class="wrap-options">
+            <div class="messages-search">
+                <input type="text" placeholder="Cari radiogram..." @keyup="FindRadiogram()" class="txt-filter-list form-control underline">
+            </div>
+        </div>
+        <ul class="messages-list perfect-scrollbar">
+            <li v-for="message in messages" :class="LoadStatusMessage(message.id, message.readStatus, message.composeStatus)" :data-date="message.simtime">
+                <a href="#" @click="viewMessageDetail(message.id)">
+                    <span class="messages-item-from">{{ message.receiverDetail | fromfilter }}</span>
+                    <div class="messages-item-time">
+                        <span class="text">{{ message.SendTime, message.createTime, message.composeStatus | wstime }}</span>
+                        <span class="text">{{ message.simtime, message.composeStatus | watime }}</span>
+                    </div>
+                    <span class="messages-item-subject"> {{message.Number}}</span>
+                    <span class="messages-item-content">{{ message.content | truncate}}.....</span>
+                </a>
+            </li>
+        </ul>
     </div>
-    <ul class="messages-list perfect-scrollbar">
-      <li v-for="message in messages" :class="LoadStatusMessage(message.id, message.readStatus, message.composeStatus)">
-        <a href="#" @click="viewMessageDetail(message.id)">
-          <span class="messages-item-from">{{message.receiverCallsign}}</span>
-          <div class="messages-item-time" v-html="message.simtime"></div>
-          <span class="messages-item-subject"> {{message.Number}}</span>
-          <span class="messages-item-content">{{ message.content | truncate}}.....</span>
-        </a>
-      </li>
-    </ul>
-  </div>
 </template>
 
 <template id="email-reply">
@@ -553,7 +520,7 @@
                 <tr>
                     <td colspan="2" class="text-bold" style="border-top:2px solid #000000; border-left:2px solid #000000; border-bottom: none; border-right: none">Dari</td>
                     <td colspan="4" style="border-top:2px solid #000000; border-right:2px solid #000000; border-bottom: none;">
-                        {{contents.senderCallsign}}
+                        {{contents.senderDetail}}
                     </td>
                     <td class="text-center text-bold bg-light-grey" colspan="2">Tanggal/Waktu Pengajuan</td>
                 </tr>
@@ -563,7 +530,7 @@
                         {{contents.receiverDetail}}
                     </td>
                     <td class="text-center" colspan="2">
-                        <label>{{contents.simtime}}</label>
+                        <label>{{ contents.simtime | stringtime }}</label>
                     </td>
                 </tr>
                 <tr class="tembusan-tr hide">
@@ -585,7 +552,7 @@
                 <tr class="klasifikasi-tr hide">
                     <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right:none;">Klasifikasi</td>
                     <td colspan="4" style="border-bottom: none; border-right: none; border-right: solid 2px #000000; ">
-                        {{contents.klasifikasi}}
+                        {{ contents.classification | stringuppercase }}
                     </td>
                     <td class="text-center" style="border-bottom:2px solid #000000"></td>
                     <td class="text-center" style="border-bottom:2px solid #000000"></td>
@@ -593,14 +560,14 @@
                 <tr>
                     <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Nomor</td>
                     <td colspan="4" class="parent-no" style="border-bottom: none; border-right: none;">
-                        {{contents.no}}
+                        {{contents.Number}}
                     </td>
                     <td style="border-bottom: none; border-right: none;"></td>
                     <td style="border-bottom: none;"></td>
                 </tr>
                 <tr class="message-tr hide">
                     <td colspan="8" style="height:250px; vertical-align: top; border-left:2px solid #000000;">
-                        <label v-html="contents.renderMessages" style="white-space: pre-wrap;"></label>
+                        <label v-html="messages" style="white-space: pre-wrap;"></label>
                     </td>
                 </tr>
                 <tr class="pengirim-tr hide">
@@ -652,6 +619,164 @@
                 </tr>
                 </tbody>
             </table>
+            <div class="row" v-html="attributes"></div>
+        </div>
+    </div>
+</template>
+
+<template id="email-kogas">
+    <div class="container-fluid container-fullw">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <td class="" style="border-bottom: none;"></td>
+                            <td colspan="2" class="text-center text-bold bg-light-grey" style="width: 10%;">Panggilan</td>
+                            <td class="text-center text-bold bg-light-grey" style="width: 30%;">Jenis</td>
+                            <td class="text-center text-bold bg-light-grey" style="width: 20%;">nomor</td>
+                            <td class="text-center text-bold bg-light-grey" colspan="2" style="width: 20%;">Derajat</td>
+                            <td class="text-center text-bold bg-light-grey" colspan="2" style="width: 20%;">Instruksi Pengiriman</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="text-center rotate" rowspan="12"><div><span><b>Ruang di luar garis hanya untuk petugas KOMLEK</b><span></div></td>
+                            <td class="text-center" colspan="2" style="height: 30px;">
+                                {{contents.panggilan}}
+                            </td>
+                            <td class="text-center">
+                                {{contents.jenis}}
+                            </td>
+                            <td class="text-center">
+                                {{contents.nomor}}
+                            </td>
+                            <td class="text-center" colspan="2">
+                                {{contents.derajat}}
+                            </td>
+                            <td class="text-center" colspan="2">
+                                {{contents.instruksi}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="text-bold" style="border-top:2px solid #000000; border-left:2px solid #000000; border-bottom: none; border-right: none; vertical-align: top;">Dari</td>
+                            <td colspan="4" style="border-top:2px solid #000000; border-right:2px solid #000000; border-bottom: none; vertical-align: top;">
+                                {{contents.senderDetail}}
+                            </td>
+                            <td class="text-center text-bold bg-light-grey" colspan="2">Tanggal/Waktu Pengajuan</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none; vertical-align: top;">Kepada</td>
+                            <td colspan="4" style="border-right:2px solid #000000; border-bottom: none; vertical-align: top;">
+                                {{contents.receiverDetail}}
+                            </td>
+                            <td class="text-center" colspan="2">
+                                <label>{{ contents.simtime | stringtime }}</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" rowspan="2" class="text-bold" style="border-left:2px solid #000000; border-right: none; border-bottom:2px solid #000000; vertical-align: top;">Tembusan</td>
+                            <td colspan="4" rowspan="2" style="border-right:2px solid #000000; border-bottom:2px solid #000000; vertical-align: top;">
+                                {{contents.ccDetail}}
+                            </td>
+                            <td class="text-center text-bold bg-light-grey">Tanda Dinas</td>
+                            <td class="text-center text-bold bg-light-grey">Group</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" style="border-bottom: none">
+                                {{contents.tandadinas}}
+                            </td>
+                            <td class="text-center" style="border-bottom: none">
+                                {{contents.group}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right:none; vertical-align: top;">Klasifikasi</td>
+                            <td colspan="4" style="border-bottom: none; border-right: none; border-right: solid 2px #000000; vertical-align: top;">
+                                {{ contents.classification | stringuppercase }}
+                            </td>
+                            <td class="text-center" style="border-bottom:2px solid #000000"></td>
+                            <td class="text-center" style="border-bottom:2px solid #000000"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none; vertical-align: top;">Nomor</td>
+                            <td colspan="4" class="parent-no" style="border-bottom: none; border-right: none; vertical-align: top;">
+                                {{contents.Number}}
+                            </td>
+                            <td style="border-bottom: none; border-right: none;"></td>
+                            <td style="border-bottom: none;"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="8" style="height:250px; vertical-align: top; border-left:2px solid #000000;">
+                                <label v-html="messages" style="white-space: pre-wrap;"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center text-bold bg-light-grey" colspan="2" style="border-left:2px solid #000000;">Pengirim</td>
+                            <td class="text-center text-bold bg-light-grey" colspan="2" style="border-right:2px solid #000000;">Derajat</td>
+                            <td class="text-center text-bold bg-light-grey" colspan="2" style="border-top:2px solid #000000;">Dikirim/Diterima</td>
+                            <td class="text-center text-bold bg-light-grey" style="border-top:2px solid #000000;">Cara</td>
+                            <td class="text-center text-bold bg-light-grey" style="border-top:2px solid #000000;">Paraf</td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none; vertical-align: top;">Nama</td>
+                            <td style="border-bottom: none; vertical-align: top;">
+                                {{contents.senderName}}
+                            </td>
+                            <td class="text-center text-bold">Aksi</td>
+                            <td class="text-center text-bold" style="border-right:2px solid #000000;">Tembusan</td>
+                            <td class="text-center text-bold">Jam</td>
+                            <td class="text-center text-bold">Tanggal</td>
+                            <td class="text-center vertical-align-top" rowspan="3">
+                                {{contents.cara}}
+                            </td>
+                            <td class="text-center vertical-align-top" rowspan="3">
+                                {{contents.paraf}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none; vertical-align: top;">Pangkat</td>
+                            <td style="border-bottom: none; vertical-align: top;">
+                                {{contents.senderRank}}
+                            </td>
+                            <td class="text-center vertical-align-top" rowspan="2">
+                                {{contents.alamataksi}}
+                            </td>
+                            <td class="text-center vertical-align-top" rowspan="2" style="border-right:2px solid #000000;">
+                                {{contents.alamattembusan}}
+                            </td>
+                            <td class="text-center vertical-align-top" rowspan="2">
+                                {{contents.jam}}
+                            </td>
+                            <td class="text-center vertical-align-top" rowspan="2">
+                                {{contents.tanggal}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold" style="border-left:2px solid #000000; border-right: none; vertical-align: top;">TTD</td>
+                            <td style="vertical-align: top;">
+                                <img :src="contents.senderSignature" width="100" class="sender-signature" name="sender-signature">
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="row" v-html="attributes"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="btn btn-warning btn-wide" type="button" @click="PrintPdf">
+                            Lihat ke PDF <i class="fa icon-file-pdf"></i>
+                        </button>
+                        <button class="btn btn-warning btn-wide" type="button" @click="SavePdf">
+                            Simpan ke PDF <i class="fa icon-file-pdf"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 </template>
@@ -678,48 +803,40 @@
                             <td class="text-center rotate" rowspan="12"><div><span><b>Ruang di luar garis hanya untuk petugas KOMLEK</b><span></div></td>
                             <td class="text-center" colspan="2" style="height: 30px;">
                                 <input type="hidden" name="selected-message" class="selected-message" id="selected-message" v-model="contents.id">
-                                <input type="hidden" placeholder="Panggilan" name="panggilan" class="form-control panggilan" v-model="contents.panggilan">
                                 {{contents.panggilan}}
                             </td>
                             <td class="text-center">
-                                <input type="hidden" placeholder="Jenis" name="jenis" class="form-control jenis" v-model="contents.jenis">
                                 {{contents.jenis}}
                             </td>
                             <td class="text-center">
-                                <input type="hidden" placeholder="Nomor" name="nomor" class="form-control nomor" v-model="contents.nomor">
                                 {{contents.nomor}}
                             </td>
                             <td class="text-center" colspan="2">
-                                <input type="hidden" placeholder="Derajat" name="derajat" class="form-control derajat" v-model="contents.derajat">
                                 {{contents.derajat}}
                             </td>
                             <td class="text-center" colspan="2">
-                                <input type="hidden" placeholder="Instruksi Pengiriman" name="instruksi" class="form-control instruksi" v-model="contents.instruksi">
                                 {{contents.instruksi}}
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2" class="text-bold" style="border-top:2px solid #000000; border-left:2px solid #000000; border-bottom: none; border-right: none">Dari</td>
-                            <td colspan="4" style="border-top:2px solid #000000; border-right:2px solid #000000; border-bottom: none;">
-                                <input type="hidden" class="senderRole" name="senderRole" v-model="contents.senderRole">
-                                <input type="hidden" class="senderUser" name="senderUser" v-model="contents.senderUser">
-                                {{contents.senderCallsign}}
+                            <td colspan="2" class="text-bold" style="border-top:2px solid #000000; border-left:2px solid #000000; border-bottom: none; border-right: none; vertical-align: top;">Dari</td>
+                            <td colspan="4" style="border-top:2px solid #000000; border-right:2px solid #000000; border-bottom: none; vertical-align: top;">
+                                {{contents.senderDetail}}
                             </td>
                             <td class="text-center text-bold bg-light-grey" colspan="2">Tanggal/Waktu Pengajuan</td>
                         </tr>
                         <tr>
-                            <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none">Kepada</td>
-                            <td colspan="4" style="border-right:2px solid #000000; border-bottom: none;">
-                                <input type="hidden" class="rolereceiver" name="rolereceiver" v-model="contents.receiverDetail">
+                            <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none; vertical-align: top;">Kepada</td>
+                            <td colspan="4" style="border-right:2px solid #000000; border-bottom: none; vertical-align: top;">
                                 {{contents.receiverDetail}}
                             </td>
-                            <td class="text-center" colspan="2"><input type="hidden" placeholder="Tanda Dinas" class="form-control" v-model="contents.simtime"><label>{{contents.simtime}}</label></td>
+                            <td class="text-center" colspan="2">
+                                <label>{{ contents.simtime | stringtime }}</label>
+                            </td>
                         </tr>
                         <tr>
-                            <td colspan="2" rowspan="2" class="text-bold" style="border-left:2px solid #000000; border-right: none; border-bottom:2px solid #000000;">Tembusan</td>
-                            <td colspan="4" rowspan="2" style="border-right:2px solid #000000; border-bottom:2px solid #000000;">
-                                <input type="hidden" class="tembusan" name="tembusan" v-model="contents.tembusan"/>
-                                <input type="hidden" class="rolecc" name="rolecc" v-model="contents.ccDetail"/>
+                            <td colspan="2" rowspan="2" class="text-bold" style="border-left:2px solid #000000; border-right: none; border-bottom:2px solid #000000; vertical-align: top;">Tembusan</td>
+                            <td colspan="4" rowspan="2" style="border-right:2px solid #000000; border-bottom:2px solid #000000; vertical-align: top;">
                                 {{contents.ccDetail}}
                             </td>
                             <td class="text-center text-bold bg-light-grey">Tanda Dinas</td>
@@ -727,36 +844,31 @@
                         </tr>
                         <tr>
                             <td class="text-center" style="border-bottom: none">
-                                <input type="hidden" placeholder="Tanda Dinas" class="form-control" v-model="contents.tandadinas">
                                 {{contents.tandadinas}}
                             </td>
                             <td class="text-center" style="border-bottom: none">
-                                <input type="hidden" placeholder="group" class="form-control" v-model="contents.group">
                                 {{contents.group}}
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right:none;">Klasifikasi</td>
-                            <td colspan="4" style="border-bottom: none; border-right: none; border-right: solid 2px #000000; ">
-                                <input type="hidden" class="klasifikasi" name="klasifikasi" v-model="contents.klasifikasi"/>
-                                {{contents.klasifikasi}}
+                            <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right:none; vertical-align: top;">Klasifikasi</td>
+                            <td colspan="4" style="border-bottom: none; border-right: none; border-right: solid 2px #000000; vertical-align: top;">
+                                {{ contents.classification | stringuppercase }}
                             </td>
                             <td class="text-center" style="border-bottom:2px solid #000000"></td>
                             <td class="text-center" style="border-bottom:2px solid #000000"></td>
                         </tr>
                         <tr>
-                            <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Nomor</td>
-                            <td colspan="4" class="parent-no" style="border-bottom: none; border-right: none;">
-                                <input type="hidden" placeholder="Nomor" name="Number" class="form-control Number" v-model="contents.no">
-                                {{contents.no}}
+                            <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none; vertical-align: top;">Nomor</td>
+                            <td colspan="4" class="parent-no" style="border-bottom: none; border-right: none; vertical-align: top;">
+                                {{contents.Number}}
                             </td>
                             <td style="border-bottom: none; border-right: none;"></td>
                             <td style="border-bottom: none;"></td>
                         </tr>
                         <tr>
                             <td colspan="8" style="height:250px; vertical-align: top; border-left:2px solid #000000;">
-                                <input type="hidden" class="context" name="context" v-model="contents.content"/>
-                                <label v-html="contents.renderMessages" style="white-space: pre-wrap;"></label>
+                                <label v-html="messages" style="white-space: pre-wrap;"></label>
                             </td>
                         </tr>
                         <tr>
@@ -767,9 +879,8 @@
                             <td class="text-center text-bold bg-light-grey" style="border-top:2px solid #000000;">Paraf</td>
                         </tr>
                         <tr>
-                            <td class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Nama</td>
-                            <td style="border-bottom: none;">
-                                <input type="hidden" placeholder="" class="form-control sender-name" name="sender-name" v-model="contents.senderName">
+                            <td class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none; vertical-align: top;">Nama</td>
+                            <td style="border-bottom: none; vertical-align: top;">
                                 {{contents.senderName}}
                             </td>
                             <td class="text-center text-bold">Aksi</td>
@@ -777,48 +888,39 @@
                             <td class="text-center text-bold">Jam</td>
                             <td class="text-center text-bold">Tanggal</td>
                             <td class="text-center vertical-align-top" rowspan="3">
-                                <input type="hidden" placeholder="" name="cara" class="form-control cara" v-model="contents.cara">
                                 {{contents.cara}}
                             </td>
                             <td class="text-center vertical-align-top" rowspan="3">
-                                <input type="hidden" placeholder="" name="paraf" class="form-control paraf" v-model="contents.paraf">
                                 {{contents.paraf}}
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Pangkat</td>
-                            <td style="border-bottom: none;">
-                                <input type="hidden" placeholder="" class="form-control sender-pangkat" name="sender-pangkat" v-model="contents.senderRank">
+                            <td class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none; vertical-align: top;">Pangkat</td>
+                            <td style="border-bottom: none; vertical-align: top;">
                                 {{contents.senderRank}}
                             </td>
                             <td class="text-center vertical-align-top" rowspan="2">
-                                <input type="hidden" placeholder="" name="alamataksi" class="form-control alamataksi" v-model="contents.alamataksi">
                                 {{contents.alamataksi}}
                             </td>
                             <td class="text-center vertical-align-top" rowspan="2" style="border-right:2px solid #000000;">
-                                <input type="hidden" placeholder="" name="alamattembusan" class="form-control alamattembusan" v-model="contents.alamattembusan">
                                 {{contents.alamattembusan}}
                             </td>
                             <td class="text-center vertical-align-top" rowspan="2">
-                                <input type="hidden" placeholder="" name="jam" class="form-control jam" v-model="contents.jam">
                                 {{contents.jam}}
                             </td>
                             <td class="text-center vertical-align-top" rowspan="2">
-                                <input type="hidden" placeholder="" name="tanggal" class="form-control tanggal" v-model="contents.tanggal">
                                 {{contents.tanggal}}
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-bold" style="border-left:2px solid #000000; border-right: none;">TTD</td>
-                            <td>
-                                <input type="hidden" name="signature" class="signature" v-model="contents.senderSignature">
-                                <input type="hidden" name="materi" class="materi" v-model="contents.materi">
+                            <td class="text-bold" style="border-left:2px solid #000000; border-right: none; vertical-align: top;">TTD</td>
+                            <td style="vertical-align: top;">
                                 <img :src="contents.senderSignature" width="100" class="sender-signature" name="sender-signature">
                             </td>
                         </tr>
                         </tbody>
                     </table>
-                    <div class="row" v-html="contents.attributes"></div>
+                    <div class="row" v-html="attributes"></div>
                 </div>
 
                 <div class="row">
@@ -848,11 +950,6 @@
                         <button class="btn btn-primary btn-wide pull-right btn-replyMessage" v-bind="loadReplyButton(contents.composeStatus)" type="button" @click="ReplyMessage">
                             Balas <i class="fa icon-arrow-right"></i>
                         </button>
-                        <!--
-                        <button class="btn btn-primary btn-wide pull-right btn-ReplyCurrrentMessage" v-bind="loadReplyCurrentButton(contents.composeStatus)" type="button" @click="ReplyCurrrentMessage">
-                            Balas ke Kogas <i class="fa icon-arrow-right"></i>
-                        </button>
-                        -->
                         <button class="btn btn-primary btn-wide pull-right" type="button" v-bind="loadSentButton(contents.composeStatus)" @click="SubmitMessage()">
                             Kirim <i class="fa icon-arrow-right"></i>
                         </button>
@@ -893,205 +990,3 @@
         </div>
     </div>
 </template>
-
-<template id="email-preview">
-    <div class="container-fluid container-fullw">
-        <div class="row">
-            <div class="col-md-12">
-
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <td colspan="2" class="text-center text-bold bg-light-grey" style="width: 10%;">Panggilan</td>
-                            <td class="text-center text-bold bg-light-grey" style="width: 30%;">Jenis</td>
-                            <td class="text-center text-bold bg-light-grey" style="width: 20%;">nomor</td>
-                            <td class="text-center text-bold bg-light-grey" colspan="2" style="width: 20%;">Derajat</td>
-                            <td class="text-center text-bold bg-light-grey" colspan="2" style="width: 20%;">Instruksi Pengiriman</td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td class="text-center" colspan="2" style="height: 30px;">
-                                <input type="hidden" placeholder="Panggilan" name="panggilan" class="form-control panggilan" v-model="contents.panggilan">
-                                {{contents.panggilan}}
-                            </td>
-                            <td class="text-center">
-                                <input type="hidden" placeholder="Jenis" name="jenis" class="form-control jenis" v-model="contents.jenis">
-                                {{contents.jenis}}
-                            </td>
-                            <td class="text-center">
-                                <input type="hidden" placeholder="Nomor" name="nomor" class="form-control nomor" v-model="contents.nomor">
-                                {{contents.nomor}}
-                            </td>
-                            <td class="text-center" colspan="2">
-                                <input type="hidden" placeholder="Derajat" name="derajat" class="form-control derajat" v-model="contents.derajat">
-                                {{contents.derajat}}
-                            </td>
-                            <td class="text-center" colspan="2">
-                                <input type="hidden" placeholder="Instruksi Pengiriman" name="instruksi" class="form-control instruksi" v-model="contents.instruksi">
-                                {{contents.instruksi}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="text-bold" style="border-top:2px solid #000000; border-left:2px solid #000000; border-bottom: none; border-right: none">Dari</td>
-                            <td colspan="4" style="border-top:2px solid #000000; border-right:2px solid #000000; border-bottom: none;">
-                                <input type="hidden" class="sender" name="sender" v-model="contents.sender">
-                                <input type="hidden" class="senderid" name="senderid" v-model="contents.senderid">
-                                {{contents.senderCallsign}}
-                            </td>
-                            <td class="text-center text-bold bg-light-grey">Tanda Dinas</td>
-                            <td class="text-center text-bold bg-light-grey">Group</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none">Kepada</td>
-                            <td colspan="4" class="parent-receivers" style="border-right:2px solid #000000; border-bottom: none;">
-                                <input type="hidden" class="receivers" name="receivers" v-model="contents.receivers">
-                                <input type="hidden" class="receiversid" name="receiversid" v-model="contents.receiversid">
-                                {{contents.receiverCallsign}}
-                            </td>
-                            <td class="text-center" style="border-bottom: none;">
-                                <input type="hidden" placeholder="Tanda Dinas" class="form-control" v-model="contents.tandadinas">
-                                {{contents.tandadinas}}
-                            </td>
-                            <td class="text-center" style="border-bottom: none;">
-                                <input type="hidden" placeholder="group" class="form-control" v-model="contents.group">
-                                {{contents.group}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom:2px solid #000000; border-right: none;">Tembusan</td>
-                            <td colspan="4" style="border-right:2px solid #000000; border-bottom:2px solid #000000;">
-                                <input type="hidden" class="tembusan" name="tembusan" v-model="contents.tembusan">
-                                {{rolecc}}
-                            </td>
-                            <td style="border-bottom:2px solid #000000"></td>
-                            <td style="border-bottom:2px solid #000000"></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right:none;">Klasifikasi</td>
-                            <td colspan="4" style="border-bottom: none; border-right: none;">
-                                <input type="hidden" class="klasifikasi" name="klasifikasi" v-model="contents.klasifikasi"/>
-                                {{contents.klasifikasi}}
-                            </td>
-                            <td style="border-bottom: none; border-right: none;"></td>
-                            <td style="border-bottom: none;"></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Judul</td>
-                            <td colspan="4" class="parent-title" style="border-bottom: none; border-right: none;">
-                                <input type="hidden" placeholder="Judul" name="title" class="form-control title" v-model="contents.title">
-                                {{contents.title}}
-                            </td>
-                            <td style="border-bottom: none; border-right: none;"></td>
-                            <td style="border-bottom: none;"></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Nomor</td>
-                            <td colspan="4" class="parent-no" style="border-bottom: none; border-right: none;">
-                                <input type="hidden" placeholder="Nomor" name="Number" class="form-control Number" v-model="contents.Number">
-                                {{contents.Number}}
-                            </td>
-                            <td style="border-bottom: none; border-right: none;"></td>
-                            <td style="border-bottom: none;"></td>
-                        </tr>
-                        <tr>
-                            <td colspan="8" style="height:250px; vertical-align: top; border-left:2px solid #000000;">
-                                <input type="hidden" class="context" name="context" v-model="contents.content"/>
-                                <label v-html="contents.renderMessages"></label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-center text-bold bg-light-grey" colspan="2" style="border-left:2px solid #000000;">Pengirim</td>
-                            <td class="text-center text-bold bg-light-grey" colspan="2" style="border-right:2px solid #000000;">Derajat</td>
-                            <td class="text-center text-bold bg-light-grey" colspan="2" style="border-top:2px solid #000000;">Dikirim/Diterima</td>
-                            <td class="text-center text-bold bg-light-grey" style="border-top:2px solid #000000;">Cara</td>
-                            <td class="text-center text-bold bg-light-grey" style="border-top:2px solid #000000;">Paraf</td>
-                        </tr>
-                        <tr>
-                            <td class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Nama</td>
-                            <td style="border-bottom: none;">
-                                <input type="hidden" placeholder="" class="form-control sender-name" name="sender-name" v-model="contents.senderName">
-                                {{contents.senderName}}
-                            </td>
-                            <td class="text-center text-bold">Aksi</td>
-                            <td class="text-center text-bold" style="border-right:2px solid #000000;">Tembusan</td>
-                            <td class="text-center text-bold">Jam</td>
-                            <td class="text-center text-bold">Tanggal</td>
-                            <td class="text-center vertical-align-top" rowspan="3">
-                                <input type="hidden" placeholder="" name="cara" class="form-control cara" v-model="contents.cara">
-                                {{contents.cara}}
-                            </td>
-                            <td class="text-center vertical-align-top" rowspan="3">
-                                <input type="hidden" placeholder="" name="paraf" class="form-control paraf" v-model="contents.paraf">
-                                {{contents.paraf}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Pangkat</td>
-                            <td style="border-bottom: none;">
-                                <input type="hidden" placeholder="" class="form-control sender-pangkat" name="sender-pangkat" v-model="contents.senderRank">
-                                {{contents.senderRank}}
-                            </td>
-                            <td class="text-center vertical-align-top" rowspan="2">
-                                <input type="hidden" placeholder="" name="alamataksi" class="form-control alamataksi" v-model="contents.alamataksi">
-                                {{contents.alamataksi}}
-                            </td>
-                            <td class="text-center vertical-align-top" rowspan="2" style="border-right:2px solid #000000;">
-                                <input type="hidden" placeholder="" name="alamattembusan" class="form-control alamattembusan" v-model="contents.alamattembusan">
-                                {{contents.alamattembusan}}
-                            </td>
-                            <td class="text-center vertical-align-top" rowspan="2">
-                                <input type="hidden" placeholder="" name="jam" class="form-control jam" v-model="contents.jam">
-                                {{contents.jam}}
-                            </td>
-                            <td class="text-center vertical-align-top" rowspan="2">
-                                <input type="hidden" placeholder="" name="tanggal" class="form-control tanggal" v-model="contents.tanggal">
-                                {{contents.tanggal}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-bold" style="border-left:2px solid #000000; border-right: none;">TTD</td>
-                            <td><input type="hidden" name="signature" class="signature" v-model="contents.senderSignature"><img :src="contents.senderSignature" width="100" class="sender-signature" name="sender-signature"></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <button class="btn btn-primary btn-o btn-wide" type="button" @click="BackToMessage()">
-                            Kembali <i class="fa icon-arrow-right"></i>
-                        </button>
-                        <button class="btn btn-info btn-wide" type="button" @click="SaveMessage()">
-                            Draft <i class="fa icon-arrow-right"></i>
-                        </button>
-                        <button class="btn btn-primary btn-wide" type="button" @click="SubmitMessage()">
-                            Kirim <i class="fa icon-arrow-right"></i>
-                        </button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</template>
-
-<div id="printerAlertModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Silahkan Pilih printer?</h4>
-            </div>
-            <div class="modal-body">
-                <div id="lp-provider"></div>
-                <div id="lp-printer"></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" id="btn-print-radiogram" class="btn btn-primary"><i class="icon-printer"></i> Print</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-            </div>
-        </div>
-    </div>
-</div>

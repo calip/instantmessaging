@@ -13,27 +13,24 @@ module.exports = {
     sender:{
       model:'role'
     },
+    senderDetail: {
+      type:'string'
+    },
     senderWasdal :{
       type: 'boolean',
       defaultsTo:false,
     },
     receivers:{
-      model:'array'
+      type:'array'
     },
-    kreceivers:{
-      model:'array'
-    },
-    alsreceivers:{
-      model:'array'
+    receiverDetail: {
+      type:'string'
     },
     cc:{
       type:'array'
     },
-    kcc:{
-      type:'array'
-    },
-    alscc:{
-      type:'array'
+    ccDetail: {
+      type:'string'
     },
     author:{
       type: 'string'
@@ -67,13 +64,16 @@ module.exports = {
     },
     composeStatus:{
       enum:['inbox','sent','draft','trash','pending'],
-      defaultsTo:'draft'
+      defaultsTo: 'draft'
     },
     readStatus:{
       enum:['read','unread'],
       defaultsTo:'unread'
     },
     materi:{
+      type:'array'
+    },
+    approved:{
       type:'array'
     },
     createTime:{
@@ -149,7 +149,8 @@ module.exports = {
       //update data
       if(data.new_val != null && data.old_val != null)
       {
-        socket.emit(data.new_val,{action:'update', old_val:data.old_val, new_val:data.new_val})
+        socket.emit(data.new_val,{action:'update', old_val:data.old_val, new_val:data.new_val});
+        socket.emit('new_radiogram', data);
       }
       //delete
       if(data.new_val == null && data.old_val != null)
@@ -159,31 +160,31 @@ module.exports = {
     })
   }
   /*,
-  getByFolder : function(options, cb)
-  {
-    Folder.findone(options.id).exec(function(err, thisFolder){
-      if (err) return cb(err);
-      if (!thisFolder) return cb(new Error('Folder not found.'));
-      return Radiogram.find({ where : {folder:thisFolder}, skip:options.offset, limit : options.limit, sort: options.sortBy + ' DESC' })
-    });
-  },
-  getByTimeInterval : function(options, cb)
-  {
-    return Radiogram.find({ where : {SendTime:{ '>': new Date(options.startDate), '<': new Date(options.endDate) }}, skip:options.offset, limit : options.limit, sort: options.sortBy + ' DESC' })
-  },
-  getByUser : function(userid, cb)
-  {
+   getByFolder : function(options, cb)
+   {
+   Folder.findone(options.id).exec(function(err, thisFolder){
+   if (err) return cb(err);
+   if (!thisFolder) return cb(new Error('Folder not found.'));
+   return Radiogram.find({ where : {folder:thisFolder}, skip:options.offset, limit : options.limit, sort: options.sortBy + ' DESC' })
+   });
+   },
+   getByTimeInterval : function(options, cb)
+   {
+   return Radiogram.find({ where : {SendTime:{ '>': new Date(options.startDate), '<': new Date(options.endDate) }}, skip:options.offset, limit : options.limit, sort: options.sortBy + ' DESC' })
+   },
+   getByUser : function(userid, cb)
+   {
 
-  },
-  getByContent : function(options, cb)
-  {
+   },
+   getByContent : function(options, cb)
+   {
 
-  },
-  getById : function(id, cb)
-  {
+   },
+   getById : function(id, cb)
+   {
 
-  },
+   },
 
-  */
+   */
 };
 

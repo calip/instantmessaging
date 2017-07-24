@@ -49,6 +49,15 @@ httpServer.listen(config.port, function () {
     resCallback(false, config.hostname + ':' + config.port)
   };
 
+  methods.deleteFile = function(authServerUrl, remoteSocket, reqMsg, resCallback){
+    var file = reqMsg.data.params.file;
+    var destFile = "./client/data/";
+    var deletePath = destFile + file;
+    fs.unlinkSync(deletePath);
+    var result = "success";
+    resCallback(result);
+  };
+
   service.identify("radiogramServer", null, config.authServerUrl, function (isIdentifySuccess, identifyResp) {
     if (isIdentifySuccess === true) {
       console.log("authserver identifed, publicKey :");
