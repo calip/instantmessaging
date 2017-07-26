@@ -1912,11 +1912,13 @@ soyut.radiogram.RenderPrinterPDF = function(id, callback) {
             var cHour = "";
             var cMinute = "";
             var tSimDate = "";
+            var mDate = "";
             if (data.simtime != null) {
                 cSendDate = moment(data.simtime).format("DD") + '-' + moment(data.simtime).format("MM") + '-' + soyut.radiogram.yearNumToSimStr(moment(data.simtime).format("YYYY")) + ' ' + moment(data.simtime).format("hh") + ':' + moment(data.simtime).format("mm");
                 cHour = moment(data.simtime).format('h');
                 cMinute = moment(data.simtime).format('mm');
                 tSimDate = moment(data.simtime).format("DD") + "" + moment(data.simtime).format("MM") + " " + moment(data.simtime).format("h") + "." + moment(data.simtime).format("mm") + " WA";
+                mDate = moment(data.simtime).format("DD");
             }
 
             soyut.radiogram.Printer_PrintToPDF({
@@ -1939,7 +1941,7 @@ soyut.radiogram.RenderPrinterPDF = function(id, callback) {
                 alamataksi: data.alamataksi,
                 alamattembusan: data.alamattembusan,
                 jam: cHour + ":" + cMinute,
-                tanggal: moment(data.simtime).format("DD"),
+                tanggal: mDate,
                 cara: data.cara,
                 paraf: data.paraf,
                 message: data.content,

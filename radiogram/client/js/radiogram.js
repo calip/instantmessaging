@@ -2138,7 +2138,7 @@ soyut.radiogram.renderReplyMessage = function (elSelector, message) {
 soyut.radiogram.SavePdf = function(val){
     soyut.radiogram.RenderPrinterPDF(val, function(res){
         soyut.radiogram.SaveFilePDF(res, function (err, result) {
-            soyut.radiogram.deleteFile({file: file.name}, function (err, resfile) {
+            soyut.radiogram.deleteFile({file: result.name}, function (err, resfile) {
                 soyut.radiogram.Show_PdfViewer(result.url);
             });
         });
@@ -2246,18 +2246,20 @@ soyut.radiogram.PrintPDF = function(val){
     $(getInstanceID("btn-print-radiogram")).click(function (event) {
         soyut.radiogram.RenderPrinterPDF(val, function (res) {
             soyut.radiogram.SaveFilePDF(res, function (err, result) {
-                var providerName = $('.provider-name').val();
-                var printerName = $('.printer-name').val();
-                console.log("print "+providerName+" - "+ printerName);
-                soyut.printserver.print({
-                    docURL : result.url,
-                    origin : 'Radiogram',
-                    provider : providerName,
-                    printer : printerName
-                }, function(print){
-                    console.log(print);
-                    $(getInstanceID('printerAlertModal')).modal('hide');
-                })
+                soyut.radiogram.deleteFile({file: result.name}, function (err, resfile) {
+                    var providerName = $('.provider-name').val();
+                    var printerName = $('.printer-name').val();
+                    console.log("print " + providerName + " - " + printerName);
+                    soyut.printserver.print({
+                        docURL: result.url,
+                        origin: 'Radiogram',
+                        provider: providerName,
+                        printer: printerName
+                    }, function (print) {
+                        console.log(print);
+                        $(getInstanceID('printerAlertModal')).modal('hide');
+                    });
+                });
             });
         });
     });
