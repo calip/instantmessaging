@@ -1574,7 +1574,7 @@ soyut.radiogram.renderListMessage = function (elSelector, elChildren, message, g
                                     console.log(result);
                                 });
                             }
-                            soyut.radiogram.renderListMessage('.email-list', '.email-reader', data.composeStatus, '');
+                            soyut.radiogram.renderListMessage('.email-list', '.email-reader', data.composeStatus, group);
                             soyut.radiogram.renderMessageDetail('.email-reader', val, message);
 
                         });
@@ -1741,20 +1741,7 @@ soyut.radiogram.renderKogasDetail = function (elSelector, message, state) {
                 messages: renderMessage,
                 attributes: attributes
             },
-            mounted: function () {
-                this.$nextTick(function () {
-                    this.LoadMessages();
-                });
-            },
             methods: {
-                LoadMessages: function () {
-                    if(roleName.isWASDAL) {
-                        console.log("defined "+ state);
-                        soyut.radiogram.renderKogasAccess();
-                        soyut.radiogram.renderUnreadMessage(state, 0);
-                        soyut.radiogram.renderSelectedMateri();
-                    }
-                },
                 PrintPdf: function (content) {
                     soyut.radiogram.PrintPDF(content.id);
                 },
