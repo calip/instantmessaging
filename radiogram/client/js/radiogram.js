@@ -937,7 +937,7 @@ soyut.radiogram.renderContent = function () {
                     var objTembusan = [];
 
                     var arAuthor = ''
-                    if(roleName.isSet){
+                    if(roleName.isSet || roleName.isAddress){
                         arAuthor = '';
                     }
                     else {
@@ -1214,7 +1214,7 @@ soyut.radiogram.renderContent = function () {
                     var objTembusan = [];
 
                     var arAuthor = ''
-                    if(roleName.isSet){
+                    if(roleName.isSet || roleName.isAddress){
                         arAuthor = refauthor;
                     }
                     else {
@@ -1935,7 +1935,20 @@ soyut.radiogram.renderMessageDetail = function (elSelector, message, state) {
                 messages: renderMessage,
                 attributes: attributes
             },
+            mounted: function () {
+                this.$nextTick(function () {
+                    this.LoadMessages();
+                });
+            },
             methods: {
+                LoadMessages: function () {
+                    if(roleName.isWASDAL) {
+                        console.log("defined "+ state);
+                        soyut.radiogram.renderKogasAccess();
+                        soyut.radiogram.renderUnreadMessage(state, 0);
+                        soyut.radiogram.renderSelectedMateri();
+                    }
+                },
                 MoveMessage: function(content){
                     function handleOkButton() {
                         console.log('radiogram Warning, delete radiogram');
