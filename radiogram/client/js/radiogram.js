@@ -2246,37 +2246,39 @@ soyut.radiogram.PrintPDF = function(val){
     $(getInstanceID('printerAlertModal')).appendTo(".wdl-main");
     $('.modal-backdrop').css("z-index", "-1");
 
+    var html = '<input type="hidden" name="sel-pdfid" class="sel-pdfid" id="sel-pdfid" value="'+val+'">';
     soyut.radiogram.renderProviderPrinter(roleName.roleGroup, function (print) {
-        var html = 'Provider: <select id="provider-name" name="provider-name" class="provider-name form-control" onchange="soyut.radiogram.selectProvider(this.value)">';
+        html += 'Provider: <select id="provider-name" name="provider-name" class="provider-name form-control" onchange="soyut.radiogram.selectProvider(this.value)">';
         print.forEach(function (i) {
             html += '<option value="'+ i.name +'">'+ i.name +'</option>';
         });
         html += '</select>';
         $(getInstanceID('lp-provider')).html(html);
-        soyut.radiogram.selectProvider($(".provider-name option:first").val());
+        soyut.radiogram.selectProvider($('.provider-name').val());
     });
+};
 
-    $(getInstanceID("btn-print-radiogram")).click(function (event) {
-        soyut.radiogram.RenderPrinterPDF(val, function (res) {
-            soyut.radiogram.SaveFilePDF(res, function (err, result) {
-                soyut.radiogram.deleteFile({file: result.name}, function (err, resfile) {
-                    var providerName = $('.provider-name').val();
-                    var printerName = $('.printer-name').val();
-                    console.log("print " + providerName + " - " + printerName);
-                    soyut.printserver.print({
-                        docURL: result.url,
-                        origin: 'Radiogram',
-                        provider: providerName,
-                        printer: printerName
-                    }, function (print) {
-                        console.log(print);
-                        $(getInstanceID('printerAlertModal')).modal('hide');
-                    });
+$(getInstanceID("btn-print-radiogram")).click(function (event) {
+    var pdfid = $('.sel-pdfid').val();
+    soyut.radiogram.RenderPrinterPDF(pdfid, function (res) {
+        soyut.radiogram.SaveFilePDF(res, function (err, result) {
+            soyut.radiogram.deleteFile({file: result.name}, function (err, resfile) {
+                var providerName = $('.provider-name').val();
+                var printerName = $('.printer-name').val();
+                console.log("print " + providerName + " - " + printerName);
+                soyut.printserver.print({
+                    docURL: result.url,
+                    origin: 'Radiogram',
+                    provider: providerName,
+                    printer: printerName
+                }, function (print) {
+                    console.log(print);
+                    $(getInstanceID('printerAlertModal')).modal('hide');
                 });
             });
         });
     });
-};
+});
 
 soyut.radiogram.Show_PdfViewer = function(val) {
     var app = getAppInstance();
