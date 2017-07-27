@@ -2253,7 +2253,7 @@ soyut.radiogram.PrintPDF = function(val){
         });
         html += '</select>';
         $(getInstanceID('lp-provider')).html(html);
-        soyut.radiogram.selectProvider($('.provider-name').val());
+        soyut.radiogram.selectProvider($(".provider-name option:first").val());
     });
 
     $(getInstanceID("btn-print-radiogram")).click(function (event) {
