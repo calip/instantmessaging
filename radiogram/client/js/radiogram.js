@@ -3201,6 +3201,8 @@ soyut.radiogram.renderKogasAccess = function () {
         callback(arrResult);
     };
 
+
+
     if(roleName.rga.length > 0) {
         var arrKogas = [];
         $('ul.wdl-kogas-list > div > li').each(function () {
@@ -3232,11 +3234,13 @@ soyut.radiogram.renderKogasAccess = function () {
             arrInbox.push(dataname);
         });
 
-        // checkCurrentAccess(arrInbox, roleName.rga, function (res) {
-        //     res.forEach(function (i) {
-        //         $('.inbox-data-' + i).css('display', 'none');
-        //     });
-        // });
+        checkCurrentAccess(arrInbox, roleName.rga, function (res) {
+            res.forEach(function (i) {
+                if(i != undefined){
+                    $('.inbox-data-' + i).css('display', 'none');
+                }
+            });
+        });
     }
 };
 
