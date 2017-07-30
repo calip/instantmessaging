@@ -3232,11 +3232,11 @@ soyut.radiogram.renderKogasAccess = function () {
             arrInbox.push(dataname);
         });
 
-        checkCurrentAccess(arrInbox, roleName.rga, function (res) {
-            res.forEach(function (i) {
-                $('.inbox-data-' + i).css('display', 'none');
-            });
-        });
+        // checkCurrentAccess(arrInbox, roleName.rga, function (res) {
+        //     res.forEach(function (i) {
+        //         $('.inbox-data-' + i).css('display', 'none');
+        //     });
+        // });
     }
 };
 
@@ -3253,7 +3253,7 @@ soyut.radiogram.init = function () {
         soyut.radiogram.renderCurrentWasdal();
         soyut.radiogram.renderWasdalRadiogram('.role-group-list');
         soyut.radiogram.renderKogasRadiogram('.wdl-kogas-list');
-        
+
     }
     else {
         soyut.radiogram.renderCurrentUser();
