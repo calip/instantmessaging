@@ -1904,6 +1904,73 @@ function getPrinterProvider(rolegroup) {
     });
 }
 
+
+soyut.radiogram.SaveFilePDF = function(val, rescallback) {
+    var dataurl = "https://"+soyut.radiogram.origin+"/data/"+val;
+    var curUrl = soyut.radiogram.origin.split(':');
+    var storageServer = 'storage.soyut';
+
+    function getFile(url, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.responseType = 'blob';
+        xhr.onload = function(e) {
+            if (this.status == 200) {
+                // get binary data as a response
+                callback(false, this.response);
+            }
+        };
+        xhr.onerror = function (e) {
+            callback(true, e);
+        };
+        xhr.send();
+    }
+
+    function saveFileToSystem(targetFolder){
+        soyut.storage.getStorageKeyAsync({userId: fileSystem.userid}).then(function(storageKey) {
+            var storagePath = targetFolder + "/" +val;
+            var fileUrl = 'https://'+ storageServer +':5454/storage/' + storageKey + storagePath;
+
+            function getPosition(str, m, i) { return str.split(m, i).join(m).length; }
+
+            var safeUrl = dataurl.substring(0, 8) + curUrl[0] + dataurl.substring(getPosition(dataurl, ':', 2));
+
+            // debugger;
+            getFile(safeUrl, function(err, dataBuffer) {
+                if (err) return;
+                soyut.storage.putAsync({
+                    storageKey: storageKey,
+                    path: storagePath,
+                    dataBuffer: dataBuffer
+                }).then(function() {
+                    console.log("File PDF telah berhasil di simpan ke file browser!");
+                    var dataObj = {
+                        url: fileUrl,
+                        name: val
+                    };
+                    rescallback(false, dataObj);
+                });
+            });
+        });
+    }
+
+    soyut.clock.getCurrentActualTime({}, function(err, reclock){
+        var strFolder = "RDG-" + moment(reclock).format('DD-MM-YYYY');
+        var tgtDir = "/" + strFolder;
+
+        fileSystem.ls(tgtDir, function (err, files) {
+            if(files.length == 0){
+                fileSystem.mkdir(tgtDir, function(err, res) {
+                    saveFileToSystem(tgtDir);
+                });
+            }
+            else{
+                saveFileToSystem(tgtDir);
+            }
+        });
+    });
+};
+
 soyut.radiogram.RenderPrinterPDF = function(id, callback) {
     soyut.radiogram.renderRadiogramDetail(id, function (data) {
         soyut.rig.Rig_GetKop({scenario: soyut.Session.role.scenario}, function (err, kop) {
