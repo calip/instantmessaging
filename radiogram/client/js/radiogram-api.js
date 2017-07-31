@@ -13,7 +13,7 @@ socket.on('new_radiogram', function (data) {
     if(data.new_val.owner.roleGroup == soyut.Session.role.roleGroup){
         if(data.new_val.composeStatus == 'inbox'){
             console.log("kirim notif");
-            soyut.radiogram.SendNotification(data.new_val.title, data.new_val.content, data.new_val.id);
+            soyut.radiogram.SendNotification(data.new_val.Number, 'Radiogram ' + data.new_val.content + ' telah masuk.', data.new_val.id);
 
             var appid = 'soyut.module.app.radiogram';
             var app = soyut.Platform.AppManager.getInstance().getApplication(appid);
@@ -35,6 +35,102 @@ soyut.radiogram.SendNotification = function(title, content, id) {
             var app = soyut.Platform.AppManager.getInstance().getApplication(appid);
             soyut.Event.getInstance().invokeAppEventOnce(appid, 'launch', app);
         }
+    });
+};
+
+
+soyut.radiogram.getListReceiversWasdal = function (callback) {
+    soyut.radiogram.renderListReceivers(function(res) {
+        soyut.radiogram.renderListRole(function (list) {
+            soyut.radiogram.renderListAlias(function (als) {
+                var arrAlias = [];
+                als.forEach(function (l) {
+                    var Obj = {
+                        id: l.id,
+                        name: l.name,
+                        type: 'als'
+                    };
+                    arrAlias.push(Obj);
+                });
+                var arrRole = [];
+                list.forEach(function (r) {
+                    var Obj = {
+                        id: r.id,
+                        name: r.position + ' ' + r.groupName,
+                        type: 'role'
+                    };
+                    arrRole.push(Obj);
+                });
+                var arrVrole = [];
+                res.forEach(function (i) {
+                    var Obj = {
+                        id: i.id,
+                        name: i.position,
+                        type: 'vrole'
+                    };
+                    arrVrole.push(Obj);
+                });
+                var arrData = arrAlias.concat(arrRole, arrVrole);
+                callback(arrData);
+            })
+        });
+    });
+};
+
+soyut.radiogram.getListSenderWasdal = function (callback) {
+    soyut.radiogram.renderListReceivers(function(res){
+        var arrVrole = [];
+        res.forEach(function (i) {
+            var Obj = {
+                id: i.id,
+                name: i.position
+            };
+            arrVrole.push(Obj);
+        });
+        callback(arrVrole);
+    });
+};
+
+soyut.radiogram.getListReceiverUser = function (callback) {
+    soyut.radiogram.renderListReceivers(function(res) {
+        soyut.radiogram.renderListRole(function (list) {
+            var arrRole = [];
+            list.forEach(function (r) {
+                var Obj = {
+                    id: r.id,
+                    name: r.position + ' ' + r.groupName,
+                    type: 'role'
+                };
+                arrRole.push(Obj);
+            });
+            var arrVrole = [];
+            res.forEach(function (i) {
+                var Obj = {
+                    id: i.id,
+                    name: i.position,
+                    type: 'vrole'
+                };
+                arrVrole.push(Obj);
+            });
+            var arrData = arrRole.concat(arrVrole);
+            callback(arrData);
+        });
+    });
+};
+
+soyut.radiogram.getListSenderUser = function (callback) {
+    soyut.radiogram.renderListSender(function(res){
+        var arrRole = [];
+        res.forEach(function (i) {
+            if(i.isAddress) {
+                var Obj = {
+                    id: i.id,
+                    name: i.position + ' ' + soyut.Session.role.roleGroupName
+                };
+                arrRole.push(Obj);
+            }
+        });
+        callback(arrRole);
     });
 };
 
