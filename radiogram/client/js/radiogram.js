@@ -477,7 +477,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
 
                                                                 var arrRoleRcv = [];
                                                                 roleReceivers.forEach(function (i) {
-                                                                    arrRoleRcv = arrRoleRcv + i.position + " (" + i.groupName + "), ";
+                                                                    arrRoleRcv = arrRoleRcv + i.position + " " + i.groupName + ", ";
                                                                 });
 
                                                                 var arrAliasCc = [];
@@ -492,7 +492,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
 
                                                                 var arrRoleCc = [];
                                                                 roleTembusan.forEach(function (i) {
-                                                                    arrRoleCc = arrRoleCc + i.position + " (" + i.groupName + "), ";
+                                                                    arrRoleCc = arrRoleCc + i.position + " " + i.groupName + ", ";
                                                                 });
 
                                                                 var curReceiver = arrAliasRcv + arrRoleRcv + arrVroleRcv;
@@ -621,7 +621,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
 
                                                                 var arrRoleRcv = [];
                                                                 roleReceivers.forEach(function (i) {
-                                                                    arrRoleRcv = arrRoleRcv + i.position + " (" + i.groupName + "), ";
+                                                                    arrRoleRcv = arrRoleRcv + i.position + " " + i.groupName + ", ";
                                                                 });
 
                                                                 var arrAliasCc = [];
@@ -636,7 +636,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
 
                                                                 var arrRoleCc = [];
                                                                 roleTembusan.forEach(function (i) {
-                                                                    arrRoleCc = arrRoleCc + i.position + " (" + i.groupName + "), ";
+                                                                    arrRoleCc = arrRoleCc + i.position + " " + i.groupName + ", ";
                                                                 });
 
                                                                 var curReceiver = arrAliasRcv + arrRoleRcv + arrVroleRcv;
@@ -661,7 +661,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                                                     content: message,
                                                                     readStatus: 'unread',
                                                                     sender: sender,
-                                                                    senderDetail: sender.position +" ("+ sender.groupName +")",
+                                                                    senderDetail: sender.position +" "+ sender.groupName +"",
                                                                     receivers: objReceiver,
                                                                     receiverDetail: curReceiver,
                                                                     cc: objTembusan,
@@ -830,7 +830,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
 
                                                                     var arrRoleRcv = [];
                                                                     roleReceivers.forEach(function (i) {
-                                                                        arrRoleRcv = arrRoleRcv + i.position + " (" + i.groupName + "), ";
+                                                                        arrRoleRcv = arrRoleRcv + i.position + " " + i.groupName + ", ";
                                                                     });
 
                                                                     var arrAliasCc = [];
@@ -845,7 +845,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
 
                                                                     var arrRoleCc = [];
                                                                     roleTembusan.forEach(function (i) {
-                                                                        arrRoleCc = arrRoleCc + i.position + " (" + i.groupName + "), ";
+                                                                        arrRoleCc = arrRoleCc + i.position + " " + i.groupName + ", ";
                                                                     });
 
                                                                     var curReceiver = arrAliasRcv + arrRoleRcv + arrVroleRcv;
@@ -973,7 +973,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
 
                                                                     var arrRoleRcv = [];
                                                                     roleReceivers.forEach(function (i) {
-                                                                        arrRoleRcv = arrRoleRcv + i.position + " (" + i.groupName + "), ";
+                                                                        arrRoleRcv = arrRoleRcv + i.position + " " + i.groupName + ", ";
                                                                     });
 
                                                                     var arrAliasCc = [];
@@ -988,7 +988,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
 
                                                                     var arrRoleCc = [];
                                                                     roleTembusan.forEach(function (i) {
-                                                                        arrRoleCc = arrRoleCc + i.position + " (" + i.groupName + "), ";
+                                                                        arrRoleCc = arrRoleCc + i.position + " " + i.groupName + ", ";
                                                                     });
 
                                                                     var curReceiver = arrAliasRcv + arrRoleRcv + arrVroleRcv;
@@ -1014,7 +1014,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                                                         readStatus: 'unread',
                                                                         owner: owner,
                                                                         sender: sender,
-                                                                        senderDetail: sender.position +" ("+ sender.groupName +")",
+                                                                        senderDetail: sender.position +" "+ sender.groupName +"",
                                                                         receivers: objReceiver,
                                                                         receiverDetail: curReceiver,
                                                                         cc: objTembusan,
@@ -1108,7 +1108,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
 
                                                                         var arrRoleRcv = [];
                                                                         roleReceivers.forEach(function (i) {
-                                                                            arrRoleRcv = arrRoleRcv + i.position + " (" + i.groupName + "), ";
+                                                                            arrRoleRcv = arrRoleRcv + i.position + " " + i.groupName + ", ";
                                                                         });
 
                                                                         var arrAliasCc = [];
@@ -1123,7 +1123,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
 
                                                                         var arrRoleCc = [];
                                                                         roleTembusan.forEach(function (i) {
-                                                                            arrRoleCc = arrRoleCc + i.position + " (" + i.groupName + "), ";
+                                                                            arrRoleCc = arrRoleCc + i.position + " " + i.groupName + ", ";
                                                                         });
 
                                                                         var curReceiver = arrAliasRcv + arrRoleRcv + arrVroleRcv;
@@ -1251,7 +1251,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
 
                                                                         var arrRoleRcv = [];
                                                                         roleReceivers.forEach(function (i) {
-                                                                            arrRoleRcv = arrRoleRcv + i.position + " (" + i.groupName + "), ";
+                                                                            arrRoleRcv = arrRoleRcv + i.position + " " + i.groupName + ", ";
                                                                         });
 
                                                                         var arrAliasCc = [];
@@ -1266,7 +1266,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
 
                                                                         var arrRoleCc = [];
                                                                         roleTembusan.forEach(function (i) {
-                                                                            arrRoleCc = arrRoleCc + i.position + " (" + i.groupName + "), ";
+                                                                            arrRoleCc = arrRoleCc + i.position + " " + i.groupName + ", ";
                                                                         });
 
                                                                         var curReceiver = arrAliasRcv + arrRoleRcv + arrVroleRcv;
