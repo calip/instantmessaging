@@ -621,7 +621,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
 
                                                                 var arrRoleRcv = [];
                                                                 roleReceivers.forEach(function (i) {
-                                                                    arrRoleRcv = arrRoleRcv + i.position + " " + i.groupName + ", ";
+                                                                    arrRoleRcv = arrRoleRcv + i.position+ ", ";
                                                                 });
 
                                                                 var arrAliasCc = [];
@@ -636,7 +636,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
 
                                                                 var arrRoleCc = [];
                                                                 roleTembusan.forEach(function (i) {
-                                                                    arrRoleCc = arrRoleCc + i.position + " " + i.groupName + ", ";
+                                                                    arrRoleCc = arrRoleCc + i.position + ", ";
                                                                 });
 
                                                                 var curReceiver = arrAliasRcv + arrRoleRcv + arrVroleRcv;
@@ -830,7 +830,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
 
                                                                     var arrRoleRcv = [];
                                                                     roleReceivers.forEach(function (i) {
-                                                                        arrRoleRcv = arrRoleRcv + i.position + " " + i.groupName + ", ";
+                                                                        arrRoleRcv = arrRoleRcv + i.position + ", ";
                                                                     });
 
                                                                     var arrAliasCc = [];
@@ -845,7 +845,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
 
                                                                     var arrRoleCc = [];
                                                                     roleTembusan.forEach(function (i) {
-                                                                        arrRoleCc = arrRoleCc + i.position + " " + i.groupName + ", ";
+                                                                        arrRoleCc = arrRoleCc + i.position + ", ";
                                                                     });
 
                                                                     var curReceiver = arrAliasRcv + arrRoleRcv + arrVroleRcv;
@@ -973,7 +973,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
 
                                                                     var arrRoleRcv = [];
                                                                     roleReceivers.forEach(function (i) {
-                                                                        arrRoleRcv = arrRoleRcv + i.position + " " + i.groupName + ", ";
+                                                                        arrRoleRcv = arrRoleRcv + i.position + ", ";
                                                                     });
 
                                                                     var arrAliasCc = [];
@@ -988,7 +988,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
 
                                                                     var arrRoleCc = [];
                                                                     roleTembusan.forEach(function (i) {
-                                                                        arrRoleCc = arrRoleCc + i.position + " " + i.groupName + ", ";
+                                                                        arrRoleCc = arrRoleCc + i.position + ", ";
                                                                     });
 
                                                                     var curReceiver = arrAliasRcv + arrRoleRcv + arrVroleRcv;
@@ -1108,7 +1108,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
 
                                                                         var arrRoleRcv = [];
                                                                         roleReceivers.forEach(function (i) {
-                                                                            arrRoleRcv = arrRoleRcv + i.position + " " + i.groupName + ", ";
+                                                                            arrRoleRcv = arrRoleRcv + i.position + ", ";
                                                                         });
 
                                                                         var arrAliasCc = [];
@@ -1123,7 +1123,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
 
                                                                         var arrRoleCc = [];
                                                                         roleTembusan.forEach(function (i) {
-                                                                            arrRoleCc = arrRoleCc + i.position + " " + i.groupName + ", ";
+                                                                            arrRoleCc = arrRoleCc + i.position + ", ";
                                                                         });
 
                                                                         var curReceiver = arrAliasRcv + arrRoleRcv + arrVroleRcv;
@@ -1251,7 +1251,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
 
                                                                         var arrRoleRcv = [];
                                                                         roleReceivers.forEach(function (i) {
-                                                                            arrRoleRcv = arrRoleRcv + i.position + " " + i.groupName + ", ";
+                                                                            arrRoleRcv = arrRoleRcv + i.position + ", ";
                                                                         });
 
                                                                         var arrAliasCc = [];
@@ -1266,7 +1266,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
 
                                                                         var arrRoleCc = [];
                                                                         roleTembusan.forEach(function (i) {
-                                                                            arrRoleCc = arrRoleCc + i.position + " " + i.groupName + ", ";
+                                                                            arrRoleCc = arrRoleCc + i.position + ", ";
                                                                         });
 
                                                                         var curReceiver = arrAliasRcv + arrRoleRcv + arrVroleRcv;
@@ -1446,7 +1446,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                     $child.html('');
                     $el.append('<wasdal-list :messages="messages"></wasdal-list>');
 
-                    soyut.radiogram.renderListMessages(group, message,function(res){
+                    soyut.radiogram.renderListMessages(group, message, function(res){
                         var vm = new Vue({
                             el: elSelector,
                             data: {
@@ -1589,7 +1589,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                         });
                     }
                     else {
-                        soyut.radiogram.renderListMessages(roleName.roleGroup, message,function(res){
+                        soyut.radiogram.renderListMessages(soyut.Session.role.roleGroup, message, function(res){
                             vmlist = new Vue({
                                 el: elSelector,
                                 data: {

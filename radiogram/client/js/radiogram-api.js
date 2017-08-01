@@ -13,7 +13,7 @@ socket.on('new_radiogram', function (data) {
     if(data.new_val.owner.roleGroup == soyut.Session.role.roleGroup){
         if(data.new_val.composeStatus == 'inbox'){
             console.log("kirim notif");
-            soyut.radiogram.SendNotification(data.new_val.Number, 'Radiogram ' + data.new_val.content + ' telah masuk.', data.new_val.id);
+            soyut.radiogram.SendNotification(data.new_val.Number, 'Radiogram ' + data.new_val.Number + ' telah masuk.', data.new_val.id);
 
             var appid = 'soyut.module.app.radiogram';
             var app = soyut.Platform.AppManager.getInstance().getApplication(appid);
@@ -56,7 +56,7 @@ soyut.radiogram.getListReceiversWasdal = function (callback) {
                 list.forEach(function (r) {
                     var Obj = {
                         id: r.id,
-                        name: r.position + ' ' + r.groupName,
+                        name: r.position,
                         type: 'role'
                     };
                     arrRole.push(Obj);
@@ -98,7 +98,7 @@ soyut.radiogram.getListReceiverUser = function (callback) {
             list.forEach(function (r) {
                 var Obj = {
                     id: r.id,
-                    name: r.position + ' ' + r.groupName,
+                    name: r.position,
                     type: 'role'
                 };
                 arrRole.push(Obj);
@@ -125,7 +125,7 @@ soyut.radiogram.getListSenderUser = function (callback) {
             if(i.isAddress) {
                 var Obj = {
                     id: i.id,
-                    name: i.position + ' ' + soyut.Session.role.roleGroupName
+                    name: i.position
                 };
                 arrRole.push(Obj);
             }
@@ -1731,12 +1731,12 @@ function getRoleDetail(group) {
 soyut.radiogram.renderListMessages = function (rolegroup, message,callback) {
     getAddressRolegroup(rolegroup).then(function(result){
         getListMessages(result, message).then(function(data) {
-            var arr = []
+            var arr = [];
             data.forEach(function (i) {
                 i.forEach(function (e) {
                     arr.push(e)
                 })
-            })
+            });
             var dataObj = {};
             dataObj = arr;
             callback(dataObj);
