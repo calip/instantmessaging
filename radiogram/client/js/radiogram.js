@@ -477,7 +477,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
 
                                                                 var arrRoleRcv = [];
                                                                 roleReceivers.forEach(function (i) {
-                                                                    arrRoleRcv = arrRoleRcv + i.position + " " + i.groupName + ", ";
+                                                                    arrRoleRcv = arrRoleRcv + i.position + ", ";
                                                                 });
 
                                                                 var arrAliasCc = [];
@@ -492,7 +492,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
 
                                                                 var arrRoleCc = [];
                                                                 roleTembusan.forEach(function (i) {
-                                                                    arrRoleCc = arrRoleCc + i.position + " " + i.groupName + ", ";
+                                                                    arrRoleCc = arrRoleCc + i.position + ", ";
                                                                 });
 
                                                                 var curReceiver = arrAliasRcv + arrRoleRcv + arrVroleRcv;
@@ -661,7 +661,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                                                     content: message,
                                                                     readStatus: 'unread',
                                                                     sender: sender,
-                                                                    senderDetail: sender.position +" "+ sender.groupName +"",
+                                                                    senderDetail: sender.position,
                                                                     receivers: objReceiver,
                                                                     receiverDetail: curReceiver,
                                                                     cc: objTembusan,
@@ -1014,7 +1014,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                                                         readStatus: 'unread',
                                                                         owner: owner,
                                                                         sender: sender,
-                                                                        senderDetail: sender.position +" "+ sender.groupName +"",
+                                                                        senderDetail: sender.position,
                                                                         receivers: objReceiver,
                                                                         receiverDetail: curReceiver,
                                                                         cc: objTembusan,
@@ -1291,7 +1291,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                                                             alamattembusan: alamattembusan,
                                                                             content: message,
                                                                             sender: sender,
-                                                                            senderDetail: sender.position +" ("+ sender.groupName +")",
+                                                                            senderDetail: sender.position,
                                                                             receivers: objReceiver,
                                                                             receiverDetail: curReceiver,
                                                                             cc: objTembusan,
@@ -2120,33 +2120,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                             },
                             methods: {
                                 ViewDetail: function () {
-                                    var status = $(".view-reply-status").val();
-                                    if(status == 0) {
-                                        $(".intruksi-tr").removeClass('hide');
-                                        $(".tembusan-tr").removeClass('hide');
-                                        $(".tandadinas-tr").removeClass('hide');
-                                        $(".klasifikasi-tr").removeClass('hide');
-                                        $(".message-tr").removeClass('hide');
-                                        $(".pengirim-tr").removeClass('hide');
-                                        $(".nama-tr").removeClass('hide');
-                                        $(".pangkat-tr").removeClass('hide');
-                                        $(".signature-tr").removeClass('hide');
 
-                                        $(".view-reply-status").val('1');
-                                    }
-                                    else {
-                                        $(".intruksi-tr").addClass('hide');
-                                        $(".tembusan-tr").addClass('hide');
-                                        $(".tandadinas-tr").addClass('hide');
-                                        $(".klasifikasi-tr").addClass('hide');
-                                        $(".message-tr").addClass('hide');
-                                        $(".pengirim-tr").addClass('hide');
-                                        $(".nama-tr").addClass('hide');
-                                        $(".pangkat-tr").addClass('hide');
-                                        $(".signature-tr").addClass('hide');
-
-                                        $(".view-reply-status").val('0');
-                                    }
                                 }
                             }
                         });

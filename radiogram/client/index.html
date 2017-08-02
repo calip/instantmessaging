@@ -491,34 +491,7 @@
     <div class="table-responsive">
         <div class="table-responsive">
             <table class="table table-bordered">
-                <thead>
-                <tr @click="ViewDetail">
-                    <td colspan="2" class="text-center text-bold bg-light-grey" style="width: 10%;">Panggilan</td>
-                    <td class="text-center text-bold bg-light-grey" style="width: 30%;">Jenis</td>
-                    <td class="text-center text-bold bg-light-grey" style="width: 20%;">nomor</td>
-                    <td class="text-center text-bold bg-light-grey" colspan="2" style="width: 20%;">Derajat</td>
-                    <td class="text-center text-bold bg-light-grey" colspan="2" style="width: 20%;">Instruksi Pengiriman</td>
-                </tr>
-                </thead>
                 <tbody>
-                <tr class="intruksi-tr hide">
-                    <td class="text-center" colspan="2" style="height: 30px;">
-                        <input type="hidden" name="view-reply-status" class="view-reply-status" value="0">
-                        {{contents.panggilan}}
-                    </td>
-                    <td class="text-center">
-                        {{contents.jenis}}
-                    </td>
-                    <td class="text-center">
-                        {{contents.nomor}}
-                    </td>
-                    <td class="text-center" colspan="2">
-                        {{contents.derajat}}
-                    </td>
-                    <td class="text-center" colspan="2">
-                        {{contents.instruksi}}
-                    </td>
-                </tr>
                 <tr>
                     <td colspan="2" class="text-bold" style="border-top:2px solid #000000; border-left:2px solid #000000; border-bottom: none; border-right: none">Dari</td>
                     <td colspan="4" style="border-top:2px solid #000000; border-right:2px solid #000000; border-bottom: none;">
@@ -535,7 +508,7 @@
                         <label>{{ contents.simtime | stringtime }}</label>
                     </td>
                 </tr>
-                <tr class="tembusan-tr hide">
+                <tr class="tembusan-tr">
                     <td colspan="2" rowspan="2" class="text-bold" style="border-left:2px solid #000000; border-right: none; border-bottom:2px solid #000000;">Tembusan</td>
                     <td colspan="4" rowspan="2" style="border-right:2px solid #000000; border-bottom:2px solid #000000;">
                         {{contents.ccDetail}}
@@ -543,7 +516,7 @@
                     <td class="text-center text-bold bg-light-grey">Tanda Dinas</td>
                     <td class="text-center text-bold bg-light-grey">Group</td>
                 </tr>
-                <tr class="tandadinas-tr hide">
+                <tr class="tandadinas-tr">
                     <td class="text-center" style="border-bottom: none">
                         {{contents.tandadinas}}
                     </td>
@@ -551,7 +524,7 @@
                         {{contents.group}}
                     </td>
                 </tr>
-                <tr class="klasifikasi-tr hide">
+                <tr class="klasifikasi-tr">
                     <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right:none;">Klasifikasi</td>
                     <td colspan="4" style="border-bottom: none; border-right: none; border-right: solid 2px #000000; ">
                         {{ contents.classification | stringuppercase }}
@@ -567,56 +540,9 @@
                     <td style="border-bottom: none; border-right: none;"></td>
                     <td style="border-bottom: none;"></td>
                 </tr>
-                <tr class="message-tr hide">
+                <tr class="message-tr">
                     <td colspan="8" style="height:250px; vertical-align: top; border-left:2px solid #000000;">
                         <label v-html="messages" style="white-space: pre-wrap;"></label>
-                    </td>
-                </tr>
-                <tr class="pengirim-tr hide">
-                    <td class="text-center text-bold bg-light-grey" colspan="2" style="border-left:2px solid #000000;">Pengirim</td>
-                    <td class="text-center text-bold bg-light-grey" colspan="2" style="border-right:2px solid #000000;">Derajat</td>
-                    <td class="text-center text-bold bg-light-grey" colspan="2" style="border-top:2px solid #000000;">Dikirim/Diterima</td>
-                    <td class="text-center text-bold bg-light-grey" style="border-top:2px solid #000000;">Cara</td>
-                    <td class="text-center text-bold bg-light-grey" style="border-top:2px solid #000000;">Paraf</td>
-                </tr>
-                <tr class="nama-tr hide">
-                    <td class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Nama</td>
-                    <td style="border-bottom: none;">
-                        {{contents.senderName}}
-                    </td>
-                    <td class="text-center text-bold">Aksi</td>
-                    <td class="text-center text-bold" style="border-right:2px solid #000000;">Tembusan</td>
-                    <td class="text-center text-bold">Jam</td>
-                    <td class="text-center text-bold">Tanggal</td>
-                    <td class="text-center vertical-align-top" rowspan="3">
-                        {{contents.cara}}
-                    </td>
-                    <td class="text-center vertical-align-top" rowspan="3">
-                        {{contents.paraf}}
-                    </td>
-                </tr>
-                <tr class="pangkat-tr hide">
-                    <td class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Pangkat</td>
-                    <td style="border-bottom: none;">
-                        {{contents.senderRank}}
-                    </td>
-                    <td class="text-center vertical-align-top" rowspan="2">
-                        {{contents.alamataksi}}
-                    </td>
-                    <td class="text-center vertical-align-top" rowspan="2" style="border-right:2px solid #000000;">
-                        {{contents.alamattembusan}}
-                    </td>
-                    <td class="text-center vertical-align-top" rowspan="2">
-                        {{contents.jam}}
-                    </td>
-                    <td class="text-center vertical-align-top" rowspan="2">
-                        {{contents.tanggal}}
-                    </td>
-                </tr>
-                <tr class="signature-tr hide">
-                    <td class="text-bold" style="border-left:2px solid #000000; border-right: none;">TTD</td>
-                    <td>
-                        <img :src="contents.senderSignature" width="100" class="sender-signature" name="sender-signature">
                     </td>
                 </tr>
                 </tbody>
