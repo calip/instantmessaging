@@ -922,18 +922,9 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                             var r = confirm("Anda Yakin?");
                             if (r == true) {
                                 console.log('radiogram Warning, delete radiogram');
-                                soyut.radiogram.renderRadiogramParent(content.id, function (res) {
-                                    res.forEach(function (i) {
-                                        soyut.radiogram.Radiogram_delete({id: res.id}, function (err, result) {
-                                            if(!err){
-
-                                            }
-                                        });
-                                    });
-                                    soyut.radiogram.Radiogram_delete({id: content.id}, function (err, data) {
-                                        if(!err){
-                                            soyut.radiogram.rigRenderTrash();
-                                        }
+                                soyut.radiogram.deleteRadiogram(content.id, function (result) {
+                                    soyut.radiogram.deleteChildRadiogram(content.id, function (res) {
+                                        soyut.radiogram.rigRenderTrash();
                                     });
                                 });
                             }

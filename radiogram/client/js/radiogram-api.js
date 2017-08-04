@@ -398,6 +398,31 @@ function getAddressRolegroup(group) {
     });
 }
 
+soyut.radiogram.deleteChildRadiogram = function (id, callback) {
+    soyut.radiogram.renderRadiogramParent(id, function (res) {
+        res.forEach(function (i) {
+            soyut.radiogram.renderMessageObj(i.id, function (rdg) {
+                if (rdg.composeStatus == 'pending') {
+                    soyut.radiogram.Radiogram_delete({id: rdg.id}, function (err, result) {
+                        if (!err) {
+
+                        }
+                    });
+                }
+            });
+        });
+        callback(id);
+    });
+};
+
+soyut.radiogram.deleteRadiogram = function (id, callback) {
+    soyut.radiogram.Radiogram_delete({id: id}, function (err, result) {
+        if (!err) {
+            callback(result)
+        }
+    });
+};
+
 soyut.radiogram.renderRadiogramParent = function (id, callback) {
     getRadiogramParent(id).then(function (result) {
         callback(result);
@@ -410,9 +435,7 @@ function getRadiogramParent(id) {
             if(e){
                 reject(e);
             }else{
-                var dataObj = {};
-                dataObj = data;
-                resolve(dataObj);
+                resolve(data);
             }
         });
     });

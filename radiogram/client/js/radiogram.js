@@ -2003,10 +2003,10 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                 DeleteMessage: function(content){
                                     function handleOkButton() {
                                         console.log('radiogram Warning, delete radiogram');
-                                        soyut.radiogram.Radiogram_delete({id: content.id}, function (err, data) {
-                                            if(!err){
+                                        soyut.radiogram.deleteRadiogram(content.id, function (result) {
+                                            soyut.radiogram.deleteChildRadiogram(content.id, function (res) {
                                                 soyut.radiogram.renderTrash();
-                                            }
+                                            });
                                         });
                                     }
                                     function handleCancelButton() {
