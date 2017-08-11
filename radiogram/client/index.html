@@ -456,8 +456,8 @@
                         <span class="text">{{ message.SendTime, message.createTime, message.composeStatus | wstime }}</span>
                         <span class="text">{{ message.simtime, message.composeStatus | watime }}</span>
                     </div>
-                    <span class="messages-item-subject"> {{message.Number}}</span>
-                    <span class="messages-item-content">{{ message.content | truncate}}.....</span>
+                    <span class="messages-item-subject"> {{message.Number | truncate}}</span>
+                    <span class="messages-item-content">{{ message.content | truncate}}</span>
                 </a>
             </li>
         </ul>
@@ -711,6 +711,11 @@
 
 <template id="email-reader">
     <div class="container-fluid container-fullw">
+        <div class="row">
+            <div class="col-md-12 reference-message">
+
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
 

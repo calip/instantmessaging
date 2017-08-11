@@ -173,7 +173,7 @@ Social Icons
   /*tambahan*/
   /*tambahan*/ }
   .wdl-main .mainTitle {
-    margin: 10px   0; }
+    margin: 10px 0; }
   .wdl-main .mainTitle small {
     color: #8e8e93;
     font-size: 17px;
@@ -7698,10 +7698,11 @@ Social Icons
   .wdl-main .messages-list .messages-item .messages-item-subject {
     font-size: 24px;
     margin-bottom: 4px;
+    margin-top: 5px;
     color: #000; }
   .wdl-main .messages-list .messages-item .messages-item-content {
     font-size: 24px;
-    color: #000;
+    color: #4c4c4c;
     margin-bottom: 4px; }
   .wdl-main .messages-list .messages-item .messages-item-preview {
     color: #aeacb4;

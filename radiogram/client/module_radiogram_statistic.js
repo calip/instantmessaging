@@ -1,3 +1,4 @@
+
 var radiogram_stat_boot = function(radiogramService){
 
     radiogramService.getOrigin(null, function(err, origin){

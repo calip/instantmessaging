@@ -63,7 +63,7 @@ module.exports = {
       model:'rolegroup'
     },
     composeStatus:{
-      enum:['inbox','sent','draft','trash','pending'],
+      enum:['inbox','sent','draft','trash','pending','group'],
       defaultsTo: 'draft'
     },
     readStatus:{
@@ -128,6 +128,9 @@ module.exports = {
       type:'string'
     },
     parentId:{
+      model:'Radiogram'
+    },
+    referenceId:{
       model:'Radiogram'
     }
   },

@@ -1,122 +1,7 @@
 <div class="rdgdraft-main">
 
     <div class="rdgdraft-app">
-        <!-- sidebar -->
-        <div class="sidebar app-aside rdgdraft-sidebar">
-            <div class="sidebar-container perfect-scrollbar">
-                <nav>
-
-                    <!-- start: DOCUMENTATION BUTTON -->
-                    <div class="wrapper">
-                        <a href="#" id="rdgdraft-nav-compose" class="button-o">
-                            <i class="fa icon-new-message"></i>
-                            <span>BUAT RADIOGRAM</span>
-                        </a>
-                    </div>
-                    <!-- end: DOCUMENTATION BUTTON -->
-
-                    <!-- start: MAIN NAVIGATION MENU -->
-                    <div class="navbar-title">
-                        <span>Menu Utama</span>
-                    </div>
-
-                    <ul class="main-navigation-menu" id="rdgdraft-navigation-menu">
-                        <li>
-                            <a href="#" id="rdgdraft-nav-draft">
-                                <div class="item-content">
-                                    <div class="item-media">
-                                        <i class="fa icon-draft"></i>
-                                    </div>
-                                    <div class="item-inner">
-                                        <span class="title"> DRAFT </span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" id="rdgdraft-nav-trash">
-                                <div class="item-content">
-                                    <div class="item-media">
-                                        <i class="fa icon-trash"></i>
-                                    </div>
-                                    <div class="item-inner">
-                                        <span class="title"> KOTAK SAMPAH </span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- materi -->
-                    <div class="navbar-title">
-                        <span id="materi-name">MATERI </span>
-                    </div>
-                    <div id="materi-list">
-                        <ul class="folders rdgdraft-folders">
-                            <li>
-                                <div class="item-content">
-                                    <div class="item-media">
-                                        <input type="checkbox" name="select-materi" class="select-materi" value="intelijen">
-                                    </div>
-                                    <div class="item-inner">
-                                        <span class="title"> INTELIJEN </span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="item-content">
-                                    <div class="item-media">
-                                        <input type="checkbox" name="select-materi" class="select-materi" value="operasi">
-                                    </div>
-                                    <div class="item-inner">
-                                        <span class="title"> OPERASI </span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="item-content">
-                                    <div class="item-media">
-                                        <input type="checkbox" name="select-materi" class="select-materi" value="personel">
-                                    </div>
-                                    <div class="item-inner">
-                                        <span class="title"> PERSONEL </span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="item-content">
-                                    <div class="item-media">
-                                        <input type="checkbox" name="select-materi" class="select-materi" value="logistik">
-                                    </div>
-                                    <div class="item-inner">
-                                        <span class="title"> LOGISTIK </span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="item-content">
-                                    <div class="item-media">
-                                        <input type="checkbox" name="select-materi" class="select-materi" value="komlek">
-                                    </div>
-                                    <div class="item-inner">
-                                        <span class="title"> KOMLEK </span>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- end materi -->
-                    <!-- start: DOCUMENTATION BUTTON
-                    <div class="wrapper" id="kop-menu">
-                      <a href="#" id="rdgdraft-nav-kop" class="button-o">
-                        <i class="fa icon-settings"></i>
-                        <span>KOP Surat</span>
-                      </a>
-                    </div>
-                    end: DOCUMENTATION BUTTON -->
-                </nav>
-            </div>
-        </div>
-        <!-- sidebar -->
+        
         <div class="app-content">
             <!-- start: TOP NAVBAR -->
             <header class="navbar navbar-default navbar-static-top">
@@ -137,8 +22,6 @@
 
                 <!-- start: NAVBAR COLLAPSE -->
                 <div class="navbar-collapse collapse">
-                    <div class="col-sm-7" id="detail-user"></div>
-
                     <ul class="nav navbar-right">
                         <!-- start: LANGUAGE SWITCHER -->
                         <li class="dropdown">
@@ -174,10 +57,6 @@
                 <div class="wrap-content container" id="rdgdraft-email-content">
                     <div class="wrap-messages">
                         <div id="inbox" class="inbox">
-                            <!-- start: EMAIL LIST -->
-                            <div class="col email-list"></div>
-                            <!-- end: EMAIL LIST -->
-
                             <!-- start: EMAIL READER -->
                             <div class="email-reader perfect-scrollbar" style="overflow-y:auto;"></div>
                             <!-- end: EMAIL READER -->
@@ -188,12 +67,6 @@
                 <div class="wrap-content container email-compose disable" id="rdgdraft-email-form">
 
                     <div class="container-fluid container-fullw">
-                        <div class="row">
-                            <div class="col-md-12 reply-message">
-
-                            </div>
-                        </div>
-
                         <div class="row">
                             <div class="col-md-12">
 
@@ -327,6 +200,27 @@
                                         </tr>
                                         </tbody>
                                     </table>
+                                    <div class="form-group">
+                                        <form role="form" class="form-horizontal">
+                                            <div class="form-group">
+                                                <label for="realtime" class="col-sm-2">Waktu Sebenarnya</label>
+                                                <div id="group-realtime" class="input-group date form-datetime col-md-6" data-date="20/10/2010 11:20" data-date-format="dd/MM/yyyy HH:ii">
+                                                    <input class="form-control" type="text" placeholder="dd/mm/yyyy hh:mm" id="realtime">
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="form-group">
+                                        <form role="form" class="form-horizontal">
+                                            <div class="form-group">
+                                                <label class="col-sm-2" for="inputAuthor">
+                                                    AUTHOR :
+                                                </label>
+                                                <div class="col-sm-6 parent-author" id="list-author"></div>
+                                            </div>
+                                        </form>
+                                    </div>
                                     <div class="form-group" id="list-materi">
 
                                     </div>
@@ -337,8 +231,8 @@
 
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <button class="btn btn-primary btn-o btn-wide" type="button" id="btnSaveMessage">
-                                            <i class="fa icon-draft"></i> Draft
+                                        <button class="btn btn-primary btn-wide pull-right" type="button" id="btnSaveMessage">
+                                            <i class="fa icon-draft"></i> Simpan
                                         </button>
                                     </div>
                                 </div>
@@ -356,29 +250,6 @@
     </div>
 
 </div>
-
-<template id="email-list">
-    <div class="wrap-list">
-        <div class="wrap-options">
-            <div class="messages-search">
-                <input type="text" placeholder="Cari radiogram..." @keyup="FindRadiogram()" class="txt-filter-list form-control underline">
-            </div>
-        </div>
-        <ul class="messages-list perfect-scrollbar">
-            <li v-for="message in messages" :class="LoadStatusMessage(message.id, message.readStatus, message.composeStatus, message.sender.roleGroup)" :data-date="message.simtime" :data-group="message.sender.roleGroup" :data-status="message.readStatus" :data-materi="message.materi" :data-id="message.id">
-                <a href="#" @click="viewMessageDetail(message.id)">
-                    <span class="messages-item-from">{{ message.receiverDetail | fromfilter }}</span>
-                    <div class="messages-item-time">
-                        <span class="text">{{ message.SendTime, message.createTime, message.composeStatus | wstime }}</span>
-                        <span class="text">{{ message.simtime, message.composeStatus | watime }}</span>
-                    </div>
-                    <span class="messages-item-subject"> {{message.Number}}</span>
-                    <span class="messages-item-content">{{ message.content | truncate}}.....</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-</template>
 
 <template id="email-reader">
     <div class="container-fluid container-fullw">

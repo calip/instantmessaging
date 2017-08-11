@@ -1334,7 +1334,7 @@ Social Icons
   @media (min-width: 992px) {
     .rdgdraft-main .main-content {
       margin-top: 65px;
-      margin-left: 260px; }
+      margin-left: 0px; }
     .rdgdraft-main .app-navbar-fixed .main-content {
       margin-top: 0; }
     .rdgdraft-main .app-navbar-fixed .main-content:before, .rdgdraft-main .app-navbar-fixed .main-content:after {

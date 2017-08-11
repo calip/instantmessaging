@@ -50,6 +50,7 @@
       "class":"soyut.module.app.radiogram.draft",
       "title":"Radiogram",
       "launcher" : false,
+      "isMultiInstance":false,
       "externalUse": true,
       "libraryScript":[
         {"name":"rdgd_scrollbar","url":"/libs/pscrollbar/pscrollbar.min.js"},

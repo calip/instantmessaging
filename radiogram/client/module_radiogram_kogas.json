@@ -6,7 +6,7 @@
   "icon":"icon.png",
   "startup" : false,
   "isWidget" : false,
-  "requiredPolicies":["radiogram-user"],
+  "requiredPolicies":["radiogram-wasdal"],
   "debug" : true,
   "activities":[
     {
