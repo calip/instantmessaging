@@ -43,11 +43,14 @@ module.exports = {
       console.log(test.length);
 
       var context = "./client/views/pdf.html";
-      var curNumber = replaceall(number,'/','-');
-          curNumber = replaceall(curNumber,' ','');
-          curNumber = replaceall(curNumber,'\"','');
-          curNumber = replaceall(curNumber,"'",'');
-          curNumber = replaceall(curNumber,'"','');
+      var curNumber = "000";
+      if(number != ""){
+        curNumber = replaceall(number,'/','-');
+        curNumber = replaceall(curNumber,' ','');
+        curNumber = replaceall(curNumber,'\"','');
+        curNumber = replaceall(curNumber,"'",'');
+        curNumber = replaceall(curNumber,'"','');
+      }
       // var pdfName = curNumber + "-" + getDateTime() + ".pdf";
       var pdfName = curNumber + ".pdf";
 
