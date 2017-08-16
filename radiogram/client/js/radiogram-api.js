@@ -12,15 +12,17 @@ if (Promise.promisifyAll) {
 
 socket.on('new_radiogram', function (data) {
     if(data.new_val.owner.roleGroup == soyut.Session.role.roleGroup){
-        if(data.new_val.composeStatus == 'inbox'){
-            console.log("kirim notif");
-            soyut.radiogram.SendNotification(data.new_val.Number, 'Radiogram dari ' + data.new_val.senderDetail + ' telah masuk.', data.new_val.id);
+              if(data.new_val.readStatus == 'unread'){
+            if(data.new_val.composeStatus == 'inbox'){
+                console.log("kirim notif");
+                soyut.radiogram.SendNotification(data.new_val.Number, 'Radiogram dari ' + data.new_val.senderDetail + ' telah masuk.', data.new_val.id);
 
-            var appid = 'soyut.module.app.radiogram';
-            var app = soyut.Platform.AppManager.getInstance().getApplication(appid);
+                var appid = 'soyut.module.app.radiogram';
+                var app = soyut.Platform.AppManager.getInstance().getApplication(appid);
 
-            if(soyut.Platform.AppManager.getInstance().hasInstance(appid)){
-                soyut.radiogram.LoadNewMessages(data.new_val);
+                if(soyut.Platform.AppManager.getInstance().hasInstance(appid)){
+                    soyut.radiogram.LoadNewMessages(data.new_val);
+                }
             }
         }
     }
@@ -583,7 +585,7 @@ soyut.radiogram.SendRadiogram = function (params, callback) {
                                 simtime: simclock.simTime,
                                 createTime: reclock,
                                 parentId: null,
-                                referenceId: referenceId,
+                                referenceId: params.referenceId,
                                 composeStatus: 'inbox'
                             }, function (err, res) {
                                 if (!err) {
@@ -633,7 +635,7 @@ soyut.radiogram.SendRadiogram = function (params, callback) {
                                     simtime: simclock.simTime,
                                     createTime: reclock,
                                     parentId: null,
-                                    referenceId: referenceId,
+                                    referenceId: params.referenceId,
                                     composeStatus: 'inbox'
                                 }, function (err, res) {
                                     if (!err) {
@@ -681,7 +683,7 @@ soyut.radiogram.SendRadiogram = function (params, callback) {
                     simtime: simclock.simTime,
                     createTime: reclock,
                     parentId: null,
-                    referenceId: referenceId,
+                    referenceId: params.referenceId,
                     composeStatus: 'inbox'
                 }, function (err, res) {
                     if (!err) {
@@ -724,7 +726,7 @@ soyut.radiogram.SendRadiogram = function (params, callback) {
                 simtime: simclock.simTime,
                 createTime: reclock,
                 parentId: null,
-                referenceId: referenceId,
+                referenceId: params.referenceId,
                 composeStatus: 'sent'
             }, function (err, results) {
                 if (!err) {
@@ -2864,8 +2866,8 @@ soyut.radiogram.SaveFilePDF = function(val, rescallback) {
 
             function getPosition(str, m, i) { return str.split(m, i).join(m).length; }
 
-            var safeUrl = dataurl.substring(0, 8) + curUrl[0] + dataurl.substring(getPosition(dataurl, ':', 2));
-
+            var safeUrl = dataurl.substring(0, 8) + storageServer + dataurl.substring(getPosition(dataurl, ':', 2));
+            console.log(safeUrl, dataurl)
             // debugger;
             getFile(safeUrl, function(err, dataBuffer) {
                 if (err) return;

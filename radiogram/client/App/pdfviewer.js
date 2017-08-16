@@ -1,9 +1,9 @@
-var curUrl = soyut.radiogram.origin.split(':');
+var storageServer = 'storage.soyut';
 var url = getParam("file");
 
 soyut.radiogram.initPdfViewer = function () {
     function getPosition(str, m, i) { return str.split(m, i).join(m).length; }
-    var safeUrl = url.substring(0, 8) + curUrl[0] + url.substring(getPosition(url, ':', 2));
+    var safeUrl = url.substring(0, 8) + storageServer + url.substring(getPosition(url, ':', 2));
     function getFile(url, callback) {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', url, true);
