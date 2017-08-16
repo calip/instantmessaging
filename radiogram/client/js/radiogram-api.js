@@ -12,7 +12,7 @@ if (Promise.promisifyAll) {
 
 socket.on('new_radiogram', function (data) {
     if(data.new_val.owner.roleGroup == soyut.Session.role.roleGroup){
-              if(data.new_val.readStatus == 'unread'){
+        if(data.new_val.readStatus == 'unread'){
             if(data.new_val.composeStatus == 'inbox'){
                 console.log("kirim notif");
                 soyut.radiogram.SendNotification(data.new_val.Number, 'Radiogram dari ' + data.new_val.senderDetail + ' telah masuk.', data.new_val.id);
@@ -2866,8 +2866,8 @@ soyut.radiogram.SaveFilePDF = function(val, rescallback) {
 
             function getPosition(str, m, i) { return str.split(m, i).join(m).length; }
 
-            var safeUrl = dataurl.substring(0, 8) + storageServer + dataurl.substring(getPosition(dataurl, ':', 2));
-            console.log(safeUrl, dataurl)
+            var safeUrl = dataurl.substring(0, 8) + curUrl[0] + dataurl.substring(getPosition(dataurl, ':', 2));
+
             // debugger;
             getFile(safeUrl, function(err, dataBuffer) {
                 if (err) return;
