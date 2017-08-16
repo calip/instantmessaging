@@ -812,7 +812,7 @@ soyut.rig.getRigListReceiversWasdal(getScenario, function (listReceiverWasdal) {
             soyut.radiogram.rigSaveFilePDF = function(val, rescallback) {
                 var dataurl = "https://"+soyut.radiogram.origin+"/data/"+val;
                 var curUrl = soyut.radiogram.origin.split(':');
-                var storageServer = 'storage.soyut';
+                var storageServer = 'pivot.filesystem.soyut';
 
                 function getFile(url, callback) {
                     var xhr = new XMLHttpRequest();
@@ -837,7 +837,7 @@ soyut.rig.getRigListReceiversWasdal(getScenario, function (listReceiverWasdal) {
 
                         function getPosition(str, m, i) { return str.split(m, i).join(m).length; }
 
-                        var safeUrl = dataurl.substring(0, 8) + curUrl[0] + dataurl.substring(getPosition(dataurl, ':', 2));
+                        var safeUrl = dataurl.substring(0, 8) + storageServer + dataurl.substring(getPosition(dataurl, ':', 2));
 
                         // debugger;
                         getFile(safeUrl, function(err, dataBuffer) {
