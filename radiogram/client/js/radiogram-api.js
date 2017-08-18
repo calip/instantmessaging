@@ -2841,7 +2841,7 @@ function getPrinterProvider(rolegroup) {
 soyut.radiogram.SaveFilePDF = function(val, rescallback) {
     var dataurl = "https://"+soyut.radiogram.origin+"/data/"+val;
     var curUrl = soyut.radiogram.origin.split(':');
-    var storageServer = 'pivot.filesystem.soyut';
+    var storageServer = 'storage.soyut';
 
     function getFile(url, callback) {
         var xhr = new XMLHttpRequest();
@@ -2869,7 +2869,7 @@ soyut.radiogram.SaveFilePDF = function(val, rescallback) {
             var safeUrl = dataurl.substring(0, 8) + storageServer + dataurl.substring(getPosition(dataurl, ':', 2));
 
             // debugger;
-            getFile(safeUrl, function(err, dataBuffer) {
+            getFile(dataurl, function(err, dataBuffer) {
                 if (err) return;
                 soyut.storage.putAsync({
                     storageKey: storageKey,
