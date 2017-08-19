@@ -558,6 +558,9 @@ soyut.rig.getRigListReceiversWasdal(getScenario, function (listReceiverWasdal) {
                 soyut.radiogram.rigRenderMateriWasdal('new', null);
                 soyut.radiogram.rigRenderAuthorWasdal('new', null);
                 soyut.radiogram.rigRenderSimtime('');
+
+                $(getInstanceID("list-materi")).css('visibility', 'hidden');
+                $(getInstanceID("list-materi")).css('height', '5px');
             };
 
             soyut.radiogram.rigEditMessage = function(){
@@ -729,7 +732,7 @@ soyut.rig.getRigListReceiversWasdal(getScenario, function (listReceiverWasdal) {
                     var attributes = '';
                     attributes +=
                         '<div class="col-md-8">' +
-                        '<div class="form-group"><p class="text-bold">MATERI :</p> ' + arrMateri + ' </div>' +
+                        '<div class="form-group"><p class="text-bold">DIPOSISI KE AS/PA :</p> ' + arrMateri + ' </div>' +
                         '</div>' +
                         '<div class="col-md-4">' +
                         '<div class="form-group pull-right"><p class="text-bold">Author</p> ' + data.author + '</div>' +
@@ -1028,7 +1031,7 @@ soyut.rig.getRigListReceiversWasdal(getScenario, function (listReceiverWasdal) {
             soyut.radiogram.rigRenderMateriWasdal = function (state, value) {
                 $(getInstanceID("list-materi")).html('');
                 if(state == 'new'){
-                    var html = '<h3>MATERI :</h3>' +
+                    var html = '<h3>DIPOSISI KE AS/PA :</h3>' +
                         '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="intelijen">INTELIJEN</label>' +
                         '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="operasi">OPERASI</label>' +
                         '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="personel">PERSONEL</label>' +
@@ -1060,7 +1063,7 @@ soyut.rig.getRigListReceiversWasdal(getScenario, function (listReceiverWasdal) {
                             checked5 = 'checked';
                         }
                     });
-                    var html = '<h3>MATERI :</h3>';
+                    var html = '<h3>DIPOSISI KE AS/PA :</h3>';
                     html += '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="intelijen" '+ checked1 +'>INTELIJEN</label>';
                     html += '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="operasi" '+ checked2 +'>OPERASI</label>';
                     html += '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="personel" '+ checked3 +'>PERSONEL</label>';

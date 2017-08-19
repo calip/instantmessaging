@@ -1027,6 +1027,23 @@ module.exports = {
                 });
             },
             accessToken: [RADIOGRAM_MANAGER_TOKEN, RADIOGRAM_USER_TOKEN]
+        },
+        UpdateListMateri:{
+            method: function (authServerUrl, remoteSocket, reqMsg, resCallback) {
+                var id = reqMsg.data.params.id;
+                var materi = reqMsg.data.params.materi;
+
+                r.table('Radiogram').update({id: id}, {materi: materi}, function (err, result) {
+                    if (err) resCallback(true, err);
+                    else {
+                        if (result.replaced > 0)
+                            resCallback(false, {success: true});
+                        else
+                            resCallback(true, {success: false});
+                    }
+                });
+            },
+            accessToken: [RADIOGRAM_MANAGER_TOKEN, RADIOGRAM_USER_TOKEN]
         }
     },
     tokenList: [
