@@ -1904,6 +1904,13 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                         };
                                         return attr;
                                     }
+                                    if(roleName.isAddress){
+                                        var attr;
+                                        attr = {
+                                            'style': 'display:none'
+                                        };
+                                        return attr;
+                                    }
                                 }
                             },
                             loadChangeButton: function(val){
