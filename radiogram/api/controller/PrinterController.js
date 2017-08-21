@@ -38,6 +38,7 @@ module.exports = {
       var message = reqMsg.data.params.message;
       var simtime = reqMsg.data.params.simtime;
       var kop = reqMsg.data.params.kop;
+      var renderKop = kop.replace(/(?:\r\n|\r|\n)/g, '<br />');
       var renderMessage = message.replace(/(?:\r\n|\r|\n)/g, '<br />');
       var test = message.split('\n');
       console.log(test.length);
@@ -81,7 +82,7 @@ module.exports = {
       html = html.replace('{{paraf}}', paraf);
       html = html.replace('{{renderMessage}}', renderMessage);
       html = html.replace('{{simtime}}', simtime);
-      html = html.replace('{{kop}}', kop);
+      html = html.replace('{{kop}}', renderKop);
 
       function replaceall(str,replace,with_this){
           var str_hasil ="";

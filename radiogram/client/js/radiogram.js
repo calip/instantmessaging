@@ -2025,7 +2025,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                         '</div>';
                                 }
                                 else{
-                                    if(roleName.isAddress){
+                                    if(roleName.isAddress || roleName.isSet){
                                         var checked1 = '';
                                         var checked2 = '';
                                         var checked3 = '';
