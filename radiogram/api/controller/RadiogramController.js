@@ -667,6 +667,32 @@ module.exports = {
             },
             accessToken: [RADIOGRAM_USER_TOKEN, RADIOGRAM_MANAGER_TOKEN]
         },
+        GetByReferenceId:{
+            method: function (authServerUrl, remoteSocket, reqMsg, resCallback) {
+                var id = reqMsg.data.params.id;
+                var field = reqMsg.data.params.field;
+                var sort = reqMsg.data.params.sort;
+                
+                r.table('Radiogram').findOrder({referenceId: id}, field, sort).exec(function (err, result) {
+                    if (err) {
+                        return res.json({success: false, error: "record not found"});
+                        throw err;
+                    }
+                    else {
+                        result.toArray(function (err, radiogram) {
+                            if (err) {
+                                return res.json({success: false, error: "record not found"});
+                                throw err;
+                            }
+                            else {
+                                resCallback(false, radiogram);
+                            }
+                        });
+                    }
+                });
+            },
+            accessToken: [RADIOGRAM_USER_TOKEN, RADIOGRAM_MANAGER_TOKEN]
+        },
         GetByRole:{
             method: function (authServerUrl, remoteSocket, reqMsg, resCallback) {
                 var id = reqMsg.data.params.id;

@@ -61,7 +61,6 @@
                                 </div>
                             </a>
                         </li>
-                        <!--
                         <li>
                             <a href="#" id="wdl-nav-trash">
                                 <div class="item-content">
@@ -74,7 +73,6 @@
                                 </div>
                             </a>
                         </li>
-                        -->
                     </ul>
                     <!-- materi -->
                     <div class="navbar-title">
@@ -463,6 +461,7 @@
         <ul class="messages-list perfect-scrollbar">
             <li v-for="message in messages" :class="LoadStatusMessage(message.id, message.readStatus, message.composeStatus, message.sender.roleGroup)" :data-date="message.simtime" :data-group="message.sender.roleGroup" :data-status="message.readStatus" :data-materi="message.materi" :data-id="message.id">
                 <a href="#" @click="viewMessageDetail(message.id)">
+                    <span :class="LoadStatusReply(message.id)" title="Tandai" v-html="LoadStatusMark(message.materi, message.approved, message.id)"></span>
                     <span class="messages-item-from">{{ message.receiverDetail, message.senderDetail, message.composeStatus | fromfilter }}</span>
                     <div class="messages-item-time">
                         <span class="text">{{ message.SendTime, message.createTime, message.composeStatus | wstime }}</span>
@@ -486,12 +485,13 @@
         <ul class="messages-list perfect-scrollbar">
             <li v-for="message in messages" :class="LoadStatusMessage(message.id, message.readStatus, message.composeStatus)" :data-date="message.simtime">
                 <a href="#" @click="viewMessageDetail(message.id)">
+                    <span :class="LoadStatusReply(message.id)" title="Tandai" v-html="LoadStatusMark(message.materi, message.approved, message.id)"></span>
                     <span class="messages-item-from">{{ message.receiverDetail | fromfilter }}</span>
                     <div class="messages-item-time">
                         <span class="text">{{ message.SendTime, message.createTime, message.composeStatus | wstime }}</span>
                         <span class="text">{{ message.simtime, message.composeStatus | watime }}</span>
                     </div>
-                    <span class="messages-item-subject"> {{message.Number}}</span>
+                    <span class="messages-item-subject"> {{message.Number | truncate}}</span>
                     <span class="messages-item-content">{{ message.content | truncate}}.....</span>
                 </a>
             </li>
@@ -870,14 +870,12 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <!--
                         <button class="btn btn-danger btn-wide" v-bind="loadMoveButton(contents.composeStatus)" type="button" @click="MoveMessage">
                             Hapus <i class="fa icon-delete121"></i>
                         </button>
                         <button class="btn btn-danger btn-wide" v-bind="loadDeleteButton(contents.composeStatus)" type="button" @click="DeleteMessage">
                             Hapus <i class="fa icon-delete121"></i>
                         </button>
-                        -->
                         <button class="btn btn-info btn-wide btn-changeMessage" type="button" @click="EditMessage" v-bind="loadChangeButton(contents.composeStatus)">
                             Ubah <i class="fa icon-pencil"></i>
                         </button>

@@ -203,7 +203,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                     var vmlist;
 
                     Vue.filter('truncate', function (value) {
-                        var length = 23;
+                        var length = 10;
 
                         if (value.length <= length) {
                             return value;
@@ -267,6 +267,12 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                     Vue.filter('stringuppercase', function (value) {
                         var stringTime = value.toUpperCase();
                         return stringTime;
+                    });
+
+                    $(getInstanceID("Number")).keydown(function(event) {
+                        if (event.keyCode == 32) {
+                            event.preventDefault();
+                        }
                     });
 
                     soyut.radiogram.renderContent = function () {
@@ -1478,6 +1484,31 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                 }
                                 return html;
                             },
+                            LoadStatusMark: function(materi, approved, msgid){
+                                var html = '';
+                                html += '<span class="boxicon inbox-reply replyicon-'+ msgid +'" style="display:none"><i class="fa icon-reply"></i></span>';
+                                    
+                                if(materi.length > 0){
+                                    html += '<span class="boxicon"><i class="fa icon-price-tag"></i></span>';
+                                }
+                                if(approved.length > 0){
+                                    html += '<span class="boxicon inbox-mark"><i class="fa icon-flag"></i></span>';
+                                }
+                                return html;
+                            },
+                            LoadStatusReply: function(msg){
+                                soyut.radiogram.Radiogram_GetByReferenceId({id: msg, field:'createTime', sort:'desc'},function(e,rdg) {
+                                    if(e){
+                                        console.log(e);
+                                    } else {
+                                        if(rdg[0] != undefined){
+                                            $('.replyicon-'+rdg[0].referenceId).css('display','');
+                                        }
+                                    }
+                                });
+                                var html = "messages-item-star";
+                                return html;
+                            },
                             viewMessageDetail: function (val) {
                                 this.$root.viewMessageDetail(val);
                             }
@@ -1537,6 +1568,31 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                         html += "active";
                                     }
                                 }
+                                return html;
+                            },
+                            LoadStatusMark: function(materi, approved, msgid){
+                                var html = '';
+                                html += '<span class="boxicon inbox-reply replyicon-'+ msgid +'" style="display:none"><i class="fa icon-reply"></i></span>';
+                                    
+                                if(materi.length > 0){
+                                    html += '<span class="boxicon"><i class="fa icon-price-tag"></i></span>';
+                                }
+                                if(approved.length > 0){
+                                    html += '<span class="boxicon inbox-mark"><i class="fa icon-flag"></i></span>';
+                                }
+                                return html;
+                            },
+                            LoadStatusReply: function(msg){
+                                soyut.radiogram.Radiogram_GetByReferenceId({id: msg, field:'createTime', sort:'desc'},function(e,rdg) {
+                                    if(e){
+                                        console.log(e);
+                                    } else {
+                                        if(rdg[0] != undefined){
+                                            $('.replyicon-'+rdg[0].referenceId).css('display','');
+                                        }
+                                    }
+                                });
+                                var html = "messages-item-star";
                                 return html;
                             },
                             viewMessageDetail: function (val) {
@@ -1848,6 +1904,13 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                             },
                             loadMoveButton: function(val){
                                 if(val == 'trash'){
+                                    var attr;
+                                    attr = {
+                                        'style': 'display:none'
+                                    };
+                                    return attr;
+                                }
+                                if(val != 'draft'){
                                     var attr;
                                     attr = {
                                         'style': 'display:none'
