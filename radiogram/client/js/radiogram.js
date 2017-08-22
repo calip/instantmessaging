@@ -1484,15 +1484,17 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                 }
                                 return html;
                             },
-                            LoadStatusMark: function(materi, approved, msgid){
+                            LoadStatusMark: function(materi, approved, msgid, msgstatus){
                                 var html = '';
                                 html += '<span class="boxicon inbox-reply replyicon-'+ msgid +'" style="display:none"><i class="fa icon-reply"></i></span>';
                                     
-                                if(materi.length > 0){
-                                    html += '<span class="boxicon"><i class="fa icon-price-tag"></i></span>';
-                                }
-                                if(approved.length > 0){
-                                    html += '<span class="boxicon inbox-mark"><i class="fa icon-flag"></i></span>';
+                                if(msgstatus != 'inbox'){
+                                    if(materi.length > 0){
+                                        html += '<span class="boxicon"><i class="fa icon-price-tag"></i></span>';
+                                    }
+                                    if(approved.length > 0){
+                                        html += '<span class="boxicon inbox-mark"><i class="fa icon-flag"></i></span>';
+                                    }
                                 }
                                 return html;
                             },
@@ -1570,15 +1572,17 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                 }
                                 return html;
                             },
-                            LoadStatusMark: function(materi, approved, msgid){
+                            LoadStatusMark: function(materi, approved, msgid, msgstatus){
                                 var html = '';
                                 html += '<span class="boxicon inbox-reply replyicon-'+ msgid +'" style="display:none"><i class="fa icon-reply"></i></span>';
                                     
-                                if(materi.length > 0){
-                                    html += '<span class="boxicon"><i class="fa icon-price-tag"></i></span>';
-                                }
-                                if(approved.length > 0){
-                                    html += '<span class="boxicon inbox-mark"><i class="fa icon-flag"></i></span>';
+                                if(msgstatus != 'inbox'){
+                                    if(materi.length > 0){
+                                        html += '<span class="boxicon"><i class="fa icon-price-tag"></i></span>';
+                                    }
+                                    if(approved.length > 0){
+                                        html += '<span class="boxicon inbox-mark"><i class="fa icon-flag"></i></span>';
+                                    }
                                 }
                                 return html;
                             },
