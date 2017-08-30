@@ -186,6 +186,7 @@
                     <ul class="nav navbar-right">
                         <!-- start: LANGUAGE SWITCHER -->
                         <li class="dropdown">
+                            <input type="hidden" value="" id="current-status" name="current-status">
                             <input type="hidden" value="20" id="current-page" name="current-page">
                             <input type="hidden" value="0" id="count-page" name="count-page">
                             <a href class="dropdown-toggle" data-toggle="dropdown">
@@ -460,7 +461,7 @@
                 <input type="text" placeholder="Cari radiogram..." @keyup="FindRadiogram()" class="txt-filter-list form-control underline">
             </div>
         </div>
-        <ul class="messages-list perfect-scrollbar" v-on:scroll="LoadScrollMessages">
+        <ul class="messages-list perfect-scrollbar" v-on:scroll="LoadScrollMessages(groups)">
             <li v-for="message in messages" :class="LoadStatusMessage(message.id, message.readStatus, message.composeStatus, message.sender.roleGroup)" :data-date="message.simtime" :data-group="message.sender.roleGroup" :data-status="message.readStatus" :data-materi="message.materi" :data-id="message.id">
                 <a href="#" @click="viewMessageDetail(message.id)">
                     <span class="messages-item-star" v-html="LoadStatusMark(message.materi, message.approved, message.isReplied, message.composeStatus)"></span>
@@ -485,7 +486,7 @@
                 <input type="text" placeholder="Cari radiogram..." @keyup="FindRadiogram()" class="txt-filter-list form-control underline">
             </div>
         </div>
-        <ul class="messages-list perfect-scrollbar" v-on:scroll="LoadScrollMessages">
+        <ul class="messages-list perfect-scrollbar" v-on:scroll="LoadScrollMessages(groups)">
             <li v-for="message in messages" :class="LoadStatusMessage(message.id, message.readStatus, message.composeStatus)" :data-date="message.simtime">
                 <a href="#" @click="viewMessageDetail(message.id)">
                     <span class="messages-item-star" v-html="LoadStatusMark(message.materi, message.approved, message.isReplied, message.composeStatus)"></span>

@@ -7622,7 +7622,7 @@ Social Icons
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
     opacity: 0.5; }
   .wdl-main .messages-list .messages-item.active {
-    background-color: #f7f7f7; }
+    background-color: #e2e2e2; }
   .wdl-main .messages-list .messages-item.unread {
     background-color: #f9f9f9; }
   .wdl-main .messages-list .messages-item.starred .messages-item-star {
@@ -7823,7 +7823,7 @@ Social Icons
     margin-top: 8px; }
   .wdl-main .linepx {
     background: linear-gradient(180deg, transparent, #ff0000, transparent);
-    background-position: 70%;
+    background-position: 1245px;
     background-repeat: repeat-y;
     background-size: 2px auto; }
   .wdl-main .linepaper:after {

@@ -2598,9 +2598,9 @@ function getRoleDetail(group) {
     });
 }
 
-soyut.radiogram.renderListMessages = function (rolegroup, message,callback) {
+soyut.radiogram.renderListMessages = function (rolegroup, message, limit,callback) {
     getAddressRolegroup(rolegroup).then(function(result){
-        getListMessages(result, message).then(function(data) {
+        getListMessages(result, message, limit).then(function(data) {
             var arr = [];
             data.forEach(function (i) {
                 i.forEach(function (e) {
@@ -2614,9 +2614,9 @@ soyut.radiogram.renderListMessages = function (rolegroup, message,callback) {
     });
 };
 
-function getListMessages(role, message) {
+function getListMessages(role, message, limit) {
     return new Promise.map(role, function(i) {
-        return getRadiogram(i.id, message).then(function(data) {
+        return getRadiogram(i.id, message, limit).then(function(data) {
             return data;
         }).then(function(result) {
             return result;
@@ -2741,7 +2741,7 @@ function getRadiogram(role, message, limit) {
         field = 'createTime';
     }
     return new Promise (function(resolve,reject){
-        soyut.radiogram.Radiogram_GetInboxByRole({id: role, state: message, field:field, sort:'desc', skip: 0, limit: limit}, function (e, data) {
+        soyut.radiogram.Radiogram_GetInboxByRole({id: role, state: message, field:field, sort:'desc', skip: null, limit: null}, function (e, data) {
             if(e){
                 reject(e);
             }else{

@@ -1432,6 +1432,9 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                         $(getInstanceID("wdl-email-send")).addClass('disable');
                         $(getInstanceID("wdl-email-view")).addClass('disable');
 
+                        $(getInstanceID("current-status")).val('inbox');
+                        $(getInstanceID("current-page")).val('20');
+                        $(getInstanceID("count-page")).val('0');
                         soyut.radiogram.renderListMessage('.email-list', '.email-reader', 'inbox', '');
                     };
 
@@ -1445,6 +1448,9 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                         $(getInstanceID("wdl-email-send")).addClass('disable');
                         $(getInstanceID("wdl-email-view")).addClass('disable');
 
+                        $(getInstanceID("current-status")).val('sent');
+                        $(getInstanceID("current-page")).val('20');
+                        $(getInstanceID("count-page")).val('0');
                         soyut.radiogram.renderListMessage('.email-list', '.email-reader', 'sent', '');
                     };
 
@@ -1458,6 +1464,9 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                         $(getInstanceID("wdl-email-send")).addClass('disable');
                         $(getInstanceID("wdl-email-view")).addClass('disable');
 
+                        $(getInstanceID("current-status")).val('draft');
+                        $(getInstanceID("current-page")).val('20');
+                        $(getInstanceID("count-page")).val('0');
                         soyut.radiogram.renderListMessage('.email-list', '.email-reader', 'draft', '');
                     };
                     soyut.radiogram.renderTrash = function () {
@@ -1470,11 +1479,14 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                         $(getInstanceID("wdl-email-send")).addClass('disable');
                         $(getInstanceID("wdl-email-view")).addClass('disable');
 
+                        $(getInstanceID("current-status")).val('trash');
+                        $(getInstanceID("current-page")).val('20');
+                        $(getInstanceID("count-page")).val('0');
                         soyut.radiogram.renderListMessage('.email-list', '.email-reader', 'trash', '');
                     };
 
                     Vue.component('wasdal-list', {
-                        props: ['messages'],
+                        props: ['messages','groups'],
                         template: '#wasdal-list',
                         methods: {
                             moment: function (date) {
@@ -1494,15 +1506,9 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                 console.log("mark "+val)
                             },
                             LoadStatusMessage: function(val, readStatus, composeStatus){
-                                var selMessage = $('.selected-message').val();
-                                var html = "messages-item ";
+                                var html = "messages-item message-data-"+val;
                                 if(readStatus == "unread" && composeStatus == "inbox"){
                                     html += "unread text-bold";
-                                }
-                                else{
-                                    if(selMessage == val){
-                                        html += "active";
-                                    }
                                 }
                                 return html;
                             },
@@ -1526,8 +1532,18 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                 
                                 return html;
                             },
-                            LoadScrollMessages: function(){
-                                console.log("asdasd")
+                            LoadScrollMessages: function(rolegroup){
+                                // var curPage = $(getInstanceID("current-page")).val();
+                                // var countPage = $(getInstanceID("count-page")).val();
+                                // var currentstatus = $(getInstanceID("current-status")).val();
+                                
+                                // if(countPage >= curPage){
+                                //     if($('.messages-list').scrollTop() + $('.messages-list').innerHeight() >= $('.messages-list')[0].scrollHeight) {
+                                //         var getPage = parseInt(curPage) + 20;
+                                //         $(getInstanceID("current-page")).val(getPage.toString());
+                                //         soyut.radiogram.renderListGroupMessage('.email-list', '.email-reader', currentstatus, rolegroup);
+                                //     }
+                                // }
                             },
                             viewMessageDetail: function (val) {
                                 this.$root.viewMessageDetail(val);
@@ -1540,16 +1556,22 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                         var $child = $(elChildren);
                         $el.html('');
                         $child.html('');
-                        $el.append('<wasdal-list :messages="messages"></wasdal-list>');
+                        $el.append('<wasdal-list :messages="messages" :groups="groups"></wasdal-list>');
 
-                        soyut.radiogram.renderListMessages(group, message, function(res){
+                        var limitCount = $(getInstanceID("current-page")).val();
+                        soyut.radiogram.renderListMessages(group, message, parseInt(limitCount), function(res){
+                            $(getInstanceID("count-page")).val(res.length);
+                            
                             var vm = new Vue({
                                 el: elSelector,
                                 data: {
+                                    groups: group,
                                     messages: res
                                 },
                                 methods: {
                                     viewMessageDetail: function (val) {
+                                        $('.messages-list').children().removeClass("active");
+                                        $('.message-data-'+ val).addClass('active');
                                         soyut.radiogram.renderKogasDetail('.email-reader', val, message);
                                     }
                                 }
@@ -1558,7 +1580,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                     };
 
                     Vue.component('email-list', {
-                        props: ['messages'],
+                        props: ['messages','groups'],
                         template: '#email-list',
                         methods: {
                             moment: function (date) {
@@ -1578,15 +1600,9 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                 console.log("mark "+val)
                             },
                             LoadStatusMessage: function(val, readStatus, composeStatus, rolegroup){
-                                var selMessage = $('.selected-message').val();
                                 var html = "message-data-"+ val +" inbox-data-"+ rolegroup +" messages-item ";
                                 if(readStatus == "unread" && composeStatus == "inbox"){
                                     html += "unread text-bold";
-                                }
-                                else{
-                                    if(selMessage == val){
-                                        html += "active";
-                                    }
                                 }
                                 return html;
                             },
@@ -1610,17 +1626,18 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                 
                                 return html;
                             },
-                            LoadScrollMessages: function(){
-                                var curPage = $(getInstanceID("current-page")).val();
-                                var countPage = $(getInstanceID("count-page")).val();
+                            LoadScrollMessages: function(rolegroup){
+                                // var curPage = $(getInstanceID("current-page")).val();
+                                // var countPage = $(getInstanceID("count-page")).val();
+                                // var currentstatus = $(getInstanceID("current-status")).val();
 
-                                if(countPage >= curPage){
-                                    if($('.messages-list').scrollTop() + $('.messages-list').innerHeight() >= $('.messages-list')[0].scrollHeight) {
-                                        var getPage = parseInt(curPage) + 20;
-                                        $(getInstanceID("current-page")).val(getPage.toString());
-                                        soyut.radiogram.renderListMessage('.email-list', '.email-reader', 'draft', '');
-                                    }
-                                }
+                                // if(countPage >= curPage){
+                                //     if($('.messages-list').scrollTop() + $('.messages-list').innerHeight() >= $('.messages-list')[0].scrollHeight) {
+                                //         var getPage = parseInt(curPage) + 20;
+                                //         $(getInstanceID("current-page")).val(getPage.toString());
+                                //         soyut.radiogram.renderListMessage('.email-list', '.email-reader', currentstatus, rolegroup);
+                                //     }
+                                // }
                             },
                             viewMessageDetail: function (val) {
                                 this.$root.viewMessageDetail(val);
@@ -1637,7 +1654,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                         var $child = $(elChildren);
                         $el.html('');
                         $child.html('');
-                        $el.append('<email-list :messages="messages"></email-list>');
+                        $el.append('<email-list :messages="messages" :groups="groups"></email-list>');
 
                         if(roleName.isWASDAL) {
                             var limitCount = $(getInstanceID("current-page")).val();
@@ -1646,6 +1663,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                 vmlist = new Vue({
                                     el: elSelector,
                                     data: {
+                                        groups: group,
                                         messages: res
                                     },
                                     mounted: function () {
@@ -1716,8 +1734,12 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                                         soyut.radiogram.renderUnreadMessage(message, 0);
                                                         console.log(result);
                                                     });
+
+                                                    $('.message-data-'+ data.id).removeClass('unread');
+                                                    $('.message-data-'+ data.id).removeClass('text-bold');
                                                 }
-                                                soyut.radiogram.renderListMessage('.email-list', '.email-reader', data.composeStatus, group);
+                                                $('.messages-list').children().removeClass("active");
+                                                $('.message-data-'+ data.id).addClass('active');
                                                 soyut.radiogram.renderMessageDetail('.email-reader', val, message);
 
                                             });
@@ -1727,7 +1749,9 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                             });
                         }
                         else {
-                            soyut.radiogram.renderListMessages(soyut.Session.role.roleGroup, message, function(res){
+                            var limitCount = $(getInstanceID("current-page")).val();
+                            soyut.radiogram.renderListMessages(soyut.Session.role.roleGroup, message, parseInt(limitCount), function(res){
+                                $(getInstanceID("count-page")).val(res.length);
                                 vmlist = new Vue({
                                     el: elSelector,
                                     data: {
@@ -1801,7 +1825,8 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                                         console.log(result);
                                                     });
                                                 }
-                                                soyut.radiogram.renderListMessage('.email-list', '.email-reader', data.composeStatus, '');
+                                                $('.messages-list').children().removeClass("active");
+                                                $('.message-data-'+ data.id).addClass('active');
                                                 soyut.radiogram.renderMessageDetail('.email-reader', val, message);
 
                                             });
@@ -2543,9 +2568,15 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                 },
                                 methods: {
                                     ViewInboxGroup: function (val) {
+                                        $(getInstanceID("current-status")).val('inbox');
+                                        $(getInstanceID("current-page")).val('20');
+                                        $(getInstanceID("count-page")).val('0');
                                         soyut.radiogram.renderListGroupMessage('.email-list', '.email-reader', 'inbox', val);
                                     },
                                     ViewSentGroup: function (val) {
+                                        $(getInstanceID("current-status")).val('inbox');
+                                        $(getInstanceID("current-page")).val('20');
+                                        $(getInstanceID("count-page")).val('0');
                                         soyut.radiogram.renderListGroupMessage('.email-list', '.email-reader', 'sent', val);
                                     }
                                 }
