@@ -135,12 +135,14 @@ module.exports = function (config, socket) {
     return this
   }
   
-  orm.findOrder = function (filter, orderBy, sort) {
+  orm.findOrder = function (filter, orderBy, sort, skip, limit) {
     var _this = this;
     _this.where(filter)
     this.findAll = true
     this.orderBy = orderBy
     this.sort = sort
+    this.limited = limit
+    this.skiped = skip
     return _this
   }
   
@@ -199,15 +201,15 @@ module.exports = function (config, socket) {
               this.sort = null
           }
       }
-      if (this.skip != null || this.skip != undefined) {
-        q.skip(this.skip)
-        delete this.skip
-        this.skip = null
+      if (this.skiped != null || this.skiped != undefined) {
+        q = q.skip(this.skiped)
+        delete this.skiped
+        this.skiped = null
       }
-      if (this.limit != null || this.limit != undefined) {
-        q.limit(this.limit)
-        delete this.limit
-        this.limit = null
+      if (this.limited != null || this.limited != undefined) {
+        q = q.limit(this.limited)
+        delete this.limited
+        this.limited = null
       }
     } else {
       q.limit(1)

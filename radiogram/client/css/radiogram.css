@@ -7821,6 +7821,20 @@ Social Icons
     line-height: 34px; }
   .wdl-main .inbox .email-options .main-options li .badge {
     margin-top: 8px; }
+  .wdl-main .linepx {
+    background: linear-gradient(180deg, transparent, #ff0000, transparent);
+    background-position: 70%;
+    background-repeat: repeat-y;
+    background-size: 2px auto; }
+  .wdl-main .linepaper:after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top: 465px;
+    bottom: 310px;
+    right: 200px;
+    border-left: 3px dashed #484848;
+    transform: translate(-50%); }
   .wdl-main .no-messages {
     bottom: 0;
     left: 0;
@@ -7831,7 +7845,7 @@ Social Icons
     text-align: center;
     top: 50%; }
   .wdl-main .inbox .email-list {
-    width: 360px !important;
+    width: 500px !important;
     border-right: 1px solid #dee5e7;
     background: #ffffff; }
   @media (max-width: 768px) {
@@ -7841,7 +7855,7 @@ Social Icons
       background: #ffffff;
       position: relative; } }
   .wdl-main .inbox .wrap-list {
-    width: 359px;
+    width: 499px;
     height: 100% !important;
     position: relative; }
   .wdl-main .inbox .wrap-list .close-message-search {

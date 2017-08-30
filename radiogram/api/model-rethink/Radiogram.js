@@ -59,6 +59,10 @@ module.exports = {
       type: 'boolean',
       defaultsTo:false,
     },
+    isReplied :{
+      type: 'boolean',
+      defaultsTo:false,
+    },
     approval :{
       model:'rolegroup'
     },

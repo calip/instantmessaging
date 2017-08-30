@@ -40,8 +40,13 @@ module.exports = {
       var kop = reqMsg.data.params.kop;
       var renderKop = kop.replace(/(?:\r\n|\r|\n)/g, '<br />');
       var renderMessage = message.replace(/(?:\r\n|\r|\n)/g, '<br />');
-      var test = message.split('\n');
-      console.log(test.length);
+      var txtMessage = message.split('\n');
+      console.log(txtMessage.length);
+
+      var coba = "";
+      if(txtMessage.length == 45){
+          
+      }
 
       var context = "./client/views/pdf.html";
       var curNumber = "000";
@@ -102,7 +107,15 @@ module.exports = {
 
       var options = {
         format: 'A4',
-        orientation: "portrait"
+        orientation: "portrait",
+        height: "842px",   
+        width: "595px", 
+        header: {
+          "height": "220px"
+        },
+        footer: {
+          "height": "145px"
+        }
       };
 
       pdf.create(html, options).toFile('./client/data/' + pdfName, function (err, res) {

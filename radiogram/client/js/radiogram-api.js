@@ -586,6 +586,7 @@ soyut.radiogram.SendRadiogram = function (params, callback) {
                                 createTime: reclock,
                                 parentId: null,
                                 referenceId: params.referenceId,
+                                isReplied: false,
                                 composeStatus: 'inbox'
                             }, function (err, res) {
                                 if (!err) {
@@ -636,6 +637,7 @@ soyut.radiogram.SendRadiogram = function (params, callback) {
                                     createTime: reclock,
                                     parentId: null,
                                     referenceId: params.referenceId,
+                                    isReplied: false,
                                     composeStatus: 'inbox'
                                 }, function (err, res) {
                                     if (!err) {
@@ -684,6 +686,7 @@ soyut.radiogram.SendRadiogram = function (params, callback) {
                     createTime: reclock,
                     parentId: null,
                     referenceId: params.referenceId,
+                    isReplied: false,
                     composeStatus: 'inbox'
                 }, function (err, res) {
                     if (!err) {
@@ -727,6 +730,7 @@ soyut.radiogram.SendRadiogram = function (params, callback) {
                 createTime: reclock,
                 parentId: null,
                 referenceId: params.referenceId,
+                isReplied: false,
                 composeStatus: 'sent'
             }, function (err, results) {
                 if (!err) {
@@ -784,6 +788,7 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
                                 createTime: reclock,
                                 parentId: null,
                                 referenceId: params.referenceId,
+                                isReplied: false,
                                 composeStatus: 'inbox'
                             }, function (err, res) {
                                 if (!err) {
@@ -830,6 +835,7 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
                                         createTime: reclock,
                                         parentId: null,
                                         referenceId: params.referenceId,
+                                        isReplied: false,
                                         composeStatus: 'inbox'
                                     }, function (err, res) {
                                         if (!err) {
@@ -882,6 +888,7 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
                                 createTime: reclock,
                                 parentId: null,
                                 referenceId: params.referenceId,
+                                isReplied: false,
                                 composeStatus: 'inbox'
                             }, function (err, res) {
                                 if (!err) {
@@ -928,6 +935,7 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
                                         createTime: reclock,
                                         parentId: null,
                                         referenceId: params.referenceId,
+                                        isReplied: false,
                                         composeStatus: 'inbox'
                                     }, function (err, res) {
                                         if (!err) {
@@ -977,6 +985,7 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
                     simtime: simclock.simTime,
                     createTime: reclock,
                     referenceId: params.referenceId,
+                    isReplied: false,
                 }, function (err, results) {
                     if (!err) {
                         callback(results.data.generated_keys[0]);
@@ -1213,6 +1222,7 @@ soyut.radiogram.DraftRadiogram = function (params, callback) {
             SendTime: null,
             simtime: null,
             createTime: reclock,
+            isReplied: false,
             referenceId: params.referenceId
         }, function (err, result) {
             if (!err) {
@@ -1257,6 +1267,7 @@ soyut.radiogram.DraftRadiogram = function (params, callback) {
                                     createTime: reclock,
                                     parentId: parentId,
                                     referenceId: params.referenceId,
+                                    isReplied: false,
                                     composeStatus: 'pending'
                                 }, function (err, res) {
                                     if (!err) {
@@ -1308,6 +1319,7 @@ soyut.radiogram.DraftRadiogram = function (params, callback) {
                                         createTime: reclock,
                                         parentId: parentId,
                                         referenceId: params.referenceId,
+                                        isReplied: false,
                                         composeStatus: 'pending'
                                     }, function (err, res) {
                                         if (!err) {
@@ -1356,6 +1368,7 @@ soyut.radiogram.DraftRadiogram = function (params, callback) {
                         createTime: reclock,
                         parentId: parentId,
                         referenceId: params.referenceId,
+                        isReplied: false,
                         composeStatus: 'pending'
                     }, function (err, res) {
                         if (!err) {
@@ -1405,7 +1418,8 @@ soyut.radiogram.DraftWasdalRadiogram = function (params, callback) {
             SendTime: null,
             simtime: null,
             createTime: reclock,
-            referenceId: params.referenceId
+            referenceId: params.referenceId,
+            isReplied: false,
         }, function (err, result) {
             if (!err) {
                 var parentId = result.data.generated_keys[0];
@@ -1448,6 +1462,7 @@ soyut.radiogram.DraftWasdalRadiogram = function (params, callback) {
                                 createTime: reclock,
                                 parentId: parentId,
                                 referenceId: params.referenceId,
+                                isReplied: false,
                                 composeStatus: 'pending'
                             }, function (err, res) {
                                 if (!err) {
@@ -1495,6 +1510,7 @@ soyut.radiogram.DraftWasdalRadiogram = function (params, callback) {
                                         createTime: reclock,
                                         parentId: parentId,
                                         referenceId: params.referenceId,
+                                        isReplied: false,
                                         composeStatus: 'pending'
                                     }, function (err, res) {
                                         if (!err) {
@@ -1548,6 +1564,7 @@ soyut.radiogram.DraftWasdalRadiogram = function (params, callback) {
                                 createTime: reclock,
                                 parentId: parentId,
                                 referenceId: params.referenceId,
+                                isReplied: false,
                                 composeStatus: 'pending'
                             }, function (err, res) {
                                 if (!err) {
@@ -1595,6 +1612,7 @@ soyut.radiogram.DraftWasdalRadiogram = function (params, callback) {
                                         createTime: reclock,
                                         parentId: parentId,
                                         referenceId: params.referenceId,
+                                        isReplied: false,
                                         composeStatus: 'pending'
                                     }, function (err, res) {
                                         if (!err) {
@@ -1651,6 +1669,7 @@ soyut.radiogram.DraftRIG = function (params, callback) {
             SendTime: null,
             simtime: null,
             createTime: params.createTime,
+            isReplied: false,
             referenceId: params.referenceId
         }, function (err, result) {
             if (!err) {
@@ -1694,6 +1713,7 @@ soyut.radiogram.DraftRIG = function (params, callback) {
                                 createTime: params.createTime,
                                 parentId: parentId,
                                 referenceId: params.referenceId,
+                                isReplied: false,
                                 composeStatus: 'pending'
                             }, function (err, res) {
                                 if (!err) {
@@ -1741,6 +1761,7 @@ soyut.radiogram.DraftRIG = function (params, callback) {
                                         createTime: params.createTime,
                                         parentId: parentId,
                                         referenceId: params.referenceId,
+                                        isReplied: false,
                                         composeStatus: 'pending'
                                     }, function (err, res) {
                                         if (!err) {
@@ -1794,6 +1815,7 @@ soyut.radiogram.DraftRIG = function (params, callback) {
                                 createTime: params.createTime,
                                 parentId: parentId,
                                 referenceId: params.referenceId,
+                                isReplied: false,
                                 composeStatus: 'pending'
                             }, function (err, res) {
                                 if (!err) {
@@ -1841,6 +1863,7 @@ soyut.radiogram.DraftRIG = function (params, callback) {
                                         createTime: params.createTime,
                                         parentId: parentId,
                                         referenceId: params.referenceId,
+                                        isReplied: false,
                                         composeStatus: 'pending'
                                     }, function (err, res) {
                                         if (!err) {
@@ -1864,7 +1887,7 @@ soyut.radiogram.DraftRIG = function (params, callback) {
 
 soyut.radiogram.SendDraftWasdalRadiogram = function (params, callback) {
     soyut.radiogram.Radiogram_GetById({id: params.id}, function(err,res) {
-        soyut.radiogram.Radiogram_GetListDraft({id: res.id, status: 'pending'}, function(err,result) {
+        soyut.radiogram.Radiogram_GetListDraft({id: res.id, status: 'pending', field: 'createTime', sort:'desc', skip: null, limit: null}, function(err,result) {
             soyut.clock.getCurrentActualTime({}, function(err, reclock){
 
                 soyut.clock.getSimTime(reclock, function(err, simclock){
@@ -1884,7 +1907,7 @@ soyut.radiogram.SendDraftWasdalRadiogram = function (params, callback) {
 
 soyut.radiogram.SendDraftRadiogram = function (params, callback) {
     soyut.radiogram.Radiogram_GetById({id: params.id}, function(err,res) {
-        soyut.radiogram.Radiogram_GetListDraft({id: res.id, status: 'pending'}, function(err,result) {
+        soyut.radiogram.Radiogram_GetListDraft({id: res.id, status: 'pending', field: 'createTime', sort:'desc', skip: null, limit: null}, function(err,result) {
             soyut.clock.getCurrentActualTime({}, function(err, reclock){
 
                 soyut.clock.getSimTime(reclock, function(err, simclock){
@@ -1980,6 +2003,7 @@ soyut.radiogram.UpdateDraftWasdalRadiogram = function(params, callback) {
                             createTime: res.createTime,
                             parentId: params.id,
                             referenceId: params.referenceId,
+                            isReplied: false,
                             composeStatus: 'pending'
                         }, function (err, res) {
                             if (!err) {
@@ -2027,6 +2051,7 @@ soyut.radiogram.UpdateDraftWasdalRadiogram = function(params, callback) {
                                     createTime: res.createTime,
                                     parentId: params.id,
                                     referenceId: params.referenceId,
+                                    isReplied: false,
                                     composeStatus: 'pending'
                                 }, function (err, res) {
                                     if (!err) {
@@ -2080,6 +2105,7 @@ soyut.radiogram.UpdateDraftWasdalRadiogram = function(params, callback) {
                             createTime: res.createTime,
                             parentId: params.id,
                             referenceId: params.referenceId,
+                            isReplied: false,
                             composeStatus: 'pending'
                         }, function (err, res) {
                             if (!err) {
@@ -2127,6 +2153,7 @@ soyut.radiogram.UpdateDraftWasdalRadiogram = function(params, callback) {
                                     createTime: res.createTime,
                                     parentId: params.id,
                                     referenceId: params.referenceId,
+                                    isReplied: false,
                                     composeStatus: 'pending'
                                 }, function (err, res) {
                                     if (!err) {
@@ -2225,6 +2252,7 @@ soyut.radiogram.UpdateDraftRIG = function(params, callback) {
                                 createTime: res.createTime,
                                 parentId: params.id,
                                 referenceId: params.referenceId,
+                                isReplied: false,
                                 composeStatus: 'pending'
                             }, function (err, res) {
                                 if (!err) {
@@ -2272,6 +2300,7 @@ soyut.radiogram.UpdateDraftRIG = function(params, callback) {
                                         createTime: res.createTime,
                                         parentId: params.id,
                                         referenceId: params.referenceId,
+                                        isReplied: false,
                                         composeStatus: 'pending'
                                     }, function (err, res) {
                                         if (!err) {
@@ -2325,6 +2354,7 @@ soyut.radiogram.UpdateDraftRIG = function(params, callback) {
                                 createTime: res.createTime,
                                 parentId: params.id,
                                 referenceId: params.referenceId,
+                                isReplied: false,
                                 composeStatus: 'pending'
                             }, function (err, res) {
                                 if (!err) {
@@ -2372,6 +2402,7 @@ soyut.radiogram.UpdateDraftRIG = function(params, callback) {
                                         createTime: res.createTime,
                                         parentId: params.id,
                                         referenceId: params.referenceId,
+                                        isReplied: false,
                                         composeStatus: 'pending'
                                     }, function (err, res) {
                                         if (!err) {
@@ -2619,11 +2650,11 @@ soyut.radiogram.renderGroupAddress = function (rolegroup, callback) {
     });
 };
 
-soyut.radiogram.renderListWasdalMessages = function (message, group, callback) {
+soyut.radiogram.renderListWasdalMessages = function (message, group, limit, callback) {
     getKolatIsaddress().then(function(result) {
         if(group != ''){
             soyut.radiogram.renderGroupAddress(group, function (owner) {
-                getListWasdalMessages(result, message).then(function(data) {
+                getListWasdalMessages(result, message, limit).then(function(data) {
                     var arr = [];
                     data.forEach(function (i) {
                         i.forEach(function (e) {
@@ -2639,7 +2670,7 @@ soyut.radiogram.renderListWasdalMessages = function (message, group, callback) {
             });
         }
         else {
-            getListWasdalMessages(result, message).then(function(data) {
+            getListWasdalMessages(result, message, limit).then(function(data) {
                 var arr = [];
                 data.forEach(function (i) {
                     i.forEach(function (e) {
@@ -2694,9 +2725,9 @@ function getKolatIsaddress() {
     });
 }
 
-function getListWasdalMessages(role, message) {
+function getListWasdalMessages(role, message, limit) {
     return new Promise.map(role, function(i) {
-        return getRadiogram(i.id, message).then(function(data) {
+        return getRadiogram(i.id, message, limit).then(function(data) {
             return data;
         }).then(function(result) {
             return result;
@@ -2704,13 +2735,13 @@ function getListWasdalMessages(role, message) {
     });
 }
 
-function getRadiogram(role, message) {
+function getRadiogram(role, message, limit) {
     var field = 'SendTime';
     if(message == 'draft'){
         field = 'createTime';
     }
     return new Promise (function(resolve,reject){
-        soyut.radiogram.Radiogram_GetInboxByRole({id: role, state: message, field:field, sort:'desc'}, function (e, data) {
+        soyut.radiogram.Radiogram_GetInboxByRole({id: role, state: message, field:field, sort:'desc', skip: 0, limit: limit}, function (e, data) {
             if(e){
                 reject(e);
             }else{
@@ -2745,6 +2776,26 @@ soyut.radiogram.UpdateReadStatus = function (id, callback) {
 function readStatusUpdated(id) {
     return new Promise (function(resolve,reject) {
         soyut.radiogram.Radiogram_UpdateReadStatus({id: id}, function (e, data) {
+            if (e) {
+                reject(e);
+            } else {
+                var dataObj = {};
+                dataObj = data;
+                resolve(dataObj);
+            }
+        });
+    });
+};
+
+soyut.radiogram.UpdateReplyStatus = function (id, callback) {
+    replyStatusUpdated(id).then(function(result){
+        callback(result);
+    });
+};
+
+function replyStatusUpdated(id) {
+    return new Promise (function(resolve,reject) {
+        soyut.radiogram.Radiogram_UpdateReplyStatus({id: id}, function (e, data) {
             if (e) {
                 reject(e);
             } else {

@@ -6,8 +6,8 @@
     body {
       font: 12px Helvetica, Sans-Serif;
     }
-    #page-wrap {
-      margin: 20px 5px;
+    .page-wrap {
+      margin: 0 5px;
     }
 
     #kop {
@@ -59,7 +59,7 @@
         transform-origin: -10% -10%;
         position: absolute;
         left: 0px;
-        top: 220px;
+        top: 200px;
     }
 
     #address { width: 250px; height: 150px; float: left; }
@@ -81,24 +81,24 @@
     #meta td.meta-head { text-align: left; background: #eee; }
     #meta td textarea { width: 100%; height: 20px; text-align: right; }
 
-    #items {
+    .items {
       width: 100%;
       margin: 0 auto;
       border: 1px solid black; }
-    #items th {
+    .items th {
       background: #eee;
       font: bold 10px Helvetica, Sans-Serif;
     }
-    #items th label{
+    .items th label{
       padding: 5px;
     }
-    #items textarea { width: 80px; height: 50px; }
-    #items tr.item-row {
+    .items textarea { width: 80px; height: 50px; }
+    .items tr.item-row {
       border: 1px solid black;
       font: 10px Helvetica, Sans-Serif;
       vertical-align: top;
     }
-    #items tr.item-row td label{
+    .items tr.item-row td label{
       padding: 5px;
     }
     #coba{
@@ -114,18 +114,18 @@
       margin-right: 50px;
     }
 
-    #items td.description textarea, #items td.item-name textarea { width: 100%; }
-    #items td.total-line { border-right: 0; text-align: right; }
-    #items td.total-value { border-left: 0; padding: 10px; }
-    #items td.total-value textarea { height: 20px; background: none; }
-    #items td.balance { background: #eee; }
-    #items td.blank { border: 0; }
+    .items td.description textarea, .items td.item-name textarea { width: 100%; }
+    .items td.total-line { border-right: 0; text-align: right; }
+    .items td.total-value { border-left: 0; padding: 10px; }
+    .items td.total-value textarea { height: 20px; background: none; }
+    .items td.balance { background: #eee; }
+    .items td.blank { border: 0; }
 
     #terms { text-align: center; margin: 20px 0 0 0; }
     #terms h5 { text-transform: uppercase; font: 13px Helvetica, Sans-Serif; letter-spacing: 10px; padding: 0 0 8px 0; margin: 0 0 8px 0; }
     #terms textarea { width: 100%; text-align: center;}
 
-    textarea:hover, textarea:focus, #items td.total-value textarea:hover, #items td.total-value textarea:focus, .delete:hover { background-color:#EEFF88; }
+    textarea:hover, textarea:focus, .items td.total-value textarea:hover, .items td.total-value textarea:focus, .delete:hover { background-color:#EEFF88; }
 
     .delete-wpr { position: relative; }
     .delete { display: block; color: #000; text-decoration: none; position: absolute; background: #EEEEEE; font-weight: bold; padding: 0px 3px; border: 1px solid; top: -6px; left: -22px; font-family: Verdana; font-size: 12px; }
@@ -136,16 +136,16 @@
 </head>
 <body>
 
-<div id="page-wrap">
+<div class="page-wrap" id="pageHeader">
 
   <div id="kop">{{kop}}</div>
   <div id="nomor-registrasi">Nomor Registrasi</div>
   <div id="header">FORMULIR BERITA</div>
   <div class="rotate">Ruang diluar garis tebal hanya untuk petugas KOMLEK</div>
 
-  <table id="items">
+  <table class="items">
     <tr class="item-row">
-      <td rowspan="13" style="width: 4%; border-right: 1px solid #ffffff; border-left: 1px solid #ffffff; border-bottom: 1px solid #ffffff;border-right: 2px solid #000000;"></td>
+      <td rowspan="7" style="width: 4%; border-right: 1px solid #ffffff; border-left: 1px solid #ffffff; border-bottom: 1px solid #ffffff;border-right: 2px solid #000000;"></td>
       <th colspan="2" style="padding: 5px;border-right: 1px solid #000000; border-left: 1px solid #ffffff; border-bottom: 1px solid #ffffff;">Panggilan (Petunjuk Pa Komlek)</th>
       <th style="padding: 5px; border-right: 1px solid #000000; border-bottom: 1px solid #ffffff;">jenis</th>
       <th style="padding: 5px;border-right: 1px solid #000000; border-bottom: 1px solid #ffffff;">nomor</th>
@@ -187,16 +187,36 @@
       <td style="padding: 5px;border-right: 1px solid #000000;border-bottom:1px solid #000000;"></td>
       <td style="padding: 5px;border-right: 1px solid #ffffff;border-bottom:1px solid #000000;"></td>
     </tr>
-    <tr class="item-row" style="padding: 5px;border-left:2px solid #000000; border-right: 2px solid #ffffff;">
-      <td colspan="8" style="height:250px; vertical-align: top; padding: 10px; border-bottom: 1px solid #ffffff;border-left:2px solid #000000;">
+  </table>
+
+</div>
+
+<div class="page-wrap" id="pageContent">
+  <table class="items">
+    <tr class="item-row">
+      <td rowspan="2" style="width: 4%; border-right: 1px solid #ffffff; border-top: 1px solid #ffffff; border-left: 1px solid #ffffff; border-bottom: 1px solid #ffffff;border-right:2px solid #000000;"></td>
+    </tr>  
+    <tr class="item-row" style="padding: 5px; border-right: 2px solid #ffffff; border-left:1px solid #ffffff;">
+      <td style="vertical-align: top; padding: 10px; border-top: 1px solid #ffffff; border-bottom:1px solid #ffffff;">
         <p style="white-space: pre-wrap;">{{renderMessage}}</p>
       </td>
     </tr>
+  </table>
+</div>
 
-    <tr class="item-row" style="border-left:2px solid #000000; border-right: 2px solid #ffffff;">
+<div class="page-wrap" id="pageFooter">
+
+  <table class="items">
+    <tr class="item-row">
+      <td rowspan="6" style="width: 4%; border-right: 1px solid #ffffff; border-top: 1px solid #ffffff; border-left: 1px solid #ffffff; border-bottom: 1px solid #ffffff;border-right: 2px solid #000000;"></td>
+    </tr>  
+    <tr class="item-row" style="border-left:2px solid #000000; border-right: 2px solid #ffffff; border-top: 1px solid #ffffff;">
       <td colspan="2" style="padding: 10px;border-left:2px solid #000000;"></td>
-      <td colspan="6" style="padding: 10px;">
-        Tanggal/Waktu Pembuatan : {{simtime}}
+      <td colspan="4" style="padding: 10px;">
+        Tanggal/Waktu Pembuatan : {{simtime}} 
+      </td>
+      <td colspan="2" style="padding: 10px 0 10px 0; text-align: right">
+        Halaman {{page}} dari {{pages}}
       </td>
     </tr>
     <tr class="item-row">

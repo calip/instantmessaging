@@ -10615,6 +10615,24 @@ Social Icons
     margin-top: 8px;
   }
 
+  .linepx {
+    background: linear-gradient(180deg, transparent, #ff0000, transparent);
+    background-position: 70%;
+    background-repeat: repeat-y;
+    background-size: 2px auto;
+  }
+
+  .linepaper:after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top: 465px;
+    bottom: 310px;
+    right: 200px;
+    border-left: 3px dashed #484848;
+    transform: translate(-50%);
+  }
+
   .no-messages {
     bottom: 0;
     left: 0;
@@ -10627,7 +10645,7 @@ Social Icons
   }
 
   .inbox .email-list {
-    width: 360px !important;
+    width: 500px !important;
     border-right: 1px solid #dee5e7;
     background: #ffffff;
   }
@@ -10641,7 +10659,7 @@ Social Icons
   }
 
   .inbox .wrap-list {
-    width: 359px;
+    width: 499px;
     height: 100% !important;
     position: relative;
   }

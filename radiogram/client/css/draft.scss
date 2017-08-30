@@ -10598,6 +10598,24 @@ Social Icons
     margin-top: 8px;
   }
 
+  .linepx {
+    background: linear-gradient(180deg, transparent, #ff0000, transparent);
+    background-position: 70%;
+    background-repeat: repeat-y;
+    background-size: 2px auto;
+  }
+
+  .linepaper:after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top: 440px;
+    bottom: 420px;
+    right: 200px;
+    border-left: 3px dashed #484848;
+    transform: translate(-50%);
+  }
+
   .no-messages {
     bottom: 0;
     left: 0;

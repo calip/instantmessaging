@@ -7809,6 +7809,20 @@ Social Icons
     line-height: 34px; }
   .rdgdraft-main .inbox .email-options .main-options li .badge {
     margin-top: 8px; }
+  .rdgdraft-main .linepx {
+    background: linear-gradient(180deg, transparent, #ff0000, transparent);
+    background-position: 70%;
+    background-repeat: repeat-y;
+    background-size: 2px auto; }
+  .rdgdraft-main .linepaper:after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top: 440px;
+    bottom: 420px;
+    right: 200px;
+    border-left: 3px dashed #484848;
+    transform: translate(-50%); }
   .rdgdraft-main .no-messages {
     bottom: 0;
     left: 0;

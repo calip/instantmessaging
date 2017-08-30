@@ -65,6 +65,7 @@ module.exports = {
                 var author = reqMsg.data.params.author;
                 var approved = reqMsg.data.params.approved;
                 var referenceId = reqMsg.data.params.referenceId;
+                var isReplied = reqMsg.data.params.isReplied;
 
                 r.table('Radiogram').insert({
                         panggilan: panggilan,
@@ -100,7 +101,8 @@ module.exports = {
                         SendTime: null,
                         simtime: null,
                         createTime: createTime,
-                        referenceId: referenceId
+                        referenceId: referenceId,
+                        isReplied: isReplied
                     },
                     function (err, result) {
                         if (err) throw err;
@@ -144,6 +146,7 @@ module.exports = {
                 var author = reqMsg.data.params.author;
                 var approved = reqMsg.data.params.approved;
                 var referenceId = reqMsg.data.params.referenceId;
+                var isReplied = reqMsg.data.params.isReplied;
 
                 r.table('Radiogram').insert({
                         panggilan: panggilan,
@@ -179,7 +182,8 @@ module.exports = {
                         SendTime: null,
                         simtime: null,
                         createTime: createTime,
-                        referenceId: referenceId
+                        referenceId: referenceId,
+                        isReplied: isReplied
                     },
                     function (err, result) {
                         if (err) throw err;
@@ -213,7 +217,12 @@ module.exports = {
             method: function (authServerUrl, remoteSocket, reqMsg, resCallback) {
                 var id = reqMsg.data.params.id;
                 var status = reqMsg.data.params.status;
-                r.table('Radiogram').find({parentId: id, composeStatus: status}).exec(function (err, result) {
+                var field = reqMsg.data.params.field;
+                var sort = reqMsg.data.params.sort;
+                var limit = reqMsg.data.params.limit;
+                var skip = reqMsg.data.params.skip;
+                
+                r.table('Radiogram').findOrder({parentId: id, composeStatus:status}, field, sort, skip, limit).exec(function (err, result) {
                     if (err) {
                         return res.json({success: false, error: "record not found"});
                         throw err;
@@ -270,6 +279,7 @@ module.exports = {
                 var composeStatus = reqMsg.data.params.composeStatus;
                 var approved = reqMsg.data.params.approved;
                 var referenceId = reqMsg.data.params.referenceId;
+                var isReplied = reqMsg.data.params.isReplied;
 
                 r.table('Radiogram').insert({
                         panggilan: panggilan,
@@ -306,7 +316,8 @@ module.exports = {
                         simtime: simtime,
                         createTime: createTime,
                         parentId: parentId,
-                        referenceId: referenceId
+                        referenceId: referenceId,
+                        isReplied: isReplied
                     },
                     function (err, result) {
                         if (err) throw err;
@@ -433,6 +444,7 @@ module.exports = {
                 var author = reqMsg.data.params.author;
                 var approved = reqMsg.data.params.approved;
                 var referenceId = reqMsg.data.params.referenceId;
+                var isReplied = reqMsg.data.params.isReplied;
 
                 r.table('Radiogram').insert({
                         panggilan: panggilan,
@@ -468,7 +480,8 @@ module.exports = {
                         SendTime: SendTime,
                         simtime: simtime,
                         createTime: createTime,
-                        referenceId: referenceId
+                        referenceId: referenceId,
+                        isReplied: isReplied
                     },
                     function (err, result) {
                         if (err) throw err;
@@ -517,6 +530,7 @@ module.exports = {
                 var composeStatus = reqMsg.data.params.composeStatus;
                 var approved = reqMsg.data.params.approved;
                 var referenceId = reqMsg.data.params.referenceId;
+                var isReplied = reqMsg.data.params.isReplied;
 
                 r.table('Radiogram').insert({
                         panggilan: panggilan,
@@ -553,7 +567,8 @@ module.exports = {
                         simtime: simtime,
                         createTime: createTime,
                         parentId: parentId,
-                        referenceId: referenceId
+                        referenceId: referenceId,
+                        isReplied: isReplied
                     },
                     function (err, result) {
                         if (err) throw err;
@@ -646,8 +661,10 @@ module.exports = {
                 var id = reqMsg.data.params.id;
                 var field = reqMsg.data.params.field;
                 var sort = reqMsg.data.params.sort;
+                var limit = reqMsg.data.params.limit;
+                var skip = reqMsg.data.params.skip;
                 
-                r.table('Radiogram').findOrder({parentId: id}, field, sort).exec(function (err, result) {
+                r.table('Radiogram').findOrder({parentId: id}, field, sort, skip, limit).exec(function (err, result) {
                     if (err) {
                         return res.json({success: false, error: "record not found"});
                         throw err;
@@ -672,8 +689,10 @@ module.exports = {
                 var id = reqMsg.data.params.id;
                 var field = reqMsg.data.params.field;
                 var sort = reqMsg.data.params.sort;
+                var limit = reqMsg.data.params.limit;
+                var skip = reqMsg.data.params.skip;
                 
-                r.table('Radiogram').findOrder({referenceId: id}, field, sort).exec(function (err, result) {
+                r.table('Radiogram').findOrder({referenceId: id}, field, sort, skip, limit).exec(function (err, result) {
                     if (err) {
                         return res.json({success: false, error: "record not found"});
                         throw err;
@@ -827,8 +846,10 @@ module.exports = {
                 var state = reqMsg.data.params.state;
                 var field = reqMsg.data.params.field;
                 var sort = reqMsg.data.params.sort;
-
-                r.table('Radiogram').findOrder({owner:{id: id}, composeStatus:state}, field, sort).exec(function (err, result) {
+                var limit = reqMsg.data.params.limit;
+                var skip = reqMsg.data.params.skip;
+                
+                r.table('Radiogram').findOrder({owner:{id: id}, composeStatus:state}, field, sort, skip, limit).exec(function (err, result) {
                     if (err) {
                         return res.json({success: false, error: "record not found"});
                         throw err;
@@ -878,8 +899,10 @@ module.exports = {
                 var sender = reqMsg.data.params.sender;
                 var field = reqMsg.data.params.field;
                 var sort = reqMsg.data.params.sort;
+                var limit = reqMsg.data.params.limit;
+                var skip = reqMsg.data.params.skip;
 
-                r.table('Radiogram').findOrder({owner:id, sender: sender, composeStatus:state}, field, sort).exec(function (err, result) {
+                r.table('Radiogram').findOrder({owner:id, sender: sender, composeStatus:state}, field, sort, skip, limit).exec(function (err, result) {
                     if (err) {
                         return res.json({success: false, error: "record not found"});
                         throw err;
@@ -1027,6 +1050,22 @@ module.exports = {
                 var id = reqMsg.data.params.id;
 
                 r.table('Radiogram').update({id: id}, {composeStatus: 'trash'}, function (err, result) {
+                    if (err) resCallback(true, err);
+                    else {
+                        if (result.replaced > 0)
+                            resCallback(false, {success: true});
+                        else
+                            resCallback(true, {success: false});
+                    }
+                });
+            },
+            accessToken: [RADIOGRAM_MANAGER_TOKEN, RADIOGRAM_USER_TOKEN]
+        },
+        UpdateReplyStatus:{
+            method: function (authServerUrl, remoteSocket, reqMsg, resCallback) {
+                var id = reqMsg.data.params.id;
+
+                r.table('Radiogram').update({id: id}, {isReplied: true}, function (err, result) {
                     if (err) resCallback(true, err);
                     else {
                         if (result.replaced > 0)

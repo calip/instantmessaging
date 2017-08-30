@@ -186,6 +186,8 @@
                     <ul class="nav navbar-right">
                         <!-- start: LANGUAGE SWITCHER -->
                         <li class="dropdown">
+                            <input type="hidden" value="20" id="current-page" name="current-page">
+                            <input type="hidden" value="0" id="count-page" name="count-page">
                             <a href class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="icon-font-size"></i> Ukuran Font
                             </a>
@@ -249,7 +251,7 @@
                         <div class="row">
                             <div class="col-md-12">
 
-                                <div class="table-responsive">
+                                <!--<div class="table-responsive">-->
                                     <table class="table table-bordered">
                                         <thead>
                                         <tr>
@@ -307,9 +309,9 @@
                                             <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right:none;">Klasifikasi</td>
                                             <td colspan="4" class="parent-klasifikasi" style="border-bottom: none; border-right: none;">
                                                 <select name="klasifikasi" class="form-control klasifikasi" id="klasifikasi">
-                                                    <option value="Rahasia">RAHASIA</option>
+                                                    <option value="Rahasia" selected>RAHASIA</option>
                                                     <option value="Sangat Rahasia">SANGAT RAHASIA</option>
-                                                    <option value="Biasa" selected>BIASA</option>
+                                                    <option value="Biasa">BIASA</option>
                                                 </select>
                                                 <span class="klasifikasi-error help-block valid"></span>
                                             </td>
@@ -345,7 +347,7 @@
                                                 <input type="hidden" id="sel_line_count" name="sel_line_count" value="0">
 
                                                 <input type="hidden" id="status" name="status" value="0">
-                                                <textarea name="message-input" class="message-input form-control" id="message-input" wrap="off" rows="10" onclick="cpcount('');" onkeyup="cpcount(''); totalcount();" style="min-height: 550px; text-wrap: balance;"></textarea>
+                                                <textarea name="message-input" class="message-input form-control linepx" id="message-input" wrap="off" rows="10" onclick="cpcount('');" onkeyup="cpcount(''); totalcount();" style="min-height: 550px; text-wrap: balance;"></textarea>
                                             </td>
                                         </tr>
                                         <tr>
@@ -385,7 +387,7 @@
                                     <div class="form-group" id="list-approval">
 
                                     </div>
-                                </div>
+                                <!--</div>-->
 
                                 <div class="row">
                                     <div class="col-md-12">
@@ -458,19 +460,20 @@
                 <input type="text" placeholder="Cari radiogram..." @keyup="FindRadiogram()" class="txt-filter-list form-control underline">
             </div>
         </div>
-        <ul class="messages-list perfect-scrollbar">
+        <ul class="messages-list perfect-scrollbar" v-on:scroll="LoadScrollMessages">
             <li v-for="message in messages" :class="LoadStatusMessage(message.id, message.readStatus, message.composeStatus, message.sender.roleGroup)" :data-date="message.simtime" :data-group="message.sender.roleGroup" :data-status="message.readStatus" :data-materi="message.materi" :data-id="message.id">
                 <a href="#" @click="viewMessageDetail(message.id)">
-                    <span :class="LoadStatusReply(message.id)" title="Tandai" v-html="LoadStatusMark(message.materi, message.approved, message.id, message.composeStatus)"></span>
-                    <span class="messages-item-from">{{ message.receiverDetail, message.senderDetail, message.composeStatus | fromfilter }}</span>
+                    <span class="messages-item-star" v-html="LoadStatusMark(message.materi, message.approved, message.isReplied, message.composeStatus)"></span>
+                    <span class="messages-item-from">{{ message.senderDetail, message.composeStatus | fromfilter }}</span>
                     <div class="messages-item-time">
                         <span class="text">{{ message.SendTime, message.createTime, message.composeStatus | wstime }}</span>
                         <span class="text">{{ message.simtime, message.composeStatus | watime }}</span>
                     </div>
-                    <span class="messages-item-subject"> {{message.Number | truncate}}</span>
-                    <span class="messages-item-content">{{ message.content | truncate}}</span>
+                    <span class="messages-item-subject">{{ message.receiverDetail, message.composeStatus | tofilter }}</span>
+                    <span class="messages-item-content">{{ message.Number | truncate}}</span>
                 </a>
             </li>
+            <li style="display:none; padding: 10px; text-align: center; color:#8e8d8d;">Silahkan Tunggu...</li>
         </ul>
     </div>
 </template>
@@ -482,17 +485,17 @@
                 <input type="text" placeholder="Cari radiogram..." @keyup="FindRadiogram()" class="txt-filter-list form-control underline">
             </div>
         </div>
-        <ul class="messages-list perfect-scrollbar">
+        <ul class="messages-list perfect-scrollbar" v-on:scroll="LoadScrollMessages">
             <li v-for="message in messages" :class="LoadStatusMessage(message.id, message.readStatus, message.composeStatus)" :data-date="message.simtime">
                 <a href="#" @click="viewMessageDetail(message.id)">
-                    <span :class="LoadStatusReply(message.id)" title="Tandai" v-html="LoadStatusMark(message.materi, message.approved, message.id, message.composeStatus)"></span>
-                    <span class="messages-item-from">{{ message.receiverDetail | fromfilter }}</span>
+                    <span class="messages-item-star" v-html="LoadStatusMark(message.materi, message.approved, message.isReplied, message.composeStatus)"></span>
+                    <span class="messages-item-from">{{ message.senderDetail, message.composeStatus | fromfilter }}</span>
                     <div class="messages-item-time">
                         <span class="text">{{ message.SendTime, message.createTime, message.composeStatus | wstime }}</span>
                         <span class="text">{{ message.simtime, message.composeStatus | watime }}</span>
                     </div>
-                    <span class="messages-item-subject"> {{message.Number | truncate}}</span>
-                    <span class="messages-item-content">{{ message.content | truncate}}.....</span>
+                    <span class="messages-item-subject">{{ message.receiverDetail, message.composeStatus | tofilter }}</span>
+                    <span class="messages-item-content">{{ message.Number | truncate}}</span>
                 </a>
             </li>
         </ul>

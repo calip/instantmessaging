@@ -161,16 +161,16 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                     };
 
                     soyut.radiogram.perfectScrollbarHandler = function () {
-                        var pScroll = $(".perfect-scrollbar");
+                        // var pScroll = $(".perfect-scrollbar");
 
-                        if (!soyut.radiogram.isMobile() && pScroll.length) {
-                            pScroll.perfectScrollbar({
-                                suppressScrollX : true
-                            });
-                            pScroll.on("mousemove", function() {
-                                $(this).perfectScrollbar('update');
-                            });
-                        }
+                        // if (!soyut.radiogram.isMobile() && pScroll.length) {
+                        //     pScroll.perfectScrollbar({
+                        //         suppressScrollX : true
+                        //     });
+                        //     pScroll.on("mousemove", function() {
+                        //         $(this).perfectScrollbar('update');
+                        //     });
+                        // }
                     };
 
                     soyut.radiogram.messageHeightHandler = function() {
@@ -213,15 +213,21 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                         }
                     });
 
-                    Vue.filter('fromfilter', function (receiver, sender, status) {
-                        var length = 12;
-                        var value = '';
-                        if(status == 'inbox'){
-                            value = sender;
+                    Vue.filter('fromfilter', function (sender, status) {
+                        var length = 20;
+                        var value = sender;
+
+                        if (value.length <= length) {
+                            return value;
                         }
                         else {
-                            value = receiver;
+                            return value.substring(0, length) + '...';
                         }
+                    });
+
+                    Vue.filter('tofilter', function (receiver, status) {
+                        var length = 20;
+                        var value = receiver;
 
                         if (value.length <= length) {
                             return value;
@@ -273,6 +279,12 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                         if (event.keyCode == 32) {
                             event.preventDefault();
                         }
+                    });
+
+                    $(getInstanceID("Number")).blur(function(event) {
+                        var textNumber = $(getInstanceID("Number")).val();
+                        var reNumber = textNumber.replace(/\s/g, '');
+                        $(getInstanceID("Number")).val(reNumber);
                     });
 
                     soyut.radiogram.renderContent = function () {
@@ -911,13 +923,18 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                                                             senderName: senderName,
                                                                             senderRank: senderRank,
                                                                             author: roleName.position,
-                                                                            referenceId: referenceid
+                                                                            referenceId: referenceid,
+                                                                            
                                                                         }, function (res) {
                                                                             soyut.radiogram.clearInput();
                                                                             $(getInstanceID("wdl-navigation-menu")).children().removeClass("active");
                                                                             $(getInstanceID("wdl-navigation-menu")).children().removeClass("open");
                                                                             $(".wdl-folders").children().removeClass("active");
                                                                             $(".wdl-folders").children().removeClass("open");
+
+                                                                            soyut.radiogram.UpdateReplyStatus(referenceid, function (resreply) {   
+                                                                                console.log("Radiogram telah di balas!");
+                                                                            });
 
                                                                             soyut.radiogram.CreateLogs({
                                                                                 radiogram: no,
@@ -1068,6 +1085,11 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                                                             soyut.radiogram.clearInput();
                                                                             $(getInstanceID("wdl-navigation-menu")).children().removeClass("active");
                                                                             $(getInstanceID("wdl-navigation-menu")).children().removeClass("open");
+
+                                                                            soyut.radiogram.UpdateReplyStatus(referenceid, function (resreply) {   
+                                                                                console.log("Radiogram telah di balas!");
+                                                                            });
+
                                                                             soyut.radiogram.renderDraft();
                                                                         });
 
@@ -1484,32 +1506,28 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                 }
                                 return html;
                             },
-                            LoadStatusMark: function(materi, approved, msgid, msgstatus){
-                                var html = '';
-                                html += '<span class="boxicon inbox-reply replyicon-'+ msgid +'" style="display:none"><i class="fa icon-reply"></i></span>';
-                                    
-                                if(msgstatus != 'inbox'){
-                                    if(materi.length > 0){
-                                        html += '<span class="boxicon"><i class="fa icon-price-tag"></i></span>';
+                            LoadStatusMark: function(materi, approved, replied, msgstatus){
+                                var html = "";
+                                if(msgstatus == 'inbox'){
+                                    if(replied){
+                                        html += '<li class="boxicon" title="Dibalas"><i class="fa icon-reply"></i></li>';
                                     }
-                                    if(approved.length > 0){
-                                        html += '<span class="boxicon inbox-mark"><i class="fa icon-flag"></i></span>';
-                                    }
-                                }
-                                return html;
-                            },
-                            LoadStatusReply: function(msg){
-                                soyut.radiogram.Radiogram_GetByReferenceId({id: msg, field:'createTime', sort:'desc'},function(e,rdg) {
-                                    if(e){
-                                        console.log(e);
-                                    } else {
-                                        if(rdg[0] != undefined){
-                                            $('.replyicon-'+rdg[0].referenceId).css('display','');
+                                    if(msgstatus != 'draft' && msgstatus != 'sent'){
+                                        if(materi.length > 0){
+                                            html += '<span class="boxicon" title="Disposisi"><i class="fa icon-checkmark17"></i></span>';
                                         }
                                     }
-                                });
-                                var html = "messages-item-star";
+                                }
+                                if(msgstatus == 'draft'){
+                                    if(approved.length > 0){
+                                        html += '<span class="boxicon" title="Disetujui"><i class="fa icon-thumb_up"></i></span>';
+                                    }
+                                }
+                                
                                 return html;
+                            },
+                            LoadScrollMessages: function(){
+                                console.log("asdasd")
                             },
                             viewMessageDetail: function (val) {
                                 this.$root.viewMessageDetail(val);
@@ -1572,32 +1590,37 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                 }
                                 return html;
                             },
-                            LoadStatusMark: function(materi, approved, msgid, msgstatus){
-                                var html = '';
-                                html += '<span class="boxicon inbox-reply replyicon-'+ msgid +'" style="display:none"><i class="fa icon-reply"></i></span>';
-                                    
-                                if(msgstatus != 'inbox'){
-                                    if(materi.length > 0){
-                                        html += '<span class="boxicon"><i class="fa icon-price-tag"></i></span>';
+                            LoadStatusMark: function(materi, approved, replied, msgstatus){
+                                var html = "";
+                                if(msgstatus == 'inbox'){
+                                    if(replied){
+                                        html += '<li class="boxicon" title="Dibalas"><i class="fa icon-reply"></i></li>';
                                     }
-                                    if(approved.length > 0){
-                                        html += '<span class="boxicon inbox-mark"><i class="fa icon-flag"></i></span>';
-                                    }
-                                }
-                                return html;
-                            },
-                            LoadStatusReply: function(msg){
-                                soyut.radiogram.Radiogram_GetByReferenceId({id: msg, field:'createTime', sort:'desc'},function(e,rdg) {
-                                    if(e){
-                                        console.log(e);
-                                    } else {
-                                        if(rdg[0] != undefined){
-                                            $('.replyicon-'+rdg[0].referenceId).css('display','');
+                                    if(msgstatus != 'draft' && msgstatus != 'sent'){
+                                        if(materi.length > 0){
+                                            html += '<span class="boxicon" title="Disposisi"><i class="fa icon-checkmark17"></i></span>';
                                         }
                                     }
-                                });
-                                var html = "messages-item-star";
+                                }
+                                if(msgstatus == 'draft'){
+                                    if(approved.length > 0){
+                                        html += '<span class="boxicon" title="Disetujui"><i class="fa icon-thumb_up"></i></span>';
+                                    }
+                                }
+                                
                                 return html;
+                            },
+                            LoadScrollMessages: function(){
+                                var curPage = $(getInstanceID("current-page")).val();
+                                var countPage = $(getInstanceID("count-page")).val();
+
+                                if(countPage >= curPage){
+                                    if($('.messages-list').scrollTop() + $('.messages-list').innerHeight() >= $('.messages-list')[0].scrollHeight) {
+                                        var getPage = parseInt(curPage) + 20;
+                                        $(getInstanceID("current-page")).val(getPage.toString());
+                                        soyut.radiogram.renderListMessage('.email-list', '.email-reader', 'draft', '');
+                                    }
+                                }
                             },
                             viewMessageDetail: function (val) {
                                 this.$root.viewMessageDetail(val);
@@ -1617,7 +1640,9 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                         $el.append('<email-list :messages="messages"></email-list>');
 
                         if(roleName.isWASDAL) {
-                            soyut.radiogram.renderListWasdalMessages(message, group, function (res) {
+                            var limitCount = $(getInstanceID("current-page")).val();
+                            soyut.radiogram.renderListWasdalMessages(message, group, parseInt(limitCount), function (res) {
+                                $(getInstanceID("count-page")).val(res.length);
                                 vmlist = new Vue({
                                     el: elSelector,
                                     data: {
@@ -3340,7 +3365,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                     };
 
                     soyut.radiogram.init = function () {
-                        soyut.radiogram.perfectScrollbarHandler();
+                        // soyut.radiogram.perfectScrollbarHandler();
                         soyut.radiogram.messageHeightHandler();
                         soyut.radiogram.sidebarHandler();
                         soyut.radiogram.renderInbox();
