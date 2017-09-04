@@ -441,7 +441,7 @@ soyut.radiogram.renderRadiogramParent = function (id, callback) {
 
 function getRadiogramParent(id) {
     return new Promise (function(resolve,reject){
-        soyut.radiogram.Radiogram_GetByParentId({id: id, field:'createTime', sort:'desc'}, function (e, data) {
+        soyut.radiogram.Radiogram_GetByParentId({id: id, field:'createTime', sort:'desc', skip: null, limit: null}, function (e, data) {
             if(e){
                 reject(e);
             }else{
@@ -1174,6 +1174,15 @@ soyut.radiogram.UpdateDraftRadiogram = function(params, callback){
             }
 
             //cc to wasdal
+            var directWasdal = false;
+            if (params.receivers.length > 0) {
+                params.receivers.forEach(function (i) {
+                    if (i.type == 'vrole') {
+                        directWasdal = true;
+                    }
+                });
+            }
+
             soyut.radiogram.renderListKolatReceiver(function (wasdal) {
                 soyut.radiogram.Radiogram_SendReceiver({
                     panggilan: params.panggilan,
@@ -1212,7 +1221,7 @@ soyut.radiogram.UpdateDraftRadiogram = function(params, callback){
                     referenceId: params.referenceId,
                     isReplied: false,
                     attachment: params.attachment,  
-                    direct: false,
+                    direct: directWasdal,
                     composeStatus: 'pending'
                 }, function (err, res) {
                     if (!err) {
@@ -1385,6 +1394,15 @@ soyut.radiogram.DraftRadiogram = function (params, callback) {
                 }
 
                 //cc to wasdal
+                var directWasdal = false;
+                if (params.receivers.length > 0) {
+                    params.receivers.forEach(function (i) {
+                        if (i.type == 'vrole') {
+                            directWasdal = true;
+                        }
+                    });
+                }
+
                 soyut.radiogram.renderListKolatReceiver(function (wasdal) {
                     soyut.radiogram.Radiogram_SendReceiver({
                         panggilan: params.panggilan,
@@ -1423,7 +1441,7 @@ soyut.radiogram.DraftRadiogram = function (params, callback) {
                         referenceId: params.referenceId,
                         isReplied: false,
                         attachment: params.attachment,
-                        direct: false,
+                        direct: directWasdal,
                         composeStatus: 'pending'
                     }, function (err, res) {
                         if (!err) {
