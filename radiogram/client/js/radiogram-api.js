@@ -551,6 +551,10 @@ soyut.radiogram.SendRadiogram = function (params, callback) {
                 params.receivers.forEach(function (i) {
                     if (i.type == 'role') {
                         soyut.radiogram.renderSenderDetail(i.id, function (m) {
+                            var directState = false;
+                            if(i.id == m.id){
+                                directState = true;
+                            }
                             soyut.radiogram.Radiogram_SendReceiver({
                                 panggilan: params.panggilan,
                                 jenis: params.jenis,
@@ -587,6 +591,8 @@ soyut.radiogram.SendRadiogram = function (params, callback) {
                                 parentId: null,
                                 referenceId: params.referenceId,
                                 isReplied: false,
+                                attachment: params.attachment,
+                                direct: directState,
                                 composeStatus: 'inbox'
                             }, function (err, res) {
                                 if (!err) {
@@ -638,6 +644,8 @@ soyut.radiogram.SendRadiogram = function (params, callback) {
                                     parentId: null,
                                     referenceId: params.referenceId,
                                     isReplied: false,
+                                    attachment: params.attachment,
+                                    direct: false,
                                     composeStatus: 'inbox'
                                 }, function (err, res) {
                                     if (!err) {
@@ -687,6 +695,8 @@ soyut.radiogram.SendRadiogram = function (params, callback) {
                     parentId: null,
                     referenceId: params.referenceId,
                     isReplied: false,
+                    attachment: params.attachment,
+                    direct: false,
                     composeStatus: 'inbox'
                 }, function (err, res) {
                     if (!err) {
@@ -731,6 +741,8 @@ soyut.radiogram.SendRadiogram = function (params, callback) {
                 parentId: null,
                 referenceId: params.referenceId,
                 isReplied: false,
+                attachment: params.attachment,
+                direct: false,
                 composeStatus: 'sent'
             }, function (err, results) {
                 if (!err) {
@@ -753,6 +765,10 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
                 params.receivers.forEach(function (i) {
                     if (i.type == 'role') {
                         soyut.radiogram.renderSenderDetail(i.id, function (m) {
+                            var directState = false;
+                            if(i.id == m.id){
+                                directState = true;
+                            }
                             soyut.radiogram.Radiogram_SendReceiverWasdal({
                                 panggilan: params.panggilan,
                                 jenis: params.jenis,
@@ -789,6 +805,8 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
                                 parentId: null,
                                 referenceId: params.referenceId,
                                 isReplied: false,
+                                attachment: params.attachment,
+                                direct: directState,
                                 composeStatus: 'inbox'
                             }, function (err, res) {
                                 if (!err) {
@@ -836,6 +854,8 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
                                         parentId: null,
                                         referenceId: params.referenceId,
                                         isReplied: false,
+                                        attachment: params.attachment,
+                                        direct: true,
                                         composeStatus: 'inbox'
                                     }, function (err, res) {
                                         if (!err) {
@@ -889,6 +909,8 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
                                 parentId: null,
                                 referenceId: params.referenceId,
                                 isReplied: false,
+                                attachment: params.attachment,
+                                direct: false,
                                 composeStatus: 'inbox'
                             }, function (err, res) {
                                 if (!err) {
@@ -936,6 +958,8 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
                                         parentId: null,
                                         referenceId: params.referenceId,
                                         isReplied: false,
+                                        attachment: params.attachment,
+                                        direct: false,
                                         composeStatus: 'inbox'
                                     }, function (err, res) {
                                         if (!err) {
@@ -986,6 +1010,8 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
                     createTime: reclock,
                     referenceId: params.referenceId,
                     isReplied: false,
+                    direct: false,
+                    attachment: params.attachment
                 }, function (err, results) {
                     if (!err) {
                         callback(results.data.generated_keys[0]);
@@ -1040,6 +1066,10 @@ soyut.radiogram.UpdateDraftRadiogram = function(params, callback){
                 params.receivers.forEach(function (i) {
                     if (i.type == 'role') {
                         soyut.radiogram.renderSenderDetail(i.id, function (m) {
+                            var directState = false;
+                            if(i.id == m.id){
+                                directState = true;
+                            }
                             soyut.radiogram.Radiogram_SendReceiver({
                                 panggilan: params.panggilan,
                                 jenis: params.jenis,
@@ -1049,7 +1079,7 @@ soyut.radiogram.UpdateDraftRadiogram = function(params, callback){
                                 tandadinas: params.tandadinas,
                                 group: params.group,
                                 classification: params.classification,
-                                materi: params.materi,
+                                materi: [],
                                 approved: params.approved,
                                 Number: params.Number,
                                 cara: params.cara,
@@ -1075,6 +1105,9 @@ soyut.radiogram.UpdateDraftRadiogram = function(params, callback){
                                 createTime: res.createTime,
                                 parentId: params.id,
                                 referenceId: params.referenceId,
+                                isReplied: false,
+                                attachment: params.attachment,  
+                                direct: directState,
                                 composeStatus: 'pending'
                             }, function (err, res) {
                                 if (!err) {
@@ -1100,7 +1133,7 @@ soyut.radiogram.UpdateDraftRadiogram = function(params, callback){
                                     tandadinas: params.tandadinas,
                                     group: params.group,
                                     classification: params.classification,
-                                    materi: params.materi,
+                                    materi: [],
                                     approved: params.approved,
                                     Number: params.Number,
                                     cara: params.cara,
@@ -1126,6 +1159,9 @@ soyut.radiogram.UpdateDraftRadiogram = function(params, callback){
                                     createTime: res.createTime,
                                     parentId: params.id,
                                     referenceId: params.referenceId,
+                                    isReplied: false,
+                                    attachment: params.attachment,  
+                                    direct: false,
                                     composeStatus: 'pending'
                                 }, function (err, res) {
                                     if (!err) {
@@ -1174,6 +1210,9 @@ soyut.radiogram.UpdateDraftRadiogram = function(params, callback){
                     createTime: res.createTime,
                     parentId: params.id,
                     referenceId: params.referenceId,
+                    isReplied: false,
+                    attachment: params.attachment,  
+                    direct: false,
                     composeStatus: 'pending'
                 }, function (err, res) {
                     if (!err) {
@@ -1223,7 +1262,9 @@ soyut.radiogram.DraftRadiogram = function (params, callback) {
             simtime: null,
             createTime: reclock,
             isReplied: false,
-            referenceId: params.referenceId
+            attachment: params.attachment,
+            referenceId: params.referenceId,
+            direct: false
         }, function (err, result) {
             if (!err) {
                 var parentId = result.data.generated_keys[0];
@@ -1232,6 +1273,10 @@ soyut.radiogram.DraftRadiogram = function (params, callback) {
                     params.receivers.forEach(function (i) {
                         if (i.type == 'role') {
                             soyut.radiogram.renderSenderDetail(i.id, function (m) {
+                                var directState = false;
+                                if(i.id == m.id){
+                                    directState = true;
+                                }
                                 soyut.radiogram.Radiogram_SendReceiver({
                                     panggilan: params.panggilan,
                                     jenis: params.jenis,
@@ -1241,7 +1286,7 @@ soyut.radiogram.DraftRadiogram = function (params, callback) {
                                     tandadinas: params.tandadinas,
                                     group: params.group,
                                     classification: params.classification,
-                                    materi: params.materi,
+                                    materi: [],
                                     approved: params.approved,
                                     Number: params.Number,
                                     cara: params.cara,
@@ -1268,6 +1313,8 @@ soyut.radiogram.DraftRadiogram = function (params, callback) {
                                     parentId: parentId,
                                     referenceId: params.referenceId,
                                     isReplied: false,
+                                    attachment: params.attachment,
+                                    direct: directState,
                                     composeStatus: 'pending'
                                 }, function (err, res) {
                                     if (!err) {
@@ -1284,6 +1331,10 @@ soyut.radiogram.DraftRadiogram = function (params, callback) {
                         params.cc.forEach(function (i) {
                             if (i.type == 'role') {
                                 soyut.radiogram.renderSenderDetail(i.id, function (m) {
+                                    var directState = false;
+                                    if(i.id == m.id){
+                                        directState = true;
+                                    }
                                     soyut.radiogram.Radiogram_SendReceiver({
                                         panggilan: params.panggilan,
                                         jenis: params.jenis,
@@ -1293,7 +1344,7 @@ soyut.radiogram.DraftRadiogram = function (params, callback) {
                                         tandadinas: params.tandadinas,
                                         group: params.group,
                                         classification: params.classification,
-                                        materi: params.materi,
+                                        materi: [],
                                         approved: params.approved,
                                         Number: params.Number,
                                         cara: params.cara,
@@ -1320,6 +1371,8 @@ soyut.radiogram.DraftRadiogram = function (params, callback) {
                                         parentId: parentId,
                                         referenceId: params.referenceId,
                                         isReplied: false,
+                                        attachment: params.attachment,
+                                        direct: directState,
                                         composeStatus: 'pending'
                                     }, function (err, res) {
                                         if (!err) {
@@ -1369,6 +1422,8 @@ soyut.radiogram.DraftRadiogram = function (params, callback) {
                         parentId: parentId,
                         referenceId: params.referenceId,
                         isReplied: false,
+                        attachment: params.attachment,
+                        direct: false,
                         composeStatus: 'pending'
                     }, function (err, res) {
                         if (!err) {
@@ -1420,6 +1475,8 @@ soyut.radiogram.DraftWasdalRadiogram = function (params, callback) {
             createTime: reclock,
             referenceId: params.referenceId,
             isReplied: false,
+            attachment: params.attachment,
+            direct: false
         }, function (err, result) {
             if (!err) {
                 var parentId = result.data.generated_keys[0];
@@ -1427,6 +1484,10 @@ soyut.radiogram.DraftWasdalRadiogram = function (params, callback) {
                 params.receivers.forEach(function (i) {
                     if (i.type == 'role') {
                         soyut.radiogram.renderSenderDetail(i.id, function (m) {
+                            var directState = false;
+                            if(i.id == m.id){
+                                directState = true;
+                            }
                             soyut.radiogram.Radiogram_SendReceiverWasdal({
                                 panggilan: params.panggilan,
                                 jenis: params.jenis,
@@ -1463,6 +1524,8 @@ soyut.radiogram.DraftWasdalRadiogram = function (params, callback) {
                                 parentId: parentId,
                                 referenceId: params.referenceId,
                                 isReplied: false,
+                                attachment: params.attachment,
+                                direct: directState,
                                 composeStatus: 'pending'
                             }, function (err, res) {
                                 if (!err) {
@@ -1511,6 +1574,8 @@ soyut.radiogram.DraftWasdalRadiogram = function (params, callback) {
                                         parentId: parentId,
                                         referenceId: params.referenceId,
                                         isReplied: false,
+                                        attachment: params.attachment,
+                                        direct: true,
                                         composeStatus: 'pending'
                                     }, function (err, res) {
                                         if (!err) {
@@ -1565,6 +1630,8 @@ soyut.radiogram.DraftWasdalRadiogram = function (params, callback) {
                                 parentId: parentId,
                                 referenceId: params.referenceId,
                                 isReplied: false,
+                                attachment: params.attachment,
+                                direct: false,
                                 composeStatus: 'pending'
                             }, function (err, res) {
                                 if (!err) {
@@ -1613,6 +1680,8 @@ soyut.radiogram.DraftWasdalRadiogram = function (params, callback) {
                                         parentId: parentId,
                                         referenceId: params.referenceId,
                                         isReplied: false,
+                                        attachment: params.attachment,
+                                        direct: false,
                                         composeStatus: 'pending'
                                     }, function (err, res) {
                                         if (!err) {
@@ -1670,7 +1739,9 @@ soyut.radiogram.DraftRIG = function (params, callback) {
             simtime: null,
             createTime: params.createTime,
             isReplied: false,
-            referenceId: params.referenceId
+            attachment: params.attachment,
+            referenceId: params.referenceId,
+            direct: false
         }, function (err, result) {
             if (!err) {
                 var parentId = result.data.generated_keys[0];
@@ -1678,6 +1749,10 @@ soyut.radiogram.DraftRIG = function (params, callback) {
                 params.receivers.forEach(function (i) {
                     if (i.type == 'role') {
                         soyut.radiogram.renderSenderDetail(i.id, function (m) {
+                            var directState = false;
+                            if(i.id == m.id){
+                                directState = true;
+                            }
                             soyut.radiogram.Radiogram_SendReceiverWasdal({
                                 panggilan: params.panggilan,
                                 jenis: params.jenis,
@@ -1714,6 +1789,8 @@ soyut.radiogram.DraftRIG = function (params, callback) {
                                 parentId: parentId,
                                 referenceId: params.referenceId,
                                 isReplied: false,
+                                attachment: params.attachment,
+                                direct: directState,
                                 composeStatus: 'pending'
                             }, function (err, res) {
                                 if (!err) {
@@ -1762,6 +1839,8 @@ soyut.radiogram.DraftRIG = function (params, callback) {
                                         parentId: parentId,
                                         referenceId: params.referenceId,
                                         isReplied: false,
+                                        attachment: params.attachment,
+                                        direct: true,
                                         composeStatus: 'pending'
                                     }, function (err, res) {
                                         if (!err) {
@@ -1816,6 +1895,8 @@ soyut.radiogram.DraftRIG = function (params, callback) {
                                 parentId: parentId,
                                 referenceId: params.referenceId,
                                 isReplied: false,
+                                attachment: params.attachment,
+                                direct: false,
                                 composeStatus: 'pending'
                             }, function (err, res) {
                                 if (!err) {
@@ -1864,6 +1945,8 @@ soyut.radiogram.DraftRIG = function (params, callback) {
                                         parentId: parentId,
                                         referenceId: params.referenceId,
                                         isReplied: false,
+                                        attachment: params.attachment,
+                                        direct: false,
                                         composeStatus: 'pending'
                                     }, function (err, res) {
                                         if (!err) {
@@ -1968,6 +2051,10 @@ soyut.radiogram.UpdateDraftWasdalRadiogram = function(params, callback) {
             params.receivers.forEach(function (i) {
                 if (i.type == 'role') {
                     soyut.radiogram.renderSenderDetail(i.id, function (m) {
+                        var directState = false;
+                        if(i.id == m.id){
+                            directState = true;
+                        }
                         soyut.radiogram.Radiogram_SendReceiverWasdal({
                             panggilan: params.panggilan,
                             jenis: params.jenis,
@@ -2004,6 +2091,8 @@ soyut.radiogram.UpdateDraftWasdalRadiogram = function(params, callback) {
                             parentId: params.id,
                             referenceId: params.referenceId,
                             isReplied: false,
+                            attachment: params.attachment,
+                            direct: directState,
                             composeStatus: 'pending'
                         }, function (err, res) {
                             if (!err) {
@@ -2052,6 +2141,8 @@ soyut.radiogram.UpdateDraftWasdalRadiogram = function(params, callback) {
                                     parentId: params.id,
                                     referenceId: params.referenceId,
                                     isReplied: false,
+                                    attachment: params.attachment,
+                                    direct: true,
                                     composeStatus: 'pending'
                                 }, function (err, res) {
                                     if (!err) {
@@ -2106,6 +2197,8 @@ soyut.radiogram.UpdateDraftWasdalRadiogram = function(params, callback) {
                             parentId: params.id,
                             referenceId: params.referenceId,
                             isReplied: false,
+                            attachment: params.attachment,
+                            direct: false,
                             composeStatus: 'pending'
                         }, function (err, res) {
                             if (!err) {
@@ -2154,6 +2247,8 @@ soyut.radiogram.UpdateDraftWasdalRadiogram = function(params, callback) {
                                     parentId: params.id,
                                     referenceId: params.referenceId,
                                     isReplied: false,
+                                    attachment: params.attachment,
+                                    direct: false,
                                     composeStatus: 'pending'
                                 }, function (err, res) {
                                     if (!err) {
@@ -2217,6 +2312,10 @@ soyut.radiogram.UpdateDraftRIG = function(params, callback) {
                 params.receivers.forEach(function (i) {
                     if (i.type == 'role') {
                         soyut.radiogram.renderSenderDetail(i.id, function (m) {
+                            var directState = false;
+                            if(i.id == m.id){
+                                directState = true;
+                            }
                             soyut.radiogram.Radiogram_SendReceiverWasdal({
                                 panggilan: params.panggilan,
                                 jenis: params.jenis,
@@ -2253,6 +2352,8 @@ soyut.radiogram.UpdateDraftRIG = function(params, callback) {
                                 parentId: params.id,
                                 referenceId: params.referenceId,
                                 isReplied: false,
+                                attachment: params.attachment,
+                                direct: directState,
                                 composeStatus: 'pending'
                             }, function (err, res) {
                                 if (!err) {
@@ -2301,6 +2402,8 @@ soyut.radiogram.UpdateDraftRIG = function(params, callback) {
                                         parentId: params.id,
                                         referenceId: params.referenceId,
                                         isReplied: false,
+                                        attachment: params.attachment,
+                                        direct: true,
                                         composeStatus: 'pending'
                                     }, function (err, res) {
                                         if (!err) {
@@ -2355,6 +2458,8 @@ soyut.radiogram.UpdateDraftRIG = function(params, callback) {
                                 parentId: params.id,
                                 referenceId: params.referenceId,
                                 isReplied: false,
+                                attachment: params.attachment,
+                                direct: false,
                                 composeStatus: 'pending'
                             }, function (err, res) {
                                 if (!err) {
@@ -2403,6 +2508,8 @@ soyut.radiogram.UpdateDraftRIG = function(params, callback) {
                                         parentId: params.id,
                                         referenceId: params.referenceId,
                                         isReplied: false,
+                                        attachment: params.attachment,
+                                        direct: false,
                                         composeStatus: 'pending'
                                     }, function (err, res) {
                                         if (!err) {

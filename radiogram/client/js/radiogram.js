@@ -203,10 +203,10 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                     var vmlist;
 
                     Vue.filter('truncate', function (value) {
-                        var length = 10;
+                        var length = 20;
 
                         if (value.length <= length) {
-                            return value;
+                            return value + '...';
                         }
                         else {
                             return value.substring(0, length) + '...';
@@ -378,6 +378,8 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                             var receiverRole = $(".optReceiver").val();
                             var tembusan = $(".optCC").val();
                             var materi = $("input:checkbox[name=checkbox-materi]:checked");
+                            var attachmentUrl = $('.attachment-url').val();
+                            var attachmentName = $('.attachment-name').val();
                             var tandadinas = $(getInstanceID("tandadinas")).val();
                             var group = $(getInstanceID("group")).val();
                             var klasifikasi = $(getInstanceID("klasifikasi")).val();
@@ -430,6 +432,11 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                 materi.each(function(){
                                     arrMateri.push($(this).val());
                                 });
+
+                                var attachment = {
+                                    "name": attachmentName,
+                                    "url": attachmentUrl
+                                }
 
                                 if(roleName.isWASDAL){
                                     var vroleRcv = [];
@@ -547,6 +554,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                                                         senderRank: senderRank,
                                                                         refsender: refsender,
                                                                         author: roleName.position,
+                                                                        attachment: attachment,
                                                                         referenceId: referenceid
                                                                     },function(res){
                                                                         soyut.radiogram.clearInput();
@@ -702,6 +710,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                                                         senderRank: senderRank,
                                                                         refsender: refsender,
                                                                         author: roleName.position,
+                                                                        attachment: attachment,
                                                                         referenceId: referenceid
                                                                     },function(res){
                                                                         soyut.radiogram.clearInput();
@@ -749,6 +758,8 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                             var tembusan = $(".optCC").val();
                             var materi = $("input:checkbox[name=checkbox-materi]:checked");
                             var approval = $("input:checkbox[name=checkbox-approval]:checked");
+                            var attachmentUrl = $('.attachment-url').val();
+                            var attachmentName = $('.attachment-name').val();
                             var tandadinas = $(getInstanceID("tandadinas")).val();
                             var group = $(getInstanceID("group")).val();
                             var klasifikasi = $(getInstanceID("klasifikasi")).val();
@@ -806,6 +817,11 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                 approval.each(function(){
                                     arrApproval.push($(this).val());
                                 });
+
+                                var attachment = {
+                                    "name": attachmentName,
+                                    "url": attachmentUrl
+                                }
 
                                 if(editId == null || editId == "") {
                                     if (roleName.isWASDAL) {
@@ -923,6 +939,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                                                             senderName: senderName,
                                                                             senderRank: senderRank,
                                                                             author: roleName.position,
+                                                                            attachment: attachment,
                                                                             referenceId: referenceid,
                                                                             
                                                                         }, function (res) {
@@ -1080,6 +1097,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                                                             senderName: senderName,
                                                                             senderRank: senderRank,
                                                                             author: arAuthor,
+                                                                            attachment: attachment,
                                                                             referenceId: referenceid
                                                                         }, function (res) {
                                                                             soyut.radiogram.clearInput();
@@ -1219,6 +1237,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                                                                 senderName: senderName,
                                                                                 senderRank: senderRank,
                                                                                 author: roleName.position,
+                                                                                attachment: attachment,
                                                                                 referenceId: referenceid
                                                                             },function(resdraft){
                                                                                 soyut.radiogram.clearInput();
@@ -1371,6 +1390,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                                                                 senderName: senderName,
                                                                                 senderRank: senderRank,
                                                                                 author: arAuthor,
+                                                                                attachment: attachment,
                                                                                 referenceId: referenceid
                                                                             }, function (resdraft) {
                                                                                 soyut.radiogram.clearInput();
@@ -1512,7 +1532,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                 }
                                 return html;
                             },
-                            LoadStatusMark: function(materi, approved, replied, msgstatus){
+                            LoadStatusMark: function(materi, approved, replied, msgstatus, direct){
                                 var html = "";
                                 if(msgstatus == 'inbox'){
                                     if(replied){
@@ -1523,10 +1543,13 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                             html += '<span class="boxicon" title="Disposisi"><i class="fa icon-checkmark17"></i></span>';
                                         }
                                     }
+                                    if(direct){
+                                        html += '<span class="boxicon" title="Ditujukan Langsung"><i class="fa icon-arrow-right"></i></span>';
+                                    }
                                 }
                                 if(msgstatus == 'draft'){
                                     if(approved.length > 0){
-                                        html += '<span class="boxicon" title="Disetujui"><i class="fa icon-thumb_up"></i></span>';
+                                        html += '<span class="boxicon" title="Disetujui"><i class="fa icon-flag"></i></span>';
                                     }
                                 }
                                 
@@ -1606,7 +1629,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                 }
                                 return html;
                             },
-                            LoadStatusMark: function(materi, approved, replied, msgstatus){
+                            LoadStatusMark: function(materi, approved, replied, msgstatus, direct){
                                 var html = "";
                                 if(msgstatus == 'inbox'){
                                     if(replied){
@@ -1617,10 +1640,13 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                             html += '<span class="boxicon" title="Disposisi"><i class="fa icon-checkmark17"></i></span>';
                                         }
                                     }
+                                    if(direct){
+                                        html += '<span class="boxicon" title="Ditujukan Langsung"><i class="fa icon-arrow-right"></i></span>';
+                                    }
                                 }
                                 if(msgstatus == 'draft'){
                                     if(approved.length > 0){
-                                        html += '<span class="boxicon" title="Disetujui"><i class="fa icon-thumb_up"></i></span>';
+                                        html += '<span class="boxicon" title="Disetujui"><i class="fa icon-flag"></i></span>';
                                     }
                                 }
                                 
@@ -1646,7 +1672,9 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                     });
 
                     soyut.radiogram.LoadNewMessages = function (data) {
-                        vmlist.NewMessages(data);
+                        if(data.composeStatus == "inbox"){
+                            vmlist.NewMessages(data);
+                        }
                     };
 
                     soyut.radiogram.renderListMessage = function (elSelector, elChildren, message, group) {
@@ -1755,6 +1783,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                 vmlist = new Vue({
                                     el: elSelector,
                                     data: {
+                                        groups: soyut.Session.role.roleGroup,
                                         messages: res
                                     },
                                     mounted: function () {
@@ -1824,6 +1853,9 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                                         soyut.radiogram.renderUnreadMessage(message, 0);
                                                         console.log(result);
                                                     });
+
+                                                    $('.message-data-'+ data.id).removeClass('unread');
+                                                    $('.message-data-'+ data.id).removeClass('text-bold');
                                                 }
                                                 $('.messages-list').children().removeClass("active");
                                                 $('.message-data-'+ data.id).addClass('active');
@@ -2129,10 +2161,10 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                             arrMateri = arrMateri + i.toUpperCase() + ", ";
                                         });
                                     }
-                                    attributes += 
-                                        '<div class="col-md-12">' +
-                                        '<div class="form-group"><p class="text-bold">DIPOSISI KE AS/PA :</p>' + arrMateri +'</div>' +
-                                        '</div>';
+                                    // attributes += 
+                                    //     '<div class="col-md-12">' +
+                                    //     '<div class="form-group"><p class="text-bold">DIPOSISI KE AS/PA :</p>' + arrMateri +'</div>' +
+                                    //     '</div>';
                                     attributes +=
                                         '<div class="col-md-8">' +
                                         '<div class="form-group"><p class="text-bold">DI SETUJUI :</p> ' + arrApproved + ' </div>' +
@@ -2748,6 +2780,8 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                 soyut.radiogram.renderReplyMessage('.reply-message', res.referenceId);
                             }
                         });
+
+                        soyut.radiogram.renderAttachment('new', null);
                     };
 
                     soyut.radiogram.renderCompose = function (referenceId, refSender, refMateri) {
@@ -2804,7 +2838,62 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                             $(getInstanceID("list-materi")).css('visibility', 'hidden');
                             $(getInstanceID("list-materi")).css('height', '5px');
                         }
+
+                        soyut.radiogram.renderAttachment('new', null);
                     };
+
+                    soyut.radiogram.renderAttachment = function (state, value) {
+                        $(getInstanceID("list-attachment")).html('');
+                        if(state == 'new'){
+                            var html = '<h3>ATTACHMENT :</h3>' +
+                                '<label class="attachment-label" style="display:none;"></label>' +
+                                '<input type="hidden" name="attachment-url" id="attachment-url" class="attachment-url" value="">' +
+                                '<input type="hidden" name="attachment-name" id="attachment-name" class="attachment-name" value="">' +
+                                '<a href="#" class="btn btn-success btn-attachment" onclick="soyut.radiogram.browseAttachment()"><i class="icon-plus"></i> Pilih File</a>';
+
+                            $(getInstanceID("list-attachment")).append(html);
+                        }
+                        else {
+                            var html = '<h3>ATTACHMENT :</h3>' +
+                                '<label class="attachment-label" style="display:none;"></label>' +
+                                '<input type="hidden" name="attachment-url" id="attachment-url" class="attachment-url" value="">' +
+                                '<input type="hidden" name="attachment-name" id="attachment-name" class="attachment-name" value="">' +
+                                '<a href="#" class="btn btn-success btn-attachment" onclick="soyut.radiogram.rigBrowseAttachment()"><i class="icon-plus"></i> Pilih File</a>';
+
+                            $(getInstanceID("list-attachment")).append(html);
+                        }
+                    }
+
+                    soyut.radiogram.browseAttachment = function(){
+                        var app = getAppInstance();
+                        var activitylistener = getActivityInstanceAsync();
+                        activitylistener.then(function (activity) {
+                            app.launchExternalActivity("soyut.module.browser.selector", {p1: '', p2: ''}, app, function (instance) {
+                                // console.log(activity)
+                            });
+                        });
+
+                        app.on('loadfile_selected', function (data) {
+                            var url = $(".attachment-url").val(data.files.url);
+                            $(".attachment-name").val(data.files.name);
+                            var html = "";
+                            if(url != ""){
+                                html += data.files.name +' <a href="#" class="btn btn-sm btn-danger" onclick="soyut.radiogram.removeAttachment()"><i class="icon-delete121"></i></a>';
+                                $('.attachment-label').html(html);
+                                $('.attachment-label').css('display', '');
+                                $('.btn-attachment').css('display', 'none');
+                            }
+                        });
+                    }
+
+                    soyut.radiogram.removeAttachment = function(){
+                        $(".attachment-url").val('');
+                        $(".attachment-name").val('');
+
+                        $('.attachment-label').html('');
+                        $('.attachment-label').css('display', 'none');
+                        $('.btn-attachment').css('display', '');
+                    }
 
                     soyut.radiogram.renderMateriWasdal = function (state, value) {
                         $(getInstanceID("list-materi")).html('');
@@ -2814,7 +2903,8 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                 '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="operasi">OPERASI</label>' +
                                 '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="personel">PERSONEL</label>' +
                                 '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="logistik">LOGISTIK</label>' +
-                                '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="komlek">KOMLEK</label>';
+                                '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="komlek">KOMLEK</label>' +
+                                '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="perencanaan">PERENCANAAN</label>';
 
                             $(getInstanceID("list-materi")).append(html);
                         }
@@ -2824,6 +2914,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                             var checked3 = '';
                             var checked4 = '';
                             var checked5 = '';
+                            var checked6 = '';
                             value.forEach(function (i) {
                                 if(i == 'intelijen'){
                                     checked1 = 'checked';
@@ -2840,6 +2931,9 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                 else if(i == 'komlek'){
                                     checked5 = 'checked';
                                 }
+                                else if(i == 'perencanaan'){
+                                    checked6 = 'checked';
+                                }
                             });
                             var html = '<h3>DIPOSISI KE AS/PA :</h3>';
                             html += '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="intelijen" '+ checked1 +'>INTELIJEN</label>';
@@ -2847,6 +2941,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                             html += '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="personel" '+ checked3 +'>PERSONEL</label>';
                             html += '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="logistik" '+ checked4 +'>LOGISTIK</label>';
                             html += '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="komlek" '+ checked5 +'>KOMLEK</label>';
+                            html += '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="perencanaan" '+ checked6 +'>PERENCANAAN</label>';
 
                             $(getInstanceID("list-materi")).append(html);
                         }
@@ -3017,7 +3112,8 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                 '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="operasi">OPERASI</label>' +
                                 '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="personel">PERSONEL</label>' +
                                 '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="logistik">LOGISTIK</label>' +
-                                '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="komlek">KOMLEK</label>';
+                                '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="komlek">KOMLEK</label>' +
+                                '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="perencanaan">PERENCANAAN</label>';
 
                             $(getInstanceID("list-materi")).append(html);
                         }
@@ -3027,6 +3123,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                             var checked3 = '';
                             var checked4 = '';
                             var checked5 = '';
+                            var checked6 = '';
                             value.forEach(function (i) {
                                 if(i == 'intelijen'){
                                     checked1 = 'checked';
@@ -3043,6 +3140,9 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                 else if(i == 'komlek'){
                                     checked5 = 'checked';
                                 }
+                                else if(i == 'perencanaan'){
+                                    checked6 = 'checked';
+                                }
                             });
                             var html = '<h3>DIPOSISI KE AS/PA :</h3>';
                             html += '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="intelijen" '+ checked1 +'>INTELIJEN</label>';
@@ -3050,6 +3150,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                             html += '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="personel" '+ checked3 +'>PERSONEL</label>';
                             html += '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="logistik" '+ checked4 +'>LOGISTIK</label>';
                             html += '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="komlek" '+ checked5 +'>KOMLEK</label>';
+                            html += '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="perencanaan" '+ checked6 +'>PERENCANAAN</label>';
 
                             $(getInstanceID("list-materi")).append(html);
                         }

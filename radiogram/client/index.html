@@ -382,6 +382,9 @@
                                         </tr>
                                         </tbody>
                                     </table>
+                                    <div class="form-group" id="list-attachment" style="display:none;">
+
+                                    </div>
                                     <div class="form-group" id="list-materi">
 
                                     </div>
@@ -464,7 +467,7 @@
         <ul class="messages-list perfect-scrollbar" v-on:scroll="LoadScrollMessages(groups)">
             <li v-for="message in messages" :class="LoadStatusMessage(message.id, message.readStatus, message.composeStatus, message.sender.roleGroup)" :data-date="message.simtime" :data-group="message.sender.roleGroup" :data-status="message.readStatus" :data-materi="message.materi" :data-id="message.id">
                 <a href="#" @click="viewMessageDetail(message.id)">
-                    <span class="messages-item-star" v-html="LoadStatusMark(message.materi, message.approved, message.isReplied, message.composeStatus)"></span>
+                    <span class="messages-item-star" v-html="LoadStatusMark(message.materi, message.approved, message.isReplied, message.composeStatus, message.direct)"></span>
                     <span class="messages-item-from">{{ message.senderDetail, message.composeStatus | fromfilter }}</span>
                     <div class="messages-item-time">
                         <span class="text">{{ message.SendTime, message.createTime, message.composeStatus | wstime }}</span>
@@ -489,7 +492,7 @@
         <ul class="messages-list perfect-scrollbar" v-on:scroll="LoadScrollMessages(groups)">
             <li v-for="message in messages" :class="LoadStatusMessage(message.id, message.readStatus, message.composeStatus)" :data-date="message.simtime">
                 <a href="#" @click="viewMessageDetail(message.id)">
-                    <span class="messages-item-star" v-html="LoadStatusMark(message.materi, message.approved, message.isReplied, message.composeStatus)"></span>
+                    <span class="messages-item-star" v-html="LoadStatusMark(message.materi, message.approved, message.isReplied, message.composeStatus, message.direct)"></span>
                     <span class="messages-item-from">{{ message.senderDetail, message.composeStatus | fromfilter }}</span>
                     <div class="messages-item-time">
                         <span class="text">{{ message.SendTime, message.createTime, message.composeStatus | wstime }}</span>

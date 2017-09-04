@@ -132,6 +132,8 @@ soyut.rig.getRigListReceiversWasdal(getScenario, function (listReceiverWasdal) {
                     var author = $(".optAuthor").val();
                     var materi = $("input:checkbox[name=checkbox-materi]:checked");
                     var approval = $("input:checkbox[name=checkbox-approval]:checked");
+                    var attachmentUrl = $('.attachment-url').val();
+                    var attachmentName = $('.attachment-name').val();
                     var tandadinas = $(getInstanceID("tandadinas")).val();
                     var group = $(getInstanceID("group")).val();
                     var klasifikasi = $(getInstanceID("klasifikasi")).val();
@@ -202,6 +204,11 @@ soyut.rig.getRigListReceiversWasdal(getScenario, function (listReceiverWasdal) {
                         approval.each(function(){
                             arrApproval.push($(this).val());
                         });
+
+                        var attachment = {
+                            "name": attachmentName,
+                            "url": attachmentUrl
+                        }
 
                         var convertTime = soyut.radiogram.rigParseDate(realtime);
                         var getRealDate = new Date(convertTime);
@@ -323,6 +330,7 @@ soyut.rig.getRigListReceiversWasdal(getScenario, function (listReceiverWasdal) {
                                                                 author: author,
                                                                 scenario: getScenario,
                                                                 createTime: curInputDate,
+                                                                attachment: attachment,
                                                                 referenceId: ""
                                                             }, function (res) {
                                                                 soyut.radiogram.rigClearInput();
@@ -483,6 +491,7 @@ soyut.rig.getRigListReceiversWasdal(getScenario, function (listReceiverWasdal) {
                                                                     author: author,
                                                                     scenario: getScenario,
                                                                     createTime: curInputDate,
+                                                                    attachment: attachment,
                                                                     referenceId: ""
                                                                 },function(resdraft){
                                                                     soyut.radiogram.rigClearInput();
@@ -561,7 +570,62 @@ soyut.rig.getRigListReceiversWasdal(getScenario, function (listReceiverWasdal) {
 
                 $(getInstanceID("list-materi")).css('visibility', 'hidden');
                 $(getInstanceID("list-materi")).css('height', '5px');
+
+                soyut.radiogram.rigRenderAttachment('new', null);
             };
+
+            soyut.radiogram.rigRenderAttachment = function (state, value) {
+                $(getInstanceID("list-attachment")).html('');
+                if(state == 'new'){
+                    var html = '<h3>ATTACHMENT :</h3>' +
+                        '<label class="attachment-label" style="display:none;"></label>' +
+                        '<input type="hidden" name="attachment-url" id="attachment-url" class="attachment-url" value="">' +
+                        '<input type="hidden" name="attachment-name" id="attachment-name" class="attachment-name" value="">' +
+                        '<a href="#" class="btn btn-success btn-attachment" onclick="soyut.radiogram.rigBrowseAttachment()"><i class="icon-plus"></i> Pilih File</a>';
+
+                    $(getInstanceID("list-attachment")).append(html);
+                }
+                else {
+                    var html = '<h3>ATTACHMENT :</h3>' +
+                        '<label class="attachment-label" style="display:none;"></label>' +
+                        '<input type="hidden" name="attachment-url" id="attachment-url" class="attachment-url" value="">' +
+                        '<input type="hidden" name="attachment-name" id="attachment-name" class="attachment-name" value="">' +
+                        '<a href="#" class="btn btn-success btn-attachment" onclick="soyut.radiogram.rigBrowseAttachment()"><i class="icon-plus"></i> Pilih File</a>';
+
+                    $(getInstanceID("list-attachment")).append(html);
+                }
+            }
+
+            soyut.radiogram.rigBrowseAttachment = function(){
+                var app = getAppInstance();
+                var activitylistener = getActivityInstanceAsync();
+                activitylistener.then(function (activity) {
+                    app.launchExternalActivity("soyut.module.browser.selector", {p1: '', p2: ''}, app, function (instance) {
+                        // console.log(activity)
+                    });
+                });
+
+                app.on('loadfile_selected', function (data) {
+                    var url = $(".attachment-url").val(data.files.url);
+                    $(".attachment-name").val(data.files.name);
+                    var html = "";
+                    if(url != ""){
+                        html += data.files.name +' <a href="#" class="btn btn-sm btn-danger" onclick="soyut.radiogram.rigRemoveAttachment()"><i class="icon-delete121"></i></a>';
+                        $('.attachment-label').html(html);
+                        $('.attachment-label').css('display', '');
+                        $('.btn-attachment').css('display', 'none');
+                    }
+                });
+            }
+
+            soyut.radiogram.rigRemoveAttachment = function(){
+                $(".attachment-url").val('');
+                $(".attachment-name").val('');
+
+                $('.attachment-label').html('');
+                $('.attachment-label').css('display', 'none');
+                $('.btn-attachment').css('display', '');
+            }
 
             soyut.radiogram.rigEditMessage = function(){
                 soyut.radiogram.rigClearInput();
@@ -586,6 +650,8 @@ soyut.rig.getRigListReceiversWasdal(getScenario, function (listReceiverWasdal) {
                         soyut.radiogram.rigRenderSimtime(result.SendTime);
                         $(getInstanceID("list-approval")).css('visibility', 'hidden');
                         $(getInstanceID("list-approval")).css('height', '5px');
+                        $(getInstanceID("list-materi")).css('visibility', 'hidden');
+                        $(getInstanceID("list-materi")).css('height', '5px');
 
                         $(getInstanceID("editId")).val(res.id);
                         $(getInstanceID("refauthor")).val(res.author);

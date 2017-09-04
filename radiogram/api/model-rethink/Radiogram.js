@@ -52,14 +52,17 @@ module.exports = {
       type:'string'
     },
     attachment: {
-      collection: 'Attachment',
-      via:'radiogram'
+      type:'array'
     },
     isApproved :{
       type: 'boolean',
       defaultsTo:false,
     },
     isReplied :{
+      type: 'boolean',
+      defaultsTo:false,
+    },
+    direct :{
       type: 'boolean',
       defaultsTo:false,
     },
@@ -136,7 +139,7 @@ module.exports = {
     },
     referenceId:{
       model:'Radiogram'
-    }
+    },
   },
   getById : function(id, cb)
   {

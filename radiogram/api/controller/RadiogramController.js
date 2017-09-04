@@ -66,6 +66,8 @@ module.exports = {
                 var approved = reqMsg.data.params.approved;
                 var referenceId = reqMsg.data.params.referenceId;
                 var isReplied = reqMsg.data.params.isReplied;
+                var attachment = reqMsg.data.params.attachment;
+                var direct = reqMsg.data.params.direct;
 
                 r.table('Radiogram').insert({
                         panggilan: panggilan,
@@ -102,6 +104,8 @@ module.exports = {
                         simtime: null,
                         createTime: createTime,
                         referenceId: referenceId,
+                        attachment: attachment,
+                        direct: direct,
                         isReplied: isReplied
                     },
                     function (err, result) {
@@ -147,6 +151,8 @@ module.exports = {
                 var approved = reqMsg.data.params.approved;
                 var referenceId = reqMsg.data.params.referenceId;
                 var isReplied = reqMsg.data.params.isReplied;
+                var attachment = reqMsg.data.params.attachment;
+                var direct = reqMsg.data.params.direct;
 
                 r.table('Radiogram').insert({
                         panggilan: panggilan,
@@ -183,6 +189,8 @@ module.exports = {
                         simtime: null,
                         createTime: createTime,
                         referenceId: referenceId,
+                        attachment: attachment,
+                        direct: direct,
                         isReplied: isReplied
                     },
                     function (err, result) {
@@ -280,6 +288,8 @@ module.exports = {
                 var approved = reqMsg.data.params.approved;
                 var referenceId = reqMsg.data.params.referenceId;
                 var isReplied = reqMsg.data.params.isReplied;
+                var attachment = reqMsg.data.params.attachment;
+                var direct = reqMsg.data.params.direct;
 
                 r.table('Radiogram').insert({
                         panggilan: panggilan,
@@ -317,6 +327,8 @@ module.exports = {
                         createTime: createTime,
                         parentId: parentId,
                         referenceId: referenceId,
+                        attachment: attachment,
+                        direct: direct,
                         isReplied: isReplied
                     },
                     function (err, result) {
@@ -445,6 +457,8 @@ module.exports = {
                 var approved = reqMsg.data.params.approved;
                 var referenceId = reqMsg.data.params.referenceId;
                 var isReplied = reqMsg.data.params.isReplied;
+                var attachment = reqMsg.data.params.attachment;
+                var direct = reqMsg.data.params.direct;
 
                 r.table('Radiogram').insert({
                         panggilan: panggilan,
@@ -481,6 +495,8 @@ module.exports = {
                         simtime: simtime,
                         createTime: createTime,
                         referenceId: referenceId,
+                        attachment: attachment,
+                        direct: direct,
                         isReplied: isReplied
                     },
                     function (err, result) {
@@ -531,6 +547,8 @@ module.exports = {
                 var approved = reqMsg.data.params.approved;
                 var referenceId = reqMsg.data.params.referenceId;
                 var isReplied = reqMsg.data.params.isReplied;
+                var attachment = reqMsg.data.params.attachment;
+                var direct = reqMsg.data.params.direct;
 
                 r.table('Radiogram').insert({
                         panggilan: panggilan,
@@ -568,6 +586,8 @@ module.exports = {
                         createTime: createTime,
                         parentId: parentId,
                         referenceId: referenceId,
+                        attachment: attachment,
+                        direct: direct,
                         isReplied: isReplied
                     },
                     function (err, result) {
