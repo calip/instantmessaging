@@ -43,11 +43,6 @@ module.exports = {
       var txtMessage = message.split('\n');
       console.log(txtMessage.length);
 
-      var coba = "";
-      if(txtMessage.length == 45){
-          
-      }
-
       var context = "./client/views/pdf.html";
       var curNumber = "000";
       if(number != ""){
@@ -111,7 +106,7 @@ module.exports = {
         height: "842px",   
         width: "595px", 
         header: {
-          "height": "220px"
+          "height": "225px"
         },
         footer: {
           "height": "145px"
