@@ -32,15 +32,17 @@
       "externalUse": false,
       "libraryScript":[
         {"name":"wdl_scrollbar","url":"/libs/pscrollbar/pscrollbar.min.js"},
-        {"name":"wdl_formatter","url":"/js/InputFormatter.js"}
+        {"name":"wdl_formatter","url":"/js/InputFormatter.js"},
+        {"name":"wdl_texteditor","url":"/js/texteditor.js"},
+        {"name":"wdl_summernote","url":"/libs/summernote/summernote.js"}
       ],
       "instanceScript":[
-        {"name":"wdl_main","url":"/js/radiogram.js"},
-        {"name":"wdl_texteditor","url":"/js/texteditor.js"}
+        {"name":"wdl_main","url":"/js/radiogram.js"}
       ],
       "styles":[
         {"name":"wdl_style","url":"/css/radiogram.css"},
-        {"name":"wdl_scrollbarcss","url":"/libs/pscrollbar/pscrollbar.min.css"}
+        {"name":"wdl_scrollbarcss","url":"/libs/pscrollbar/pscrollbar.min.css"},
+        {"name":"wdl_summernotecss","url":"/libs/summernote/summernote.css"}
       ],
       "contents":[
         {"name":"wdl_index","url":"/index.html"}
@@ -57,8 +59,7 @@
         {"name":"rdgd_formatter","url":"/js/InputFormatter.js"}
       ],
       "instanceScript":[
-        {"name":"rdgd_main","url":"/App/draft.js"},
-        {"name":"rdgd_texteditor","url":"/js/texteditor.js"}
+        {"name":"rdgd_main","url":"/App/draft.js"}
       ],
       "styles":[
         {"name":"rdgd_style","url":"/css/draft.css"},
@@ -77,13 +78,31 @@
 
       ],
       "instanceScript":[
-        {"name":"pdfviewer","url":"/App/pdfviewer.js"}
+        {"name":"pdfviewerjs","url":"/App/pdfviewer.js"}
       ],
       "styles":[
 
       ],
       "contents":[
         {"name":"pdfviewer","url":"/App/pdfviewer.html"}
+      ]
+    },
+    {
+      "class":"soyut.module.app.radiogram.configuration",
+      "title":"Konfigurasi Radiogram",
+      "launcher" : false,
+      "externalUse": true,
+      "libraryScript":[
+
+      ],
+      "instanceScript":[
+        {"name":"configurationjs","url":"/App/configuration.js"}
+      ],
+      "styles":[
+
+      ],
+      "contents":[
+        {"name":"configuration","url":"/App/configuration.html"}
       ]
     }
   ]

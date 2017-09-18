@@ -29,6 +29,31 @@ module.exports = {
             //var models = mongoDb.models;
             console.log(reqMsg.data.params.title)
             resCallback(false, {success: true, data: "sadasd"})
+        },
+        GetPending: function(authServerUrl, remoteSocket, reqMsg, resCallback){
+            var scenario = reqMsg.data.params.scenario;
+            var field = reqMsg.data.params.field;
+            var sort = reqMsg.data.params.sort;
+            var limit = reqMsg.data.params.limit;
+            var skip = reqMsg.data.params.skip;
+            
+            r.table('Pending').findOrder({scenario: scenario}, field, sort, skip, limit).exec(function (err, result) {
+                if (err) {
+                    return res.json({success: false, error: "record not found"});
+                    throw err;
+                }
+                else {
+                    result.toArray(function (err, radiogram) {
+                        if (err) {
+                            return res.json({success: false, error: "record not found"});
+                            throw err;
+                        }
+                        else {
+                            resCallback(false, radiogram);
+                        }
+                    });
+                }
+            });
         }
     },
     restricted: {
@@ -210,6 +235,23 @@ module.exports = {
                 var status = reqMsg.data.params.status;
 
                 r.table('Radiogram').update({id: id}, {composeStatus: status, SendTime: sendtime, simtime: simtime}, function (err, results) {
+                    if (err) resCallback(true, err);
+                    else {
+                        if (results.replaced > 0){
+                            resCallback(false, {success: true, data: results})
+                        }
+                    }
+                });
+
+            },
+            accessToken: [RADIOGRAM_USER_TOKEN, RADIOGRAM_MANAGER_TOKEN]
+        },
+        StatusForward:{
+            method: function (authServerUrl, remoteSocket, reqMsg, resCallback) {
+                var id = reqMsg.data.params.id;
+                var forward = reqMsg.data.params.forward;
+
+                r.table('Radiogram').update({id: id}, {isForward: forward}, function (err, results) {
                     if (err) resCallback(true, err);
                     else {
                         if (results.replaced > 0){
@@ -1129,7 +1171,70 @@ module.exports = {
                 });
             },
             accessToken: [RADIOGRAM_MANAGER_TOKEN, RADIOGRAM_USER_TOKEN]
-        }
+        },
+        UpdatePending:{
+            method: function (authServerUrl, remoteSocket, reqMsg, resCallback) {
+                var id = reqMsg.data.params.id;
+                var pending = reqMsg.data.params.pending;
+
+                r.table('Pending').update({id: id}, {
+                    pending: pending
+                }, function (err, result) {
+                    if (err) resCallback(true, err)
+                    else resCallback(false, result)
+                });
+            },
+            accessToken: [RADIOGRAM_MANAGER_TOKEN]
+        },
+        CreatePending:{
+            method: function (authServerUrl, remoteSocket, reqMsg, resCallback) {
+                var pending = reqMsg.data.params.pending;
+                var scenario = reqMsg.data.params.scenario;
+                
+                r.table('Pending').insert({
+                    pending: pending,
+                    scenario: scenario
+                }, function (err, result) {
+                    if (err) throw err;
+                    else {
+                        resCallback(false, result);
+                    }
+                });
+            },
+            accessToken: [RADIOGRAM_MANAGER_TOKEN]
+        },
+        SaveForward:{
+            method: function (authServerUrl, remoteSocket, reqMsg, resCallback) {
+                var id = reqMsg.data.params.id;
+                var panggilan = reqMsg.data.params.panggilan;
+                var jenis = reqMsg.data.params.jenis;
+                var nomor = reqMsg.data.params.nomor;
+                var derajat = reqMsg.data.params.derajat;
+                var instruksi = reqMsg.data.params.instruksi;
+                var tandadinas = reqMsg.data.params.tandadinas;
+                var groups = reqMsg.data.params.group;
+                var classification = reqMsg.data.params.classification;
+                var Number = reqMsg.data.params.Number;
+                var content = reqMsg.data.params.content;
+
+                r.table('Radiogram').update({id: id}, {
+                    panggilan: panggilan,
+                    jenis: jenis,
+                    nomor: nomor,
+                    derajat: derajat,
+                    instruksi: instruksi,
+                    tandadinas: tandadinas,
+                    group: groups,
+                    classification: classification,
+                    Number: Number,
+                    content: content
+                }, function (err, result) {
+                    if (err) resCallback(true, err)
+                    else resCallback(false, result)
+                });
+            },
+            accessToken: [RADIOGRAM_USER_TOKEN, RADIOGRAM_MANAGER_TOKEN]
+        },
     },
     tokenList: [
         {

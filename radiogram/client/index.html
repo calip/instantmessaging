@@ -410,6 +410,159 @@
 
                 </div>
 
+                <div class="wrap-content container email-forward disable" id="wdl-email-forward">
+                        
+                    <div class="container-fluid container-fullw">
+
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <td class="" style="border-bottom: none; width:1%"></td>
+                                        <td colspan="2" class="text-center text-bold bg-light-grey" style="width:10%">Panggilan</td>
+                                        <td class="text-center text-bold bg-light-grey">Jenis</td>
+                                        <td class="text-center text-bold bg-light-grey">nomor</td>
+                                        <td class="text-center text-bold bg-light-grey" colspan="2">Derajat</td>
+                                        <td class="text-center text-bold bg-light-grey" colspan="2" style="width:15%">Instruksi Pengiriman</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="text-center rotate" rowspan="12"><div><span><b>Ruang di luar garis hanya untuk petugas KOMLEK</b><span></div></td>
+                                        <td class="text-center" colspan="2">
+                                            <input type="hidden" name="fwd-editId" id="fwd-editId" value="">
+                                            <input type="hidden" name="fwd-parentId" id="fwd-parentId" value="">
+                                            <input type="text" placeholder="Panggilan" name="fwd-panggilan" class="form-control panggilan" id="fwd-panggilan" value="">
+                                        </td>
+                                        <td class="text-center">
+                                            <input type="text" placeholder="Jenis" name="fwd-jenis" class="form-control jenis" id="fwd-jenis" value="">
+                                        </td>
+                                        <td class="text-center">
+                                            <input type="text" placeholder="Nomor" class="form-control nomor" id="fwd-nomor" value="">
+                                        </td>
+                                        <td class="text-center" colspan="2">
+                                            <select name="fwd-derajat" class="form-control fwd-derajat" id="fwd-derajat" style="display:none">
+                                                <option value="P" selected>P</option>
+                                                <option value="OP">OP</option>
+                                                <option value="O">O</option>
+                                            </select>
+                                        </td>
+                                        <td class="text-center" colspan="2">
+                                            <input type="text" placeholder="Instruksi Pengiriman" name="fwd-instruksi" id="fwd-instruksi" class="form-control instruksi" value="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="text-bold" style="border-top:2px solid #000000; border-left:2px solid #000000; border-bottom: none; border-right: none">Dari</td>
+                                        <td colspan="4" class="parent-sender" style="border-top:2px solid #000000; border-right:2px solid #000000; border-bottom: none;" id="fwd-list-sender"></td>
+                                        <td class="text-center text-bold bg-light-grey">Tanda Dinas</td>
+                                        <td class="text-center text-bold bg-light-grey">Group</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none">Kepada</td>
+                                        <td colspan="4" class="parent-receivers" style="border-right:2px solid #000000; border-bottom: none;" id="fwd-list-receiver"></td>
+                                        <td class="text-center" style="border-bottom: none;"><input type="text" placeholder="Tanda Dinas" class="form-control" value="" id="fwd-tandadinas"></td>
+                                        <td class="text-center" style="border-bottom: none;"><input type="text" placeholder="group" class="form-control" value="0" name="fwd-group" id="fwd-group" readonly></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom:2px solid #000000; border-right: none;">Tembusan</td>
+                                        <td colspan="4" style="border-right:2px solid #000000; border-bottom:2px solid #000000;" id="fwd-list-tembusan"></td>
+                                        <td style="border-bottom:2px solid #000000"></td>
+                                        <td style="border-bottom:2px solid #000000"></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right:none;">Klasifikasi</td>
+                                        <td colspan="4" class="parent-klasifikasi" style="border-bottom: none; border-right: none;">
+                                            <select name="fwd-klasifikasi" class="form-control klasifikasi" id="fwd-klasifikasi">
+                                                <option value="Rahasia" selected>RAHASIA</option>
+                                                <option value="Sangat Rahasia">SANGAT RAHASIA</option>
+                                                <option value="Biasa">BIASA</option>
+                                            </select>
+                                            <span class="klasifikasi-error help-block valid"></span>
+                                        </td>
+                                        <td style="border-bottom: none; border-right: none;"></td>
+                                        <td style="border-bottom: none;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Nomor</td>
+                                        <td colspan="4" class="parent-no" style="border-bottom: none; border-right: none;">
+                                            <input type="text" placeholder="Nomor" name="fwd-Number" class="form-control Number" id="fwd-Number">
+                                            <span class="no-error help-block valid"></span>
+                                        </td>
+                                        <td style="border-bottom: none; border-right: none;"></td>
+                                        <td style="border-bottom: none;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8" style="border-left:2px solid #000000;">
+                                            <input type="hidden" name="ref_sender" id="ref_sender" value="">
+                                            <input type="hidden" name="cur_posfwd" id="cur_posfwd" value="0">
+                                            <input type="hidden" name="cur_wordfwd" id="cur_wordfwd" value="0">
+                                            <input type="hidden" name="cur_sentfwd" id="cur_sentfwd" value="0">
+                                            <input type="hidden" name="cur_linefwd" id="cur_linefwd" value="0">
+                                            <input type="hidden" name="colm_countfwd" id="colm_countfwd" value="0">
+                                            <input type="hidden" id="char_countfwd" name="char_countfwd" value="0">
+                                            <input type="hidden" id="word_countfwd" name="word_countfwd" value="0">
+                                            <input type="hidden" id="sent_countfwd" name="sent_countfwd" value="0">
+                                            <input type="hidden" id="line_countfwd" name="line_countfwd" value="0">
+                                            <input type="hidden" id="sel_char_countfwd" name="sel_char_countfwd" value="0">
+                                            <input type="hidden" id="sel_word_countfwd" name="sel_word_countfwd" value="0">
+                                            <input type="hidden" id="sel_sent_countfwd" name="sel_sent_countfwd" value="0">
+                                            <input type="hidden" id="sel_line_countfwd" name="sel_line_countfwd" value="0">
+
+                                            <input type="hidden" id="status" name="status" value="0">
+                                            <textarea name="fwd-message-input" class="fwd-message-input form-control linepx" id="fwd-message-input" wrap="off" rows="10" onclick="fwdcpcount('');" onkeyup="fwdcpcount(''); fwdtotalcount();" style="min-height: 550px; text-wrap: balance;"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center text-bold bg-light-grey" colspan="2" style="border-left:2px solid #000000;">Pengirim</td>
+                                        <td class="text-center text-bold bg-light-grey" colspan="2" style="border-right:2px solid #000000;">Derajat</td>
+                                        <td class="text-center text-bold bg-light-grey" colspan="2" style="border-top:2px solid #000000;">Dikirim/Diterima</td>
+                                        <td class="text-center text-bold bg-light-grey" style="border-top:2px solid #000000;">Cara</td>
+                                        <td class="text-center text-bold bg-light-grey" style="border-top:2px solid #000000;">Paraf</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Nama</td>
+                                        <td style="border-bottom: none;" id="fwd-sender-name"></td>
+                                        <td class="text-center text-bold">Aksi</td>
+                                        <td class="text-center text-bold" style="border-right:2px solid #000000;">Tembusan</td>
+                                        <td class="text-center text-bold">Jam</td>
+                                        <td class="text-center text-bold">Tanggal</td>
+                                        <td class="text-center vertical-align-top" rowspan="3" id="fwd-cara"></td>
+                                        <td class="text-center vertical-align-top" rowspan="3" id="fwd-paraf"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-bold" style="border-left:2px solid #000000; border-bottom: none; border-right: none;">Pangkat</td>
+                                        <td style="border-bottom: none;" id="fwd-sender-pangkat"></td>
+                                        <td class="text-center vertical-align-top" rowspan="2" id="fwd-alamataksi"></td>
+                                        <td class="text-center vertical-align-top" rowspan="2" style="border-right:2px solid #000000;" id="fwd-alamattembusan"></td>
+                                        <td class="text-center vertical-align-top" rowspan="2" id="fwd-jam"></td>
+                                        <td class="text-center vertical-align-top" rowspan="2" id="fwd-tanggal"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-bold" style="border-left:2px solid #000000; border-right: none;">TTD</td>
+                                        <td><img width="100" class="fwd-sender-signature" id="fwd-sender-signature" name="fwd-sender-signature"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button class="btn btn-primary btn-o btn-wide" type="button" id="btnSaveForward">
+                                            <i class="fa icon-draft"></i> Simpan
+                                        </button>
+                                        <button class="btn btn-primary btn-wide pull-right" type="button" id="btnSendForward">
+                                            Kirim <i class="fa icon-arrow-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
             <!-- main content -->
 
@@ -467,7 +620,7 @@
         <ul class="messages-list perfect-scrollbar" v-on:scroll="LoadScrollMessages(groups)">
             <li v-for="message in messages" :class="LoadStatusMessage(message.id, message.readStatus, message.composeStatus, message.sender.roleGroup)" :data-date="message.simtime" :data-group="message.sender.roleGroup" :data-status="message.readStatus" :data-materi="message.materi" :data-id="message.id">
                 <a href="#" @click="viewMessageDetail(message.id)">
-                    <span class="messages-item-star" v-html="LoadStatusMark(message.materi, message.approved, message.isReplied, message.composeStatus, message.direct)"></span>
+                    <span :class="LoadItemStar(message.id)" v-html="LoadStatusMark(message.materi, message.approved, message.isReplied, message.composeStatus, message.direct, message.isForward)"></span>
                     <span class="messages-item-from">{{ message.senderDetail, message.composeStatus | fromfilter }}</span>
                     <div class="messages-item-time">
                         <span class="text">{{ message.SendTime, message.createTime, message.composeStatus | wstime }}</span>
@@ -492,7 +645,7 @@
         <ul class="messages-list perfect-scrollbar" v-on:scroll="LoadScrollMessages(groups)">
             <li v-for="message in messages" :class="LoadStatusMessage(message.id, message.readStatus, message.composeStatus)" :data-date="message.simtime">
                 <a href="#" @click="viewMessageDetail(message.id)">
-                    <span class="messages-item-star" v-html="LoadStatusMark(message.materi, message.approved, message.isReplied, message.composeStatus, message.direct)"></span>
+                    <span :class="LoadItemStar(message.id)" v-html="LoadStatusMark(message.materi, message.approved, message.isReplied, message.composeStatus, message.direct)"></span>
                     <span class="messages-item-from">{{ message.senderDetail, message.composeStatus | fromfilter }}</span>
                     <div class="messages-item-time">
                         <span class="text">{{ message.SendTime, message.createTime, message.composeStatus | wstime }}</span>
@@ -904,6 +1057,9 @@
                         </button>
                         <button class="btn btn-primary btn-wide pull-right" type="button" v-bind="loadSentButton(contents.composeStatus)" @click="SubmitMessage()">
                             Kirim <i class="fa icon-arrow-right"></i>
+                        </button>
+                        <button class="btn btn-primary btn-wide pull-right" type="button" v-bind="loadForwardButton(contents.composeStatus, contents.direct, contents.isForward)" @click="ForwardMessage()">
+                            Teruskan <i class="fa icon-arrow-right"></i>
                         </button>
                     </div>
                 </div>

@@ -106,7 +106,7 @@ module.exports = {
         height: "842px",   
         width: "595px", 
         header: {
-          "height": "235px"
+          "height": "290px"
         },
         footer: {
           "height": "145px"

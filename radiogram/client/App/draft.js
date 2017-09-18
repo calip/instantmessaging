@@ -83,6 +83,18 @@ soyut.rig.getRigListReceiversWasdal(getScenario, function (listReceiverWasdal) {
                 return stringTime;
             });
 
+            $(getInstanceID("Number")).keydown(function(event) {
+                if (event.keyCode == 32) {
+                    event.preventDefault();
+                }
+            });
+
+            $(getInstanceID("Number")).blur(function(event) {
+                var textNumber = $(getInstanceID("Number")).val();
+                var reNumber = textNumber.replace(/\s/g, '');
+                $(getInstanceID("Number")).val(reNumber);
+            });
+
             soyut.radiogram.rigClearInput = function() {
                 $(getInstanceID("editId")).val('');
                 $(getInstanceID("panggilan")).val('');

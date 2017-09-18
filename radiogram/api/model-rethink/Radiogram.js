@@ -62,6 +62,10 @@ module.exports = {
       type: 'boolean',
       defaultsTo:false,
     },
+    isForward :{
+      type: 'boolean',
+      defaultsTo:false,
+    },
     direct :{
       type: 'boolean',
       defaultsTo:false,
