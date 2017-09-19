@@ -1024,111 +1024,75 @@ soyut.radiogram.SendWasdalRadiogram = function (params, callback) {
 };
 
 soyut.radiogram.SaveForwardRadiogram = function(params, callback){
-    soyut.radiogram.renderRadiogramDetail(params.parentId, function (data) {
-        soyut.radiogram.Radiogram_SaveForward({
-            id: data.id,
-            panggilan: params.panggilan,
-            jenis: params.jenis,
-            nomor: params.nomor,
-            derajat: params.derajat,
-            instruksi: params.instruksi,
-            tandadinas: params.tandadinas,
-            group: params.group,
-            classification: params.classification,
-            Number: params.Number,
-            content: params.content
-        }, function (err, resdraft) {
-            getRadiogramParent(params.parentId).then(function(result) {
-                var resultLength = 0;
-                result.forEach(function(i){
-                    resultLength++;
-                    soyut.radiogram.Radiogram_SaveForward({
-                        id: i.id,
-                        panggilan: params.panggilan,
-                        jenis: params.jenis,
-                        nomor: params.nomor,
-                        derajat: params.derajat,
-                        instruksi: params.instruksi,
-                        tandadinas: params.tandadinas,
-                        group: params.group,
-                        classification: params.classification,
-                        Number: params.Number,
-                        content: params.content
-                    }, function (err, resdraft) {
-            
-                    });
-
-                    if(resultLength == result.length){
-                        callback(params.editId);
-                    }
-
-                });
+    getRadiogramParent(params.parentId).then(function(result) {
+        var resultLength = 0;
+        result.forEach(function(i){
+            resultLength++;
+            soyut.radiogram.Radiogram_SaveForward({
+                id: i.id,
+                panggilan: params.panggilan,
+                jenis: params.jenis,
+                nomor: params.nomor,
+                derajat: params.derajat,
+                instruksi: params.instruksi,
+                tandadinas: params.tandadinas,
+                group: params.group,
+                classification: params.classification,
+                Number: params.Number,
+                content: params.content
+            }, function (err, resdraft) {
+    
             });
+
+            if(resultLength == result.length){
+                callback(params.editId);
+            }
+
         });
-    });    
+    });     
 };
 
 soyut.radiogram.SendForwardRadiogram = function(params, callback){
     soyut.clock.getCurrentActualTime({}, function(err, reclock){
-    soyut.radiogram.renderRadiogramDetail(params.parentId, function (data) {
-        soyut.radiogram.Radiogram_SaveForward({
-            id: data.id,
-            panggilan: params.panggilan,
-            jenis: params.jenis,
-            nomor: params.nomor,
-            derajat: params.derajat,
-            instruksi: params.instruksi,
-            tandadinas: params.tandadinas,
-            group: params.group,
-            classification: params.classification,
-            Number: params.Number,
-            content: params.content
-        }, function (err, resdraft) {
 
-            getRadiogramParent(params.parentId).then(function(result) {
-                var resultLength = 0;
-                result.forEach(function(i){
-                    resultLength++;
-                    soyut.radiogram.Radiogram_SaveForward({
-                        id: i.id,
-                        panggilan: params.panggilan,
-                        jenis: params.jenis,
-                        nomor: params.nomor,
-                        derajat: params.derajat,
-                        instruksi: params.instruksi,
-                        tandadinas: params.tandadinas,
-                        group: params.group,
-                        classification: params.classification,
-                        Number: params.Number,
-                        content: params.content
-                    }, function (err, resdraft) {
-            
-                    });
-                    
-                    if(resultLength == result.length){
-                        soyut.clock.getSimTime(reclock, function(err, simclock){
-                            soyut.radiogram.Radiogram_GetListDraft({id: params.parentId, status: 'pending', field: 'createTime', sort:'desc', skip: null, limit: null}, function(err,reslist) {
-                                reslist.forEach(function(m){
-                                    soyut.radiogram.Radiogram_SendDraft({id: m.id, sendtime: reclock, simtime: simclock.simTime, status: 'inbox'}, function(err,res) {
-                                    });
-                                });
-
-                                soyut.radiogram.Radiogram_StatusForward({id: params.editId, forward: true}, function(err,res) {
-                                    callback(params.editId);
+        getRadiogramParent(params.parentId).then(function(result) {
+            var resultLength = 0;
+            result.forEach(function(i){
+                resultLength++;
+                soyut.radiogram.Radiogram_SaveForward({
+                    id: i.id,
+                    panggilan: params.panggilan,
+                    jenis: params.jenis,
+                    nomor: params.nomor,
+                    derajat: params.derajat,
+                    instruksi: params.instruksi,
+                    tandadinas: params.tandadinas,
+                    group: params.group,
+                    classification: params.classification,
+                    Number: params.Number,
+                    content: params.content
+                }, function (err, resdraft) {
+        
+                });
+                
+                if(resultLength == result.length){
+                    soyut.clock.getSimTime(reclock, function(err, simclock){
+                        soyut.radiogram.Radiogram_GetListDraft({id: params.parentId, status: 'pending', field: 'createTime', sort:'desc', skip: null, limit: null}, function(err,reslist) {
+                            reslist.forEach(function(m){
+                                soyut.radiogram.Radiogram_SendDraft({id: m.id, sendtime: reclock, simtime: simclock.simTime, status: 'inbox'}, function(err,res) {
                                 });
                             });
-                        });
-                    }
-                });
 
+                            soyut.radiogram.Radiogram_StatusForward({id: params.editId, forward: true}, function(err,res) {
+                                callback(params.editId);
+                            });
+                        });
+                    });
+                }
             });
+
         });
     });
-    });
-
-    
-
-    
 };
 
 soyut.radiogram.UpdateDraftRadiogram = function(params, callback){

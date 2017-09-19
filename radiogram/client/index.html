@@ -143,6 +143,25 @@
                         </ul>
                     </div>
                     <!-- end materi -->
+                    <!-- tunda -->
+                    <div class="navbar-title">
+                        <span id="tunda-name">Pengendali Tunda </span>
+                    </div>
+                    <div id="tunda-list">
+                        <ul class="folders wdl-folders">
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media">
+                                        <input type="checkbox" name="select-tunda" class="select-tunda" value="pending">
+                                    </div>
+                                    <div class="item-inner">
+                                        <span class="title"> PENGENDALI TUNDA </span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- end tunda -->
                     <!-- group -->
                     <div class="navbar-title">
                         <span id="role-group-name">MONITORING PELAKU </span>
@@ -618,7 +637,7 @@
             </div>
         </div>
         <ul class="messages-list perfect-scrollbar" v-on:scroll="LoadScrollMessages(groups)">
-            <li v-for="message in messages" :class="LoadStatusMessage(message.id, message.readStatus, message.composeStatus, message.sender.roleGroup)" :data-date="message.simtime" :data-group="message.sender.roleGroup" :data-status="message.readStatus" :data-materi="message.materi" :data-id="message.id">
+            <li v-for="message in messages" :class="LoadStatusMessage(message.id, message.readStatus, message.composeStatus, message.sender.roleGroup)" :data-date="message.simtime" :data-group="message.sender.roleGroup" :data-status="message.readStatus" :data-materi="message.materi" :data-id="message.id" :data-pending="message.direct">
                 <a href="#" @click="viewMessageDetail(message.id)">
                     <span :class="LoadItemStar(message.id)" v-html="LoadStatusMark(message.materi, message.approved, message.isReplied, message.composeStatus, message.direct, message.isForward)"></span>
                     <span class="messages-item-from">{{ message.senderDetail, message.composeStatus | fromfilter }}</span>

@@ -489,6 +489,14 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                         Number: no,
                                         content: message
                                     },function(res){
+                                        soyut.radiogram.clearInput();
+                                        $(getInstanceID("wdl-navigation-menu")).children().removeClass("active");
+                                        $(getInstanceID("wdl-navigation-menu")).children().removeClass("open");
+                                        $(".wdl-folders").children().removeClass("active");
+                                        $(".wdl-folders").children().removeClass("open");
+
+                                        soyut.radiogram.renderInbox(res);
+                                        soyut.radiogram.renderMessageDetail('.email-reader', res, 'inbox');
                                         console.log("save "+ res);
                                     });
                                 }
@@ -1904,6 +1912,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                                 soyut.radiogram.renderKogasAccess();
                                                 soyut.radiogram.renderUnreadMessage(message, 0);
                                                 soyut.radiogram.renderSelectedMateri();
+                                                soyut.radiogram.renderSelectedPending();
 
                                                 $('.messages-list').children().removeClass("active");
                                                 $('.message-data-' + selected).addClass('active');
@@ -3641,6 +3650,29 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                             }
                         };
 
+                        soyut.radiogram.renderSelectedPending = function(){
+                            var selpending = $("input:checkbox[name=select-tunda]:checked");
+                            var getPending = [];
+                            selpending.each(function () {
+                                getPending.push($(this).val());
+                            });
+
+                            if(getPending.length > 0 ) {
+                                $('ul.messages-list > li').each(function () {
+                                    var mid = $(this).attr('data-id');
+                                    if ($(this).css("display") != 'none') {
+                                        var pending = $(this).attr('data-pending');
+                                        if (pending != undefined) {
+                                            $('.message-data-' + mid).css('display', 'none');
+                                        }
+                                        else{
+                                            $('.message-data-' + mid).css('display', '');
+                                        }
+                                    }
+                                });
+                            }
+                        }
+
                         soyut.radiogram.renderSelectedMateri = function () {
                             var selmateri = $("input:checkbox[name=select-materi]:checked");
                             var getMateri = [];
@@ -3778,8 +3810,8 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                             else {
                                 soyut.radiogram.renderCurrentUser();
                                 $(getInstanceID('role-group-name')).css('display','none');
-                                // $(getInstanceID('materi-name')).css('display','none');
-                                // $(getInstanceID('materi-list')).css('display','none');
+                                $(getInstanceID('tunda-name')).css('display','none');
+                                $(getInstanceID('tunda-list')).css('display','none');
                             }
                         };
 
