@@ -2293,6 +2293,13 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                         };
                                         return attr;
                                     }
+                                    if(!resconf[0].pending){
+                                        var attr;
+                                        attr = {
+                                            'style': 'display:none'
+                                        };
+                                        return attr;
+                                    }
                                 }
                             }
                         });
@@ -3805,7 +3812,15 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                 soyut.radiogram.renderCurrentWasdal();
                                 soyut.radiogram.renderWasdalRadiogram('.role-group-list');
                                 soyut.radiogram.renderKogasRadiogram('.wdl-kogas-list');
-
+                                
+                                if(resconf[0].pending){
+                                    $(getInstanceID('tunda-name')).css('display','');
+                                    $(getInstanceID('tunda-list')).css('display','');
+                                }
+                                else{
+                                    $(getInstanceID('tunda-name')).css('display','none');
+                                    $(getInstanceID('tunda-list')).css('display','none');
+                                }
                             }
                             else {
                                 soyut.radiogram.renderCurrentUser();
