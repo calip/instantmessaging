@@ -2422,7 +2422,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                             '<label class="checkbox-inline"><input type="checkbox" name="checkbox-mtr" value="personel" '+ checked3 +' onclick="soyut.radiogram.disposisiMateri(\''+ message +'\', this.value)">PERSONEL</label>' + 
                                             '<label class="checkbox-inline"><input type="checkbox" name="checkbox-mtr" value="logistik" '+ checked4 +' onclick="soyut.radiogram.disposisiMateri(\''+ message +'\', this.value)">LOGISTIK</label>' + 
                                             '<label class="checkbox-inline"><input type="checkbox" name="checkbox-mtr" value="komlek" '+ checked5 +' onclick="soyut.radiogram.disposisiMateri(\''+ message +'\', this.value)">KOMLEK</label>' + 
-                                            '<label class="checkbox-inline"><input type="checkbox" name="checkbox-mtr" value="perencanaan" '+ checked6 +' onclick="soyut.radiogram.disposisiMateri(\''+ message +'\', this.value)">PERENCANAAN</label>' + 
+                                            '<label class="checkbox-inline"><input type="checkbox" name="checkbox-mtr" value="perencanaan" '+ checked6 +' onclick="soyut.radiogram.disposisiMateri(\''+ message +'\', this.value)">TERITORIAL</label>' + 
                                             '</div>' +
                                             '</div>';
                                             
@@ -3183,7 +3183,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                     '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="personel">PERSONEL</label>' +
                                     '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="logistik">LOGISTIK</label>' +
                                     '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="komlek">KOMLEK</label>' +
-                                    '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="perencanaan">PERENCANAAN</label>';
+                                    '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="perencanaan">TERITORIAL</label>';
 
                                 $(getInstanceID("list-materi")).append(html);
                             }
@@ -3220,7 +3220,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                 html += '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="personel" '+ checked3 +'>PERSONEL</label>';
                                 html += '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="logistik" '+ checked4 +'>LOGISTIK</label>';
                                 html += '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="komlek" '+ checked5 +'>KOMLEK</label>';
-                                html += '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="perencanaan" '+ checked6 +'>PERENCANAAN</label>';
+                                html += '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="perencanaan" '+ checked6 +'>TERITORIAL</label>';
 
                                 $(getInstanceID("list-materi")).append(html);
                             }
@@ -3392,7 +3392,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                     '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="personel">PERSONEL</label>' +
                                     '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="logistik">LOGISTIK</label>' +
                                     '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="komlek">KOMLEK</label>' +
-                                    '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="perencanaan">PERENCANAAN</label>';
+                                    '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="perencanaan">TERITORIAL</label>';
 
                                 $(getInstanceID("list-materi")).append(html);
                             }
@@ -3429,7 +3429,7 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                 html += '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="personel" '+ checked3 +'>PERSONEL</label>';
                                 html += '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="logistik" '+ checked4 +'>LOGISTIK</label>';
                                 html += '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="komlek" '+ checked5 +'>KOMLEK</label>';
-                                html += '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="perencanaan" '+ checked6 +'>PERENCANAAN</label>';
+                                html += '<label class="checkbox-inline"><input type="checkbox" name="checkbox-materi" value="perencanaan" '+ checked6 +'>TERITORIAL</label>';
 
                                 $(getInstanceID("list-materi")).append(html);
                             }
