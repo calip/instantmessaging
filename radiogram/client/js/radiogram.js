@@ -2079,7 +2079,14 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                 var arrMateri = '';
                                 if (data.materi != null) {
                                     data.materi.forEach(function (i) {
-                                        arrMateri = arrMateri + i.toUpperCase() + ", ";
+                                        var ter = '';
+                                        if(i == "perencanaan"){
+                                            ter = i.replace("perencanaan", "teritorial");
+                                            arrMateri = arrMateri + ter.toUpperCase() + ", ";
+                                        }
+                                        else{
+                                            arrMateri = arrMateri + i.toUpperCase() + ", ";
+                                        }
                                     });
                                 }
                                 else {
@@ -2331,7 +2338,14 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                 var arrMateri = '';
                                 if(data.materi != null ) {
                                     data.materi.forEach(function (i) {
-                                        arrMateri = arrMateri + i.toUpperCase() + ", ";
+                                        var ter = '';
+                                        if(i == "perencanaan"){
+                                            ter = i.replace("perencanaan", "teritorial");
+                                            arrMateri = arrMateri + ter.toUpperCase() + ", ";
+                                        }
+                                        else{
+                                            arrMateri = arrMateri + i.toUpperCase() + ", ";
+                                        }
                                     });
                                 }
                                 else {
@@ -2370,7 +2384,14 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                         var arrMateri = '';
                                         if (data.materi != null) {
                                             data.materi.forEach(function (i) {
-                                                arrMateri = arrMateri + i.toUpperCase() + ", ";
+                                                var ter = '';
+                                                if(i == "perencanaan"){
+                                                    ter = i.replace("perencanaan", "teritorial");
+                                                    arrMateri = arrMateri + ter.toUpperCase() + ", ";
+                                                }
+                                                else{
+                                                    arrMateri = arrMateri + i.toUpperCase() + ", ";
+                                                }
                                             });
                                         }
                                         // attributes += 
@@ -2431,7 +2452,14 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                             var arrMateri = '';
                                             if (data.materi != null) {
                                                 data.materi.forEach(function (i) {
-                                                    arrMateri = arrMateri + i.toUpperCase() + ", ";
+                                                    var ter = '';
+                                                    if(i == "perencanaan"){
+                                                        ter = i.replace("perencanaan", "teritorial");
+                                                        arrMateri = arrMateri + ter.toUpperCase() + ", ";
+                                                    }
+                                                    else{
+                                                        arrMateri = arrMateri + i.toUpperCase() + ", ";
+                                                    }
                                                 });
                                             }
                                             attributes += 
@@ -2647,7 +2675,14 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                 var arrMateri = '';
                                 if (data.materi != null) {
                                     data.materi.forEach(function (i) {
-                                        arrMateri = arrMateri + i.toUpperCase() + ", ";
+                                        var ter = '';
+                                        if(i == "perencanaan"){
+                                            ter = i.replace("perencanaan", "teritorial");
+                                            arrMateri = arrMateri + ter.toUpperCase() + ", ";
+                                        }
+                                        else{
+                                            arrMateri = arrMateri + i.toUpperCase() + ", ";
+                                        }
                                     });
                                 }
                                 else {
@@ -2669,7 +2704,14 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                         var arrMateri = '';
                                         if (data.materi != null) {
                                             data.materi.forEach(function (i) {
-                                                arrMateri = arrMateri + i.toUpperCase() + ", ";
+                                                var ter = '';
+                                                if(i == "perencanaan"){
+                                                    ter = i.replace("perencanaan", "teritorial");
+                                                    arrMateri = arrMateri + ter.toUpperCase() + ", ";
+                                                }
+                                                else{
+                                                    arrMateri = arrMateri + i.toUpperCase() + ", ";
+                                                }
                                             });
                                         }
                                         attributes += 

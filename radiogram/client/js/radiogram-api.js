@@ -1412,10 +1412,6 @@ soyut.radiogram.DraftRadiogram = function (params, callback) {
                         params.cc.forEach(function (i) {
                             if (i.type == 'role') {
                                 soyut.radiogram.renderSenderDetail(i.id, function (m) {
-                                    var directState = false;
-                                    if(i.id == m.id){
-                                        directState = true;
-                                    }
                                     soyut.radiogram.Radiogram_SendReceiver({
                                         panggilan: params.panggilan,
                                         jenis: params.jenis,
@@ -1453,7 +1449,7 @@ soyut.radiogram.DraftRadiogram = function (params, callback) {
                                         referenceId: params.referenceId,
                                         isReplied: false,
                                         attachment: params.attachment,
-                                        direct: directState,
+                                        direct: false,
                                         composeStatus: 'pending'
                                     }, function (err, res) {
                                         if (!err) {
@@ -2090,10 +2086,10 @@ soyut.radiogram.SendDraftRadiogram = function (params, pending, callback) {
                                 soyut.radiogram.Radiogram_SendDraft({id: i.id, sendtime: reclock, simtime: simclock.simTime, status: 'inbox'}, function(err,res) {
                                 });
                             }
-                        }
-                        else{
-                            soyut.radiogram.Radiogram_SendDraft({id: i.id, sendtime: reclock, simtime: simclock.simTime, status: 'inbox'}, function(err,res) {
-                            });
+                            else{
+                                soyut.radiogram.Radiogram_SendDraft({id: i.id, sendtime: reclock, simtime: simclock.simTime, status: 'inbox'}, function(err,res) {
+                                });
+                            }
                         }
                         
                     });
@@ -3060,6 +3056,7 @@ function getDetailPrinter(provider) {
     return new Promise.map(provider, function(i) {
         return getPrinter(i).then(function(data) {
             return data;
+
         }).then(function(result) {
             return result;
         });
