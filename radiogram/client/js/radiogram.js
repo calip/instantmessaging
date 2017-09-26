@@ -2399,11 +2399,21 @@ soyut.radiogram.getListReceiversWasdal(function (listReceiverWasdal) {
                                         //     '<div class="form-group"><p class="text-bold">DIPOSISI KE AS/PA :</p>' + arrMateri +'</div>' +
                                         //     '</div>';
                                         attributes +=
+                                            // '<div class="col-md-8">' +
+                                            // '<div class="form-group"><p class="text-bold">DI SETUJUI :</p> aaa' + arrApproved + ' </div>' +
+                                            // '</div>'+
+                                            // '<div class="col-md-4">' +
+                                            // '<div class="form-group pull-right"><p class="text-bold">Author</p> ' + data.author + '</div>' +
+                                            // '</div>';
+
                                             '<div class="col-md-8">' +
-                                            '<div class="form-group"><p class="text-bold">DI SETUJUI :</p> ' + arrApproved + ' </div>' +
+                                            '<div class="form-group"><p class="text-bold">DIPOSISI KE AS/PA :</p>' + arrMateri +'</div>' +
                                             '</div>'+
                                             '<div class="col-md-4">' +
                                             '<div class="form-group pull-right"><p class="text-bold">Author</p> ' + data.author + '</div>' +
+                                            '</div>'+
+                                            '<div class="col-md-12">' +
+                                            '<div class="form-group"><p class="text-bold">DI SETUJUI :</p> ' + arrApproved + ' </div>' +
                                             '</div>';
                                     }
                                     else{
