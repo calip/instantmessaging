@@ -2082,14 +2082,20 @@ soyut.radiogram.SendDraftRadiogram = function (params, pending, callback) {
                 soyut.clock.getSimTime(reclock, function(err, simclock){
                     result.forEach(function(i){
                         if(pending){
-                            if(i.owner.isWASDAL){
-                                soyut.radiogram.Radiogram_SendDraft({id: i.id, sendtime: reclock, simtime: simclock.simTime, status: 'inbox'}, function(err,res) {
-                                });
+                            if(i.receivers[0].type == "role"){
+                                if(i.owner.isWASDAL){
+                                    soyut.radiogram.Radiogram_SendDraft({id: i.id, sendtime: reclock, simtime: simclock.simTime, status: 'inbox'}, function(err,res) {
+                                    });
+                                }
                             }
                             else{
                                 soyut.radiogram.Radiogram_SendDraft({id: i.id, sendtime: reclock, simtime: simclock.simTime, status: 'inbox'}, function(err,res) {
                                 });
                             }
+                        }
+                        else{
+                            soyut.radiogram.Radiogram_SendDraft({id: i.id, sendtime: reclock, simtime: simclock.simTime, status: 'inbox'}, function(err,res) {
+                            });
                         }
                         
                     });
