@@ -46,7 +46,6 @@ soyut.radiogram.getListReceiversWasdal = function (callback) {
     soyut.radiogram.renderListReceivers(function(res) {
         soyut.radiogram.renderListRole(function (list) {
             soyut.radiogram.renderListAlias(function (als) {
-                var arrAlias = [];
                 var arrRole = [];
                 list.forEach(function (r) {
                     var Obj = {
@@ -65,6 +64,7 @@ soyut.radiogram.getListReceiversWasdal = function (callback) {
                     };
                     arrVrole.push(Obj);
                 });
+                var arrAlias = [];
                 als.forEach(function (l) {
                     var Obj = {
                         id: l.id,
@@ -73,7 +73,7 @@ soyut.radiogram.getListReceiversWasdal = function (callback) {
                     };
                     arrAlias.push(Obj);
                 });
-                var arrData = arrAlias.concat(arrVrole, arrRole);
+                var arrData = arrVrole.concat(arrAlias, arrRole);
                 callback(arrData);
             })
         });
