@@ -8,9 +8,9 @@
 	"port": 28015
   },
   "ssl": {
-    "ca": "/home/administrator/dev/ssl_new/soyut-root-ca.crt",
-    "cert": "/home/administrator/dev/ssl_new/cert.soyut.crt",
-    "key": "/home/administrator/dev/ssl_new/private.soyut.key"
+    "ca": "root-ca.crt",
+    "cert": "cert.soyut.crt",
+    "key": "private.soyut.key"
   },
   "terminalCheckInterval": 1000
 }
