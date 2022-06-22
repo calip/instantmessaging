@@ -1,0 +1,16 @@
+{
+    "authServerUrl": "https://pivot.auth.soyut:3000",
+    "hostname": "pivot.radiogram.soyut",
+    "port": 50120,
+    "rethink": {
+        "database": "soyut_radiogram",
+        "host": "radiogram.db.soyut",
+        "port": 28015
+    },
+    "ssl": {
+        "ca": "/home/administrator/dev/ssl/tesynergy-root-ca.crt",
+        "cert": "/home/administrator/dev/ssl/cert-*.radiogram.soyut.crt",
+        "key": "/home/administrator/dev/ssl/private-*.radiogram.soyut.key"
+    },
+    "terminalCheckInterval": 10
+}

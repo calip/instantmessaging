@@ -54,6 +54,53 @@ module.exports = {
                     });
                 }
             });
+        },
+        GetTeam: function(authServerUrl, remoteSocket, reqMsg, resCallback){
+            var scenario = reqMsg.data.params.scenario;
+            var field = reqMsg.data.params.field;
+            var sort = reqMsg.data.params.sort;
+            var limit = reqMsg.data.params.limit;
+            var skip = reqMsg.data.params.skip;
+            
+            r.table('Team').findOrder({scenario: scenario}, field, sort, skip, limit).exec(function (err, result) {
+                if (err) {
+                    return res.json({success: false, error: "record not found"});
+                    throw err;
+                }
+                else {
+                    result.toArray(function (err, radiogram) {
+                        if (err) {
+                            return res.json({success: false, error: "record not found"});
+                            throw err;
+                        }
+                        else {
+                            console.log(JSON.stringify(radiogram))
+                            resCallback(false, radiogram);
+                        }
+                    });
+                }
+            });
+        },
+        ClearRadiogram: function(authServerUrl, remoteSocket, reqMsg, resCallback) {
+            var session = reqMsg.data.params.session;
+            
+            r.table('Radiogram').find({session: session}).exec(function (err, result) {
+                if (err) {
+                    return res.json({success: false, error: "record not found"});
+                    throw err;
+                }
+                else {
+                    result.toArray(function (err, radiogram) {
+                        if (err) {
+                            return res.json({success: false, error: "record not found"});
+                            throw err;
+                        }
+                        else {
+                            resCallback(false, radiogram);
+                        }
+                    });
+                }
+            });
         }
     },
     restricted: {
@@ -1203,10 +1250,49 @@ module.exports = {
             },
             accessToken: [RADIOGRAM_MANAGER_TOKEN]
         },
+        UpdateTeam:{
+            method: function (authServerUrl, remoteSocket, reqMsg, resCallback) {
+                var id = reqMsg.data.params.id;
+                var name = reqMsg.data.params.name;
+                var color = reqMsg.data.params.color;
+
+                r.table('Team').update({id: id}, {
+                    name: name,
+                    color: color
+                }, function (err, result) {
+                    if (err) resCallback(true, err)
+                    else resCallback(false, result)
+                });
+            },
+            accessToken: [RADIOGRAM_MANAGER_TOKEN]
+        },
+        CreateTeam:{
+            method: function (authServerUrl, remoteSocket, reqMsg, resCallback) {
+                var name = reqMsg.data.params.name;
+                var color = reqMsg.data.params.color;
+                var scenario = reqMsg.data.params.scenario;
+                
+                r.table('Team').insert({
+                    name: name,
+                    color: color,
+                    scenario: scenario
+                }, function (err, result) {
+                    if (err) throw err;
+                    else {
+                        resCallback(false, result);
+                    }
+                });
+            },
+            accessToken: [RADIOGRAM_MANAGER_TOKEN]
+        },
         SaveForward:{
             method: function (authServerUrl, remoteSocket, reqMsg, resCallback) {
                 var id = reqMsg.data.params.id;
                 var panggilan = reqMsg.data.params.panggilan;
+                var receivers = reqMsg.data.params.receivers;
+                var receiverDetail = reqMsg.data.params.receiverDetail;
+                var cc = reqMsg.data.params.cc;
+                var ccDetail = reqMsg.data.params.ccDetail;
                 var jenis = reqMsg.data.params.jenis;
                 var nomor = reqMsg.data.params.nomor;
                 var derajat = reqMsg.data.params.derajat;
@@ -1219,6 +1305,10 @@ module.exports = {
 
                 r.table('Radiogram').update({id: id}, {
                     panggilan: panggilan,
+                    receivers: receivers,
+                    receiverDetail: receiverDetail,
+                    cc: cc,
+                    ccDetail: ccDetail,
                     jenis: jenis,
                     nomor: nomor,
                     derajat: derajat,

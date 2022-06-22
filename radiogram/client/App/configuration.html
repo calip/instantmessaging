@@ -25,6 +25,63 @@
                     </div>
                 </div>
             </form>
+            
+            <form role="form" class="form-horizontal">
+                <div class="form-group" id="kop-name">
+                    <label class="col-sm-4 control-label" for="input-kop">
+                        Hapus Semua Radiogram yang Telah Terkirim?
+                    </label>
+                    <div class="col-sm-8">
+                        <select name="scenario-status" id="scenario-status" class="form-control">
+                            <option value="false" selected>Tidak</option>
+                            <option value="true">Ya</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group margin-bottom-0">
+                    <div class="col-sm-offset-4 col-sm-8">
+                        <button class="btn btn-o btn-success" type="button" name="clear-save" id="clear-save">
+                            Simpan
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        <div class="panel-heading" style="min-height: 50px">Team</div>
+        <div class="panel-body">
+            <form role="form" class="form-horizontal">
+                <div class="form-group" id="label-time-name">
+                    <label class="col-sm-4 control-label" for="input-kop">
+                        Tim Name
+                    </label>
+                    <div class="col-sm-8">
+                        <input type="hidden" id="team-id" name="team-id" value="">
+                        <input type="text" id="team-name" name="team-name" value="Tim Biru" placeholder="Tim Biru">
+                    </div>
+                </div>
+                <div class="form-group" id="label-color-name">
+                    <label class="col-sm-4 control-label" for="input-color">
+                        Tim Color
+                    </label>
+                    <div class="col-sm-8">
+                        <select name="team-color" id="team-color" class="form-control">
+                            <option value="blue" selected>Biru</option>
+                            <option value="red">Merah</option>
+                            <option value="green">Hijau</option>
+                            <option value="yellow">Kuning</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group margin-bottom-0">
+                    <div class="col-sm-offset-4 col-sm-8">
+                        <button class="btn btn-o btn-success" type="button" name="team-save" id="team-save">
+                            Simpan
+                        </button>
+                    </div>
+                </div>
+            </form>
+            
         </div>
 
     </div>

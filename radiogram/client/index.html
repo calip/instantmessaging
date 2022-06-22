@@ -136,6 +136,16 @@
                                         <input type="checkbox" name="select-materi" class="select-materi" value="perencanaan">
                                     </div>
                                     <div class="item-inner">
+                                        <span class="title"> PERENCANAAN </span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media">
+                                        <input type="checkbox" name="select-materi" class="select-materi" value="teritorial">
+                                    </div>
+                                    <div class="item-inner">
                                         <span class="title"> TERITORIAL </span>
                                     </div>
                                 </div>
@@ -633,7 +643,7 @@
     <div class="wrap-list">
         <div class="wrap-options">
             <div class="messages-search">
-                <input type="text" placeholder="Cari radiogram..." @keyup="FindRadiogram()" class="txt-filter-list form-control underline">
+                <input type="text" placeholder="Carid radiogram..." @keyup="FindRadiogram()" class="txt-filter-list form-control underline">
             </div>
         </div>
         <ul class="messages-list perfect-scrollbar" v-on:scroll="LoadScrollMessages(groups)">
@@ -649,7 +659,7 @@
                     <span class="messages-item-content">{{ message.Number | truncate}}</span>
                 </a>
             </li>
-            <li style="display:none; padding: 10px; text-align: center; color:#8e8d8d;">Silahkan Tunggu...</li>
+            <li class="radiogram-loader" style="display:none; padding: 10px; text-align: center; color:#8e8d8d;">Silahkan Tunggu...</li>
         </ul>
     </div>
 </template>
@@ -658,7 +668,7 @@
     <div class="wrap-list">
         <div class="wrap-options">
             <div class="messages-search">
-                <input type="text" placeholder="Cari radiogram..." @keyup="FindRadiogram()" class="txt-filter-list form-control underline">
+                <input type="text" placeholder="Cari d radiogram..." @keyup="FindRadiogram()" class="txt-filter-list form-control underline">
             </div>
         </div>
         <ul class="messages-list perfect-scrollbar" v-on:scroll="LoadScrollMessages(groups)">

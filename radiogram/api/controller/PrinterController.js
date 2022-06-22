@@ -100,13 +100,25 @@ module.exports = {
           return str_hasil;
       }
 
+      // var options = {
+      //   format: 'A4',
+      //   orientation: "portrait",
+      //   height: "872px",   
+      //   width: "595px", 
+      //   header: {
+      //     "height": "370px"
+      //   },
+      //   footer: {
+      //     "height": "145px"
+      //   }
+      // };
       var options = {
         format: 'A4',
         orientation: "portrait",
         height: "842px",   
         width: "595px", 
         header: {
-          "height": "290px"
+          "height": "320px"
         },
         footer: {
           "height": "145px"

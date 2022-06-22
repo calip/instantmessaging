@@ -311,6 +311,8 @@ soyut.rig.getRigListReceiversWasdal(getScenario, function (listReceiverWasdal) {
 
                                                             var curReceiver = arrAliasRcv + arrRoleRcv + arrVroleRcv;
                                                             var curCc = arrAliasCc + arrRoleCc + arrVroleCc;
+                                                            
+                                                            $(getInstanceID("btnSaveMessage")).css('display', 'none');
 
                                                             soyut.radiogram.DraftRIG({
                                                                 panggilan: panggilan,
@@ -356,23 +358,36 @@ soyut.rig.getRigListReceiversWasdal(getScenario, function (listReceiverWasdal) {
                                                                     console.log(reslog)
                                                                 });
 
-                                                                soyut.rig.Rig_CreateList({
-                                                                    rig: getId,
-                                                                    scenario: getScenario,
-                                                                    type: 'RIL',
-                                                                    status: 'draft',
-                                                                    title: no,
-                                                                    radiogram: res,
-                                                                    action: '',
-                                                                    description: '',
-                                                                    SendTime: curInputDate,
-                                                                    simtime: curInputDate
-                                                                }, function (err, reslist) {
-                                                                    console.log("ril list created!");
-                                                                    
-                                                                    var activity = getActivityInstance();
-                                                                    activity.context.invoke('listril_selected', getId);
-                                                                    activity.window.close();
+                                                                soyut.rig.renderRigRadiogramParent(res, function (resvalid) {
+                                                                    console.log("resvalid ", resvalid);
+                                                                    var mainStatus = '';
+                                                                    if(resvalid.length <= 0){
+                                                                        mainStatus = 'invalid';
+                                                                    }
+                                                                    else {
+                                                                        mainStatus = 'valid';
+                                                                    }
+                                                
+                                                                    soyut.rig.Rig_CreateList({
+                                                                        rig: getId,
+                                                                        scenario: getScenario,
+                                                                        type: 'RIL',
+                                                                        status: 'draft',
+                                                                        title: no,
+                                                                        radiogram: res,
+                                                                        message: mainStatus,
+                                                                        action: '',
+                                                                        description: '',
+                                                                        SendTime: curInputDate,
+                                                                        simtime: curInputDate
+                                                                    }, function (err, reslist) {
+                                                                        console.log("ril list created!");
+                                                                        
+                                                                        $(getInstanceID("btnSaveMessage")).css('display', '');
+                                                                        var activity = getActivityInstance();
+                                                                        activity.context.invoke('listril_selected', getId);
+                                                                        activity.window.close();
+                                                                    });
                                                                 });
                                                             });
 
@@ -473,6 +488,8 @@ soyut.rig.getRigListReceiversWasdal(getScenario, function (listReceiverWasdal) {
 
                                                                 var curReceiver = arrAliasRcv + arrRoleRcv + arrVroleRcv;
                                                                 var curCc = arrAliasCc + arrRoleCc + arrVroleCc;
+                                                                
+                                                                $(getInstanceID("btnSaveMessage")).css('display', 'none');
 
                                                                 soyut.radiogram.UpdateDraftRIG({
                                                                     id: res.id,
@@ -523,22 +540,34 @@ soyut.rig.getRigListReceiversWasdal(getScenario, function (listReceiverWasdal) {
                                                                         console.log(reslog)
                                                                     });
 
-                                                                    soyut.rig.Rig_UpdateList({
-                                                                        id: getCurid,
-                                                                        rig: getId,
-                                                                        scenario: getScenario,
-                                                                        title: no,
-                                                                        radiogram: res.id,
-                                                                        action: '',
-                                                                        description: '',
-                                                                        SendTime: curInputDate,
-                                                                        simtime: curInputDate
-                                                                    }, function (err, res) {
-                                                                        console.log("ril list created!");
-                                                                        
-                                                                        var activity = getActivityInstance();
-                                                                        activity.context.invoke('listril_selected', getId);
-                                                                        activity.window.close();
+                                                                    soyut.rig.renderRigRadiogramParent(res.id, function (resvalid) {
+                                                                        console.log("resvalid ", resvalid);
+                                                                        var mainStatus = '';
+                                                                        if(resvalid.length <= 0){
+                                                                            mainStatus = 'invalid';
+                                                                        }
+                                                                        else {
+                                                                            mainStatus = 'valid';
+                                                                        }
+                                                                        soyut.rig.Rig_UpdateList({
+                                                                            id: getCurid,
+                                                                            rig: getId,
+                                                                            scenario: getScenario,
+                                                                            title: no,
+                                                                            radiogram: res.id,
+                                                                            message: mainStatus,
+                                                                            action: '',
+                                                                            description: '',
+                                                                            SendTime: curInputDate,
+                                                                            simtime: curInputDate
+                                                                        }, function (err, res) {
+                                                                            console.log("ril list created!");
+                                                                            $(getInstanceID("btnSaveMessage")).css('display', '');
+                                                                            
+                                                                            var activity = getActivityInstance();
+                                                                            activity.context.invoke('listril_selected', getId);
+                                                                            activity.window.close();
+                                                                        });
                                                                     });
                                                                 });
 

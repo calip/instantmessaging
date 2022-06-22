@@ -130,24 +130,7 @@
     .delete-wpr { position: relative; }
     .delete { display: block; color: #000; text-decoration: none; position: absolute; background: #EEEEEE; font-weight: bold; padding: 0px 3px; border: 1px solid; top: -6px; left: -22px; font-family: Verdana; font-size: 12px; }
     .text-center { text-align: center}
-    
-    /*Menambahkan css untuk text ujung kiri*/
-    .vertical-text {
-     -webkit-transform: rotate(90deg);
-        transform: rotate(90deg);
-        -webkit-transform-origin: 10% 10%;
-        transform-origin: -10% -10%;
-         position: absolute;
-        left: 14px;
-        top: 120px;
-    }
-    /*Menambah Wrapper pada (kepada, tembusan)*/
-    .wrap-text {
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      max-width: 180px;
-    }
+
 
   </style>
 </head>
@@ -158,8 +141,7 @@
   <div id="kop">{{kop}}</div>
   <div id="nomor-registrasi">Nomor Registrasi</div>
   <div id="header">FORMULIR BERITA</div>
-  <!--Mengubah class menjadi vertical-text-->
-  <div class="vertical-text"><h5>Ruang diluar Garis Tebal Hanya untuk Petugas KOMLEK</h5></div>
+  <div class="rotate">Ruang diluar garis tebal hanya untuk petugas KOMLEK</div>
 
   <table class="items">
     <tr class="item-row">
@@ -184,12 +166,12 @@
     </tr>
     <tr class="item-row">
       <td colspan="2" style="padding: 5px; border-left:2px solid #000000; border-bottom: 1px solid #ffffff;">Kepada</td>
-      <td colspan="4" style="padding: 5px; border-bottom: 1px solid #ffffff; border-right: 2px solid #000000"><p class="wrap-text">{{receiver_Name}}</p></td>
+      <td colspan="4" style="padding: 5px; border-bottom: 1px solid #ffffff; border-right: 2px solid #000000">{{receiver_Name}}</td>
       <td colspan="2" class="text-center" style="padding: 5px; border-right: 1px solid #ffffff;">{{datetime}}</td>
     </tr>
     <tr class="item-row">
       <td colspan="2" style="padding: 5px; border-left:2px solid #000000; border-bottom: 1px solid #000;">Tembusan</td>
-      <td class="wrap-text" colspan="4" style="padding: 5px; border-bottom: 1px solid #000; border-right: 2px solid #000000">{{tembusan_Name}}</td>
+      <td colspan="4" style="padding: 5px; border-bottom: 1px solid #000; border-right: 2px solid #000000">{{tembusan_Name}}</td>
       <th class="text-center" style="padding: 5px; border-right: 1px solid #000000; border-bottom: 1px solid #ffffff;">Tanda dinas</th>
       <th class="text-center" style="padding: 5px; border-right: 1px solid #ffffff; border-bottom: 1px solid #ffffff;">Group</th>
     </tr>
@@ -215,8 +197,7 @@
       <td rowspan="2" style="width: 4%; border-right: 1px solid #ffffff; border-top: 1px solid #ffffff; border-left: 1px solid #ffffff; border-bottom: 1px solid #ffffff;border-right:2px solid #000000;"></td>
     </tr>  
     <tr class="item-row" style="padding: 5px; border-right: 2px solid #ffffff; border-left:1px solid #ffffff;">
-      <!--Menambahkan Height pada TD render massage-->
-      <td height="360" style="vertical-align: top; padding: 10px; border-top: 1px solid #ffffff; margin-top:50px; border-bottom:1px solid #ffffff;">
+      <td style="vertical-align: top; padding: 10px; border-top: 1px solid #ffffff; margin-top:50px; border-bottom:1px solid #ffffff;">
         <p style="white-space: pre-wrap;" id="pageContent">{{renderMessage}}</p>
       </td>
     </tr>
